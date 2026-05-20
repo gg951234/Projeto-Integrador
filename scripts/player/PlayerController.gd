@@ -5,6 +5,7 @@ const SPEED := 300.0
 var last_direction: Vector2 = Vector2.DOWN
 var is_attacking: bool = false
 var hitbox_offset: Vector2
+var currentweapon: String
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var swing_sword: AudioStreamPlayer2D = $SwingSword
@@ -15,6 +16,7 @@ var hitbox_offset: Vector2
 # FUNÇÕES DE INÍCIO (PADRÃO GODOT)
 # --------------
 func _ready() -> void: # Executa quando o nó é criado
+	currentweapon = "Sword" # IMPLEMENTAR PARA PUXAR DO BANCO DE DADOS
 	hitbox_offset = sword_hitbox.position
 
 func _physics_process(_delta: float) -> void: # Executa a cada frame
@@ -99,3 +101,9 @@ func update_hitbox_offset() -> void:
 func _on_sword_hitbox_body_entered(body: Node2D) -> void:
 	if is_attacking and body.name.begins_with("Slime"): # Seção somente para Slimes
 		print("Hit: " + body.name)
+		# Busca os dados da arma atual na tabela global
+		var dados = WeaponsData.get_stats(currentweapon)
+		if dados.is_empty():
+			push_error("Tipo de arma desconhecido: ", currentweapon)
+			return
+		body.take_damage(dados["damage"], position, dados["kb"])

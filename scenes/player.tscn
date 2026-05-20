@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://vouxq2b1nbk5" path="res://assets/images/player/Player.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://2tievjsrtmbf" path="res://scripts/player/PlayerController.gd" id="1_g2els"]
+[ext_resource type="AudioStream" uid="uid://ewh27pocv2bu" path="res://assets/sounds/player/Slash 1.mp3" id="3_qhqgy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t4otl"]
 atlas = ExtResource("1_3vyb7")
@@ -407,15 +408,21 @@ scale = Vector2(4, 4)
 shape = SubResource("RectangleShape2D_i4ail")
 
 [node name="SwingSword" type="AudioStreamPlayer2D" parent="." unique_id=885009983]
+stream = ExtResource("3_qhqgy")
 
 [node name="SwordHitbox" type="Area2D" parent="." unique_id=1563834819]
 position = Vector2(0, 32)
+collision_mask = 2
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordHitbox" unique_id=1067306325]
 shape = SubResource("RectangleShape2D_g2els")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1339975773]
+limit_left = 0
+limit_top = 0
+limit_right = 1664
+limit_bottom = 1024
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="SwordHitbox" to="." method="_on_sword_hitbox_body_entered"]

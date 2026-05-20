@@ -16,15 +16,17 @@ config/features=PackedStringArray("4.6")
 
 [autoload]
 
-GameManager="*res://scripts/autoload/GameManager.gd"
-SaveManager="*res://scripts/autoload/SaveManager.gd"
-AudioManager="*res://scripts/autoload/AudioManager.gd"
-SettingsManager="*res://scripts/autoload/SettingsManager.gd"
+GameManager="*res://scripts/managers/GameManager.gd"
+SaveManager="*res://scripts/managers/SaveManager.gd"
+AudioManager="*res://scripts/managers/AudioManager.gd"
+SettingsManager="*res://scripts/managers/SettingsManager.gd"
+EnemiesData="*uid://dsj0211osp3n2"
+WeaponsData="*uid://05nkuc2s8aaj"
 
 [display]
 
-window/size/viewport_width=480
-window/size/viewport_height=270
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/size/mode=2
 window/stretch/mode="canvas_items"
 
