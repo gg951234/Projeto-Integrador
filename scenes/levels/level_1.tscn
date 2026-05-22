@@ -364,9 +364,12 @@ tile_set = SubResource("TileSet_vcyb2")
 position = Vector2(174, 416)
 
 [node name="Enemies" type="Node2D" parent="." unique_id=446152784]
+y_sort_enabled = true
 
 [node name="Slime" parent="Enemies" unique_id=1469553198 instance=ExtResource("9_j7gcg")]
+y_sort_enabled = true
 position = Vector2(515, 467)
 
 [node name="Slime2" parent="Enemies" unique_id=172194659 instance=ExtResource("9_j7gcg")]
+y_sort_enabled = true
 position = Vector2(915, 486)

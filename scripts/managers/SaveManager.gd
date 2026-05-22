@@ -2,27 +2,27 @@ extends Node
 
 const SAVE_PATH := "user://save.json"
 
-func salvar() -> void:
-	var dados := {
-		"jogador_nome": GameManager.jogador_nome,
-		"fase_atual": GameManager.fase_atual,
-		"moedas": GameManager.moedas,
-		"fases_desbloqueadas": GameManager.fases_desbloqueadas
+func save() -> void:
+	var data := {
+		"playername": GameManager.playername,
+		"maxscore": GameManager.maxscore,
+		"coins": GameManager.coins,
+		"unlockedlevels": GameManager.unlockedlevels
 	}
-	var arquivo := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
-	if arquivo:
-		arquivo.store_string(JSON.stringify(dados))
-		arquivo.close()
+	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	if file:
+		file.store_string(JSON.stringify(data))
+		file.close()
 
-func carregar() -> void:
+func load() -> void:
 	if not FileAccess.file_exists(SAVE_PATH):
 		return
-	var arquivo := FileAccess.open(SAVE_PATH, FileAccess.READ)
-	if arquivo:
-		var dados = JSON.parse_string(arquivo.get_as_text())
-		arquivo.close()
-		if dados:
-			GameManager.jogador_nome = dados.get("jogador_nome", "")
-			GameManager.fase_atual   = dados.get("fase_atual", 1)
-			GameManager.moedas       = dados.get("moedas", 0)
-			GameManager.fases_desbloqueadas = dados.get("fases_desbloqueadas", [1])
+	var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
+	if file:
+		var data = JSON.parse_string(file.get_as_text())
+		file.close()
+		if data:
+			GameManager.playername = data.get("playername", "")
+			GameManager.maxscore = data.get("maxscore", 0)
+			GameManager.coins = data.get("coins", 0)
+			GameManager.unlockedlevels = data.get("unlockedlevels", [1])

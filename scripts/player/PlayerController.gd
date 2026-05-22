@@ -100,7 +100,7 @@ func update_hitbox_offset() -> void:
 
 func _on_sword_hitbox_body_entered(body: Node2D) -> void:
 	if is_attacking and body.name.begins_with("Slime"): # Seção somente para Slimes
-		print("Hit: " + body.name)
+		# print("Hit: " + body.name)
 		# Busca os dados da arma atual na tabela global
 		var dados = WeaponsData.get_stats(currentweapon)
 		if dados.is_empty():

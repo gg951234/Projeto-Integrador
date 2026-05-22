@@ -1,7 +1,201 @@
 [gd_scene format=3 uid="uid://5ndbo72db1a3"]
 
-[ext_resource type="PackedScene" uid="uid://cg24io3k0m6q7" path="res://scenes/levels/base_level.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://drw237hufmuki" path="res://scripts/managers/GameManager.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://drrx1gjlwjdld" path="res://scripts/ui/MainMenuController.gd" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://dvwor3ijsv8cj" path="res://scenes/fade_transition.tscn" id="3_h2yge"]
 
 [node name="Main" type="Node2D" unique_id=91432734]
+y_sort_enabled = true
+script = ExtResource("1_ig7tw")
 
-[node name="LevelRoot" parent="." unique_id=2020180848 instance=ExtResource("1_ig7tw")]
+[node name="LevelRoot" type="Node2D" parent="." unique_id=179192019]
+y_sort_enabled = true
+
+[node name="UI" type="Control" parent="." unique_id=1007926531]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 900.0
+offset_bottom = 700.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_0xm2m")
+
+[node name="MainMenuCanvas" type="CanvasLayer" parent="UI" unique_id=229359762]
+
+[node name="BackgroundTexture" type="TextureRect" parent="UI/MainMenuCanvas" unique_id=1669689416]
+offset_right = 900.0
+offset_bottom = 700.0
+
+[node name="Buttons" type="VBoxContainer" parent="UI/MainMenuCanvas" unique_id=1313602937]
+auto_translate_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.0
+offset_top = -111.5
+offset_right = 119.0
+offset_bottom = 111.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Start" type="Button" parent="UI/MainMenuCanvas/Buttons" unique_id=2106310327]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_vertical = 3
+action_mode = 0
+text = "Iniciar"
+
+[node name="Options" type="Button" parent="UI/MainMenuCanvas/Buttons" unique_id=1899815235]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_vertical = 3
+action_mode = 0
+text = "Opções"
+
+[node name="Quit" type="Button" parent="UI/MainMenuCanvas/Buttons" unique_id=746797418]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_vertical = 3
+action_mode = 0
+text = "Sair"
+
+[node name="LevelSelectionCanvas" type="CanvasLayer" parent="UI" unique_id=2055950245]
+visible = false
+
+[node name="BackgroundTexture" type="TextureRect" parent="UI/LevelSelectionCanvas" unique_id=888582346]
+offset_right = 900.0
+offset_bottom = 700.0
+
+[node name="Back" type="Button" parent="UI/LevelSelectionCanvas" unique_id=536956405]
+auto_translate_mode = 1
+offset_left = 35.0
+offset_top = 29.0
+offset_right = 166.0
+offset_bottom = 78.0
+size_flags_horizontal = 7
+size_flags_vertical = 7
+action_mode = 0
+text = "Back"
+
+[node name="Buttons" type="VBoxContainer" parent="UI/LevelSelectionCanvas" unique_id=728205895]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -135.0
+offset_right = 100.0
+offset_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/LevelSelectionCanvas/Buttons" unique_id=1173015350]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="UI/LevelSelectionCanvas/Buttons/CenterContainer" unique_id=1246081477]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 3
+
+[node name="Level1" type="Button" parent="UI/LevelSelectionCanvas/Buttons/CenterContainer/GridContainer" unique_id=1391833050]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 7
+action_mode = 0
+text = "1"
+
+[node name="Level2" type="Button" parent="UI/LevelSelectionCanvas/Buttons/CenterContainer/GridContainer" unique_id=1091494363]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 7
+action_mode = 0
+text = "2"
+
+[node name="Level3" type="Button" parent="UI/LevelSelectionCanvas/Buttons/CenterContainer/GridContainer" unique_id=856973424]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 7
+action_mode = 0
+text = "3"
+
+[node name="Level4" type="Button" parent="UI/LevelSelectionCanvas/Buttons/CenterContainer/GridContainer" unique_id=378090732]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 7
+action_mode = 0
+text = "4"
+
+[node name="Level5" type="Button" parent="UI/LevelSelectionCanvas/Buttons/CenterContainer/GridContainer" unique_id=1183739620]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 7
+action_mode = 0
+text = "5"
+
+[node name="Level6" type="Button" parent="UI/LevelSelectionCanvas/Buttons/CenterContainer/GridContainer" unique_id=824131502]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 7
+action_mode = 0
+text = "6"
+
+[node name="Level7" type="Button" parent="UI/LevelSelectionCanvas/Buttons/CenterContainer/GridContainer" unique_id=2128527101]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 7
+action_mode = 0
+text = "7"
+
+[node name="Level8" type="Button" parent="UI/LevelSelectionCanvas/Buttons/CenterContainer/GridContainer" unique_id=611003828]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 7
+action_mode = 0
+text = "8"
+
+[node name="Level9" type="Button" parent="UI/LevelSelectionCanvas/Buttons/CenterContainer/GridContainer" unique_id=1125462705]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 7
+action_mode = 0
+text = "9"
+
+[node name="CenterContainer2" type="CenterContainer" parent="UI/LevelSelectionCanvas/Buttons" unique_id=2046008238]
+layout_mode = 2
+
+[node name="Level10" type="Button" parent="UI/LevelSelectionCanvas/Buttons/CenterContainer2" unique_id=872992557]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+action_mode = 0
+text = "10"
+
+[node name="FadeTransition" parent="." unique_id=1020010962 instance=ExtResource("3_h2yge")]
+visible = false
+
+[connection signal="pressed" from="UI/MainMenuCanvas/Buttons/Start" to="UI" method="_on_start_pressed"]
+[connection signal="pressed" from="UI/MainMenuCanvas/Buttons/Options" to="UI" method="_on_options_pressed"]
+[connection signal="pressed" from="UI/MainMenuCanvas/Buttons/Quit" to="UI" method="_on_quit_pressed"]
+[connection signal="pressed" from="UI/LevelSelectionCanvas/Back" to="UI" method="_on_back_pressed"]

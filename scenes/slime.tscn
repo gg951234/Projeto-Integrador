@@ -191,7 +191,9 @@ shape = SubResource("RectangleShape2D_371uh")
 shape = SubResource("CircleShape2D_n6pvg")
 
 [node name="HitSound" type="AudioStreamPlayer2D" parent="." unique_id=1610741949]
+y_sort_enabled = true
 stream = ExtResource("3_n6pvg")
+volume_db = -20.0
 
 [node name="HealthBar" parent="." unique_id=332343199 instance=ExtResource("4_pjw23")]
 position = Vector2(-19, 13)

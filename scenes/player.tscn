@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://vouxq2b1nbk5" path="res://assets/images/player/Player.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://2tievjsrtmbf" path="res://scripts/player/PlayerController.gd" id="1_g2els"]
-[ext_resource type="AudioStream" uid="uid://ewh27pocv2bu" path="res://assets/sounds/player/Slash 1.mp3" id="3_qhqgy"]
+[ext_resource type="AudioStream" uid="uid://dmh0msh3bcjkj" path="res://assets/sounds/player/Slash 2.mp3" id="3_qhqgy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t4otl"]
 atlas = ExtResource("1_3vyb7")
@@ -395,6 +395,7 @@ size = Vector2(14, 2.75)
 size = Vector2(128, 64)
 
 [node name="Player" type="CharacterBody2D" unique_id=1259653975]
+y_sort_enabled = true
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=437506249]

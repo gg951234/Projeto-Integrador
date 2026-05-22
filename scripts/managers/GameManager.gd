@@ -1,16 +1,38 @@
 extends Node
 
-var fase_atual: int = 1
-var moedas: int = 0
-var jogador_nome: String = ""
-var fases_desbloqueadas: Array = [1]
+# Dados que não precisam ser salvos
+var currentlevel: int = 1
+var gamescore: int = 0
 
-func avancar_fase() -> void:
-	fase_atual += 1
-	if fase_atual not in fases_desbloqueadas:
-		fases_desbloqueadas.append(fase_atual)
-	SaveManager.salvar()
+# Dados para serem salvos
+var playername: String = ""
+var maxscore: int = 0
+var coins: int = 0
+var unlockedlevels: Array = [1]
 
-func adicionar_moedas(quantidade: int) -> void:
-	moedas += quantidade
-	SaveManager.salvar()
+var currentlevelroot: Node = null
+
+func _ready() -> void:
+	pass #currentlevelroot = get_node("LevelRoot")
+
+func load_level(levelnumber: int) -> bool:
+	if currentlevelroot:
+		currentlevelroot.queue_free()
+	
+	# Mudar fase se ela existir
+	var levelpath = "res://scenes/levels/level_%s.tscn" % levelnumber
+	if ResourceLoader.exists(levelpath):
+		currentlevelroot = load(levelpath).instantiate()
+		add_child(currentlevelroot)
+		currentlevelroot.name = "LevelRoot"
+		return 1
+	else:
+		print("A fase " + str(levelnumber) + " não existe")
+		return 0
+
+func unlocknextlevel() -> void:
+	if not (currentlevel + 1) in unlockedlevels:
+		unlockedlevels.append(currentlevel+1)
+
+func add_coins(amount: int) -> void:
+	coins += amount
