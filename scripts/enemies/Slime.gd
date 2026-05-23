@@ -1,73 +1,75 @@
 extends CharacterBody2D
+
 @export var enemy_type: String = "Slime"
 
 var SPEED: float
 var health: int
 var target = null
 var isAlive = true
+var knockback_tween: Tween = null   # Referência para o tween ativo
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hit_sound: AudioStreamPlayer2D = $HitSound
 @onready var health_bar: Node2D = $HealthBar
 
-# --------------
-# FUNÇÕES DE INÍCIO (PADRÃO GODOT)
-# --------------
-func _ready(): # Executa quando o nó é criado
-	# Busca os dados do inimigo na tabela global
+func _ready():
 	var dados = EnemiesData.get_stats(enemy_type)
 	if dados.is_empty():
 		push_error("Tipo de inimigo desconhecido: ", enemy_type)
 		return
-	
 	SPEED = dados["speed"]
 	health = dados["health"]
 
-func _physics_process(delta: float) -> void: # Executa a cada frame
-	if isAlive and target:
-		_moveToTarget(delta)
-	move_and_slide()
+func _physics_process(delta: float) -> void:
+	if isAlive and target and knockback_tween == null:
+		# Só segue o player se NÃO estiver em knockback
+		_moveToTarget()
+	elif knockback_tween == null:
+		# Sem knockback e sem alvo → para
+		velocity = Vector2.ZERO
+	# Se knockback_tween não for nulo, não alteramos a velocity (ela está sendo controlada pelo tween)
 	
-# --------------
-# MOVIMENTAÇÃO
-# --------------
-func _moveToTarget(delta: float) -> void:
+	move_and_slide()
+
+func _moveToTarget() -> void:
 	var direction = (target.position - position).normalized()
-	position += direction * SPEED * delta
+	velocity = direction * SPEED
 	animated_sprite_2d.play("attack")
 
-# --------------
-# DANO
-# --------------
 func take_damage(damage: int, attackedpos: Vector2, kbforce: int) -> void:
 	health -= damage
 	health_bar.updateHealth(health)
-	
-	if health <= 0: # Se a vida for menor que 0 chama a função de morte
+	if health <= 0:
 		onDied()
+		return
 	
 	hit_sound.play()
-	# Knockback
-	var kbdirection = (position - attackedpos).normalized()
-	var kbpos = position + kbdirection * kbforce
 	
-	var tween = create_tween()
-	tween.set_ease(Tween.EASE_OUT)
-	tween.set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(self, "position", kbpos, 0.3)
+	# Cancela qualquer tween anterior
+	if knockback_tween and knockback_tween.is_valid():
+		knockback_tween.kill()
+	
+	# Define a direção do knockback
+	var kbdirection = (position - attackedpos).normalized()
+	velocity = kbdirection * (kbforce * 6)   # Força inicial * 6 para ajustar a potência
+	
+	# Cria um tween para reduzir a velocidade gradualmente até zero
+	knockback_tween = create_tween()
+	knockback_tween.tween_property(self, "velocity", Vector2.ZERO, 0.3).set_ease(Tween.EASE_OUT)
+	# Quando o tween terminar, libera a referência
+	knockback_tween.finished.connect(_on_knockback_finished)
+
+func _on_knockback_finished():
+	knockback_tween = null
 
 func onDied() -> void:
 	isAlive = false
 	animated_sprite_2d.play("die")
 	hit_sound.pitch_scale = 0.7
 	hit_sound.play()
-	
 	$CollisionShape2D.set_deferred("disabled", true)
 	$Sight/CollisionShape2D.set_deferred("disabled", true)
 
-# --------------
-# DETECÇÃO
-# --------------
 func _on_sight_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
 		target = body

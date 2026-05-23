@@ -48,7 +48,9 @@ y_sort_enabled = true
 [node name="Slime" parent="Enemies" unique_id=1469553198 instance=ExtResource("9_j7gcg")]
 y_sort_enabled = true
 position = Vector2(271, 738)
+collision_mask = 1
 
 [node name="Slime2" parent="Enemies" unique_id=172194659 instance=ExtResource("9_j7gcg")]
 y_sort_enabled = true
 position = Vector2(325, 369)
+collision_mask = 1

@@ -396,6 +396,7 @@ size = Vector2(128, 64)
 
 [node name="Player" type="CharacterBody2D" unique_id=1259653975]
 y_sort_enabled = true
+collision_layer = 2
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=437506249]
@@ -413,7 +414,7 @@ stream = ExtResource("3_qhqgy")
 
 [node name="SwordHitbox" type="Area2D" parent="." unique_id=1563834819]
 position = Vector2(0, 32)
-collision_mask = 2
+collision_mask = 4
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordHitbox" unique_id=1067306325]
