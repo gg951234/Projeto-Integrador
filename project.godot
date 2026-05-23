@@ -22,6 +22,7 @@ AudioManager="*res://scripts/managers/AudioManager.gd"
 SettingsManager="*res://scripts/managers/SettingsManager.gd"
 EnemiesData="*uid://dsj0211osp3n2"
 WeaponsData="*uid://05nkuc2s8aaj"
+BossesData="*uid://di8ghtsr687r1"
 
 [display]
 

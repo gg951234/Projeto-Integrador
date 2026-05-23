@@ -16,6 +16,7 @@ var currentweapon: String
 # FUNÇÕES DE INÍCIO (PADRÃO GODOT)
 # --------------
 func _ready() -> void: # Executa quando o nó é criado
+	add_to_group("player")
 	currentweapon = "Sword" # IMPLEMENTAR PARA PUXAR DO BANCO DE DADOS
 	hitbox_offset = sword_hitbox.position
 
@@ -99,7 +100,7 @@ func update_hitbox_offset() -> void:
 
 
 func _on_sword_hitbox_body_entered(body: Node2D) -> void:
-	if is_attacking and body.name.begins_with("Slime"): # Seção somente para Slimes
+	if is_attacking and (body.is_in_group("enemy") or body.is_in_group("boss")): # Seção somente para Slimes
 		# print("Hit: " + body.name)
 		# Busca os dados da arma atual na tabela global
 		var dados = WeaponsData.get_stats(currentweapon)

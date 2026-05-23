@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://bxnh1uqts5v6p"]
+
+[ext_resource type="Script" uid="uid://pmxhd6ukqkdi" path="res://scripts/bosses/Golem/Rock.gd" id="1_ik6fu"]
+[ext_resource type="Texture2D" uid="uid://ct0bj6ehxk2ua" path="res://assets/images/bosses/Golem/rock.png" id="1_mek2u"]
+[ext_resource type="Texture2D" uid="uid://cqpdoakt41dd7" path="res://assets/images/bosses/Golem/smoke_particle.png" id="2_ik6fu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_872ht"]
+radius = 33.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_p2d0s"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_p2d0s"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vqvgd"]
+curve = SubResource("Curve_p2d0s")
+
+[sub_resource type="Gradient" id="Gradient_mek2u"]
+colors = PackedColorArray(0.7294118, 0.7019608, 0.5921569, 1, 0.27450982, 0.23921569, 0.21960784, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ik6fu"]
+gradient = SubResource("Gradient_mek2u")
+
+[sub_resource type="Curve" id="Curve_872ht"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_p2d0s"]
+width = 64
+curve = SubResource("Curve_872ht")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vqvgd"]
+particle_flag_disable_z = true
+angle_min = 1.0728835e-05
+angle_max = 360.00003
+angle_curve = SubResource("CurveTexture_vqvgd")
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 40.0
+initial_velocity_max = 60.0
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_p2d0s")
+color_ramp = SubResource("GradientTexture1D_ik6fu")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="Rock" type="Area2D" unique_id=704143548]
+script = ExtResource("1_ik6fu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1309746016]
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_872ht")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1197976437]
+scale = Vector2(2, 2)
+texture = ExtResource("1_mek2u")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1474515504]
+material = SubResource("CanvasItemMaterial_p2d0s")
+emitting = false
+texture = ExtResource("2_ik6fu")
+process_material = SubResource("ParticleProcessMaterial_vqvgd")

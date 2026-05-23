@@ -13,6 +13,7 @@ var knockback_tween: Tween = null   # Referência para o tween ativo
 @onready var health_bar: Node2D = $HealthBar
 
 func _ready():
+	add_to_group("enemy")
 	var dados = EnemiesData.get_stats(enemy_type)
 	if dados.is_empty():
 		push_error("Tipo de inimigo desconhecido: ", enemy_type)
@@ -20,7 +21,7 @@ func _ready():
 	SPEED = dados["speed"]
 	health = dados["health"]
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if isAlive and target and knockback_tween == null:
 		# Só segue o player se NÃO estiver em knockback
 		_moveToTarget()
@@ -44,6 +45,11 @@ func take_damage(damage: int, attackedpos: Vector2, kbforce: int) -> void:
 		return
 	
 	hit_sound.play()
+	
+	# Pisca em branco
+	var tween = create_tween()
+	tween.tween_property(animated_sprite_2d, "self_modulate", Color.RED, 0.05)
+	tween.tween_property(animated_sprite_2d, "self_modulate", Color.WHITE, 0.1)
 	
 	# Cancela qualquer tween anterior
 	if knockback_tween and knockback_tween.is_valid():
