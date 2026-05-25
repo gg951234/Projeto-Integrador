@@ -4,13 +4,16 @@ extends CharacterBody2D
 
 var SPEED: float
 var health: int
+
 var target = null
-var isAlive = true
+var target_in_range: bool = false
+var isAlive: bool = true
 var knockback_tween: Tween = null   # Referência para o tween ativo
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hit_sound: AudioStreamPlayer2D = $HitSound
 @onready var health_bar: Node2D = $HealthBar
+@onready var attack_timer: Timer = $AttackTimer
 
 func _ready():
 	add_to_group("enemy")
@@ -20,22 +23,25 @@ func _ready():
 		return
 	SPEED = dados["speed"]
 	health = dados["health"]
+	attack_timer.wait_time = dados["attackcd"]
 
 func _physics_process(_delta: float) -> void:
-	if isAlive and target and knockback_tween == null:
+	if isAlive and knockback_tween == null:
 		# Só segue o player se NÃO estiver em knockback
-		_moveToTarget()
-	elif knockback_tween == null:
-		# Sem knockback e sem alvo → para
-		velocity = Vector2.ZERO
-	# Se knockback_tween não for nulo, não alteramos a velocity (ela está sendo controlada pelo tween)
-	
-	move_and_slide()
+		if target != null:
+			_moveToTarget()
+		elif target == null:
+			velocity = Vector2.ZERO
+	if isAlive:
+		move_and_slide()
 
 func _moveToTarget() -> void:
+	var distance = position.distance_to(target.position)
+	if distance < 1: # Se estiver muito perto, não se move
+		velocity = Vector2.ZERO
+		return
 	var direction = (target.position - position).normalized()
 	velocity = direction * SPEED
-	animated_sprite_2d.play("attack")
 
 func take_damage(damage: int, attackedpos: Vector2, kbforce: int) -> void:
 	health -= damage
@@ -75,12 +81,39 @@ func onDied() -> void:
 	hit_sound.play()
 	$CollisionShape2D.set_deferred("disabled", true)
 	$Sight/CollisionShape2D.set_deferred("disabled", true)
+	$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 
 func _on_sight_body_entered(body: Node2D) -> void:
-	if body.name == "Player":
+	if body.is_in_group("player"):
 		target = body
 
 func _on_sight_body_exited(body: Node2D) -> void:
-	if body.name == "Player" and isAlive:
+	if body.is_in_group("player") and isAlive:
 		target = null
 		animated_sprite_2d.play("idle")
+
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player") and attack_timer.time_left <= 0:
+		target_in_range = true
+		attack_timer.start()
+		
+		# Busca os dados do inimigo atual na tabela global
+		var dados = EnemiesData.get_stats(enemy_type)
+		if dados.is_empty():
+			push_error("Dano não registrado: ", enemy_type)
+			return
+		body.take_damage(dados["damage"], position, dados["kb"])
+
+func _on_hitbox_body_exited(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		target_in_range = false
+
+func _on_attack_timer_timeout() -> void:
+	attack_timer.stop()
+	if target and target_in_range:
+		# Busca os dados do inimigo atual na tabela global
+		var dados = EnemiesData.get_stats(enemy_type)
+		if dados.is_empty():
+			push_error("Dano não registrado: ", enemy_type)
+			return
+		target.take_damage(dados["damage"], position, dados["kb"])

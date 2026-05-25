@@ -1,13 +1,18 @@
 extends BossManager
 
 @export var boss_type_override: String = "Golem" # ou use @export var boss_type: String
+var levelroot = null
 
 func _ready():
 	boss_type = boss_type_override   # passa para a base
 	super._ready()                   # chama a inicialização da base
+	levelroot = GameManager.currentlevelroot
 
 # Implementação da skill 1 (queda de pedras)
 func _skill_1() -> void:
+	if not levelroot:
+		print("Sem LevelRoot")
+		return
 	var params = skills[1]
 	var marker_count = params.get("marker_count", 4)
 	var marker_radius = params.get("marker_radius", 200)
@@ -34,7 +39,7 @@ func _skill_1() -> void:
 		sprite.position = -sprite.texture.get_size() * sprite.scale / 2
 		marker.add_child(sprite)
 		
-		get_tree().current_scene.add_child(marker)
+		levelroot.add_child(marker)
 		skill_markers.append(marker)
 	
 	await get_tree().create_timer(fall_delay).timeout
@@ -44,7 +49,7 @@ func _skill_1() -> void:
 			var rock = rock_scene.instantiate()
 			rock.global_position = marker.global_position
 			rock.setup(rock_damage, rock_knockback)
-			get_tree().current_scene.add_child(rock)
+			levelroot.add_child(rock)
 	
 	for m in skill_markers:
 		m.queue_free()
