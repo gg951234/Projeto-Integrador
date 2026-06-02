@@ -112,7 +112,7 @@ func choose_new_waypoint():
 		new_waypoint = waypoints[randi() % waypoints.size()]
 	current_waypoint = new_waypoint
 	current_target_pos = current_waypoint.global_position
-	print("Next waypoint: ", current_waypoint.name)
+	# print("Next waypoint: ", current_waypoint.name)
 
 # Variável auxiliar para o movimento
 var current_target_pos: Vector2 = Vector2.ZERO
@@ -176,7 +176,6 @@ func _on_skill_cooldown_timeout():
 	pass
 
 # ===== MÉTODOS DE SKILL (sobrescrever nos filhos) =====
-# Corrotinas: adicionamos um await inócuo para torná-las assíncronas.
 func _skill_1() -> void:
 	await get_tree().process_frame
 	pass

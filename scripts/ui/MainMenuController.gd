@@ -106,8 +106,9 @@ func _on_back_pressed() -> void:
 	level_selection_canvas.visible = false
 
 func _on_level_pressed(button: Button) -> void:
-	fade_in(1, func():
-		if GameManager.load_level(int(button.name)): # Pega o número da fase e tenta carregar
+	if GameManager.check_level(int(button.name)): # Pega o número da fase e verifica se ela existe
+		fade_in(1, func():
+			GameManager.load_level(int(button.name)) # Pega o número da fase e tenta carregar
 			level_selection_canvas.visible = false
 			fade_out(0.5)
-	)
+		)

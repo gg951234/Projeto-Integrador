@@ -11,7 +11,7 @@ func _ready():
 # Implementação da skill 1 (queda de pedras)
 func _skill_1() -> void:
 	if not levelroot:
-		print("Sem LevelRoot")
+		# print("Sem LevelRoot")
 		return
 	var params = skills[1]
 	var marker_count = params.get("marker_count", 4)

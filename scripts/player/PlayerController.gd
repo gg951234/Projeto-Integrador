@@ -12,6 +12,13 @@ var hitbox_offset: Vector2
 var isAlive = true
 var knockback_tween: Tween = null   # Referência para o tween ativo
 
+var last_hit_id: int = -1
+var hit_sounds: Array[AudioStream] = [
+	preload("res://assets/sounds/player/PlayerHit1.mp3"),
+	preload("res://assets/sounds/player/PlayerHit2.mp3"),
+	preload("res://assets/sounds/player/PlayerHit3.mp3")
+]
+
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var swing_sword: AudioStreamPlayer2D = $SwingSword
 @onready var sword_hitbox: Area2D = $SwordHitbox
@@ -130,11 +137,21 @@ func _on_sword_hitbox_body_entered(body: Node2D) -> void:
 func _on_knockback_finished():
 	knockback_tween = null
 
+#========
+func hitSound():
+	var new_id = last_hit_id
+	while new_id == last_hit_id:
+		new_id = randi() % hit_sounds.size()
+	
+	last_hit_id = new_id
+	hit_sound.stream = hit_sounds[new_id]
+	hit_sound.play()
+
 func onDied() -> void:
 	isAlive = false
 	animated_sprite_2d.play("die")
 	hit_sound.pitch_scale = 0.7
-	hit_sound.play()
+	hitSound()
 	$CollisionShape2D.set_deferred("disabled", true)
 	$SwordHitbox/CollisionShape2D.set_deferred("disabled", true)
 	await get_tree().create_timer(2.0).timeout
@@ -149,7 +166,8 @@ func take_damage(damage: int, attackedpos: Vector2, kbforce: int) -> void:
 		onDied()
 		return
 	
-	hit_sound.play()
+	#hit_sound.pitch_scale = 1
+	hitSound()
 	
 	# Pisca em vermelho
 	var tween = create_tween()

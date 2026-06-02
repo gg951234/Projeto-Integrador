@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://cg24io3k0m6q7"]
 
 [ext_resource type="PackedScene" uid="uid://c863a26p162xb" path="res://scenes/golem.tscn" id="4_x42e6"]
+[ext_resource type="PackedScene" uid="uid://dy0qxbrtqd5ir" path="res://scenes/coin.tscn" id="5_6761a"]
 [ext_resource type="PackedScene" uid="uid://co6ewiawdd4i7" path="res://scenes/slime.tscn" id="9_j7gcg"]
 [ext_resource type="Texture2D" uid="uid://gdniqe0ohaw2" path="res://assets/images/tiles/Tile Map 1 - GEO/TileMap1GEO.png" id="9_np2pn"]
 [ext_resource type="PackedScene" uid="uid://dqmugt1xu11kk" path="res://scenes/player.tscn" id="10_qhwlw"]
@@ -43,6 +44,9 @@ tile_set = SubResource("TileSet_gmpev")
 [node name="Player" parent="." unique_id=1259653975 instance=ExtResource("10_qhwlw")]
 position = Vector2(255, 189)
 
+[node name="Golem" parent="." unique_id=563389507 instance=ExtResource("4_x42e6")]
+position = Vector2(1148, -438)
+
 [node name="Enemies" type="Node2D" parent="." unique_id=446152784]
 y_sort_enabled = true
 
@@ -54,9 +58,6 @@ position = Vector2(271, 738)
 y_sort_enabled = true
 position = Vector2(325, 369)
 
-[node name="Golem" parent="." unique_id=563389507 instance=ExtResource("4_x42e6")]
-position = Vector2(1148, -438)
-
 [node name="Waypoints" type="Node2D" parent="." unique_id=1333587902]
 position = Vector2(1133, -599)
 
@@ -67,3 +68,23 @@ position = Vector2(-347, 242)
 position = Vector2(372, 235)
 
 [node name="Waypoint3" type="Marker2D" parent="Waypoints" unique_id=707722350]
+
+[node name="Collectables" type="Node2D" parent="." unique_id=408660253]
+
+[node name="Coin" parent="Collectables" unique_id=1825989390 instance=ExtResource("5_6761a")]
+position = Vector2(735, 287)
+
+[node name="Coin2" parent="Collectables" unique_id=546184357 instance=ExtResource("5_6761a")]
+position = Vector2(545, 416)
+
+[node name="Coin3" parent="Collectables" unique_id=958984914 instance=ExtResource("5_6761a")]
+position = Vector2(1183, 928)
+
+[node name="Coin4" parent="Collectables" unique_id=17782453 instance=ExtResource("5_6761a")]
+position = Vector2(1183, 96)
+
+[node name="Coin5" parent="Collectables" unique_id=1111458468 instance=ExtResource("5_6761a")]
+position = Vector2(2273, 415)
+
+[node name="Coin6" parent="Collectables" unique_id=1665158482 instance=ExtResource("5_6761a")]
+position = Vector2(2145, 608)
