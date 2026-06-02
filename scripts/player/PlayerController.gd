@@ -68,7 +68,6 @@ func process_movement() -> void:
 	if direction != Vector2.ZERO:
 		velocity = direction * SPEED # Mover para direção * velocidade
 		last_direction = direction
-		update_hitbox_offset()
 	else:
 		velocity = Vector2.ZERO
 
@@ -88,6 +87,7 @@ func play_anims(prefix: String, dir: Vector2) -> void: # Tocar animações
 		animated_sprite_2d.play(prefix + "_up")
 	elif dir.y > 0:
 		animated_sprite_2d.play(prefix + "_down")
+	update_hitbox_offset()
 
 # --------------
 # ATACAR/INTERAGIR
@@ -103,30 +103,31 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		is_attacking = false
 
 # --------------
-# HITBOX
+# DAR DANO
 # --------------
-func update_hitbox_offset() -> void:
-	var defaulthb = {
-		Vector2.DOWN:  { "pos": Vector2(0,  32), "size": Vector2(128, 64) },
-		Vector2.UP:    { "pos": Vector2(0, -12), "size": Vector2(128, 64) },
-		Vector2.RIGHT: { "pos": Vector2(4, 20), "size": Vector2(120, 72) },
-		Vector2.LEFT:  { "pos": Vector2(-4, 20), "size": Vector2(120, 72) },
-	}
-	
-	var info = defaulthb.get(last_direction, { "pos": Vector2(0, 32), "size": Vector2(128, 64) }) # (Direção atual, Default)
-	sword_hitbox.position = info["pos"]
-	
-	var shape = sword_collisionbox.shape
-	if shape is RectangleShape2D:
-		shape.size = info["size"]
-	else:
-		# Caso a shape não seja retangular, logar um erro
-		print("Aviso: sword_collisionbox.shape não é um RectangleShape2D")
 
+func getHbInfo(dir) -> Dictionary:
+	return WeaponsData.get_hitbox(currentweapon).get(dir, { "pos": Vector2(0, 32), "size": Vector2(128, 64) }) # (Direção atual, Default)
+
+func update_hitbox_offset() -> void:
+	var direction_key: String = ""
+	
+	if last_direction.x < 0:
+		direction_key = "Left"
+	elif last_direction.x > 0:
+		direction_key = "Right"
+	elif last_direction.y < 0:
+		direction_key = "Up"
+	elif last_direction.y > 0:
+		direction_key = "Down"
+		
+	var hb_info = getHbInfo(direction_key)
+	var shape = sword_collisionbox.shape
+	sword_hitbox.position = hb_info["pos"]
+	shape.size = hb_info["size"]
 
 func _on_sword_hitbox_body_entered(body: Node2D) -> void:
-	if is_attacking and (body.is_in_group("enemy") or body.is_in_group("boss")): # Seção somente para Slimes
-		# print("Hit: " + body.name)
+	if is_attacking and (body.is_in_group("enemy") or body.is_in_group("boss")):
 		# Busca os dados da arma atual na tabela global
 		var dados = WeaponsData.get_stats(currentweapon)
 		if dados.is_empty():
@@ -137,7 +138,9 @@ func _on_sword_hitbox_body_entered(body: Node2D) -> void:
 func _on_knockback_finished():
 	knockback_tween = null
 
-#========
+# --------------
+# RECEBER DANO / MORTE
+# --------------
 func hitSound():
 	var new_id = last_hit_id
 	while new_id == last_hit_id:
