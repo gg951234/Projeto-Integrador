@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+signal health_changed(new_health: int)
+signal died
+
 var SPEED: float
 var health: int
 var currentweapon: String
@@ -151,26 +154,35 @@ func hitSound():
 	hit_sound.play()
 
 func onDied() -> void:
+	if not isAlive:
+		return  # Evita múltiplas chamadas
 	isAlive = false
 	animated_sprite_2d.play("die")
+	
 	hit_sound.pitch_scale = 0.7
 	hitSound()
+	
 	$CollisionShape2D.set_deferred("disabled", true)
 	$SwordHitbox/CollisionShape2D.set_deferred("disabled", true)
-	await get_tree().create_timer(2.0).timeout
-	print("Resetou Level")
-	isAlive = true
-	GameManager.load_level() # Pega o número da fase e tenta carregar
+
+	await animated_sprite_2d.animation_finished
+	var death_screen = load("res://scenes/death_screen.tscn").instantiate()
+	get_tree().root.add_child(death_screen)
 
 func take_damage(damage: int, attackedpos: Vector2, kbforce: int) -> void:
 	health -= damage
 	print(health)
 	if health <= 0:
 		onDied()
+		# Emite um sinal
+		emit_signal("died")
 		return
 	
-	#hit_sound.pitch_scale = 1
+	# Toca som
 	hitSound()
+	
+	# Emite um sinal
+	emit_signal("health_changed", health)
 	
 	# Pisca em vermelho
 	var tween = create_tween()

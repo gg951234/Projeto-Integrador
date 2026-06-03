@@ -1,13 +1,14 @@
 extends Control
 
+@onready var hud: CanvasLayer = $HUD
+@onready var health_bar: TextureProgressBar = $HUD/HealthBar
+
 @onready var start: Button = $MainMenuCanvas/Buttons/Start
 @onready var options: Button = $MainMenuCanvas/Buttons/Options
 @onready var quit: Button = $MainMenuCanvas/Buttons/Quit
 @onready var main_menu_canvas: CanvasLayer = $MainMenuCanvas
 @onready var level_selection_canvas: CanvasLayer = $LevelSelectionCanvas
 @onready var level_selection_buttons: VBoxContainer = $LevelSelectionCanvas/Buttons
-@onready var fade_canvas: CanvasLayer = $"../FadeTransition"
-@onready var fade_image: ColorRect = $"../FadeTransition/TransitionImage"
 
 var hover_scale: Vector2 = Vector2(1.1, 1.1)
 var animation_duration: float = 0.2
@@ -15,9 +16,12 @@ var tween_type: Tween.EaseType = Tween.EASE_OUT
 var tween_trans: Tween.TransitionType = Tween.TRANS_BACK
 
 var original_scale: Vector2 = Vector2(1, 1)
-var tween: Tween
+var buttontween: Tween
 
 var levels_setup_done: bool = false
+
+var player
+var max_health
 
 # --------------
 # FUNÇÕES DE INÍCIO (PADRÃO GODOT)
@@ -28,25 +32,24 @@ func _ready() -> void:  # Executa quando o nó é criado
 	setup_main_buttons()
 
 # --------------
-# TRANSIÇÕES DE TELA
+# SETAR PLAYER
 # --------------
-func fade_out(duration: float = 0.5, on_finished: Callable = Callable()) -> void:
-	fade_canvas.show()
-	tween = create_tween()
-	tween.tween_property(fade_image, "modulate:a", 0.0, duration)
-	if on_finished:
-		tween.finished.connect(on_finished)
-	else:
-		tween.finished.connect(func(): fade_canvas.hide())
+func set_player(p) -> void:
+	player = p
+	if player:
+		hud.visible = true
+		max_health = player.health
+		player.health_changed.connect(_update_health)
+		player.died.connect(_hide_HUD)
+		_update_health(player.health)
 
-func fade_in(duration: float = 0.5, on_finished: Callable = Callable()) -> void:
-	fade_canvas.show()
-	fade_image.modulate.a = 0.0  # Começa transparente
-	tween = create_tween()
-	tween.tween_property(fade_image, "modulate:a", 1.0, duration)
-	if on_finished:
-		tween.finished.connect(on_finished)
-	
+func _hide_HUD() -> void:
+	hud.visible = false
+
+func _update_health(new_health) -> void:
+	health_bar.value = new_health
+	health_bar.max_value = max_health
+
 # --------------
 # ANIMAÇÃO DE HOVER
 # --------------
@@ -57,11 +60,11 @@ func _on_button_mouse_exited(button: Button) -> void:
 	animate_scale(button, original_scale)
 
 func animate_scale(button: Button, target_scale: Vector2) -> void:
-	tween = create_tween()
-	tween.set_ease(tween_type)
-	tween.set_trans(tween_trans)
-	tween.tween_property(button, "scale", target_scale, animation_duration)
-	tween.finished.connect(tween.kill)
+	buttontween = create_tween()
+	buttontween.set_ease(tween_type)
+	buttontween.set_trans(tween_trans)
+	buttontween.tween_property(button, "scale", target_scale, animation_duration)
+	buttontween.finished.connect(buttontween.kill)
 
 func setup_main_buttons() -> void:
 	# Conecta todos os botões do menu de uma vez
@@ -81,7 +84,7 @@ func setup_levels_selection() -> void:
 		levelbutton.pressed.connect(_on_level_pressed.bind(levelbutton))
 
 # --------------
-# BOTÕES DO MAIN MENU
+# MAIN MENU
 # --------------
 func _on_start_pressed() -> void:
 	main_menu_canvas.visible = false
@@ -107,8 +110,9 @@ func _on_back_pressed() -> void:
 
 func _on_level_pressed(button: Button) -> void:
 	if GameManager.check_level(int(button.name)): # Pega o número da fase e verifica se ela existe
-		fade_in(1, func():
+		GameManager.fade_in(1, func():
 			GameManager.load_level(int(button.name)) # Pega o número da fase e tenta carregar
 			level_selection_canvas.visible = false
-			fade_out(0.5)
+			hud.visible = true
+			GameManager.fade_out(0.5)
 		)

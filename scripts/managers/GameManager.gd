@@ -12,11 +12,68 @@ var maxscore: int = 0
 var coins: int = 0
 var unlockedlevels: Array = [1, 2]
 
+# Sistema de transição global
+var ui_reference: Control
+var transition_layer: CanvasLayer
+var transition_rect: ColorRect
+
 func _ready() -> void:
 	await get_tree().process_frame
 	# ADD FUNÇÃO PARA CARREGAR DADOS DO BANCO DE DADOS
 	currentlevelroot = get_tree().root.find_child("LevelRoot", true, false)
+	
+	# Cria o sistema de transição global (sempre visível, mas transparente)
+	_find_nodes()
+	_create_transition_system()
+	
+# --------------
+# TRANSIÇÕES DE TELA
+# --------------
+func _find_nodes() -> void:
+	# Procura por um CanvasLayer chamado "FadeTransition" em qualquer lugar da cena root
+	var root = get_tree().root
+	ui_reference = root.find_child("UI", true, false)
+	transition_layer = root.find_child("FadeTransition", true, false)
+	
+	if transition_layer:
+		transition_rect = transition_layer.find_child("TransitionImage", true, false)
+		if transition_rect:
+			# Garante que ela comece escondida e transparente
+			transition_layer.hide()
+			transition_rect.modulate.a = 0.0
+		else:
+			push_error("FadeTransition encontrada, mas não achei o TransitionImage")
+	else:
+		push_error("Não encontrou uma FadeTransition na árvore. Verifique se ela existe como filha da root.")
 
+func _create_transition_system() -> void:
+	# Ajusta o tamanho quando a janela for redimensionada (opcional)
+	get_tree().root.connect("size_changed", _on_viewport_size_changed)
+
+func _on_viewport_size_changed() -> void:
+	if transition_rect:
+		transition_rect.size = get_tree().root.size
+
+# Funções de fade globais
+func fade_in(duration: float = 0.5, on_finished: Callable = Callable()) -> void:
+	transition_layer.show()
+	transition_rect.modulate.a = 0.0  # Começa transparente
+	var tween = create_tween()
+	tween.tween_property(transition_rect, "modulate:a", 1.0, duration)
+	if on_finished:
+		tween.finished.connect(on_finished)
+
+func fade_out(duration: float = 0.5, on_finished: Callable = Callable()) -> void:
+	transition_layer.show()
+	var tween = create_tween()
+	tween.tween_property(transition_rect, "modulate:a", 0.0, duration)
+	if on_finished:
+		transition_layer.hide()
+		tween.finished.connect(on_finished)
+
+# --------------
+# SISTEMA DE FASES
+# --------------
 func check_level(levelnumber: int = 0) -> bool:
 	if levelnumber <= 0:
 		print("Sem levelnumber")
@@ -25,7 +82,7 @@ func check_level(levelnumber: int = 0) -> bool:
 	if levelnumber in unlockedlevels:
 		# Achar o caminho da fase se o player tiver ela desbloqueada
 		currentlevelpath = "res://scenes/levels/level_%s.tscn" % levelnumber
-		# Mudar fase se ela existir
+		# Retornar true se ela existir
 		if ResourceLoader.exists(currentlevelpath):
 			return 1
 		else:
@@ -35,30 +92,39 @@ func check_level(levelnumber: int = 0) -> bool:
 	
 	return 0
 
+func delete_level() -> bool:
+	if currentlevelroot:
+		currentlevelroot.queue_free()
+		return 1
+	return 0
+
 func load_level(levelnumber: int = 0) -> bool:
 	if levelnumber <= 0:
 		print("Sem levelnumber")
 		levelnumber = currentlevel
-		
-	if currentlevelroot:
-		print("Queue Free")
-		currentlevelroot.queue_free()
-		
+	
+	delete_level()
+	
 	if check_level(levelnumber):
 		currentlevelroot = load(currentlevelpath).instantiate()
 		add_child(currentlevelroot)
 		currentlevelroot.name = "LevelRoot"
 		print("Fase " + str(levelnumber) + " carregada com sucesso")
+		
+		var player = currentlevelroot.get_node("Player")
+		ui_reference.set_player(player)
 		return 1
 	else:
 		print("Falha ao carregar a fase " + str(levelnumber))
 		return 0
 
-
 func unlocknextlevel() -> void:
 	if not (currentlevel + 1) in unlockedlevels:
 		unlockedlevels.append(currentlevel+1)
 
+# --------------
+# SISTEMA DE COLETA
+# --------------
 func add_coins(amount: int) -> void:
 	coins += amount
 	print(coins)

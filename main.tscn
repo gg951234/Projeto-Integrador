@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://drw237hufmuki" path="res://scripts/managers/GameManager.gd" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://drrx1gjlwjdld" path="res://scripts/ui/MainMenuController.gd" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://dvwor3ijsv8cj" path="res://scenes/fade_transition.tscn" id="3_h2yge"]
+[ext_resource type="Texture2D" uid="uid://cectm7oekm2qn" path="res://assets/images/UI/PlayerLifeBarUnder.png" id="3_lquwl"]
+[ext_resource type="Texture2D" uid="uid://bjr8pl1h64num" path="res://assets/images/UI/PlayerLifeBar.png" id="4_7mycd"]
 
 [node name="Main" type="Node2D" unique_id=91432734]
 y_sort_enabled = true
@@ -192,7 +194,20 @@ size_flags_vertical = 4
 action_mode = 0
 text = "10"
 
+[node name="HUD" type="CanvasLayer" parent="UI" unique_id=1201332776]
+visible = false
+
+[node name="HealthBar" type="TextureProgressBar" parent="UI/HUD" unique_id=1552069552]
+offset_left = 20.0
+offset_top = 15.0
+offset_right = 416.0
+offset_bottom = 48.0
+nine_patch_stretch = true
+texture_under = ExtResource("3_lquwl")
+texture_progress = ExtResource("4_7mycd")
+
 [node name="FadeTransition" parent="." unique_id=1020010962 instance=ExtResource("3_h2yge")]
+layer = 2
 visible = false
 
 [connection signal="pressed" from="UI/MainMenuCanvas/Buttons/Start" to="UI" method="_on_start_pressed"]

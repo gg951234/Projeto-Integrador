@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://dj76silp0h2jp"]
+
+[ext_resource type="Script" uid="uid://bibf1hvu0i4v2" path="res://scripts/ui/DeathScreenController.gd" id="1_uyutr"]
+
+[node name="DeathScreenCanvas" type="CanvasLayer" unique_id=780261741]
+script = ExtResource("1_uyutr")
+
+[node name="Panel" type="Panel" parent="." unique_id=146161933]
+modulate = Color(0, 0, 0, 0.39215687)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="Buttons" type="VBoxContainer" parent="." unique_id=969578106]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.75
+offset_top = -80.0
+offset_right = 128.75
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Retry" type="Button" parent="Buttons" unique_id=1597536416]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 7
+action_mode = 0
+text = "Tentar Novamente"
+
+[node name="Back" type="Button" parent="Buttons" unique_id=83548257]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 7
+action_mode = 0
+text = "Voltar para o Menu"
