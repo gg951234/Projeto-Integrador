@@ -1,18 +1,21 @@
 extends BossManager
 
-@export var boss_type_override: String = "Golem" # ou use @export var boss_type: String
+@export var boss_type_override: String = "Golem"
 var levelroot = null
 
 func _ready():
-	boss_type = boss_type_override   # passa para a base
-	super._ready()                   # chama a inicialização da base
+	# Registra as skills dinâmicas antes de inicializar a base
+	skill_executors[1] = _skill_rock_fall
+	
+	boss_type = boss_type_override
+	super._ready()
 	levelroot = GameManager.currentlevelroot
 
 # Implementação da skill 1 (queda de pedras)
-func _skill_1() -> void:
+func _skill_rock_fall() -> void:
 	if not levelroot:
-		# print("Sem LevelRoot")
 		return
+	
 	var params = skills[1]
 	var marker_count = params.get("marker_count", 4)
 	var marker_radius = params.get("marker_radius", 200)
@@ -20,7 +23,10 @@ func _skill_1() -> void:
 	var rock_damage = params.get("rock_damage", 20)
 	var rock_knockback = params.get("rock_knockback", 300)
 	
-	var target_size = 48.0  # tamanho desejado para o marcador (pixels)
+	var skill_markers: Array[Node2D] = []
+	var rock_scene: PackedScene = preload("res://scenes/rock.tscn")
+	
+	var target_size = 48.0
 	var texture = preload("res://assets/images/bosses/Golem/rock_target.png")
 	var tex_size = texture.get_size()
 	var scale_factor = target_size / max(tex_size.x, tex_size.y)
@@ -35,7 +41,6 @@ func _skill_1() -> void:
 		var sprite = Sprite2D.new()
 		sprite.texture = texture
 		sprite.scale = Vector2(scale_factor, scale_factor)
-		# Centraliza o sprite no marker
 		sprite.position = -sprite.texture.get_size() * sprite.scale / 2
 		marker.add_child(sprite)
 		

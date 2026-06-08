@@ -2,31 +2,30 @@ class_name BossManager
 extends CharacterBody2D
 
 # Estados
-enum State { MOVING, SKILL_ACTIVE }
-var state: State = State.MOVING
+enum State { IDLE, SKILL_ACTIVE }
+var state: State = State.IDLE
 
-# Estatísticas
+# Estatísticas comuns (carregadas do BossesData)
 var boss_type: String = ""
-var speed: float
+var speed: float          # reservado para skills que exigem movimento
 var health: int
-var skill_pattern: Array
-var skills: Dictionary
+var skill_pattern: Array  # ex: [1, 2, 1, 3]
+var skills: Dictionary     # { id: { cooldown, outros parâmetros } }
 var current_pattern_index: int = 0
-
-# Waypoints (agora fixos na cena, não mais filhos do boss)
-var waypoints: Array[Marker2D] = []   # Lista de Marker2D encontrados no nó "Waypoints"
-var current_waypoint: Marker2D = null
 
 # Combate e sobrevivência
 var isAlive: bool = true
 var player: CharacterBody2D = null
 
 # Timers
-var skill_cooldown_timer: Timer
+var skill_cooldown_timer: Timer     # cooldown individual da última skill
+var skill_trigger_timer: Timer      # periodicamente tenta executar próxima skill
 
-# Elementos de skill (podem ser usados pelos filhos)
-var skill_markers: Array[Node2D] = []
-var rock_scene: PackedScene = preload("res://scenes/rock.tscn")
+# Sistema de skills dinâmicas
+var skill_executors: Dictionary = {}   # { skill_id: Callable }
+
+# Ajuste visual
+@export var horizontal_threshold: float = 160.0
 
 # Referências visuais
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -37,10 +36,10 @@ var rock_scene: PackedScene = preload("res://scenes/rock.tscn")
 func _ready():
 	add_to_group("boss")
 	load_stats()
-	load_waypoints()
 	setup_timers()
 	find_player()
-	start_patrol()
+	setup_skill_trigger_timer()
+	_update_facing()
 
 func load_stats():
 	if boss_type.is_empty():
@@ -58,134 +57,88 @@ func load_stats():
 	
 	health_bar.updateHealth(health)
 
-func load_waypoints():
-	# Aguarda um frame para garantir que toda a árvore de cena esteja pronta
-	await get_tree().process_frame
-	
-	var waypoints_node = null
-	
-	# 1ª tentativa: procurar "Waypoints" em toda a árvore (a partir da raiz)
-	waypoints_node = get_tree().root.find_child("Waypoints", true, false)
-	
-	# 2ª tentativa: se não achou, procurar dentro de um nó "LevelRoot" (se existir)
-	if waypoints_node == null:
-		var level_root = get_tree().root.find_child("LevelRoot", true, false)
-		if level_root != null:
-			waypoints_node = level_root.find_child("Waypoints", true, false)
-	
-	if waypoints_node == null:
-		push_error("BossManager: Não foi encontrado um nó 'Waypoints' em toda a cena nem dentro de 'LevelRoot'. Adicione um Node2D chamado Waypoints com os Marker2D filhos.")
-		return
-	
-	# Coleta todos os Marker2D filhos
-	for child in waypoints_node.get_children():
-		if child is Marker2D:
-			waypoints.append(child)
-	
-	if waypoints.is_empty():
-		push_error("BossManager: O nó 'Waypoints' não possui nenhum Marker2D como filho. Adicione pelo menos um Marker2D.")
-
 func setup_timers():
 	skill_cooldown_timer = Timer.new()
 	skill_cooldown_timer.one_shot = true
 	add_child(skill_cooldown_timer)
 	skill_cooldown_timer.timeout.connect(_on_skill_cooldown_timeout)
 
+func setup_skill_trigger_timer():
+	skill_trigger_timer = Timer.new()
+	skill_trigger_timer.wait_time = 0.5
+	skill_trigger_timer.one_shot = false
+	add_child(skill_trigger_timer)
+	skill_trigger_timer.timeout.connect(_on_skill_trigger_timeout)
+	skill_trigger_timer.start()
+
 func find_player():
 	player = get_tree().get_first_node_in_group("player")
 	if player == null:
 		push_warning("BossManager: player não encontrado (adicione ao grupo 'player')")
 
-func start_patrol():
-	# Aguarda um frame para garantir que toda a árvore de cena esteja pronta
-	await get_tree().process_frame
-	if waypoints.is_empty():
-		push_error("BossManager: Nenhum waypoint disponível.")
+# ===== ROTAÇÃO (IDLE) =====
+func _update_facing():
+	if not isAlive or state != State.IDLE:
 		return
-	choose_new_waypoint()
-	state = State.MOVING
-
-func choose_new_waypoint():
-	if waypoints.size() == 0: return
-	var new_waypoint = current_waypoint
-	while new_waypoint == current_waypoint and waypoints.size() > 1:
-		new_waypoint = waypoints[randi() % waypoints.size()]
-	current_waypoint = new_waypoint
-	current_target_pos = current_waypoint.global_position
-	# print("Next waypoint: ", current_waypoint.name)
-
-# Variável auxiliar para o movimento
-var current_target_pos: Vector2 = Vector2.ZERO
-
-# ===== MOVIMENTO =====
-func _physics_process(_delta: float):
-	if not isAlive: return
-	match state:
-		State.MOVING:
-			_move_to_target()
-		State.SKILL_ACTIVE:
-			velocity = Vector2.ZERO
-	move_and_slide()
-
-func _move_to_target():
-	if current_target_pos == Vector2.ZERO:
-		choose_new_waypoint()
+	if player == null:
+		find_player()
+	if player == null:
 		return
-	var direction = (current_target_pos - position).normalized()
-	velocity = direction * speed
-	animated_sprite.play("move")
 	
-	if position.distance_to(current_target_pos) < 10.0:
-		_on_arrived_at_waypoint()
-
-func _on_arrived_at_waypoint():
-	if state != State.MOVING: return
-	velocity = Vector2.ZERO
-	animated_sprite.play("idle")
+	var delta = player.global_position - global_position
 	
-	if skill_cooldown_timer.is_stopped() and skill_pattern.size() > 0:
-		var skill_id = skill_pattern[current_pattern_index]
-		current_pattern_index = (current_pattern_index + 1) % skill_pattern.size()
-		_execute_skill(skill_id)
+	# Se a diferença horizontal for pequena → jogador está acima ou abaixo
+	if abs(delta.x) <= horizontal_threshold:
+		# Vira para cima ou para baixo (resetando flip_h)
+		animated_sprite.flip_h = false
+		if delta.y > 0:
+			if animated_sprite.animation != "idle_down":
+				animated_sprite.play("idle_down")
+		else:
+			if animated_sprite.animation != "idle_up":
+				animated_sprite.play("idle_up")
 	else:
-		choose_new_waypoint()
+		# Jogador está à esquerda ou direita → vira para o lado com flip
+		animated_sprite.flip_h = (delta.x < 0)
+		if animated_sprite.animation != "idle_side":
+			animated_sprite.play("idle_side")
 
-# ===== SISTEMA DE SKILLS =====
+# ===== SISTEMA DE SKILLS DINÂMICO =====
+func _on_skill_trigger_timeout():
+	if isAlive and state == State.IDLE and skill_cooldown_timer.is_stopped() and not skill_pattern.is_empty():
+		_execute_next_skill()
+
+func _execute_next_skill():
+	var skill_id = skill_pattern[current_pattern_index]
+	current_pattern_index = (current_pattern_index + 1) % skill_pattern.size()
+	_execute_skill(skill_id)
+
 func _execute_skill(skill_id: int):
 	state = State.SKILL_ACTIVE
 	velocity = Vector2.ZERO
-	animated_sprite.play("skill_" + str(skill_id))
-	await animated_sprite.animation_finished
 	
-	match skill_id:
-		1:
-			await _skill_1()
-		2:
-			await _skill_2()
-		3:
-			await _skill_3()
-		_:
-			push_warning("Skill ", skill_id, " não implementada")
+	# Toca animação correspondente (skill_<id>)
+	var anim_name = "skill_" + str(skill_id)
+	if animated_sprite.sprite_frames.has_animation(anim_name):
+		animated_sprite.play(anim_name)
+		await animated_sprite.animation_finished
+	else:
+		push_warning("Animação ", anim_name, " não encontrada para o boss ", boss_type)
 	
+	# Executa o callable registrado para esta skill, se existir
+	if skill_executors.has(skill_id):
+		await skill_executors[skill_id].call()
+	else:
+		push_warning("Skill ", skill_id, " não registrada em skill_executors para o boss ", boss_type)
+	
+	# Cooldown e retorno ao idle
 	var cooldown = skills[skill_id].get("cooldown", 3.0)
 	skill_cooldown_timer.start(cooldown)
-	state = State.MOVING
-	choose_new_waypoint()
+	state = State.IDLE
+	_update_facing()
 
 func _on_skill_cooldown_timeout():
-	pass
-
-# ===== MÉTODOS DE SKILL (sobrescrever nos filhos) =====
-func _skill_1() -> void:
-	await get_tree().process_frame
-	pass
-
-func _skill_2() -> void:
-	await get_tree().process_frame
-	pass
-
-func _skill_3() -> void:
-	await get_tree().process_frame
+	# Opcional: usado para indicar que skill pode ser usada novamente
 	pass
 
 # ===== DANO E MORTE =====
@@ -208,3 +161,15 @@ func die() -> void:
 	hit_sound.play()
 	$CollisionShape2D.set_deferred("disabled", true)
 	skill_cooldown_timer.stop()
+	skill_trigger_timer.stop()
+
+func _physics_process(_delta: float):
+	if not isAlive:
+		return
+	match state:
+		State.IDLE:
+			velocity = Vector2.ZERO
+			_update_facing()
+		State.SKILL_ACTIVE:
+			velocity = Vector2.ZERO
+	move_and_slide()

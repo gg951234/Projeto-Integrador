@@ -42,7 +42,7 @@ tile_map_data = PackedByteArray("AAABAAUAAAADAAAAAAAAAAUAAAACAAEAAAAAAAQAAAACAAE
 tile_set = SubResource("TileSet_gmpev")
 
 [node name="Player" parent="." unique_id=1259653975 instance=ExtResource("10_qhwlw")]
-position = Vector2(255, 189)
+position = Vector2(253, 169)
 
 [node name="Golem" parent="." unique_id=563389507 instance=ExtResource("4_x42e6")]
 position = Vector2(1148, -438)
@@ -51,11 +51,9 @@ position = Vector2(1148, -438)
 y_sort_enabled = true
 
 [node name="Slime" parent="Enemies" unique_id=1469553198 instance=ExtResource("9_j7gcg")]
-y_sort_enabled = true
 position = Vector2(271, 738)
 
 [node name="Slime2" parent="Enemies" unique_id=172194659 instance=ExtResource("9_j7gcg")]
-y_sort_enabled = true
 position = Vector2(325, 369)
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=1333587902]
