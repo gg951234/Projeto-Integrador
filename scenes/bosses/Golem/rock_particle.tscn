@@ -1,11 +1,6 @@
-[gd_scene format=3 uid="uid://bxnh1uqts5v6p"]
+[gd_scene format=3 uid="uid://c43j0r7ygbpsb"]
 
-[ext_resource type="Script" uid="uid://pmxhd6ukqkdi" path="res://scripts/bosses/Golem/Rock.gd" id="1_ik6fu"]
-[ext_resource type="Texture2D" uid="uid://ct0bj6ehxk2ua" path="res://assets/images/bosses/Golem/rock.png" id="1_mek2u"]
-[ext_resource type="Texture2D" uid="uid://cqpdoakt41dd7" path="res://assets/images/bosses/Golem/smoke_particle.png" id="2_ik6fu"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_872ht"]
-radius = 33.0
+[ext_resource type="Texture2D" uid="uid://cqpdoakt41dd7" path="res://assets/images/bosses/Golem/smoke_particle.png" id="1_35aaa"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_p2d0s"]
 particles_animation = true
@@ -41,29 +36,21 @@ angle_max = 360.00003
 angle_curve = SubResource("CurveTexture_vqvgd")
 direction = Vector3(0, 0, 0)
 spread = 180.0
-initial_velocity_min = 40.0
-initial_velocity_max = 60.0
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
 gravity = Vector3(0, 0, 0)
 scale_min = 3.0
-scale_max = 3.0
+scale_max = 7.0
 scale_curve = SubResource("CurveTexture_p2d0s")
 color_ramp = SubResource("GradientTexture1D_ik6fu")
 anim_speed_min = 1.0
-anim_speed_max = 1.0
+anim_speed_max = 2.0
 
-[node name="Rock" type="Area2D" unique_id=704143548]
-script = ExtResource("1_ik6fu")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1309746016]
-scale = Vector2(2, 2)
-shape = SubResource("CircleShape2D_872ht")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1197976437]
-scale = Vector2(2, 2)
-texture = ExtResource("1_mek2u")
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1474515504]
+[node name="GPUParticles2D" type="GPUParticles2D" unique_id=1709007374]
 material = SubResource("CanvasItemMaterial_p2d0s")
+position = Vector2(545, -490)
 emitting = false
-texture = ExtResource("2_ik6fu")
+texture = ExtResource("1_35aaa")
+one_shot = true
+explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_vqvgd")

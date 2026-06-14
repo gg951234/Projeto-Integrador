@@ -16,6 +16,7 @@ func save() -> void:
 
 func load() -> void:
 	if not FileAccess.file_exists(SAVE_PATH):
+		print("Arquivo de saves não existe")
 		return
 	var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
 	if file:

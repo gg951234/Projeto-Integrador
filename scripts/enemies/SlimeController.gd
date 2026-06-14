@@ -11,7 +11,7 @@ var isAlive: bool = true
 var knockback_tween: Tween = null   # Referência para o tween ativo
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var hit_sound: AudioStreamPlayer2D = $HitSound
+@onready var hit_sound: String = "res://assets/sounds/enemies/SlimeDamaged.mp3"
 @onready var health_bar: Node2D = $HealthBar
 @onready var attack_timer: Timer = $AttackTimer
 
@@ -50,7 +50,7 @@ func take_damage(damage: int, attackedpos: Vector2, kbforce: int) -> void:
 		onDied()
 		return
 	
-	hit_sound.play()
+	AudioManager.tocar_sfx(position, hit_sound)
 	
 	# Pisca em branco
 	var tween = create_tween()
@@ -77,8 +77,9 @@ func _on_knockback_finished():
 func onDied() -> void:
 	isAlive = false
 	animated_sprite_2d.play("die")
-	hit_sound.pitch_scale = 0.7
-	hit_sound.play()
+	
+	AudioManager.tocar_sfx(position, hit_sound, {Volume = -10.0, Pitch = 0.7})
+	
 	$CollisionShape2D.set_deferred("disabled", true)
 	$Sight/CollisionShape2D.set_deferred("disabled", true)
 	$Hitbox/CollisionShape2D.set_deferred("disabled", true)

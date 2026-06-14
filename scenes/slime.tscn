@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://bw4ivcp3ydif5" path="res://assets/images/enemies/Slime_Green.png" id="1_371uh"]
 [ext_resource type="Script" uid="uid://04gkiynn8103" path="res://scripts/enemies/SlimeController.gd" id="1_p2gj0"]
-[ext_resource type="AudioStream" uid="uid://gxnydufebwm8" path="res://assets/sounds/enemies/SlimeDamaged.mp3" id="3_n6pvg"]
 [ext_resource type="PackedScene" uid="uid://ccmhhb48eeshy" path="res://scenes/health_bar.tscn" id="4_pjw23"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p2gj0"]
@@ -193,11 +192,6 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=708594787]
 shape = SubResource("CircleShape2D_n6pvg")
-
-[node name="HitSound" type="AudioStreamPlayer2D" parent="." unique_id=1610741949]
-y_sort_enabled = true
-stream = ExtResource("3_n6pvg")
-volume_db = -20.0
 
 [node name="HealthBar" parent="." unique_id=332343199 instance=ExtResource("4_pjw23")]
 position = Vector2(-19, 13)

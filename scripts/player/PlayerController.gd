@@ -16,17 +16,16 @@ var isAlive = true
 var knockback_tween: Tween = null   # Referência para o tween ativo
 
 var last_hit_id: int = -1
-var hit_sounds: Array[AudioStream] = [
-	preload("res://assets/sounds/player/PlayerHit1.mp3"),
-	preload("res://assets/sounds/player/PlayerHit2.mp3"),
-	preload("res://assets/sounds/player/PlayerHit3.mp3")
+var hit_sounds: Array[String] = [
+	"res://assets/sounds/player/PlayerHit1.mp3",
+	"res://assets/sounds/player/PlayerHit2.mp3",
+	"res://assets/sounds/player/PlayerHit3.mp3"
 ]
+@onready var swing_sword: String = "res://assets/sounds/player/Slash1.mp3"
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var swing_sword: AudioStreamPlayer2D = $SwingSword
 @onready var sword_hitbox: Area2D = $SwordHitbox
 @onready var sword_collisionbox: CollisionShape2D = $SwordHitbox/CollisionShape2D
-@onready var hit_sound: AudioStreamPlayer2D = $HitSound
 
 # --------------
 # FUNÇÕES DE INÍCIO (PADRÃO GODOT)
@@ -98,7 +97,7 @@ func play_anims(prefix: String, dir: Vector2) -> void: # Tocar animações
 func attack() -> void:
 	is_attacking = true
 	sword_hitbox.monitoring = true
-	swing_sword.play()
+	AudioManager.tocar_sfx(position, swing_sword)
 	play_anims("attack", last_direction)
 
 func _on_animated_sprite_2d_animation_finished() -> void:
@@ -150,8 +149,7 @@ func hitSound():
 		new_id = randi() % hit_sounds.size()
 	
 	last_hit_id = new_id
-	hit_sound.stream = hit_sounds[new_id]
-	hit_sound.play()
+	AudioManager.tocar_sfx(position, hit_sounds[new_id])
 
 func onDied() -> void:
 	if not isAlive:
@@ -159,8 +157,7 @@ func onDied() -> void:
 	isAlive = false
 	animated_sprite_2d.play("die")
 	
-	hit_sound.pitch_scale = 0.7
-	hitSound()
+	AudioManager.tocar_sfx(position, hit_sounds[1], {Pitch = 0.7})
 	
 	$CollisionShape2D.set_deferred("disabled", true)
 	$SwordHitbox/CollisionShape2D.set_deferred("disabled", true)

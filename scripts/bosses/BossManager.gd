@@ -2,15 +2,16 @@ class_name BossManager
 extends CharacterBody2D
 
 # Estados
-enum State { IDLE, SKILL_ACTIVE }
+enum State { IDLE, SKILL_ACTIVE, DOWNED }
 var state: State = State.IDLE
 
 # Estatísticas comuns (carregadas do BossesData)
 var boss_type: String = ""
-var speed: float          # reservado para skills que exigem movimento
+var speed: float
 var health: int
-var skill_pattern: Array  # ex: [1, 2, 1, 3]
-var skills: Dictionary     # { id: { cooldown, outros parâmetros } }
+var max_health: int               # guarda a vida máxima
+var skill_pattern: Array
+var skills: Dictionary
 var current_pattern_index: int = 0
 
 # Combate e sobrevivência
@@ -18,19 +19,26 @@ var isAlive: bool = true
 var player: CharacterBody2D = null
 
 # Timers
-var skill_cooldown_timer: Timer     # cooldown individual da última skill
-var skill_trigger_timer: Timer      # periodicamente tenta executar próxima skill
+var skill_cooldown_timer: Timer
+var skill_trigger_timer: Timer
 
 # Sistema de skills dinâmicas
-var skill_executors: Dictionary = {}   # { skill_id: Callable }
+var skill_executors: Dictionary = {}
 
 # Ajuste visual
 @export var horizontal_threshold: float = 160.0
+@export var interact_radius: float = 80.0   # distância para interagir com o boss caído
 
 # Referências visuais
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var hit_sound: AudioStreamPlayer2D = $HitSound
+@onready var hit_sound: String = "res://assets/sounds/enemies/SlimeDamaged.mp3"
 @onready var health_bar: Node2D = $HealthBar
+
+# Controle dos limiares de down
+var downed_66_triggered: bool = false
+var downed_33_triggered: bool = false
+var current_down_threshold: int = 0   # 66 ou 33
+var is_quiz_open: bool = false
 
 # ===== INICIALIZAÇÃO =====
 func _ready():
@@ -52,6 +60,7 @@ func load_stats():
 	
 	speed = data["speed"]
 	health = data["health"]
+	max_health = health                     # guarda o valor máximo
 	skill_pattern = data["skill_pattern"]
 	skills = data["skills"]
 	
@@ -87,9 +96,7 @@ func _update_facing():
 	
 	var delta = player.global_position - global_position
 	
-	# Se a diferença horizontal for pequena → jogador está acima ou abaixo
 	if abs(delta.x) <= horizontal_threshold:
-		# Vira para cima ou para baixo (resetando flip_h)
 		animated_sprite.flip_h = false
 		if delta.y > 0:
 			if animated_sprite.animation != "idle_down":
@@ -98,12 +105,11 @@ func _update_facing():
 			if animated_sprite.animation != "idle_up":
 				animated_sprite.play("idle_up")
 	else:
-		# Jogador está à esquerda ou direita → vira para o lado com flip
 		animated_sprite.flip_h = (delta.x < 0)
 		if animated_sprite.animation != "idle_side":
 			animated_sprite.play("idle_side")
 
-# ===== SISTEMA DE SKILLS DINÂMICO =====
+# ===== SISTEMA DE SKILLS =====
 func _on_skill_trigger_timeout():
 	if isAlive and state == State.IDLE and skill_cooldown_timer.is_stopped() and not skill_pattern.is_empty():
 		_execute_next_skill()
@@ -116,54 +122,83 @@ func _execute_next_skill():
 func _execute_skill(skill_id: int):
 	state = State.SKILL_ACTIVE
 	velocity = Vector2.ZERO
-	
-	# Toca animação correspondente (skill_<id>)
-	var anim_name = "skill_" + str(skill_id)
-	if animated_sprite.sprite_frames.has_animation(anim_name):
-		animated_sprite.play(anim_name)
-		await animated_sprite.animation_finished
-	else:
-		push_warning("Animação ", anim_name, " não encontrada para o boss ", boss_type)
-	
-	# Executa o callable registrado para esta skill, se existir
+
 	if skill_executors.has(skill_id):
 		await skill_executors[skill_id].call()
 	else:
 		push_warning("Skill ", skill_id, " não registrada em skill_executors para o boss ", boss_type)
 	
-	# Cooldown e retorno ao idle
 	var cooldown = skills[skill_id].get("cooldown", 3.0)
 	skill_cooldown_timer.start(cooldown)
 	state = State.IDLE
 	_update_facing()
 
 func _on_skill_cooldown_timeout():
-	# Opcional: usado para indicar que skill pode ser usada novamente
 	pass
 
-# ===== DANO E MORTE =====
+# ===== DANO E LIMIARES =====
 func take_damage(damage: int, _attackedpos: Vector2, _kbforce: int) -> void:
+	if not isAlive or state == State.DOWNED:
+		return   # não toma dano enquanto caído ou morto
+	
+	var old_health = health
 	health -= damage
+	health = clamp(health, 0, max_health)
 	health_bar.updateHealth(health)
+	
 	if health <= 0:
 		die()
 		return
-	hit_sound.play()
+	
+	AudioManager.tocar_sfx(position, hit_sound, {Volume = -20.0})
+	
 	var tween = create_tween()
 	tween.tween_property(animated_sprite, "self_modulate", Color.RED, 0.05)
 	tween.tween_property(animated_sprite, "self_modulate", Color.WHITE, 0.1)
+	
+	# Verifica cruzamento de limiares (do maior para o menor)
+	var health_percent = float(health) / max_health * 100.0
+	var old_percent = float(old_health) / max_health * 100.0
+	
+	if not downed_66_triggered and old_percent > 66.0 and health_percent <= 66.0:
+		health = clamp(max_health*0.66, 0, max_health)
+		enter_down(66)
+	elif not downed_33_triggered and old_percent > 33.0 and health_percent <= 33.0:
+		health = clamp(max_health*0.33, 0, max_health)
+		enter_down(33)
 
 func die() -> void:
 	isAlive = false
 	state = State.SKILL_ACTIVE
 	animated_sprite.play("die")
-	hit_sound.pitch_scale = 0.7
-	hit_sound.play()
+	
+	AudioManager.tocar_sfx(position, hit_sound, {Volume = -10.0, Pitch = 0.7})
+
 	$CollisionShape2D.set_deferred("disabled", true)
 	skill_cooldown_timer.stop()
 	skill_trigger_timer.stop()
 
-func _physics_process(_delta: float):
+# ===== ESTADO DOWNED =====
+func enter_down(threshold: int):
+	state = State.DOWNED
+	current_down_threshold = threshold
+	animated_sprite.play("downed")
+	skill_trigger_timer.stop()   # impede ataques enquanto caído
+	velocity = Vector2.ZERO
+	
+	# Marca o limiar como acionado
+	if threshold == 66:
+		downed_66_triggered = true
+	else:
+		downed_33_triggered = true
+
+func exit_down():
+	state = State.IDLE
+	skill_trigger_timer.start()
+	_update_facing()
+
+# ===== INTERAÇÃO E QUIZ =====
+func _physics_process(_delta):
 	if not isAlive:
 		return
 	match state:
@@ -172,4 +207,75 @@ func _physics_process(_delta: float):
 			_update_facing()
 		State.SKILL_ACTIVE:
 			velocity = Vector2.ZERO
+		State.DOWNED:
+			velocity = Vector2.ZERO
+			# Verifica interação do jogador (Espaço) se quiz não estiver aberto
+			if not is_quiz_open and player and Input.is_action_just_pressed("attack"):
+				var dist = global_position.distance_to(player.global_position)
+				if dist <= interact_radius:
+					_open_quiz()
 	move_and_slide()
+
+func _open_quiz():
+	is_quiz_open = true
+	# Pausa o jogo (opcional)
+	get_tree().paused = true
+	
+	# Instancia a cena do quiz (assumindo um caminho válido)
+	var quiz_scene = preload("res://scenes/quiz_popup.tscn")
+	var quiz_instance = quiz_scene.instantiate()
+	add_child(quiz_instance)
+	
+	# Configura pergunta conforme o limiar atual
+	var quiz_data = get_quiz_data_for_threshold(current_down_threshold)
+	quiz_instance.setup(quiz_data.question, quiz_data.options, quiz_data.correct_index)
+	
+	# Aguarda o sinal de conclusão
+	quiz_instance.quiz_finished.connect(_on_quiz_finished, CONNECT_ONE_SHOT)
+
+func get_quiz_data_for_threshold(threshold: int) -> Dictionary:
+	# Exemplo de perguntas – você pode carregar de um arquivo de dados
+	if threshold == 66:
+		return {
+			"question": "Qual é a capital do Brasil?",
+			"options": ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"],
+			"correct_index": 2
+		}
+	else:  # threshold == 33
+		return {
+			"question": "Quantos planetas tem o sistema solar?",
+			"options": ["7", "8", "9", "10"],
+			"correct_index": 1
+		}
+
+func _on_quiz_finished(correct: bool):
+	# Remove a tela de quiz
+	for child in get_children():
+		if child.name == "QuizPopup":
+			child.queue_free()
+	
+	get_tree().paused = false
+	is_quiz_open = false
+	
+	if correct:
+		# Sai do estado DOWNED e volta a atacar normalmente
+		exit_down()
+	else:
+		# Aplica penalidade conforme o limiar
+		if current_down_threshold == 66:
+			health = max_health
+			health_bar.updateHealth(health)
+			# Libera os dois limiares para poderem ser acionados novamente
+			downed_66_triggered = false
+			downed_33_triggered = false
+		else:  # 33%
+			health = int(max_health * 0.66)
+			health_bar.updateHealth(health)
+			# Libera apenas o limiar de 33% (o de 66% permanece usado)
+			downed_33_triggered = false
+			# Evita que o reset para 66% acione novamente o downed imediatamente
+			# Se o limiar de 66% ainda não tivesse sido usado, marcamos como usado para não trigger agora
+			if not downed_66_triggered and health >= max_health * 0.66:
+				downed_66_triggered = true
+		# Sai do estado DOWNED (volta ao IDLE)
+		exit_down()

@@ -8,12 +8,12 @@ var stats = {
 		"skills": { # Skills e seus parâmetros { id: { parâmetros necessários } }
 			1: {
 				"cooldown": 5.0,
-				"move_radius": 20,
-				"rock_damage": 20,
-				"rock_knockback": 300,
-				"marker_count": 4,
-				"marker_radius": 200,
-				"fall_delay": 1.0
+				"rock_damage": 20, # Dano
+				"rock_knockback": 300, # Knockback
+				"rock_count": 4, # Quantidade de pedras
+				"spawn_range": 200, # Distância máxima das pedras
+				"fall_delay": 1.0, # Delay pra spawnar as pedras após o preview
+				"impact_scale": 3.0, # Tamanho da pedra
 			}
 		}
 	},
