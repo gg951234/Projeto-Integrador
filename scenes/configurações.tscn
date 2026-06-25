@@ -1,0 +1,116 @@
+[gd_scene format=3 uid="uid://c3sn0vkoejm35"]
+
+[ext_resource type="Texture2D" uid="uid://bccxfjr04ypeh" path="res://assets/images/background/Background2.png" id="1_thr3o"]
+[ext_resource type="Texture2D" uid="uid://eeqglqx0jmio" path="res://assets/images/background/balão configurações.png" id="2_ay6x5"]
+[ext_resource type="FontFile" uid="uid://3qlwirrvnr0m" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="3_t4qar"]
+[ext_resource type="Texture2D" uid="uid://bd1y5spnsbgb1" path="res://assets/images/background/voltar.png" id="4_p8o8j"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_thr3o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gab1l"]
+bg_color = Color(0.14117648, 0.15294118, 0.16862746, 1)
+border_width_bottom = 3
+border_color = Color(0.10398757, 0.11155973, 0.12670413, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.2518868, 0.2555316, 0.26646787, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_05dfj"]
+bg_color = Color(0.10041275, 0.109790824, 0.12229461, 1)
+border_width_bottom = 3
+border_color = Color(0.072584815, 0.082180806, 0.09177645, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.18543503, 0.18543416, 0.19119146, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ew52p"]
+bg_color = Color(0.19506925, 0.21521798, 0.23536971, 1)
+border_width_bottom = 3
+border_color = Color(0.13452473, 0.13923976, 0.16280726, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.34988332, 0.3543434, 0.3632636, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
+[node name="Configurações" type="Node2D" unique_id=1399743998]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1290759133]
+modulate = Color(1, 1, 1, 0.8666667)
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+offset_right = 904.0
+offset_bottom = 702.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_thr3o")
+expand_mode = 1
+flip_v = true
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect" unique_id=420513311]
+modulate = Color(0, 0, 0, 0.5647059)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_thr3o")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=1583328169]
+offset_left = 109.0
+offset_top = -78.0
+offset_right = 804.0
+offset_bottom = 288.0
+texture = ExtResource("2_ay6x5")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="." unique_id=1821256293]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 342.0
+offset_top = 70.0
+offset_right = 625.0
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.02745098, 0.050980393, 0.14117648, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("3_t4qar")
+theme_override_font_sizes/font_size = 33
+text = "CONFIGURAÇÕES"
+
+[node name="Voltar" type="Button" parent="." unique_id=861081731]
+auto_translate_mode = 1
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 75.0
+offset_bottom = 75.0
+size_flags_horizontal = 7
+size_flags_vertical = 7
+theme_override_styles/normal = SubResource("StyleBoxFlat_gab1l")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_05dfj")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ew52p")
+action_mode = 0
+icon = ExtResource("4_p8o8j")
+icon_alignment = 1

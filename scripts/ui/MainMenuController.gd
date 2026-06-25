@@ -10,6 +10,17 @@ extends Control
 @onready var level_selection_canvas: CanvasLayer = $LevelSelectionCanvas
 @onready var level_selection_buttons: VBoxContainer = $LevelSelectionCanvas/Buttons
 
+@onready var sound_button: Button = $MainMenuCanvas/Som
+@onready var help: Button = $MainMenuCanvas/Help
+@onready var back: Button = $LevelSelectionCanvas/Back
+@onready var loja: Button = $LevelSelectionCanvas/Loja
+@onready var profile: Button = $LevelSelectionCanvas/Profile
+
+var sound_on_icon = preload("res://assets/images/background/icon_som.png")
+var sound_off_icon = preload("res://assets/images/background/icon_sem_som.png")
+
+var sound_muted: bool = false
+
 var hover_scale: Vector2 = Vector2(1.1, 1.1)
 var animation_duration: float = 0.2
 var tween_type: Tween.EaseType = Tween.EASE_OUT
@@ -30,6 +41,11 @@ func _ready() -> void:  # Executa quando o nó é criado
 	# Aguarda um frame para o VBoxContainer ajustar os tamanhos
 	await get_tree().process_frame
 	setup_main_buttons()
+	
+	await get_tree().process_frame
+	setup_main_buttons()
+
+	sound_button.pressed.connect(_on_som_pressed)
 
 # --------------
 # SETAR PLAYER
@@ -68,7 +84,7 @@ func animate_scale(button: Button, target_scale: Vector2) -> void:
 
 func setup_main_buttons() -> void:
 	# Conecta todos os botões do menu de uma vez
-	for button in [start, options, quit]:
+	for button in [start, options, quit, sound_button, help, back, loja, profile]:
 		button.pivot_offset = button.size / 2 # Define o pivot para o centro do botão
 		button.mouse_entered.connect(_on_button_mouse_entered.bind(button))
 		button.mouse_exited.connect(_on_button_mouse_exited.bind(button))
@@ -116,3 +132,15 @@ func _on_level_pressed(button: Button) -> void:
 			hud.visible = true
 			GameManager.fade_out(0.5)
 		)
+
+func _on_som_pressed() -> void:
+	sound_muted = !sound_muted
+
+	var master_bus = AudioServer.get_bus_index("Master")
+
+	if sound_muted:
+		AudioServer.set_bus_mute(master_bus, true)
+		sound_button.icon = sound_off_icon
+	else:
+		AudioServer.set_bus_mute(master_bus, false)
+		sound_button.icon = sound_on_icon

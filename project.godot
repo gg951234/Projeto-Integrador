@@ -29,6 +29,7 @@ CharactersData="*uid://xm5kigm3ipti"
 
 window/size/viewport_width=900
 window/size/viewport_height=700
+window/size/mode=2
 window/stretch/mode="canvas_items"
 
 [input]
