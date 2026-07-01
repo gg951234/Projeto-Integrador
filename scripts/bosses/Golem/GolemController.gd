@@ -26,20 +26,25 @@ func _skill_1() -> void:
 	var anim_name = "skill_1"
 	if animated_sprite.sprite_frames.has_animation(anim_name):
 		animated_sprite.play(anim_name)
-		await animated_sprite.animation_finished
+		var frame_count = animated_sprite.sprite_frames.get_frame_count(anim_name)
+		var fps = animated_sprite.sprite_frames.get_animation_speed(anim_name)
+		var anim_length = frame_count / fps if fps > 0 else 1.0
+		
+		# Aguarda o tempo exato da animação com Timer
+		await get_tree().create_timer(anim_length).timeout
 	else:
 		push_warning("Animação ", anim_name, " não encontrada para o boss ", boss_type)
-	
-	# 1. Criar previews das áreas de impacto
-	for i in range(rock_count):
-		rock_spawn(params)
+		
+	if currentstate == States.SKILL_ACTIVE:
+		# 1. Criar previews das áreas de impacto
+		for i in range(rock_count):
+			rock_spawn(params)
 
 func _on_damage_area_body_entered(body: Node, damage: int, kb: int, area: Area2D) -> void:
 	if body.is_in_group("player") and body.has_method("take_damage"):
 		body.take_damage(damage, area.position, kb)
 
 func rock_spawn(params) -> void:
-	var spawn_range = params.get("spawn_range", 200)
 	var fall_delay = params.get("fall_delay", 1.0)
 	var rock_damage = params.get("rock_damage", 20)
 	var rock_knockback = params.get("rock_knockback", 300)
@@ -49,11 +54,13 @@ func rock_spawn(params) -> void:
 	var rock_texture = preload("res://assets/images/bosses/Golem/rock.png")
 	var impact_particles_scene = preload("res://scenes/bosses/Golem/rock_particle.tscn")
 	
-	var angle = randf_range(0, TAU)
-	var radius = randf_range(100, spawn_range)
-	var offset = Vector2(cos(angle), sin(angle)) * radius
-	var target_pos = position + offset
+	var square_size = params.get("square_size", 1408.0)
+	var half = square_size / 2.0
+	var offset_x = randf_range(-half, half)
+	var offset_y = randf_range(-half, half)
+	var target_pos = position + Vector2(offset_x, offset_y)
 	
+	# Preview
 	var preview = Sprite2D.new()
 	preview.texture = preview_texture
 	preview.scale = Vector2(impact_scale, impact_scale)
@@ -63,31 +70,31 @@ func rock_spawn(params) -> void:
 	
 	await get_tree().create_timer(fall_delay).timeout
 	
-	# 2. Queda simultânea das pedras
+	# Queda da pedra
 	var rock = Sprite2D.new()
 	rock.texture = rock_texture
 	rock.scale = Vector2(impact_scale, impact_scale)
 	rock.global_position = target_pos + Vector2(0, -150)
 	rock.z_index = 1
 	levelroot.add_child(rock)
-	
+
 	var tween = create_tween()
+	var rotacao = 3
 	tween.tween_property(rock, "global_position:y", target_pos.y, 0.4).set_ease(Tween.EASE_IN)
+	tween.parallel().tween_property(rock, "rotation", rotacao, 0.4).set_ease(Tween.EASE_IN)
 	
-	# Aguarda todas as quedas terminarem
 	await get_tree().create_timer(0.4).timeout
 	
 	rock.queue_free()
 	preview.queue_free()
 	
-	# 3. Criar áreas de dano (layer/mask = 2) e partículas
+	# Partículas e área de dano
 	var particles = impact_particles_scene.instantiate()
 	particles.global_position = target_pos
 	levelroot.add_child(particles)
 	particles.emitting = true
 	particles.z_index = 2
 	
-	# Área de dano com collision_layer e mask configurados para 2
 	var damage_area = Area2D.new()
 	damage_area.collision_layer = 2
 	damage_area.collision_mask = 2
@@ -100,22 +107,14 @@ func rock_spawn(params) -> void:
 	damage_area.add_child(collision_shape)
 	damage_area.global_position = target_pos
 	
-	# Aplica dano a todos os jogadores sobrepostos
 	damage_area.body_entered.connect(_on_damage_area_body_entered.bind(
-	rock_damage,
-	rock_knockback,
-	damage_area
+		rock_damage,
+		rock_knockback,
+		damage_area
 	))
 	
 	levelroot.add_child(damage_area)
-	
-	# Aguarda um tempo para que as áreas sejam processadas
 	await get_tree().create_timer(0.2).timeout
-	
-	# Limpeza das hitboxes
 	damage_area.queue_free()
-	
-	# Limpeza com delay da duração das partículas
 	await get_tree().create_timer(particles.lifetime).timeout
-	
 	particles.queue_free()

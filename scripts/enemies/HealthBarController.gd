@@ -51,4 +51,6 @@ func updateHealth(new_health: int) -> void:
 		push_error("HealthBar: max_health inválido (", max_health, ")")
 		return
 	var new_width = (new_health / max_health) * default_width
+	if new_width < 0:
+		new_width = 0
 	health_bar.region_rect = Rect2(0, 0, new_width, default_height)

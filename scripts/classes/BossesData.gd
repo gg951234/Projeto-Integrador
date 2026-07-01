@@ -9,9 +9,9 @@ var stats = {
 			1: {
 				"cooldown": 5.0,
 				"rock_damage": 20, # Dano
-				"rock_knockback": 300, # Knockback
-				"rock_count": 4, # Quantidade de pedras
-				"spawn_range": 200, # Distância máxima das pedras
+				"rock_knockback": 150, # Knockback
+				"rock_count": 16, # Quantidade de pedras
+				"square_size": 1300, # Distância máxima das pedras
 				"fall_delay": 1.0, # Delay pra spawnar as pedras após o preview
 				"impact_scale": 3.0, # Tamanho da pedra
 			}
