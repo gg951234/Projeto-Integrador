@@ -774,6 +774,19 @@ shadow_color = Color(0, 0, 0, 1)
 shadow_size = 1
 shadow_offset = Vector2(3, 3)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uit24"]
+bg_color = Color(0.14117648, 0.15294118, 0.16862746, 1)
+border_width_bottom = 3
+border_color = Color(0.10398757, 0.11155973, 0.12670413, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.2518868, 0.2555316, 0.26646787, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0cp0l"]
 bg_color = Color(0.039215688, 0.050980393, 0.06666667, 1)
 border_width_left = 200
@@ -837,19 +850,6 @@ corner_radius_bottom_left = 8
 corner_detail = 1
 shadow_color = Color(0.1882353, 0.19215687, 0.21176471, 1)
 shadow_size = 3
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uit24"]
-bg_color = Color(0.14117648, 0.15294118, 0.16862746, 1)
-border_width_bottom = 3
-border_color = Color(0.10398757, 0.11155973, 0.12670413, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-corner_detail = 1
-shadow_color = Color(0.2518868, 0.2555316, 0.26646787, 1)
-shadow_size = 1
-shadow_offset = Vector2(0, -2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blkrb"]
 bg_color = Color(0.07771615, 0.086844094, 0.1005361, 1)
@@ -1667,6 +1667,270 @@ grow_vertical = 2
 texture = ExtResource("25_0rl1p")
 expand_mode = 1
 
+[node name="Perfil" type="Panel" parent="UI/LevelSelectionCanvas" unique_id=710262694]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -295.0
+offset_top = -280.0
+offset_right = 295.0
+offset_bottom = 268.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_htxhm")
+
+[node name="Panel" type="Panel" parent="UI/LevelSelectionCanvas/Perfil" unique_id=369874437]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -285.0
+offset_top = 106.0
+offset_right = -97.0
+offset_bottom = 347.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4k2k6")
+
+[node name="Padrao" type="TextureRect" parent="UI/LevelSelectionCanvas/Perfil/Panel" unique_id=609312168]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 25.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("33_facbu")
+expand_mode = 1
+
+[node name="Informacoes" type="Panel" parent="UI/LevelSelectionCanvas/Perfil" unique_id=1224587930]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -88.0
+offset_top = 106.0
+offset_right = 285.0
+offset_bottom = 531.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4k2k6")
+
+[node name="LabelUserName" type="Label" parent="UI/LevelSelectionCanvas/Perfil/Informacoes" unique_id=2011198630]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 21.0
+offset_top = -165.5
+offset_right = 129.0
+offset_bottom = -140.5
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.87058824, 0.6509804, 0.07058824, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 23
+text = "username"
+
+[node name="LabelEmail" type="Label" parent="UI/LevelSelectionCanvas/Perfil/Informacoes" unique_id=166613881]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 21.0
+offset_top = -95.5
+offset_right = 129.0
+offset_bottom = -70.5
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.87058824, 0.6509804, 0.07058824, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 23
+text = "email"
+
+[node name="LabelDataCriacao" type="Label" parent="UI/LevelSelectionCanvas/Perfil/Informacoes" unique_id=564681446]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 21.0
+offset_top = -26.5
+offset_right = 129.0
+offset_bottom = -1.5
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.87058824, 0.6509804, 0.07058824, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 23
+text = "00/00/0000"
+
+[node name="LabelBio" type="Label" parent="UI/LevelSelectionCanvas/Perfil/Informacoes" unique_id=723856220]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 21.0
+offset_top = 41.5
+offset_right = 129.0
+offset_bottom = 66.5
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.87058824, 0.6509804, 0.07058824, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 23
+text = "bio"
+
+[node name="LabelPais" type="Label" parent="UI/LevelSelectionCanvas/Perfil/Informacoes" unique_id=1350455792]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 21.0
+offset_top = 111.5
+offset_right = 129.0
+offset_bottom = 136.5
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.87058824, 0.6509804, 0.07058824, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 23
+text = "país"
+
+[node name="LabelDataNascimento" type="Label" parent="UI/LevelSelectionCanvas/Perfil/Informacoes" unique_id=214038139]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 21.0
+offset_top = 177.5
+offset_right = 156.0
+offset_bottom = 202.5
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.87058824, 0.6509804, 0.07058824, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 23
+text = "00/00/0000"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/LevelSelectionCanvas/Perfil" unique_id=1481998503]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -151.0
+offset_right = 289.0
+offset_bottom = 243.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_selected_color = Color(0.9098039, 0.73333335, 0.050980393, 1)
+theme_override_constants/line_separation = 3
+theme_override_constants/outline_size = 2
+theme_override_fonts/normal_font = ExtResource("4_5vw27")
+theme_override_font_sizes/normal_font_size = 22
+bbcode_enabled = true
+text = "USERNAME:
+
+
+E-MAIL:
+
+
+DATA DE CRIAÇÃO DA CONTA:
+
+
+BIO:
+
+
+PAÍS:
+
+
+DATA DE NASCIMENTO:
+
+"
+fit_content = true
+
+[node name="TextureRect2" type="TextureRect" parent="UI/LevelSelectionCanvas/Perfil" unique_id=1980971998]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -219.0
+offset_top = -33.0
+offset_right = 219.0
+offset_bottom = 124.0
+grow_horizontal = 2
+texture = ExtResource("8_dg77c")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="UI/LevelSelectionCanvas/Perfil" unique_id=1054418012]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -44.0
+offset_top = 34.0
+offset_right = 44.0
+offset_bottom = 57.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 25
+text = "PERFIL"
+
+[node name="FecharPerfil" type="Button" parent="UI/LevelSelectionCanvas/Perfil" unique_id=891462149]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -54.0
+offset_top = 13.0
+offset_right = -12.0
+offset_bottom = 55.0
+grow_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_hrvbo")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_w48qg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vivmo")
+icon = ExtResource("18_0odxb")
+icon_alignment = 1
+
+[node name="Senha" type="Button" parent="UI/LevelSelectionCanvas/Perfil" unique_id=1073616589]
+auto_translate_mode = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -284.5
+offset_top = 86.0
+offset_right = -99.0
+offset_bottom = 136.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 7
+size_flags_vertical = 7
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 19
+theme_override_styles/normal = SubResource("StyleBoxFlat_uit24")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_uit24")
+theme_override_styles/hover = SubResource("StyleBoxFlat_uit24")
+action_mode = 0
+text = "ALTERAR SENHA"
+
 [node name="HUD" type="CanvasLayer" parent="UI" unique_id=1201332776]
 visible = false
 
@@ -1919,6 +2183,7 @@ theme_override_font_sizes/font_size = 28
 text = "0"
 
 [node name="Loja" type="CanvasLayer" parent="UI" unique_id=975011843]
+visible = false
 
 [node name="Panel" type="Panel" parent="UI/Loja" unique_id=1456026557]
 anchors_preset = 15
@@ -3076,6 +3341,8 @@ visible = false
 [connection signal="pressed" from="UI/MainMenuCanvas/Som" to="." method="_on_som_pressed"]
 [connection signal="pressed" from="UI/LevelSelectionCanvas/Back" to="UI" method="_on_back_pressed"]
 [connection signal="pressed" from="UI/LevelSelectionCanvas/Loja" to="UI" method="_on_loja_pressed"]
+[connection signal="pressed" from="UI/LevelSelectionCanvas/Profile" to="UI" method="_on_profile_pressed"]
 [connection signal="pressed" from="UI/LevelSelectionCanvas/Ranking" to="UI" method="_on_ranking_pressed"]
+[connection signal="pressed" from="UI/LevelSelectionCanvas/Perfil/FecharPerfil" to="UI" method="_on_fechar_perfil_pressed"]
 [connection signal="pressed" from="UI/Loja/VoltarLoja" to="UI" method="_on_voltar_loja_pressed"]
 [connection signal="pressed" from="UI/Ranking/BackRanking" to="UI" method="_on_back_ranking_pressed"]
