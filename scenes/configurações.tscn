@@ -1,9 +1,13 @@
 [gd_scene format=3 uid="uid://c3sn0vkoejm35"]
 
+[ext_resource type="Script" uid="uid://blgng47schcgq" path="res://scenes/configurações.gd" id="1_p8o8j"]
 [ext_resource type="Texture2D" uid="uid://bccxfjr04ypeh" path="res://assets/images/background/Background2.png" id="1_thr3o"]
 [ext_resource type="Texture2D" uid="uid://eeqglqx0jmio" path="res://assets/images/background/balão configurações.png" id="2_ay6x5"]
 [ext_resource type="FontFile" uid="uid://3qlwirrvnr0m" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="3_t4qar"]
 [ext_resource type="Texture2D" uid="uid://bd1y5spnsbgb1" path="res://assets/images/background/voltar.png" id="4_p8o8j"]
+[ext_resource type="Texture2D" uid="uid://cl7mte3m4kyld" path="res://assets/images/background/icon_som_verde.png" id="6_05dfj"]
+[ext_resource type="Texture2D" uid="uid://2wp6eoooe1oc" path="res://assets/images/background/brilho.png" id="6_ew52p"]
+[ext_resource type="Texture2D" uid="uid://d3k4o4wxjokwh" path="res://assets/images/background/slider.png" id="8_ew52p"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_thr3o"]
 
@@ -46,23 +50,81 @@ shadow_color = Color(0.34988332, 0.3543434, 0.3632636, 1)
 shadow_size = 1
 shadow_offset = Vector2(0, -2)
 
-[node name="Configurações" type="Node2D" unique_id=1399743998]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ay6x5"]
+bg_color = Color(0.07771615, 0.086844094, 0.1005361, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.023529412, 0.03137255, 0.050980393, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.1882353, 0.19215687, 0.21176471, 1)
+shadow_size = 3
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1290759133]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4qar"]
+bg_color = Color(0.07058824, 0.09019608, 0.11764706, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.1882353, 0.19215687, 0.21176471, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.023529412, 0.03137255, 0.050980393, 1)
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8hktn"]
+bg_color = Color(0.07058824, 0.09019608, 0.11764706, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.07058824, 0.09019608, 0.11764706, 1)
+corner_detail = 1
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r4kmw"]
+bg_color = Color(0.22595084, 0.23043805, 0.25286263, 1)
+corner_detail = 1
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rwvnh"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_houyn"]
+bg_color = Color(0.07058824, 0.09019608, 0.11764706, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7lk5g"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="Configurações" type="Node2D" unique_id=1399743998]
+script = ExtResource("1_p8o8j")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=809208954]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1290759133]
 modulate = Color(1, 1, 1, 0.8666667)
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -2.0
-offset_right = 904.0
-offset_bottom = 702.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_thr3o")
 expand_mode = 1
 flip_v = true
 
-[node name="TextureRect" type="TextureRect" parent="TextureRect" unique_id=420513311]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/TextureRect" unique_id=420513311]
 modulate = Color(0, 0, 0, 0.5647059)
 layout_mode = 1
 anchors_preset = 15
@@ -73,24 +135,25 @@ grow_vertical = 2
 texture = SubResource("CanvasTexture_thr3o")
 expand_mode = 1
 
-[node name="TextureRect2" type="TextureRect" parent="." unique_id=1583328169]
-offset_left = 109.0
-offset_top = -78.0
-offset_right = 804.0
-offset_bottom = 288.0
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer" unique_id=1583328169]
+offset_left = 112.0
+offset_top = -20.0
+offset_right = 792.0
+offset_bottom = 280.0
 texture = ExtResource("2_ay6x5")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="." unique_id=1821256293]
+[node name="Label" type="Label" parent="CanvasLayer/TextureRect2" unique_id=1821256293]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 342.0
-offset_top = 70.0
-offset_right = 625.0
-offset_bottom = 105.0
+offset_left = -117.0
+offset_top = -31.0
+offset_right = 134.0
+offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -100,7 +163,7 @@ theme_override_fonts/font = ExtResource("3_t4qar")
 theme_override_font_sizes/font_size = 33
 text = "CONFIGURAÇÕES"
 
-[node name="Voltar" type="Button" parent="." unique_id=861081731]
+[node name="Voltar" type="Button" parent="CanvasLayer" unique_id=861081731]
 auto_translate_mode = 1
 offset_left = 25.0
 offset_top = 25.0
@@ -114,3 +177,168 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_ew52p")
 action_mode = 0
 icon = ExtResource("4_p8o8j")
 icon_alignment = 1
+
+[node name="ConfiguracoesMenu" type="Panel" parent="CanvasLayer" unique_id=533048732]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 243.0
+offset_top = -136.0
+offset_right = 667.0
+offset_bottom = 241.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ay6x5")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/ConfiguracoesMenu" unique_id=626851867]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -201.0
+offset_top = 101.0
+offset_right = 201.0
+offset_bottom = 181.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t4qar")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ConfiguracoesMenu/Panel" unique_id=1094472250]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 18.0
+offset_right = 58.0
+offset_bottom = 63.0
+texture = ExtResource("6_ew52p")
+expand_mode = 1
+
+[node name="HSlider" type="HSlider" parent="CanvasLayer/ConfiguracoesMenu/Panel" unique_id=2086926006]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 9.0
+offset_right = 378.0
+offset_bottom = 72.0
+theme_override_constants/center_grabber = 0
+theme_override_constants/grabber_offset = 0
+theme_override_constants/tick_offset = 0
+theme_override_icons/grabber = ExtResource("8_ew52p")
+theme_override_icons/grabber_highlight = ExtResource("8_ew52p")
+theme_override_styles/slider = SubResource("StyleBoxFlat_8hktn")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_r4kmw")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_r4kmw")
+
+[node name="Panel2" type="Panel" parent="CanvasLayer/ConfiguracoesMenu" unique_id=1899765440]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -201.0
+offset_top = 194.0
+offset_right = 201.0
+offset_bottom = 274.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t4qar")
+
+[node name="OptionButton" type="OptionButton" parent="CanvasLayer/ConfiguracoesMenu/Panel2" unique_id=1584299503]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_right = -19.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_t4qar")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_rwvnh")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rwvnh")
+theme_override_styles/hover = SubResource("StyleBoxFlat_rwvnh")
+alignment = 1
+item_count = 2
+popup/item_0/text = "Português"
+popup/item_0/id = 0
+popup/item_1/text = "English"
+popup/item_1/id = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/ConfiguracoesMenu" unique_id=349296547]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 82.0
+offset_top = 202.0
+offset_right = -88.0
+offset_bottom = -109.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("3_t4qar")
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxFlat_houyn")
+text = "IDIOMA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel3" type="Panel" parent="CanvasLayer/ConfiguracoesMenu" unique_id=1681367525]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -201.0
+offset_top = 288.0
+offset_right = 201.0
+offset_bottom = 368.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t4qar")
+
+[node name="Button" type="Button" parent="CanvasLayer/ConfiguracoesMenu/Panel3" unique_id=793236963]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("3_t4qar")
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxFlat_7lk5g")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7lk5g")
+theme_override_styles/hover = SubResource("StyleBoxFlat_7lk5g")
+text = "ACESSIBILIDADE"
+
+[node name="Panel4" type="Panel" parent="CanvasLayer/ConfiguracoesMenu" unique_id=1588674045]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -201.0
+offset_top = 9.0
+offset_right = 201.0
+offset_bottom = 89.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t4qar")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ConfiguracoesMenu/Panel4" unique_id=1108699202]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 17.0
+offset_right = 60.0
+offset_bottom = 62.0
+texture = ExtResource("6_05dfj")
+
+[node name="HSlider" type="HSlider" parent="CanvasLayer/ConfiguracoesMenu/Panel4" unique_id=1189168367]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 9.0
+offset_right = 378.0
+offset_bottom = 72.0
+theme_override_constants/center_grabber = 0
+theme_override_constants/grabber_offset = 0
+theme_override_constants/tick_offset = 0
+theme_override_icons/grabber = ExtResource("8_ew52p")
+theme_override_icons/grabber_highlight = ExtResource("8_ew52p")
+theme_override_styles/slider = SubResource("StyleBoxFlat_8hktn")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_r4kmw")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_r4kmw")
+
+[connection signal="pressed" from="CanvasLayer/Voltar" to="." method="_on_voltar_pressed"]

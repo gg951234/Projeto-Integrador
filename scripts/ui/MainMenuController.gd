@@ -15,6 +15,13 @@ extends Control
 @onready var back: Button = $LevelSelectionCanvas/Back
 @onready var loja: Button = $LevelSelectionCanvas/Loja
 @onready var profile: Button = $LevelSelectionCanvas/Profile
+@onready var menu_sprite: AnimatedSprite2D = $MainMenuCanvas/AnimatedSprite2D
+@onready var instrucoes: Panel = $MainMenuCanvas/Instrucoes
+@onready var fechar: Button = $MainMenuCanvas/Instrucoes/Fechar
+@onready var next: Button = $TelaVitoria/HBoxContainer/ProximaFase
+@onready var menu: Button = $TelaVitoria/HBoxContainer/Menu
+@onready var ranking: Button = $LevelSelectionCanvas/Ranking
+@onready var voltar_loja: Button = $Loja/VoltarLoja
 
 var sound_on_icon = preload("res://assets/images/background/icon_som.png")
 var sound_off_icon = preload("res://assets/images/background/icon_sem_som.png")
@@ -41,8 +48,12 @@ func _ready() -> void:  # Executa quando o nó é criado
 	# Aguarda um frame para o VBoxContainer ajustar os tamanhos
 	await get_tree().process_frame
 	setup_main_buttons()
-
+	
+	change_idle()
+	
 	sound_button.pressed.connect(_on_som_pressed)
+	fechar.pressed.connect(_on_fechar_pressed)
+	help.pressed.connect(_on_help_pressed)
 
 # --------------
 # SETAR PLAYER
@@ -81,7 +92,7 @@ func animate_scale(button: Button, target_scale: Vector2) -> void:
 
 func setup_main_buttons() -> void:
 	# Conecta todos os botões do menu de uma vez
-	for button in [start, options, quit, sound_button, help, back, loja, profile]:
+	for button in [start, options, quit, sound_button, help, back, loja, profile, fechar, next, menu, ranking, voltar_loja]:
 		button.pivot_offset = button.size / 2 # Define o pivot para o centro do botão
 		button.mouse_entered.connect(_on_button_mouse_entered.bind(button))
 		button.mouse_exited.connect(_on_button_mouse_exited.bind(button))
@@ -125,13 +136,14 @@ func setup_levels_selection() -> void:
 func _on_start_pressed() -> void:
 	main_menu_canvas.visible = false
 	level_selection_canvas.visible = true
+	
 	# Configura apenas se ainda não foi feito
 	await get_tree().process_frame
 	setup_levels_selection()
 	levels_setup_done = true
 
 func _on_options_pressed() -> void:
-	pass
+	get_tree().change_scene_to_file("res://scenes/configurações.tscn")
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
@@ -163,3 +175,30 @@ func _on_som_pressed() -> void:
 	else:
 		AudioServer.set_bus_mute(master_bus, false)
 		sound_button.icon = sound_on_icon
+
+func change_idle():
+	while true:
+		menu_sprite.flip_h = false
+		menu_sprite.play("idle_side")
+		await get_tree().create_timer(2.0).timeout
+		
+		menu_sprite.play("idle_down")
+		await get_tree().create_timer(2.0).timeout
+
+		menu_sprite.flip_h = true
+		menu_sprite.play("idle_side")
+		await get_tree().create_timer(2.0).timeout
+
+func _on_help_pressed() -> void:
+	instrucoes.visible = true
+
+func _on_fechar_pressed() -> void:
+	instrucoes.visible = false
+
+func _on_loja_pressed() -> void:
+	$LevelSelectionCanvas.visible = false
+	$Loja.visible = true
+
+func _on_voltar_loja_pressed() -> void:
+	$Loja.visible = false
+	$LevelSelectionCanvas.visible = true
