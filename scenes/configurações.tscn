@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://bd1y5spnsbgb1" path="res://assets/images/background/voltar.png" id="4_p8o8j"]
 [ext_resource type="Texture2D" uid="uid://cl7mte3m4kyld" path="res://assets/images/background/icon_som_verde.png" id="6_05dfj"]
 [ext_resource type="Texture2D" uid="uid://2wp6eoooe1oc" path="res://assets/images/background/brilho.png" id="6_ew52p"]
-[ext_resource type="PackedScene" uid="uid://dvwor3ijsv8cj" path="res://scenes/fade_transition.tscn" id="6_gab1l"]
 [ext_resource type="Texture2D" uid="uid://d3k4o4wxjokwh" path="res://assets/images/background/slider.png" id="8_ew52p"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_thr3o"]
@@ -341,9 +340,5 @@ theme_override_icons/grabber_highlight = ExtResource("8_ew52p")
 theme_override_styles/slider = SubResource("StyleBoxFlat_8hktn")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_r4kmw")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_r4kmw")
-
-[node name="FadeTransition" parent="CanvasLayer" unique_id=25234559 instance=ExtResource("6_gab1l")]
-layer = 2
-visible = false
 
 [connection signal="pressed" from="CanvasLayer/Voltar" to="." method="_on_voltar_pressed"]

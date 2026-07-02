@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://drrx1gjlwjdld" path="res://scripts/ui/MainMenuController.gd" id="2_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://djrmuepei0fe3" path="res://assets/images/background/Background.png" id="3_272bh"]
 [ext_resource type="PackedScene" uid="uid://dvwor3ijsv8cj" path="res://scenes/fade_transition.tscn" id="3_h2yge"]
-[ext_resource type="Texture2D" uid="uid://cectm7oekm2qn" path="res://assets/images/UI/PlayerLifeBarUnder.png" id="3_lquwl"]
+[ext_resource type="Texture2D" uid="uid://bw4grtua74luc" path="res://assets/images/UI/PlayerLifeBarUnder.png" id="3_lquwl"]
 [ext_resource type="FontFile" uid="uid://3qlwirrvnr0m" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="4_5vw27"]
 [ext_resource type="Texture2D" uid="uid://u8t085i4fy33" path="res://assets/images/UI/PlayerLifeBar.png" id="4_7mycd"]
 [ext_resource type="Texture2D" uid="uid://udlkj2co2260" path="res://assets/images/player/AttackDown.png" id="4_d13ii"]
@@ -770,9 +770,101 @@ shadow_color = Color(0, 0, 0, 1)
 shadow_size = 1
 shadow_offset = Vector2(3, 3)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0cp0l"]
+bg_color = Color(0.039215688, 0.050980393, 0.06666667, 1)
+border_width_left = 200
+border_width_top = 200
+border_width_right = 200
+border_width_bottom = 200
+border_color = Color(0.014659039, 0.019448105, 0.027101196, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qnost"]
+bg_color = Color(0.14509805, 0.30588236, 0.08235294, 1)
+border_width_bottom = 5
+border_color = Color(0.093666516, 0.21266991, 0.047307417, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.20140347, 0.4046115, 0.1186792, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wnkbs"]
+bg_color = Color(0.10123908, 0.22636017, 0.052486904, 1)
+border_width_bottom = 5
+border_color = Color(0.062328346, 0.1547584, 0.026781358, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.13397384, 0.2839644, 0.07361763, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f6a44"]
+bg_color = Color(0.18531781, 0.37931076, 0.10945145, 1)
+border_width_bottom = 5
+border_color = Color(0.1074295, 0.23432598, 0.05458705, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.2302961, 0.45965207, 0.13743341, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0cbny"]
+bg_color = Color(0.07771615, 0.086844094, 0.1005361, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.023529412, 0.03137255, 0.050980393, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.1882353, 0.19215687, 0.21176471, 1)
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uypp3"]
+bg_color = Color(0.14117648, 0.15294118, 0.16862746, 1)
+border_width_bottom = 3
+border_color = Color(0.10398757, 0.11155973, 0.12670413, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.2518868, 0.2555316, 0.26646787, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blkrb"]
+bg_color = Color(0.07771615, 0.086844094, 0.1005361, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.023529412, 0.03137255, 0.050980393, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.1882353, 0.19215687, 0.21176471, 1)
+shadow_size = 3
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jq2sk"]
 bg_color = Color(0.1446, 0.16677123, 0.17337954, 1)
-
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
@@ -914,99 +1006,6 @@ corner_detail = 1
 shadow_color = Color(0, 0, 0, 1)
 shadow_size = 1
 shadow_offset = Vector2(3, 3)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0cp0l"]
-bg_color = Color(0.039215688, 0.050980393, 0.06666667, 1)
-border_width_left = 200
-border_width_top = 200
-border_width_right = 200
-border_width_bottom = 200
-border_color = Color(0.014659039, 0.019448105, 0.027101196, 1)
-border_blend = true
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qnost"]
-bg_color = Color(0.14509805, 0.30588236, 0.08235294, 1)
-border_width_bottom = 5
-border_color = Color(0.093666516, 0.21266991, 0.047307417, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-corner_detail = 1
-shadow_color = Color(0.20140347, 0.4046115, 0.1186792, 1)
-shadow_size = 1
-shadow_offset = Vector2(0, -2)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wnkbs"]
-bg_color = Color(0.10123908, 0.22636017, 0.052486904, 1)
-border_width_bottom = 5
-border_color = Color(0.062328346, 0.1547584, 0.026781358, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-corner_detail = 1
-shadow_color = Color(0.13397384, 0.2839644, 0.07361763, 1)
-shadow_size = 1
-shadow_offset = Vector2(0, -2)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f6a44"]
-bg_color = Color(0.18531781, 0.37931076, 0.10945145, 1)
-border_width_bottom = 5
-border_color = Color(0.1074295, 0.23432598, 0.05458705, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-corner_detail = 1
-shadow_color = Color(0.2302961, 0.45965207, 0.13743341, 1)
-shadow_size = 1
-shadow_offset = Vector2(0, -2)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0cbny"]
-bg_color = Color(0.07771615, 0.086844094, 0.1005361, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.023529412, 0.03137255, 0.050980393, 1)
-border_blend = true
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-corner_detail = 1
-shadow_color = Color(0.1882353, 0.19215687, 0.21176471, 1)
-shadow_size = 3
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uypp3"]
-bg_color = Color(0.14117648, 0.15294118, 0.16862746, 1)
-border_width_bottom = 3
-border_color = Color(0.10398757, 0.11155973, 0.12670413, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-corner_detail = 1
-shadow_color = Color(0.2518868, 0.2555316, 0.26646787, 1)
-shadow_size = 1
-shadow_offset = Vector2(0, -2)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blkrb"]
-bg_color = Color(0.07771615, 0.086844094, 0.1005361, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.023529412, 0.03137255, 0.050980393, 1)
-border_blend = true
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-corner_detail = 1
-shadow_color = Color(0.1882353, 0.19215687, 0.21176471, 1)
-shadow_size = 3
 
 [node name="Main" type="Node2D" unique_id=91432734]
 y_sort_enabled = true
@@ -1415,12 +1414,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-
 offset_left = -300.0
 offset_top = -200.0
 offset_right = 300.0
 offset_bottom = 200.0
-
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -1440,9 +1437,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-
 theme_override_colors/font_disabled_color = Color(0.5649617, 0.5649616, 0.5649616, 1)
-
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("4_5vw27")
@@ -1456,321 +1451,6 @@ action_mode = 0
 text = "1"
 icon_alignment = 1
 vertical_icon_alignment = 2
-
-[node name="Level2" type="Button" parent="UI/LevelSelectionCanvas/Buttons/CenterContainer/GridContainer" unique_id=1091494363]
-auto_translate_mode = 1
-custom_minimum_size = Vector2(100, 120)
-layout_mode = 2
-size_flags_horizontal = 7
-size_flags_vertical = 7
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 37
-theme_override_styles/normal = SubResource("StyleBoxFlat_jq2sk")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_jq2sk")
-theme_override_styles/hover = SubResource("StyleBoxFlat_jq2sk")
-action_mode = 0
-text = "2"
-icon = ExtResource("23_a6jrf")
-icon_alignment = 1
-vertical_icon_alignment = 2
-
-[node name="TextureRect" type="TextureRect" parent="UI/LevelSelectionCanvas/Buttons/CenterContainer/GridContainer/Level2" unique_id=1512279185]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -17.5
-offset_top = -48.0
-offset_right = 15.5
-offset_bottom = -15.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("23_lswn8")
-expand_mode = 1
-
-[node name="Level3" type="Button" parent="UI/LevelSelectionCanvas/Buttons/CenterContainer/GridContainer" unique_id=856973424]
-auto_translate_mode = 1
-custom_minimum_size = Vector2(100, 120)
-layout_mode = 2
-size_flags_horizontal = 7
-size_flags_vertical = 7
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 37
-theme_override_styles/normal = SubResource("StyleBoxFlat_0rl1p")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_jq2sk")
-theme_override_styles/hover = SubResource("StyleBoxFlat_jq2sk")
-action_mode = 0
-text = "3"
-icon = ExtResource("23_a6jrf")
-icon_alignment = 1
-vertical_icon_alignment = 2
-
-[node name="TextureRect" type="TextureRect" parent="UI/LevelSelectionCanvas/Buttons/CenterContainer/GridContainer/Level3" unique_id=1350260962]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -17.5
-offset_top = -48.0
-offset_right = 15.5
-offset_bottom = -15.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("23_lswn8")
-expand_mode = 1
-
-[node name="Level4" type="Button" parent="UI/LevelSelectionCanvas/Buttons/CenterContainer/GridContainer" unique_id=378090732]
-auto_translate_mode = 1
-custom_minimum_size = Vector2(100, 120)
-layout_mode = 2
-size_flags_horizontal = 7
-size_flags_vertical = 7
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 37
-theme_override_styles/normal = SubResource("StyleBoxFlat_ok6jj")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_jq2sk")
-theme_override_styles/hover = SubResource("StyleBoxFlat_jq2sk")
-action_mode = 0
-text = "4"
-icon = ExtResource("23_a6jrf")
-icon_alignment = 1
-vertical_icon_alignment = 2
-
-[node name="TextureRect" type="TextureRect" parent="UI/LevelSelectionCanvas/Buttons/CenterContainer/GridContainer/Level4" unique_id=1782856133]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -17.5
-offset_top = -48.0
-offset_right = 15.5
-offset_bottom = -15.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("23_lswn8")
-expand_mode = 1
-
-[node name="Level5" type="Button" parent="UI/LevelSelectionCanvas/Buttons/CenterContainer/GridContainer" unique_id=1183739620]
-auto_translate_mode = 1
-custom_minimum_size = Vector2(100, 120)
-layout_mode = 2
-size_flags_horizontal = 7
-size_flags_vertical = 7
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 37
-theme_override_styles/normal = SubResource("StyleBoxFlat_facbu")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_jq2sk")
-theme_override_styles/hover = SubResource("StyleBoxFlat_jq2sk")
-action_mode = 0
-text = "5"
-icon = ExtResource("23_a6jrf")
-icon_alignment = 1
-vertical_icon_alignment = 2
-
-[node name="TextureRect" type="TextureRect" parent="UI/LevelSelectionCanvas/Buttons/CenterContainer/GridContainer/Level5" unique_id=815393464]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -17.5
-offset_top = -48.0
-offset_right = 15.5
-offset_bottom = -15.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("23_lswn8")
-expand_mode = 1
-
-[node name="Level6" type="Button" parent="UI/LevelSelectionCanvas/Buttons/CenterContainer/GridContainer" unique_id=824131502]
-auto_translate_mode = 1
-layout_mode = 2
-size_flags_horizontal = 7
-size_flags_vertical = 7
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 37
-theme_override_styles/normal = SubResource("StyleBoxFlat_b1qrp")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_jq2sk")
-theme_override_styles/hover = SubResource("StyleBoxFlat_jq2sk")
-action_mode = 0
-text = "6"
-icon = ExtResource("23_a6jrf")
-icon_alignment = 1
-vertical_icon_alignment = 2
-
-[node name="TextureRect" type="TextureRect" parent="UI/LevelSelectionCanvas/Buttons/CenterContainer/GridContainer/Level6" unique_id=1493616319]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -17.5
-offset_top = -48.0
-offset_right = 15.5
-offset_bottom = -15.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("23_lswn8")
-expand_mode = 1
-
-[node name="Level7" type="Button" parent="UI/LevelSelectionCanvas/Buttons/CenterContainer/GridContainer" unique_id=2128527101]
-auto_translate_mode = 1
-custom_minimum_size = Vector2(0, 120)
-layout_mode = 2
-size_flags_horizontal = 7
-size_flags_vertical = 7
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 37
-theme_override_styles/normal = SubResource("StyleBoxFlat_come4")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_jq2sk")
-theme_override_styles/hover = SubResource("StyleBoxFlat_jq2sk")
-action_mode = 0
-text = "7"
-icon = ExtResource("23_a6jrf")
-icon_alignment = 1
-vertical_icon_alignment = 2
-
-[node name="TextureRect" type="TextureRect" parent="UI/LevelSelectionCanvas/Buttons/CenterContainer/GridContainer/Level7" unique_id=895375793]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -17.5
-offset_top = -48.0
-offset_right = 15.5
-offset_bottom = -15.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("23_lswn8")
-expand_mode = 1
-
-[node name="Level8" type="Button" parent="UI/LevelSelectionCanvas/Buttons/CenterContainer/GridContainer" unique_id=611003828]
-auto_translate_mode = 1
-custom_minimum_size = Vector2(0, 120)
-layout_mode = 2
-size_flags_horizontal = 7
-size_flags_vertical = 7
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 37
-theme_override_styles/normal = SubResource("StyleBoxFlat_h8e4i")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_jq2sk")
-theme_override_styles/hover = SubResource("StyleBoxFlat_jq2sk")
-action_mode = 0
-text = "8"
-icon = ExtResource("23_a6jrf")
-icon_alignment = 1
-vertical_icon_alignment = 2
-
-[node name="TextureRect" type="TextureRect" parent="UI/LevelSelectionCanvas/Buttons/CenterContainer/GridContainer/Level8" unique_id=781560899]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -17.5
-offset_top = -48.0
-offset_right = 15.5
-offset_bottom = -15.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("23_lswn8")
-expand_mode = 1
-
-[node name="Level9" type="Button" parent="UI/LevelSelectionCanvas/Buttons/CenterContainer/GridContainer" unique_id=1125462705]
-auto_translate_mode = 1
-custom_minimum_size = Vector2(0, 120)
-layout_mode = 2
-size_flags_horizontal = 7
-size_flags_vertical = 7
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 37
-theme_override_styles/normal = SubResource("StyleBoxFlat_4lmeg")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_jq2sk")
-theme_override_styles/hover = SubResource("StyleBoxFlat_jq2sk")
-action_mode = 0
-text = "9"
-icon = ExtResource("23_a6jrf")
-icon_alignment = 1
-vertical_icon_alignment = 2
-
-[node name="TextureRect" type="TextureRect" parent="UI/LevelSelectionCanvas/Buttons/CenterContainer/GridContainer/Level9" unique_id=651819341]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -17.5
-offset_top = -48.0
-offset_right = 15.5
-offset_bottom = -15.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("23_lswn8")
-expand_mode = 1
-
-[node name="Level10" type="Button" parent="UI/LevelSelectionCanvas/Buttons/CenterContainer/GridContainer" unique_id=872992557]
-auto_translate_mode = 1
-custom_minimum_size = Vector2(100, 120)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 37
-theme_override_styles/normal = SubResource("StyleBoxFlat_0odxb")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_jq2sk")
-theme_override_styles/hover = SubResource("StyleBoxFlat_jq2sk")
-action_mode = 0
-text = "10"
-icon = ExtResource("23_a6jrf")
-icon_alignment = 1
-vertical_icon_alignment = 2
-
-[node name="TextureRect" type="TextureRect" parent="UI/LevelSelectionCanvas/Buttons/CenterContainer/GridContainer/Level10" unique_id=1285878652]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -17.5
-offset_top = -48.0
-offset_right = 15.5
-offset_bottom = -15.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("23_lswn8")
-expand_mode = 1
 
 [node name="Ranking" type="Button" parent="UI/LevelSelectionCanvas" unique_id=1917760781]
 auto_translate_mode = 1
@@ -2176,6 +1856,303 @@ theme_override_font_sizes/normal_font_size = 21
 text = "COMPRE NOVAS ROUPAS E DEIXE SEU PERSONAGEM COM UM VISUAL ÉPICO!"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="UI_LevelSelectionCanvas_Buttons_CenterContainer_GridContainer#Level2" type="Button" parent="." unique_id=1091494363]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(100, 120)
+size_flags_horizontal = 7
+size_flags_vertical = 7
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 37
+theme_override_styles/normal = SubResource("StyleBoxFlat_jq2sk")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jq2sk")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jq2sk")
+action_mode = 0
+text = "2"
+icon = ExtResource("23_a6jrf")
+icon_alignment = 1
+vertical_icon_alignment = 2
+
+[node name="UI_LevelSelectionCanvas_Buttons_CenterContainer_GridContainer_Level2#TextureRect" type="TextureRect" parent="." unique_id=1512279185]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -17.5
+offset_top = -48.0
+offset_right = 15.5
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("23_lswn8")
+expand_mode = 1
+
+[node name="UI_LevelSelectionCanvas_Buttons_CenterContainer_GridContainer#Level3" type="Button" parent="." unique_id=856973424]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(100, 120)
+size_flags_horizontal = 7
+size_flags_vertical = 7
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 37
+theme_override_styles/normal = SubResource("StyleBoxFlat_0rl1p")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jq2sk")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jq2sk")
+action_mode = 0
+text = "3"
+icon = ExtResource("23_a6jrf")
+icon_alignment = 1
+vertical_icon_alignment = 2
+
+[node name="UI_LevelSelectionCanvas_Buttons_CenterContainer_GridContainer_Level3#TextureRect" type="TextureRect" parent="." unique_id=1350260962]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -17.5
+offset_top = -48.0
+offset_right = 15.5
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("23_lswn8")
+expand_mode = 1
+
+[node name="UI_LevelSelectionCanvas_Buttons_CenterContainer_GridContainer#Level4" type="Button" parent="." unique_id=378090732]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(100, 120)
+size_flags_horizontal = 7
+size_flags_vertical = 7
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 37
+theme_override_styles/normal = SubResource("StyleBoxFlat_ok6jj")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jq2sk")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jq2sk")
+action_mode = 0
+text = "4"
+icon = ExtResource("23_a6jrf")
+icon_alignment = 1
+vertical_icon_alignment = 2
+
+[node name="UI_LevelSelectionCanvas_Buttons_CenterContainer_GridContainer_Level4#TextureRect" type="TextureRect" parent="." unique_id=1782856133]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -17.5
+offset_top = -48.0
+offset_right = 15.5
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("23_lswn8")
+expand_mode = 1
+
+[node name="UI_LevelSelectionCanvas_Buttons_CenterContainer_GridContainer#Level5" type="Button" parent="." unique_id=1183739620]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(100, 120)
+size_flags_horizontal = 7
+size_flags_vertical = 7
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 37
+theme_override_styles/normal = SubResource("StyleBoxFlat_facbu")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jq2sk")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jq2sk")
+action_mode = 0
+text = "5"
+icon = ExtResource("23_a6jrf")
+icon_alignment = 1
+vertical_icon_alignment = 2
+
+[node name="UI_LevelSelectionCanvas_Buttons_CenterContainer_GridContainer_Level5#TextureRect" type="TextureRect" parent="." unique_id=815393464]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -17.5
+offset_top = -48.0
+offset_right = 15.5
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("23_lswn8")
+expand_mode = 1
+
+[node name="UI_LevelSelectionCanvas_Buttons_CenterContainer_GridContainer#Level6" type="Button" parent="." unique_id=824131502]
+auto_translate_mode = 1
+size_flags_horizontal = 7
+size_flags_vertical = 7
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 37
+theme_override_styles/normal = SubResource("StyleBoxFlat_b1qrp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jq2sk")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jq2sk")
+action_mode = 0
+text = "6"
+icon = ExtResource("23_a6jrf")
+icon_alignment = 1
+vertical_icon_alignment = 2
+
+[node name="UI_LevelSelectionCanvas_Buttons_CenterContainer_GridContainer_Level6#TextureRect" type="TextureRect" parent="." unique_id=1493616319]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -17.5
+offset_top = -48.0
+offset_right = 15.5
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("23_lswn8")
+expand_mode = 1
+
+[node name="UI_LevelSelectionCanvas_Buttons_CenterContainer_GridContainer#Level7" type="Button" parent="." unique_id=2128527101]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(0, 120)
+size_flags_horizontal = 7
+size_flags_vertical = 7
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 37
+theme_override_styles/normal = SubResource("StyleBoxFlat_come4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jq2sk")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jq2sk")
+action_mode = 0
+text = "7"
+icon = ExtResource("23_a6jrf")
+icon_alignment = 1
+vertical_icon_alignment = 2
+
+[node name="UI_LevelSelectionCanvas_Buttons_CenterContainer_GridContainer_Level7#TextureRect" type="TextureRect" parent="." unique_id=895375793]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -17.5
+offset_top = -48.0
+offset_right = 15.5
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("23_lswn8")
+expand_mode = 1
+
+[node name="UI_LevelSelectionCanvas_Buttons_CenterContainer_GridContainer#Level8" type="Button" parent="." unique_id=611003828]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(0, 120)
+size_flags_horizontal = 7
+size_flags_vertical = 7
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 37
+theme_override_styles/normal = SubResource("StyleBoxFlat_h8e4i")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jq2sk")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jq2sk")
+action_mode = 0
+text = "8"
+icon = ExtResource("23_a6jrf")
+icon_alignment = 1
+vertical_icon_alignment = 2
+
+[node name="UI_LevelSelectionCanvas_Buttons_CenterContainer_GridContainer_Level8#TextureRect" type="TextureRect" parent="." unique_id=781560899]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -17.5
+offset_top = -48.0
+offset_right = 15.5
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("23_lswn8")
+expand_mode = 1
+
+[node name="UI_LevelSelectionCanvas_Buttons_CenterContainer_GridContainer#Level9" type="Button" parent="." unique_id=1125462705]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(0, 120)
+size_flags_horizontal = 7
+size_flags_vertical = 7
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 37
+theme_override_styles/normal = SubResource("StyleBoxFlat_4lmeg")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jq2sk")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jq2sk")
+action_mode = 0
+text = "9"
+icon = ExtResource("23_a6jrf")
+icon_alignment = 1
+vertical_icon_alignment = 2
+
+[node name="UI_LevelSelectionCanvas_Buttons_CenterContainer_GridContainer_Level9#TextureRect" type="TextureRect" parent="." unique_id=651819341]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -17.5
+offset_top = -48.0
+offset_right = 15.5
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("23_lswn8")
+expand_mode = 1
+
+[node name="UI_LevelSelectionCanvas_Buttons_CenterContainer_GridContainer#Level10" type="Button" parent="." unique_id=872992557]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(100, 120)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 37
+theme_override_styles/normal = SubResource("StyleBoxFlat_0odxb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jq2sk")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jq2sk")
+action_mode = 0
+text = "10"
+icon = ExtResource("23_a6jrf")
+icon_alignment = 1
+vertical_icon_alignment = 2
+
+[node name="UI_LevelSelectionCanvas_Buttons_CenterContainer_GridContainer_Level10#TextureRect" type="TextureRect" parent="." unique_id=1285878652]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -17.5
+offset_top = -48.0
+offset_right = 15.5
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("23_lswn8")
+expand_mode = 1
 
 [node name="FadeTransition" parent="." unique_id=1020010962 instance=ExtResource("3_h2yge")]
 layer = 2

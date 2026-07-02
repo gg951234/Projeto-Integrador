@@ -117,11 +117,12 @@ func load_level(levelnumber: int = 0) -> bool:
 		ui_reference.set_player(player)
 		
 		# Define a câmera do player no CameraManager
-		var camera = player.get_node("PlayerCamera")  # Ajuste o caminho se necessário
+		var camera = player.get_node("PlayerCamera")
+		
 		if camera:
-			CameraManager.set_camera(camera)
+				CameraManager.set_camera(camera)
 		else:
-			push_warning("Camera2D não encontrada no Player.")
+				push_warning("Camera2D não encontrada no Player.")
 		
 		# Define os limites usando o CameraData
 		var level_name = "Level" + str(levelnumber)
