@@ -1502,7 +1502,6 @@ texture_under = ExtResource("3_lquwl")
 texture_progress = ExtResource("4_7mycd")
 
 [node name="TelaVitoria" type="CanvasLayer" parent="UI" unique_id=1399314675]
-visible = false
 
 [node name="Panel" type="Panel" parent="UI/TelaVitoria" unique_id=478136331]
 anchors_preset = 15
