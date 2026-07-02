@@ -7,7 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://bw4grtua74luc" path="res://assets/images/UI/PlayerLifeBarUnder.png" id="3_lquwl"]
 [ext_resource type="FontFile" uid="uid://3qlwirrvnr0m" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="4_5vw27"]
 [ext_resource type="Texture2D" uid="uid://u8t085i4fy33" path="res://assets/images/UI/PlayerLifeBar.png" id="4_7mycd"]
+
 [ext_resource type="Texture2D" uid="uid://udlkj2co2260" path="res://assets/images/player/AttackDown.png" id="4_d13ii"]
+
 [ext_resource type="Texture2D" uid="uid://5du0vr5icnvl" path="res://assets/images/background/titulo.png" id="4_kek77"]
 [ext_resource type="Texture2D" uid="uid://ckejh85lb0e4e" path="res://assets/images/player/AttackSide.png" id="5_1u8w0"]
 [ext_resource type="Texture2D" uid="uid://bccxfjr04ypeh" path="res://assets/images/background/Background2.png" id="5_5vw27"]
