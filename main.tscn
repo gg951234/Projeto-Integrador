@@ -35,6 +35,8 @@
 [ext_resource type="Texture2D" uid="uid://ce8im8lvafhso" path="res://assets/images/background/Untitled.png" id="31_ok6jj"]
 [ext_resource type="Texture2D" uid="uid://ctbjnnayhhol2" path="res://assets/images/background/estrela.png" id="32_facbu"]
 [ext_resource type="Texture2D" uid="uid://dqmpwmatnsnov" path="res://assets/images/background/Coin.png" id="33_b1qrp"]
+[ext_resource type="Texture2D" uid="uid://uwjdei4mvcwo" path="res://assets/images/background/padrao.png" id="33_facbu"]
+[ext_resource type="Texture2D" uid="uid://nd3gi1ahd6jm" path="res://assets/images/background/gold1.png" id="34_b1qrp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a38lo"]
 atlas = ExtResource("4_d13ii")
@@ -1054,6 +1056,7 @@ grow_vertical = 2
 script = ExtResource("2_0xm2m")
 
 [node name="MainMenuCanvas" type="CanvasLayer" parent="UI" unique_id=229359762]
+visible = false
 
 [node name="BackgroundTexture" type="TextureRect" parent="UI/MainMenuCanvas" unique_id=1669689416]
 anchors_preset = 15
@@ -1769,7 +1772,6 @@ theme_override_font_sizes/font_size = 28
 text = "0"
 
 [node name="Loja" type="CanvasLayer" parent="UI" unique_id=975011843]
-visible = false
 
 [node name="Panel" type="Panel" parent="UI/Loja" unique_id=1456026557]
 anchors_preset = 15
@@ -1880,10 +1882,34 @@ custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_blkrb")
 
+[node name="TextureRect" type="TextureRect" parent="UI/Loja/HBoxContainer/Roupa" unique_id=717974857]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 32.0
+offset_bottom = -68.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("33_facbu")
+expand_mode = 1
+
 [node name="Roupa2" type="Panel" parent="UI/Loja/HBoxContainer" unique_id=183207182]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_blkrb")
+
+[node name="TextureRect" type="TextureRect" parent="UI/Loja/HBoxContainer/Roupa2" unique_id=2116640239]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 30.0
+offset_bottom = -62.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("34_b1qrp")
+expand_mode = 1
 
 [node name="Roupa3" type="Panel" parent="UI/Loja/HBoxContainer" unique_id=676208100]
 custom_minimum_size = Vector2(200, 0)
