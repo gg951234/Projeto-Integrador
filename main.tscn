@@ -838,7 +838,7 @@ corner_detail = 1
 shadow_color = Color(0.1882353, 0.19215687, 0.21176471, 1)
 shadow_size = 3
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uypp3"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uit24"]
 bg_color = Color(0.14117648, 0.15294118, 0.16862746, 1)
 border_width_bottom = 3
 border_color = Color(0.10398757, 0.11155973, 0.12670413, 1)
@@ -867,6 +867,97 @@ corner_detail = 1
 shadow_color = Color(0.1882353, 0.19215687, 0.21176471, 1)
 shadow_size = 3
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rnkwl"]
+bg_color = Color(0.14117648, 0.15294118, 0.16862746, 1)
+border_width_bottom = 3
+border_color = Color(0.10398757, 0.11155973, 0.12670413, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.2518868, 0.2555316, 0.26646787, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vke2r"]
+bg_color = Color(0.11443318, 0.1246377, 0.1382435, 1)
+border_width_bottom = 3
+border_color = Color(0.06673056, 0.06970989, 0.08162988, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.20875928, 0.21218249, 0.22245428, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uypp3"]
+bg_color = Color(0.1784553, 0.1923506, 0.21087801, 1)
+border_width_bottom = 3
+border_color = Color(0.13983947, 0.14456621, 0.16346866, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.28770572, 0.29203683, 0.30502844, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rm4vd"]
+bg_color = Color(0.19239807, 0.3346806, 0.08387112, 1)
+border_width_bottom = 3
+border_color = Color(0.10028914, 0.19048461, 0.032176755, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.24964103, 0.42441636, 0.11326853, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ruth0"]
+bg_color = Color(0.14776033, 0.2633192, 0.058027156, 1)
+border_width_bottom = 3
+border_color = Color(0.07841011, 0.15502739, 0.02128171, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.20312697, 0.34815958, 0.08806934, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pjyto"]
+bg_color = Color(0.23357707, 0.39890018, 0.104715414, 1)
+border_width_bottom = 3
+border_color = Color(0.1368593, 0.24723727, 0.049771897, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.28389335, 0.4756565, 0.13096693, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sm6fg"]
+bg_color = Color(0.23357707, 0.39890018, 0.104715414, 1)
+border_width_bottom = 3
+border_color = Color(0.1368593, 0.24723727, 0.049771897, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.28389335, 0.4756565, 0.13096693, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4w656"]
 bg_color = Color(0.078431375, 0.08627451, 0.101960786, 1)
 border_width_left = 4
@@ -882,6 +973,45 @@ corner_radius_bottom_left = 8
 corner_detail = 1
 shadow_color = Color(0.1882353, 0.19215687, 0.21176471, 1)
 shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e71vb"]
+bg_color = Color(0.19239807, 0.3346806, 0.08387112, 1)
+border_width_bottom = 3
+border_color = Color(0.10028914, 0.19048461, 0.032176755, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.24964103, 0.42441636, 0.11326853, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b17eg"]
+bg_color = Color(0.14776033, 0.2633192, 0.058027156, 1)
+border_width_bottom = 3
+border_color = Color(0.07841011, 0.15502739, 0.02128171, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.20312697, 0.34815958, 0.08806934, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ntx8l"]
+bg_color = Color(0.23357707, 0.39890018, 0.104715414, 1)
+border_width_bottom = 3
+border_color = Color(0.1368593, 0.24723727, 0.049771897, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.28389335, 0.4756565, 0.13096693, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_abqjc"]
 bg_color = Color(0.07771615, 0.086844094, 0.1005361, 1)
@@ -1789,7 +1919,6 @@ theme_override_font_sizes/font_size = 28
 text = "0"
 
 [node name="Loja" type="CanvasLayer" parent="UI" unique_id=975011843]
-visible = false
 
 [node name="Panel" type="Panel" parent="UI/Loja" unique_id=1456026557]
 anchors_preset = 15
@@ -1829,10 +1958,16 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 7
 size_flags_vertical = 7
-theme_override_styles/normal = SubResource("StyleBoxFlat_uypp3")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_uypp3")
-theme_override_styles/hover = SubResource("StyleBoxFlat_uypp3")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxFlat_uit24")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_uit24")
+theme_override_styles/hover = SubResource("StyleBoxFlat_uit24")
 action_mode = 0
+text = " 0"
 
 [node name="TextureRect" type="TextureRect" parent="UI/Loja/Coins" unique_id=1900162152]
 layout_mode = 1
@@ -1928,6 +2063,49 @@ theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 21
 text = "PADRÃO"
 
+[node name="Coins" type="Button" parent="UI/Loja/HBoxContainer/Roupa1" unique_id=1111599662]
+auto_translate_mode = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -63.625
+offset_top = -65.0
+offset_right = 63.625
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 7
+size_flags_vertical = 7
+theme_override_colors/font_color = Color(0.34403187, 0.575942, 0.16130099, 1)
+theme_override_colors/font_pressed_color = Color(0.34509805, 0.5764706, 0.16078432, 1)
+theme_override_colors/font_hover_color = Color(0.34509805, 0.5764706, 0.16078432, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxFlat_rnkwl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_vke2r")
+theme_override_styles/hover = SubResource("StyleBoxFlat_uypp3")
+action_mode = 0
+text = "EQUIPADO"
+
+[node name="TextureRect" type="TextureRect" parent="UI/Loja/HBoxContainer/Roupa1/Coins" unique_id=1120728528]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.0
+offset_top = -16.0
+offset_right = -14.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
 [node name="Roupa2" type="Panel" parent="UI/Loja/HBoxContainer" unique_id=183207182]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
@@ -1963,6 +2141,48 @@ theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 21
 text = "FROST"
+
+[node name="Coins" type="Button" parent="UI/Loja/HBoxContainer/Roupa2" unique_id=1150973000]
+auto_translate_mode = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -54.25
+offset_top = -65.0
+offset_right = 54.25
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 7
+size_flags_vertical = 7
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxFlat_rm4vd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ruth0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pjyto")
+action_mode = 0
+text = "  15"
+
+[node name="TextureRect" type="TextureRect" parent="UI/Loja/HBoxContainer/Roupa2/Coins" unique_id=470339825]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.0
+offset_top = -16.0
+offset_right = -14.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("33_b1qrp")
+expand_mode = 1
 
 [node name="Roupa3" type="Panel" parent="UI/Loja/HBoxContainer" unique_id=676208100]
 custom_minimum_size = Vector2(200, 0)
@@ -2000,6 +2220,48 @@ theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 21
 text = "GOLD"
 
+[node name="Coins" type="Button" parent="UI/Loja/HBoxContainer/Roupa3" unique_id=1391711249]
+auto_translate_mode = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -54.25
+offset_top = -65.0
+offset_right = 54.25
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 7
+size_flags_vertical = 7
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxFlat_rm4vd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ruth0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_sm6fg")
+action_mode = 0
+text = "  20"
+
+[node name="TextureRect" type="TextureRect" parent="UI/Loja/HBoxContainer/Roupa3/Coins" unique_id=1279434768]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.0
+offset_top = -16.0
+offset_right = -14.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("33_b1qrp")
+expand_mode = 1
+
 [node name="Roupa4" type="Panel" parent="UI/Loja/HBoxContainer" unique_id=1187601212]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
@@ -2035,6 +2297,48 @@ theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 21
 text = "SHADOW"
+
+[node name="Coins" type="Button" parent="UI/Loja/HBoxContainer/Roupa4" unique_id=1919722582]
+auto_translate_mode = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -54.25
+offset_top = -65.0
+offset_right = 54.25
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 7
+size_flags_vertical = 7
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxFlat_e71vb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_b17eg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ntx8l")
+action_mode = 0
+text = "  10"
+
+[node name="TextureRect" type="TextureRect" parent="UI/Loja/HBoxContainer/Roupa4/Coins" unique_id=377073581]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.0
+offset_top = -16.0
+offset_right = -14.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("33_b1qrp")
+expand_mode = 1
 
 [node name="Panel2" type="Panel" parent="UI/Loja" unique_id=1562097576]
 custom_minimum_size = Vector2(200, 90)

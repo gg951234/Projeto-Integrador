@@ -23,6 +23,9 @@ extends Control
 @onready var ranking: Button = $LevelSelectionCanvas/Ranking
 @onready var voltar_loja: Button = $Loja/VoltarLoja
 @onready var back_ranking: Button = $Ranking/BackRanking
+@onready var roupa4: Button = $Loja/HBoxContainer/Roupa4/Coins
+@onready var roupa2: Button = $Loja/HBoxContainer/Roupa2/Coins
+@onready var roupa3: Button = $Loja/HBoxContainer/Roupa3/Coins
 
 var sound_on_icon = preload("res://assets/images/background/icon_som.png")
 var sound_off_icon = preload("res://assets/images/background/icon_sem_som.png")
@@ -93,7 +96,7 @@ func animate_scale(button: Button, target_scale: Vector2) -> void:
 
 func setup_main_buttons() -> void:
 	# Conecta todos os botões do menu de uma vez
-	for button in [start, options, quit, sound_button, help, back, loja, profile, fechar, next, menu, ranking, voltar_loja, back_ranking]:
+	for button in [start, options, quit, sound_button, help, back, loja, profile, fechar, next, menu, ranking, voltar_loja, back_ranking, roupa4, roupa2, roupa3]:
 		button.pivot_offset = button.size / 2 # Define o pivot para o centro do botão
 		button.mouse_entered.connect(_on_button_mouse_entered.bind(button))
 		button.mouse_exited.connect(_on_button_mouse_exited.bind(button))
