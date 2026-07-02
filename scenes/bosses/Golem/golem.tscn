@@ -206,8 +206,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_371uh"]
 size = Vector2(75.5, 71.25)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_n6pvg"]
-radius = 475.08527
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_co1n5"]
+size = Vector2(1408, 1408)
 
 [node name="Golem" type="CharacterBody2D" unique_id=1469553198]
 collision_layer = 4
@@ -230,7 +230,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=708594787]
 position = Vector2(0, -1)
-shape = SubResource("CircleShape2D_n6pvg")
+shape = SubResource("RectangleShape2D_co1n5")
 
 [node name="HitSound" type="AudioStreamPlayer2D" parent="." unique_id=1610741949]
 y_sort_enabled = true

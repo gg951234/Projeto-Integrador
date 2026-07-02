@@ -8,7 +8,7 @@ extends Control
 @onready var quit: Button = $MainMenuCanvas/Buttons/Quit
 @onready var main_menu_canvas: CanvasLayer = $MainMenuCanvas
 @onready var level_selection_canvas: CanvasLayer = $LevelSelectionCanvas
-@onready var level_selection_buttons: VBoxContainer = $LevelSelectionCanvas/Buttons
+@onready var level_selection_buttons: GridContainer = $LevelSelectionCanvas/Buttons/GridContainer
 
 @onready var sound_button: Button = $MainMenuCanvas/Som
 @onready var help: Button = $MainMenuCanvas/Help
@@ -46,9 +46,6 @@ var max_health
 # --------------
 func _ready() -> void:  # Executa quando o nó é criado
 	# Aguarda um frame para o VBoxContainer ajustar os tamanhos
-	await get_tree().process_frame
-	setup_main_buttons()
-	
 	await get_tree().process_frame
 	setup_main_buttons()
 	
@@ -101,14 +98,37 @@ func setup_main_buttons() -> void:
 		button.mouse_exited.connect(_on_button_mouse_exited.bind(button))
 
 func setup_levels_selection() -> void:
-	var levelbuttons = level_selection_buttons.find_children("*", "Button", true)
+	var template = level_selection_buttons.get_node("Level")
+	if not template:
+		push_error("Template 'Level' não encontrado em level_selection_buttons.")
+		return
 	
-	# Conecta todos os botões de seleção de fase de uma vez
-	for levelbutton in levelbuttons:
-		levelbutton.pivot_offset = levelbutton.size / 2 # Define o pivot para o centro do botão
-		levelbutton.mouse_entered.connect(_on_button_mouse_entered.bind(levelbutton))
-		levelbutton.mouse_exited.connect(_on_button_mouse_exited.bind(levelbutton))
-		levelbutton.pressed.connect(_on_level_pressed.bind(levelbutton))
+	# Remove todos os botões existentes (exceto o template)
+	for child in level_selection_buttons.get_children():
+		if child != template:
+			child.queue_free()
+	
+	await get_tree().process_frame
+	
+	# Cria 10 botões clonando o template
+	for i in range(1, 11):
+		var btn = template.duplicate()
+		btn.visible = true
+		btn.name = "Level" + str(i)
+		btn.text = str(i)
+		
+		# Verifica se o nível está desbloqueado
+		if i in GameManager.unlockedlevels:
+			btn.disabled = false
+		else:
+			btn.disabled = true
+		
+		level_selection_buttons.add_child(btn)
+		
+		btn.pivot_offset = btn.size / 2
+		btn.mouse_entered.connect(_on_button_mouse_entered.bind(btn))
+		btn.mouse_exited.connect(_on_button_mouse_exited.bind(btn))
+		btn.pressed.connect(_on_level_pressed.bind(btn))
 
 # --------------
 # MAIN MENU
@@ -118,10 +138,9 @@ func _on_start_pressed() -> void:
 	level_selection_canvas.visible = true
 	
 	# Configura apenas se ainda não foi feito
-	if not levels_setup_done:
-		await get_tree().process_frame
-		setup_levels_selection()
-		levels_setup_done = true
+	await get_tree().process_frame
+	setup_levels_selection()
+	levels_setup_done = true
 
 func _on_options_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/configurações.tscn")

@@ -8,8 +8,8 @@ var currentlevelpath: String = ""
 
 # Dados para serem salvos
 var playername: String = ""
-var maxscore: int = 0
-var coins: int = 0
+var currentscore: int = 0
+var currentcoins: int = 0
 var unlockedlevels: Array = [1, 2]
 
 # Sistema de transição global
@@ -75,6 +75,7 @@ func fade_out(duration: float = 0.5, on_finished: Callable = Callable()) -> void
 # SISTEMA DE FASES
 # --------------
 func check_level(levelnumber: int = 0) -> bool:
+	print(levelnumber)
 	if levelnumber <= 0:
 		print("Sem levelnumber")
 		levelnumber = currentlevel
@@ -95,6 +96,7 @@ func check_level(levelnumber: int = 0) -> bool:
 func delete_level() -> bool:
 	if currentlevelroot:
 		currentlevelroot.queue_free()
+		currentcoins = 0
 		return 1
 	return 0
 
@@ -113,18 +115,80 @@ func load_level(levelnumber: int = 0) -> bool:
 		
 		var player = currentlevelroot.get_node("Player")
 		ui_reference.set_player(player)
+		
+		# Define a câmera do player no CameraManager
+		var camera = player.get_node("PlayerCamera")  # Ajuste o caminho se necessário
+		if camera:
+			CameraManager.set_camera(camera)
+		else:
+			push_warning("Camera2D não encontrada no Player.")
+		
+		# Define os limites usando o CameraData
+		var level_name = "Level" + str(levelnumber)
+		CameraManager.set_limits_from_level(level_name, 0.0)  # sem transição no início
+		
+		# Configura a área de entrada do boss
+		setup_boss_enter_area()
+		
+		currentlevel = levelnumber
 		return 1
 	else:
 		print("Falha ao carregar a fase " + str(levelnumber))
 		return 0
 
-func unlocknextlevel() -> void:
-	if not (currentlevel + 1) in unlockedlevels:
-		unlockedlevels.append(currentlevel+1)
+func level_completed() -> bool:
+	# ENVIAR MOEDAS PARA O BANCO DE DADOS
+	unlocknextlevel()
+	var death_screen = load("res://scenes/death_screen.tscn").instantiate()
+	get_tree().root.add_child(death_screen)
+	return 1
+
+# --------------
+# ÁREA DE ENTRADA DO BOSS
+# --------------
+func setup_boss_enter_area() -> void:
+	if not currentlevelroot:
+		return
+	
+	var boss_enter_area = currentlevelroot.get_node("BossEnterArea")
+	if not boss_enter_area:
+		# Não há área de entrada do boss neste nível, ignorar
+		return
+	
+	var enter_area = boss_enter_area.get_node("Enter")
+	var barrier = boss_enter_area.get_node("Barrier")
+	
+	if enter_area and barrier:
+		# Conecta o sinal body_entered da Enter para ativar a Barrier
+		if not enter_area.body_entered.is_connected(_on_boss_enter_area_body_entered):
+			enter_area.body_entered.connect(_on_boss_enter_area_body_entered.bind(barrier))
+	else:
+		push_warning("BossEnterArea não possui os nós 'Enter' e/ou 'Barrier'.")
+
+func _on_boss_enter_area_body_entered(body: Node, barrier: Node) -> void:
+	if body.is_in_group("player"):
+		# Ativa a barreira (torna colidível)
+		if barrier is StaticBody2D and barrier.get_node("CollisionShape2D"):
+			var collisionshape = barrier.get_node("CollisionShape2D")
+			collisionshape.set_deferred("disabled", false)
+		
+		# Opcional: mudar limites da câmera para a sala do boss
+		#CameraManager.set_limits_from_level("BossRoom1", 0)
+		var bossroom_name = "BossRoom" + str(currentlevel)
+		CameraManager.set_camera_to_room(bossroom_name, 0)
+		
+		# Desconecta o sinal para não disparar novamente
+		var enter_area = barrier.get_parent().get_node("Enter")
+		if enter_area and enter_area.body_entered.is_connected(_on_boss_enter_area_body_entered):
+			enter_area.body_entered.disconnect(_on_boss_enter_area_body_entered)
 
 # --------------
 # SISTEMA DE COLETA
 # --------------
+func unlocknextlevel() -> void:
+	if not (currentlevel + 1) in unlockedlevels:
+		unlockedlevels.append(currentlevel+1)
+
 func add_coins(amount: int) -> void:
-	coins += amount
-	print(coins)
+	currentcoins += amount
+	print(currentcoins)
