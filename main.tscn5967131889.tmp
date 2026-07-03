@@ -1587,7 +1587,6 @@ icon = ExtResource("18_0odxb")
 icon_alignment = 1
 
 [node name="LevelSelectionCanvas" type="CanvasLayer" parent="UI" unique_id=2055950245]
-visible = false
 
 [node name="BackgroundTexture" type="TextureRect" parent="UI/LevelSelectionCanvas" unique_id=888582346]
 modulate = Color(1, 1, 1, 0.8666667)
@@ -2044,7 +2043,6 @@ action_mode = 0
 text = "ALTERAR SENHA"
 
 [node name="Login" type="Panel" parent="UI/LevelSelectionCanvas" unique_id=301168815]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -2080,7 +2078,7 @@ offset_top = -56.0
 offset_right = 473.0
 offset_bottom = -21.0
 grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.87058824, 0.6509804, 0.07058824, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("4_5vw27")
@@ -2096,7 +2094,7 @@ offset_top = 56.0
 offset_right = 471.0
 offset_bottom = 90.5
 grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.87058824, 0.6509804, 0.07058824, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("4_5vw27")
@@ -3337,25 +3335,12 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -295.0
-offset_top = -312.0
+offset_top = -280.0
 offset_right = 295.0
-offset_bottom = 236.0
+offset_bottom = 268.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_htxhm")
-
-[node name="TextureRect2" type="TextureRect" parent="UI/Cadastro/Panel2" unique_id=444761973]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -228.0
-offset_top = -34.0
-offset_right = 224.0
-offset_bottom = 179.0
-grow_horizontal = 2
-texture = ExtResource("17_0odxb")
-expand_mode = 1
 
 [node name="Informacoes" type="Panel" parent="UI/Cadastro/Panel2" unique_id=239142440]
 layout_mode = 1
@@ -3369,17 +3354,113 @@ offset_bottom = 527.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_4k2k6")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/Cadastro/Panel2/Informacoes" unique_id=1700913573]
+[node name="LabelUserName" type="LineEdit" parent="UI/Cadastro/Panel2/Informacoes" unique_id=361275975]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -186.5
+offset_right = 547.0
+offset_bottom = -157.5
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.87058824, 0.6509804, 0.07058824, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 23
+
+[node name="LabelEmail" type="LineEdit" parent="UI/Cadastro/Panel2/Informacoes" unique_id=1214228788]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 116.0
+offset_top = -116.5
+offset_right = 552.0
+offset_bottom = -87.5
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.87058824, 0.6509804, 0.07058824, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 23
+
+[node name="LabelSenha" type="LineEdit" parent="UI/Cadastro/Panel2/Informacoes" unique_id=1329380414]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 100.0
+offset_top = -45.5
+offset_right = 555.0
+offset_bottom = -16.5
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.87058824, 0.6509804, 0.07058824, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 23
+
+[node name="LabelBio" type="LineEdit" parent="UI/Cadastro/Panel2/Informacoes" unique_id=1910471573]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 70.0
+offset_top = 21.5
+offset_right = 553.0
+offset_bottom = 50.5
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.87058824, 0.6509804, 0.07058824, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 23
+
+[node name="LabelPais" type="LineEdit" parent="UI/Cadastro/Panel2/Informacoes" unique_id=507905002]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 83.0
+offset_top = 91.5
+offset_right = 554.0
+offset_bottom = 120.5
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.87058824, 0.6509804, 0.07058824, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 23
+
+[node name="LabelDataNascimento" type="LineEdit" parent="UI/Cadastro/Panel2/Informacoes" unique_id=993177265]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 264.0
+offset_top = 160.5
+offset_right = 556.0
+offset_bottom = 189.5
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.87058824, 0.6509804, 0.07058824, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 23
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Cadastro/Panel2" unique_id=1700913573]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -268.5
-offset_top = -181.5
-offset_right = 2.5
-offset_bottom = 212.5
+offset_left = -267.0
+offset_top = -127.5
+offset_right = 278.0
+offset_bottom = 266.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
@@ -3409,101 +3490,18 @@ DATA DE NASCIMENTO:
 "
 fit_content = true
 
-[node name="LabelUserName" type="LineEdit" parent="UI/Cadastro/Panel2" unique_id=361275975]
+[node name="TextureRect2" type="TextureRect" parent="UI/Cadastro/Panel2" unique_id=444761973]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 155.0
-offset_top = -132.5
-offset_right = 560.0
-offset_bottom = -103.5
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 23
-
-[node name="LabelEmail" type="LineEdit" parent="UI/Cadastro/Panel2" unique_id=1214228788]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 129.0
-offset_top = -62.5
-offset_right = 565.0
-offset_bottom = -33.5
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 23
-
-[node name="LabelSenha" type="LineEdit" parent="UI/Cadastro/Panel2" unique_id=1329380414]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 113.0
-offset_top = 8.5
-offset_right = 568.0
-offset_bottom = 37.5
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 23
-
-[node name="LabelBio" type="LineEdit" parent="UI/Cadastro/Panel2" unique_id=1910471573]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 83.0
-offset_top = 75.5
-offset_right = 566.0
-offset_bottom = 104.5
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 23
-
-[node name="LabelPais" type="LineEdit" parent="UI/Cadastro/Panel2" unique_id=507905002]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 96.0
-offset_top = 145.5
-offset_right = 567.0
-offset_bottom = 174.5
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 23
-
-[node name="LabelDataNascimento" type="LineEdit" parent="UI/Cadastro/Panel2" unique_id=993177265]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 277.0
-offset_top = 214.5
-offset_right = 569.0
-offset_bottom = 243.5
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 23
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -228.0
+offset_top = -34.0
+offset_right = 224.0
+offset_bottom = 179.0
+grow_horizontal = 2
+texture = ExtResource("17_0odxb")
+expand_mode = 1
 
 [node name="Label" type="Label" parent="UI/Cadastro/Panel2" unique_id=572332018]
 layout_mode = 1
@@ -3534,31 +3532,6 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_1u8w0")
 action_mode = 0
 icon = ExtResource("8_efxa6")
 icon_alignment = 1
-
-[node name="Cadastrar" type="Button" parent="UI/Cadastro" unique_id=54805313]
-auto_translate_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -96.625
-offset_top = -88.0
-offset_right = 96.625
-offset_bottom = -31.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0.09803922, 0.05490196, 0.20784314, 1)
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = SubResource("StyleBoxFlat_1vm84")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_jx0wj")
-theme_override_styles/hover = SubResource("StyleBoxFlat_kkkcx")
-action_mode = 0
-text = "ENTRAR"
 
 [node name="UI_LevelSelectionCanvas_Buttons_CenterContainer_GridContainer#Level2" type="Button" parent="." unique_id=1091494363]
 auto_translate_mode = 1
@@ -3871,9 +3844,5 @@ visible = false
 [connection signal="pressed" from="UI/LevelSelectionCanvas/Ranking" to="UI" method="_on_ranking_pressed"]
 [connection signal="pressed" from="UI/LevelSelectionCanvas/Perfil/FecharPerfil" to="UI" method="_on_fechar_perfil_pressed"]
 [connection signal="pressed" from="UI/LevelSelectionCanvas/Login/BtnTelaCadastro" to="UI" method="_on_btn_tela_cadastro_pressed"]
-[connection signal="pressed" from="UI/LevelSelectionCanvas/Login/FecharLogin" to="UI" method="_on_fechar_login_pressed"]
-[connection signal="pressed" from="UI/LevelSelectionCanvas/Login/Entrar" to="UI" method="_on_entrar_pressed"]
 [connection signal="pressed" from="UI/Loja/VoltarLoja" to="UI" method="_on_voltar_loja_pressed"]
 [connection signal="pressed" from="UI/Ranking/BackRanking" to="UI" method="_on_back_ranking_pressed"]
-[connection signal="pressed" from="UI/Cadastro/VoltarCadastro" to="UI" method="_on_voltar_cadastro_pressed"]
-[connection signal="pressed" from="UI/Cadastro/Cadastrar" to="UI" method="_on_cadastrar_pressed"]

@@ -8,6 +8,7 @@ extends Control
 @onready var quit: Button = $MainMenuCanvas/Buttons/Quit
 @onready var main_menu_canvas: CanvasLayer = $MainMenuCanvas
 @onready var level_selection_canvas: CanvasLayer = $LevelSelectionCanvas
+@onready var cadastro: CanvasLayer = $Cadastro
 @onready var level_selection_buttons: GridContainer = $LevelSelectionCanvas/Buttons/GridContainer
 
 @onready var sound_button: Button = $MainMenuCanvas/Som
@@ -28,6 +29,8 @@ extends Control
 @onready var roupa3: Button = $Loja/HBoxContainer/Roupa3/Coins
 @onready var fechar_perfil: Button = $LevelSelectionCanvas/Perfil/FecharPerfil
 @onready var perfil: Panel = $LevelSelectionCanvas/Perfil
+@onready var login: Panel = $LevelSelectionCanvas/Login
+
 
 var sound_on_icon = preload("res://assets/images/background/icon_som.png")
 var sound_off_icon = preload("res://assets/images/background/icon_sem_som.png")
@@ -222,3 +225,10 @@ func _on_profile_pressed() -> void:
 
 func _on_fechar_perfil_pressed() -> void:
 	perfil.visible = false
+
+func _on_btn_tela_cadastro_pressed() -> void:
+	cadastro.visible = true
+	
+
+func _on_entrar_pressed() -> void:
+	pass # Replace with function body.
