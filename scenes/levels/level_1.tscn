@@ -1,10 +1,10 @@
 [gd_scene format=4 uid="uid://cg24io3k0m6q7"]
 
+[ext_resource type="Script" uid="uid://vej28ctixkyh" path="res://scripts/managers/EnemiesManager.gd" id="4_6761a"]
 [ext_resource type="PackedScene" uid="uid://c863a26p162xb" path="res://scenes/bosses/Golem/golem.tscn" id="4_x42e6"]
-[ext_resource type="PackedScene" uid="uid://dy0qxbrtqd5ir" path="res://scenes/coin.tscn" id="5_6761a"]
-[ext_resource type="PackedScene" uid="uid://co6ewiawdd4i7" path="res://scenes/slime.tscn" id="9_j7gcg"]
+[ext_resource type="PackedScene" uid="uid://dy0qxbrtqd5ir" path="res://scenes/collectables/coin.tscn" id="5_6761a"]
 [ext_resource type="Texture2D" uid="uid://h4c1l4ge1tx0" path="res://assets/images/tiles/Tile Map 1 - Geografia/TileMap1GEO.png" id="9_np2pn"]
-[ext_resource type="PackedScene" uid="uid://dqmugt1xu11kk" path="res://scenes/player.tscn" id="10_qhwlw"]
+[ext_resource type="PackedScene" uid="uid://dqmugt1xu11kk" path="res://scenes/player/player.tscn" id="10_qhwlw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v6ha0"]
 texture = ExtResource("9_np2pn")
@@ -42,6 +42,9 @@ size = Vector2(7, 72)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sk5k4"]
 size = Vector2(128, 126)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s8va5"]
+size = Vector2(64, 142)
+
 [node name="LevelRoot" type="Node2D" unique_id=2020180848]
 y_sort_enabled = true
 
@@ -51,19 +54,32 @@ tile_map_data = PackedByteArray("AAABAAUAAAADAAAAAAAAAAUAAAACAAEAAAAAAAQAAAACAAE
 tile_set = SubResource("TileSet_gmpev")
 
 [node name="Player" parent="." unique_id=1259653975 instance=ExtResource("10_qhwlw")]
-position = Vector2(267, 167)
+position = Vector2(253, 173)
 
 [node name="Golem" parent="." unique_id=563389507 instance=ExtResource("4_x42e6")]
 position = Vector2(3202, 770)
 
 [node name="Enemies" type="Node2D" parent="." unique_id=446152784]
 y_sort_enabled = true
+script = ExtResource("4_6761a")
 
-[node name="Slime" parent="Enemies" unique_id=1469553198 instance=ExtResource("9_j7gcg")]
-position = Vector2(271, 738)
+[node name="Spawn1" type="Marker2D" parent="Enemies" unique_id=579465052]
+position = Vector2(289, 728)
 
-[node name="Slime2" parent="Enemies" unique_id=172194659 instance=ExtResource("9_j7gcg")]
-position = Vector2(325, 369)
+[node name="Spawn2" type="Marker2D" parent="Enemies" unique_id=685336806]
+position = Vector2(1501, 614)
+
+[node name="Spawn3" type="Marker2D" parent="Enemies" unique_id=1701684364]
+position = Vector2(2240, 162)
+
+[node name="Spawn4" type="Marker2D" parent="Enemies" unique_id=915180599]
+position = Vector2(932, 987)
+
+[node name="Spawn5" type="Marker2D" parent="Enemies" unique_id=2144625678]
+position = Vector2(2334, 959)
+
+[node name="Spawn6" type="Marker2D" parent="Enemies" unique_id=1770697422]
+position = Vector2(805, 124)
 
 [node name="Collectables" type="Node2D" parent="." unique_id=408660253]
 
@@ -111,3 +127,17 @@ metadata/_edit_group_ = true
 position = Vector2(1, -2)
 shape = SubResource("RectangleShape2D_sk5k4")
 disabled = true
+
+[node name="Door" type="StaticBody2D" parent="BossEnterArea" unique_id=1699506710]
+position = Vector2(2431, 129)
+
+[node name="Sprite2D" type="Sprite2D" parent="BossEnterArea/Door" unique_id=227528443]
+position = Vector2(33, -1)
+scale = Vector2(4, 4)
+texture = ExtResource("9_np2pn")
+region_enabled = true
+region_rect = Rect2(48, 31, 16, 33)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossEnterArea/Door" unique_id=707082841]
+position = Vector2(34, -1)
+shape = SubResource("RectangleShape2D_s8va5")

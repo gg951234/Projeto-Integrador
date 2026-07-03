@@ -2,10 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://h4c1l4ge1tx0" path="res://assets/images/tiles/Tile Map 1 - Geografia/TileMap1GEO.png" id="1_l37oo"]
 [ext_resource type="Texture2D" uid="uid://4pdca8blduo4" path="res://assets/images/tiles/Tile Map 2 - Física/untitled.png" id="2_ibugp"]
-[ext_resource type="PackedScene" uid="uid://dqmugt1xu11kk" path="res://scenes/player.tscn" id="2_qpwj6"]
-[ext_resource type="PackedScene" uid="uid://c863a26p162xb" path="res://scenes/bosses/Golem/golem.tscn" id="3_ibugp"]
-[ext_resource type="PackedScene" uid="uid://co6ewiawdd4i7" path="res://scenes/slime.tscn" id="4_8qukl"]
-[ext_resource type="PackedScene" uid="uid://dy0qxbrtqd5ir" path="res://scenes/coin.tscn" id="5_3p04p"]
+[ext_resource type="PackedScene" uid="uid://dqmugt1xu11kk" path="res://scenes/player/player.tscn" id="2_qpwj6"]
+[ext_resource type="Script" uid="uid://vej28ctixkyh" path="res://scripts/managers/EnemiesManager.gd" id="4_qpwj6"]
+[ext_resource type="PackedScene" uid="uid://dy0qxbrtqd5ir" path="res://scenes/collectables/coin.tscn" id="5_3p04p"]
+[ext_resource type="PackedScene" uid="uid://dns1qam5e5e88" path="res://scenes/bosses/ByBy/byby.tscn" id="6_qpwj6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v6ha0"]
 texture = ExtResource("1_l37oo")
@@ -92,19 +92,15 @@ tile_set = SubResource("TileSet_gmpev")
 [node name="Player" parent="." unique_id=1259653975 instance=ExtResource("2_qpwj6")]
 position = Vector2(189, 127)
 
-[node name="Golem" parent="." unique_id=563389507 instance=ExtResource("3_ibugp")]
-position = Vector2(410, 92)
-
 [node name="Enemies" type="Node2D" parent="." unique_id=446152784]
 y_sort_enabled = true
+script = ExtResource("4_qpwj6")
 
-[node name="Slime" parent="Enemies" unique_id=1469553198 instance=ExtResource("4_8qukl")]
-y_sort_enabled = true
-position = Vector2(271, 738)
+[node name="Spawn1" type="Marker2D" parent="Enemies" unique_id=177357264]
+position = Vector2(292, 753)
 
-[node name="Slime2" parent="Enemies" unique_id=172194659 instance=ExtResource("4_8qukl")]
-y_sort_enabled = true
-position = Vector2(415, 337)
+[node name="Spawn2" type="Marker2D" parent="Enemies" unique_id=937498315]
+position = Vector2(1504, 639)
 
 [node name="Collectables" type="Node2D" parent="." unique_id=408660253]
 
@@ -152,3 +148,6 @@ metadata/_edit_group_ = true
 position = Vector2(1, -2)
 shape = SubResource("RectangleShape2D_8qukl")
 disabled = true
+
+[node name="Golem" parent="." unique_id=2032706976 instance=ExtResource("6_qpwj6")]
+position = Vector2(2225, 264)

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://co6ewiawdd4i7"]
 
 [ext_resource type="Texture2D" uid="uid://bw4ivcp3ydif5" path="res://assets/images/enemies/Slime_Green.png" id="1_371uh"]
-[ext_resource type="Script" uid="uid://04gkiynn8103" path="res://scripts/enemies/SlimeController.gd" id="1_p2gj0"]
-[ext_resource type="PackedScene" uid="uid://ccmhhb48eeshy" path="res://scenes/health_bar.tscn" id="4_pjw23"]
+[ext_resource type="Script" uid="uid://04gkiynn8103" path="res://scripts/enemies/EnemiesController.gd" id="1_p2gj0"]
+[ext_resource type="PackedScene" uid="uid://ccmhhb48eeshy" path="res://scenes/UI/health_bar.tscn" id="4_pjw23"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p2gj0"]
 atlas = ExtResource("1_371uh")

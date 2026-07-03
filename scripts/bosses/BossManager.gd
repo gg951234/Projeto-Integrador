@@ -98,17 +98,20 @@ func _update_facing():
 	
 	var delta = player.global_position - global_position
 	if abs(delta.x) <= horizontal_threshold:
-		animated_sprite.flip_h = false
+		#animated_sprite.flip_h = false
 		if delta.y > 0:
 			if animated_sprite.animation != "idle_down":
 				animated_sprite.play("idle_down")
 		else:
 			if animated_sprite.animation != "idle_up":
 				animated_sprite.play("idle_up")
-	else:
-		animated_sprite.flip_h = (delta.x < 0)
-		if animated_sprite.animation != "idle_side":
-			animated_sprite.play("idle_side")
+		if delta.x > 0:
+			#animated_sprite.flip_h = (delta.x < 0)
+			if animated_sprite.animation != "idle_left":
+				animated_sprite.play("idle_left")
+		else:
+			if animated_sprite.animation != "idle_right":
+				animated_sprite.play("idle_right")
 
 # ===== SKILLS =====
 func _on_sight_body_entered(body: Node2D) -> void:

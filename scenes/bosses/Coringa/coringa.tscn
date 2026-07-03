@@ -1,15 +1,16 @@
 [gd_scene format=3 uid="uid://j7nhvw4qoh2c"]
 
 [ext_resource type="Script" uid="uid://b05t1orawevxu" path="res://scripts/bosses/Golem/GolemController.gd" id="1_wpr87"]
-[ext_resource type="Texture2D" uid="uid://cd8056gu8sl7e" path="res://assets/images/bosses/Coringa/Sheets Coringa/dead.png" id="2_f1i8c"]
-[ext_resource type="AudioStream" uid="uid://8s5flkwxwv4j" path="res://assets/sounds/enemies/SlimeDamaged.mp3" id="3_bko2c"]
-[ext_resource type="Texture2D" uid="uid://cbjn0i3jbi7i1" path="res://assets/images/bosses/Coringa/Sheets Coringa/half_life.png" id="3_yd2ib"]
-[ext_resource type="Texture2D" uid="uid://dd52i8pidov1x" path="res://assets/images/bosses/Coringa/Sheets Coringa/idle_down.png" id="4_1wjaa"]
-[ext_resource type="PackedScene" uid="uid://ccmhhb48eeshy" path="res://scenes/health_bar.tscn" id="4_u0guc"]
-[ext_resource type="Texture2D" uid="uid://db3od5rd3bsdt" path="res://assets/images/bosses/Coringa/Sheets Coringa/idle_left.png" id="5_57ydo"]
-[ext_resource type="Texture2D" uid="uid://njwmkuvixgjr" path="res://assets/images/bosses/Coringa/Sheets Coringa/idle_rigth.png" id="6_l2304"]
-[ext_resource type="Texture2D" uid="uid://cj2440mudcmd6" path="res://assets/images/bosses/Coringa/Sheets Coringa/idle_up.png" id="7_1hry3"]
-[ext_resource type="Texture2D" uid="uid://c8xm0f31shvup" path="res://assets/images/bosses/Coringa/Sheets Coringa/attack.png" id="8_s31qu"]
+[ext_resource type="Texture2D" uid="uid://d355jxrirn1ya" path="res://assets/images/bosses/Coringa/Sheets Coringa/dead.png" id="2_f1i8c"]
+[ext_resource type="AudioStream" uid="uid://gxnydufebwm8" path="res://assets/sounds/enemies/SlimeDamaged.mp3" id="3_bko2c"]
+[ext_resource type="Texture2D" uid="uid://dkayouqvl3x6u" path="res://assets/images/bosses/Coringa/Sheets Coringa/half_life.png" id="3_yd2ib"]
+[ext_resource type="Texture2D" uid="uid://btqr84fbhoshl" path="res://assets/images/bosses/Coringa/Sheets Coringa/idle_down.png" id="4_1wjaa"]
+[ext_resource type="PackedScene" uid="uid://ccmhhb48eeshy" path="res://scenes/UI/health_bar.tscn" id="4_u0guc"]
+[ext_resource type="Texture2D" uid="uid://cfiv75vgm8ilv" path="res://assets/images/bosses/Coringa/Sheets Coringa/idle_left.png" id="5_57ydo"]
+[ext_resource type="Texture2D" uid="uid://u7pv0w00euua" path="res://assets/images/bosses/Coringa/Sheets Coringa/idle_rigth.png" id="6_l2304"]
+[ext_resource type="Texture2D" uid="uid://chrjsfcybwlcp" path="res://assets/images/bosses/Coringa/Sheets Coringa/idle_up.png" id="7_1hry3"]
+[ext_resource type="Texture2D" uid="uid://p5p1i55wl86p" path="res://assets/images/bosses/Coringa/Sheets Coringa/attack.png" id="8_s31qu"]
+
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dtt46"]
 atlas = ExtResource("2_f1i8c")

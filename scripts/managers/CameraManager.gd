@@ -58,11 +58,11 @@ func _set_camera_to_area(left: float, top: float, right: float, bottom: float, d
 		push_warning("CameraManager: câmera nula.")
 		return
 	
-	# Define os limites da câmera
-	camera.limit_left = left
-	camera.limit_top = top
-	camera.limit_right = right
-	camera.limit_bottom = bottom
+	# Define os limites da câmera – conversão para int para evitar NARROWING_CONVERSION
+	camera.limit_left = int(left)
+	camera.limit_top = int(top)
+	camera.limit_right = int(right)
+	camera.limit_bottom = int(bottom)
 	
 	# Centraliza no centro da área
 	var center = Vector2((left + right) / 2.0, (top + bottom) / 2.0)
@@ -91,17 +91,17 @@ func _set_camera_to_area(left: float, top: float, right: float, bottom: float, d
 		camera.global_position = center
 		camera.zoom = Vector2(new_zoom, new_zoom)
 
-## Define os limites imediatamente
+## Define os limites imediatamente – conversão para int
 func set_limits(limits: Dictionary) -> void:
 	if not camera:
 		push_warning("CameraManager: câmera nula, não foi possível definir limites.")
 		return
-	camera.limit_left = limits.get("left", 0)
-	camera.limit_top = limits.get("top", 0)
-	camera.limit_right = limits.get("right", 0)
-	camera.limit_bottom = limits.get("bottom", 0)
+	camera.limit_left = int(limits.get("left", 0))
+	camera.limit_top = int(limits.get("top", 0))
+	camera.limit_right = int(limits.get("right", 0))
+	camera.limit_bottom = int(limits.get("bottom", 0))
 
-## Aplica transição suave dos limites
+## Aplica transição suave dos limites – garantindo valores int
 func transition_to_limits(limits: Dictionary, duration: float = 1.0) -> void:
 	if not camera:
 		push_warning("CameraManager: câmera nula, não foi possível aplicar transição.")
@@ -117,19 +117,20 @@ func transition_to_limits(limits: Dictionary, duration: float = 1.0) -> void:
 	tween.set_parallel(true)
 	camera.set_meta("camera_tween", tween)
 	
+	# Obtém os valores atuais (já são int)
 	var current_left = camera.limit_left
 	var current_top = camera.limit_top
 	var current_right = camera.limit_right
 	var current_bottom = camera.limit_bottom
 	
 	if limits.has("left"):
-		tween.tween_property(camera, "limit_left", limits["left"], duration).from(current_left)
+		tween.tween_property(camera, "limit_left", int(limits["left"]), duration).from(int(current_left))
 	if limits.has("top"):
-		tween.tween_property(camera, "limit_top", limits["top"], duration).from(current_top)
+		tween.tween_property(camera, "limit_top", int(limits["top"]), duration).from(int(current_top))
 	if limits.has("right"):
-		tween.tween_property(camera, "limit_right", limits["right"], duration).from(current_right)
+		tween.tween_property(camera, "limit_right", int(limits["right"]), duration).from(int(current_right))
 	if limits.has("bottom"):
-		tween.tween_property(camera, "limit_bottom", limits["bottom"], duration).from(current_bottom)
+		tween.tween_property(camera, "limit_bottom", int(limits["bottom"]), duration).from(int(current_bottom))
 
 ## Aplica um shake à câmera
 func shake(duration: float = 0.3, intensity: float = 5.0) -> void:

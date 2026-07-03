@@ -40,6 +40,7 @@ extends Control
 @onready var fechar_senha: Button = $LevelSelectionCanvas/Perfil/AlterarSenha/FecharSenha
 @onready var confirmar: Button = $LevelSelectionCanvas/Perfil/AlterarSenha/Confirmar
 @onready var tela_alterar_senha: Panel = $LevelSelectionCanvas/Perfil/AlterarSenha
+@onready var settings: CanvasLayer = $Settings
 
 var sound_on_icon = preload("res://assets/images/background/icon_som.png")
 var sound_off_icon = preload("res://assets/images/background/icon_sem_som.png")
@@ -90,6 +91,10 @@ func _hide_HUD() -> void:
 
 func _update_health(new_health) -> void:
 	health_bar.value = new_health
+	health_bar.max_value = max_health
+
+func _update_coins(amount) -> void:
+	health_bar.value = amount
 	health_bar.max_value = max_health
 
 # --------------
@@ -161,7 +166,8 @@ func _on_start_pressed() -> void:
 	levels_setup_done = true
 
 func _on_options_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/configurações.tscn")
+	main_menu_canvas.visible = false
+	settings.visible = true
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
@@ -243,7 +249,6 @@ func _on_entrar_pressed() -> void:
 
 func _on_fechar_senha_pressed() -> void:
 	tela_alterar_senha.visible = false
-
 
 func _on_senha_pressed() -> void:
 	tela_alterar_senha.visible = true

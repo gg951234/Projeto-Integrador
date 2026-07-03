@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ccmhhb48eeshy"]
 
-[ext_resource type="Script" uid="uid://dhou4vm312c6x" path="res://scripts/enemies/HealthBarController.gd" id="1_6opq1"]
+[ext_resource type="Script" uid="uid://dhou4vm312c6x" path="res://scripts/ui/HealthBarController.gd" id="1_6opq1"]
 [ext_resource type="Texture2D" uid="uid://bvahhiteaicuy" path="res://assets/images/UI/EnemiesLifeBarUnder.png" id="1_y3kqx"]
 [ext_resource type="Texture2D" uid="uid://c6per6gh48any" path="res://assets/images/UI/EnemiesLifeBar.png" id="2_6opq1"]
 

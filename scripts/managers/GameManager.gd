@@ -5,6 +5,8 @@ var currentlevel: int = 1
 var gamescore: int = 0
 var currentlevelroot: Node = null
 var currentlevelpath: String = ""
+var enemies_remaining: int = 0
+var door_node: Node = null
 
 # Dados para serem salvos
 var playername: String = ""
@@ -97,50 +99,58 @@ func delete_level() -> bool:
 	if currentlevelroot:
 		currentlevelroot.queue_free()
 		currentcoins = 0
+		enemies_remaining = 0
 		return 1
 	return 0
 
 func load_level(levelnumber: int = 0) -> bool:
 	if levelnumber <= 0:
-		print("Sem levelnumber")
 		levelnumber = currentlevel
-	
+
 	delete_level()
-	
+
 	if check_level(levelnumber):
 		currentlevelroot = load(currentlevelpath).instantiate()
 		add_child(currentlevelroot)
 		currentlevelroot.name = "LevelRoot"
-		print("Fase " + str(levelnumber) + " carregada com sucesso")
-		
+		print("Fase " + str(levelnumber) + " carregada")
+
 		var player = currentlevelroot.get_node("Player")
 		ui_reference.set_player(player)
-		
-		# Define a câmera do player no CameraManager
-		var camera = player.get_node("PlayerCamera")
-		
-		if camera:
-				CameraManager.set_camera(camera)
+
+		# Busca o nó Enemies recursivamente (não precisa ser filho direto)
+		var enemies_node = currentlevelroot.find_child("Enemies", true, false)
+		if enemies_node and enemies_node.has_method("spawn_enemies"):
+			# Passa o nome do nível como string (ex: "Level1")
+			enemies_node.spawn_enemies("Level" + str(levelnumber))
+			# Configura a contagem e conecta os sinais
+			_setup_enemy_counting(enemies_node)
 		else:
-				push_warning("Camera2D não encontrada no Player.")
-		
-		# Define os limites usando o CameraData
+			push_error("Nó 'Enemies' não encontrado ou não possui o método spawn_enemies")
+			# Opcional: imprime a árvore para depuração
+			print("Estrutura do LevelRoot:")
+
+		# Configuração da câmera
+		var camera = player.get_node("PlayerCamera")
+		if camera:
+			CameraManager.set_camera(camera)
+		else:
+			push_warning("Camera2D não encontrada no Player.")
+
 		var level_name = "Level" + str(levelnumber)
-		CameraManager.set_limits_from_level(level_name, 0.0)  # sem transição no início
-		
-		# Configura a área de entrada do boss
+		CameraManager.set_limits_from_level(level_name, 0.0)
+
 		setup_boss_enter_area()
-		
 		currentlevel = levelnumber
-		return 1
+		return true
 	else:
 		print("Falha ao carregar a fase " + str(levelnumber))
-		return 0
+		return false
 
 func level_completed() -> bool:
 	# ENVIAR MOEDAS PARA O BANCO DE DADOS
 	unlocknextlevel()
-	var death_screen = load("res://scenes/death_screen.tscn").instantiate()
+	var death_screen = load("res://scenes/UI/death_screen.tscn").instantiate()
 	get_tree().root.add_child(death_screen)
 	return 1
 
@@ -155,6 +165,9 @@ func setup_boss_enter_area() -> void:
 	if not boss_enter_area:
 		# Não há área de entrada do boss neste nível, ignorar
 		return
+	
+	# Armazena a referência da Door, se existir
+	door_node = boss_enter_area.get_node("Door") if boss_enter_area.has_node("Door") else null
 	
 	var enter_area = boss_enter_area.get_node("Enter")
 	var barrier = boss_enter_area.get_node("Barrier")
@@ -193,3 +206,30 @@ func unlocknextlevel() -> void:
 func add_coins(amount: int) -> void:
 	currentcoins += amount
 	print(currentcoins)
+
+# --------------
+# CONTAGEM DE INIMIGOS E PORTA
+# --------------
+func _setup_enemy_counting(enemies_node: Node) -> void:
+	# Coleta todos os filhos que estão no grupo "enemy"
+	var enemies = enemies_node.get_children().filter(func(child):
+		return child.is_in_group("enemy")
+	)
+	enemies_remaining = enemies.size()
+	
+	# Conecta o sinal "died" de cada inimigo
+	for enemy in enemies:
+		if enemy.has_signal("died") and not enemy.died.is_connected(_on_enemy_died):
+			enemy.died.connect(_on_enemy_died)
+	
+	# Se não houver inimigos, já libera a porta
+	if enemies_remaining == 0 and door_node:
+		door_node.queue_free()
+		door_node = null
+
+func _on_enemy_died() -> void:
+	enemies_remaining -= 1
+	if enemies_remaining <= 0:
+		if door_node:
+			door_node.queue_free()
+			door_node = null

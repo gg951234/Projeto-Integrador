@@ -1,15 +1,16 @@
 [gd_scene format=3 uid="uid://bno1n44iy78yc"]
 
 [ext_resource type="Script" uid="uid://b05t1orawevxu" path="res://scripts/bosses/Golem/GolemController.gd" id="1_wpr87"]
-[ext_resource type="Texture2D" uid="uid://ceqsoue3bavjh" path="res://assets/images/bosses/Ares/Sheets Ares/dead.png" id="2_5k5d1"]
-[ext_resource type="AudioStream" uid="uid://8s5flkwxwv4j" path="res://assets/sounds/enemies/SlimeDamaged.mp3" id="3_bko2c"]
-[ext_resource type="Texture2D" uid="uid://b68w8jhgrt147" path="res://assets/images/bosses/Ares/Sheets Ares/half_life.png" id="3_th258"]
-[ext_resource type="Texture2D" uid="uid://biev7a7ds511a" path="res://assets/images/bosses/Ares/Sheets Ares/IdleFoward-Sheet.png" id="4_a2vll"]
-[ext_resource type="PackedScene" uid="uid://ccmhhb48eeshy" path="res://scenes/health_bar.tscn" id="4_u0guc"]
-[ext_resource type="Texture2D" uid="uid://dodsx11vb63ua" path="res://assets/images/bosses/Ares/Sheets Ares/IdleLeft-Sheet.png" id="5_t3njw"]
-[ext_resource type="Texture2D" uid="uid://co6ji6lvkwg1h" path="res://assets/images/bosses/Ares/Sheets Ares/IdleRight-Sheet.png" id="6_j8ied"]
-[ext_resource type="Texture2D" uid="uid://bjt07ncgacvls" path="res://assets/images/bosses/Ares/Sheets Ares/IdleBack-Sheet.png" id="7_8evjb"]
-[ext_resource type="Texture2D" uid="uid://dqm5nradbwnl2" path="res://assets/images/bosses/Ares/Sheets Ares/attack.png" id="8_i304j"]
+[ext_resource type="Texture2D" uid="uid://boxe0tika5day" path="res://assets/images/bosses/Ares/Sheets Ares/dead.png" id="2_5k5d1"]
+[ext_resource type="AudioStream" uid="uid://gxnydufebwm8" path="res://assets/sounds/enemies/SlimeDamaged.mp3" id="3_bko2c"]
+[ext_resource type="Texture2D" uid="uid://calax0c1hqo2t" path="res://assets/images/bosses/Ares/Sheets Ares/half_life.png" id="3_th258"]
+[ext_resource type="Texture2D" uid="uid://dc2p0lmh6m50c" path="res://assets/images/bosses/Ares/Sheets Ares/IdleFoward-Sheet.png" id="4_a2vll"]
+[ext_resource type="PackedScene" uid="uid://ccmhhb48eeshy" path="res://scenes/UI/health_bar.tscn" id="4_u0guc"]
+[ext_resource type="Texture2D" uid="uid://sqs42tcxg1b" path="res://assets/images/bosses/Ares/Sheets Ares/IdleLeft-Sheet.png" id="5_t3njw"]
+[ext_resource type="Texture2D" uid="uid://bllu2bt5j6733" path="res://assets/images/bosses/Ares/Sheets Ares/IdleRight-Sheet.png" id="6_j8ied"]
+[ext_resource type="Texture2D" uid="uid://gurate2yc0gb" path="res://assets/images/bosses/Ares/Sheets Ares/IdleBack-Sheet.png" id="7_8evjb"]
+[ext_resource type="Texture2D" uid="uid://n6n8em5t7o52" path="res://assets/images/bosses/Ares/Sheets Ares/attack.png" id="8_i304j"]
+
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wu7g6"]
 atlas = ExtResource("2_5k5d1")

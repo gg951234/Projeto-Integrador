@@ -19,15 +19,15 @@ config/features=PackedStringArray("4.6")
 GameManager="*res://scripts/managers/GameManager.gd"
 SaveManager="*res://scripts/managers/SaveManager.gd"
 AudioManager="*res://scripts/managers/AudioManager.gd"
-SettingsManager="*res://scripts/managers/SettingsManager.gd"
 EnemiesData="*res://scripts/classes/EnemiesData.gd"
 WeaponsData="*res://scripts/classes/WeaponsData.gd"
 BossesData="*res://scripts/classes/BossesData.gd"
-CharactersData="*res://scripts/classes/CharactersData.gd"
 QuizData="*res://scripts/classes/QuizData.gd"
-QuizManager="*res://scripts/managers/QuizManager.gd"
 CameraData="*res://scripts/classes/CameraData.gd"
 CameraManager="*res://scripts/managers/CameraManager.gd"
+QuizManager="*res://scripts/managers/QuizManager.gd"
+CharactersData="*res://scripts/classes/CharactersData.gd"
+LevelEnemiesData="*uid://b4k1l8aineteh"
 
 [display]
 

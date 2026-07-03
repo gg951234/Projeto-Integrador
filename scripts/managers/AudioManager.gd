@@ -52,4 +52,4 @@ func get_volumesfx_db() -> float:
 	return linear_to_db(ganho_linear)
 
 func get_volumesfx() -> float:
-	return SettingsManager.get_configs()["volumesfx"]
+	return $UI/Settings.get_configs()["volumesfx"]

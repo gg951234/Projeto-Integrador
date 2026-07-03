@@ -67,7 +67,7 @@ func show_quiz(level: String) -> void:
 		return
 	
 	# Instancia a cena do quiz
-	var quiz_scene = preload("res://scenes/quiz_popup.tscn")
+	var quiz_scene = preload("res://scenes/UI/quiz_popup.tscn")
 	quiz_ui = quiz_scene.instantiate()
 	get_tree().root.add_child(quiz_ui)
 	quiz_ui.setup(data.question, shuffled_options, correct_index)

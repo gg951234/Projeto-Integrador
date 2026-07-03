@@ -6,9 +6,17 @@ var stats = {
 		"health": 100,
 		"speed": 300,
 	},
-	"Knight": {
+	"Gold": {
 		"health": 200,
 		"speed": 350,
+	},
+	"Frost": {
+		"health": 250,
+		"speed": 400,
+	},
+	"Shadow": {
+		"health": 300,
+		"speed": 450,
 	},
 }
 

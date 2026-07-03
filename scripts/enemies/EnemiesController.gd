@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
-@export var enemy_type: String = "Slime"
+signal died   # <--- NOVO SINAL
+
+@export var enemy_type: String = name
 
 var SPEED: float
 var health: int
@@ -83,6 +85,8 @@ func onDied() -> void:
 	$CollisionShape2D.set_deferred("disabled", true)
 	$Sight/CollisionShape2D.set_deferred("disabled", true)
 	$Hitbox/CollisionShape2D.set_deferred("disabled", true)
+	
+	died.emit()   # Emite sinal para o GameManager
 
 func _on_sight_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):

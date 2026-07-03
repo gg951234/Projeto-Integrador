@@ -1,15 +1,15 @@
 [gd_scene format=3 uid="uid://bd38fdb3c53cg"]
 
 [ext_resource type="Script" uid="uid://b05t1orawevxu" path="res://scripts/bosses/Golem/GolemController.gd" id="1_wpr87"]
-[ext_resource type="Texture2D" uid="uid://ddrd7a3r1opxq" path="res://assets/images/bosses/Anubis/Sheets Anubis/dead.png" id="2_v0sh5"]
-[ext_resource type="AudioStream" uid="uid://8s5flkwxwv4j" path="res://assets/sounds/enemies/SlimeDamaged.mp3" id="3_bko2c"]
-[ext_resource type="Texture2D" uid="uid://crbhete2jfxpm" path="res://assets/images/bosses/Anubis/Sheets Anubis/half_life.png" id="3_usfer"]
-[ext_resource type="Texture2D" uid="uid://tdm407gvvcj2" path="res://assets/images/bosses/Anubis/Sheets Anubis/idle_down.png" id="4_7evfn"]
-[ext_resource type="PackedScene" uid="uid://ccmhhb48eeshy" path="res://scenes/health_bar.tscn" id="4_u0guc"]
-[ext_resource type="Texture2D" uid="uid://ds5qsvkr2u1vk" path="res://assets/images/bosses/Anubis/Sheets Anubis/idle_left.png" id="5_w0jlu"]
-[ext_resource type="Texture2D" uid="uid://dw51x8x6foyks" path="res://assets/images/bosses/Anubis/Sheets Anubis/idle_right.png" id="6_fsybn"]
-[ext_resource type="Texture2D" uid="uid://crvxqo4eqsy7t" path="res://assets/images/bosses/Anubis/Sheets Anubis/idle_up.png" id="7_geebw"]
-[ext_resource type="Texture2D" uid="uid://bixt07m0b6l5d" path="res://assets/images/bosses/Anubis/Sheets Anubis/idle_attack.png" id="8_6swm0"]
+[ext_resource type="Texture2D" uid="uid://clb571mp5rpkw" path="res://assets/images/bosses/Anubis/Sheets Anubis/dead.png" id="2_v0sh5"]
+[ext_resource type="AudioStream" uid="uid://gxnydufebwm8" path="res://assets/sounds/enemies/SlimeDamaged.mp3" id="3_bko2c"]
+[ext_resource type="Texture2D" uid="uid://0j2pblo4ig64" path="res://assets/images/bosses/Anubis/Sheets Anubis/half_life.png" id="3_usfer"]
+[ext_resource type="Texture2D" uid="uid://b52oank1n2aoq" path="res://assets/images/bosses/Anubis/Sheets Anubis/idle_down.png" id="4_7evfn"]
+[ext_resource type="PackedScene" uid="uid://ccmhhb48eeshy" path="res://scenes/UI/health_bar.tscn" id="4_u0guc"]
+[ext_resource type="Texture2D" uid="uid://cddw188k4kgqu" path="res://assets/images/bosses/Anubis/Sheets Anubis/idle_left.png" id="5_w0jlu"]
+[ext_resource type="Texture2D" uid="uid://bc150hjj5y82k" path="res://assets/images/bosses/Anubis/Sheets Anubis/idle_right.png" id="6_fsybn"]
+[ext_resource type="Texture2D" uid="uid://b31oklde32b18" path="res://assets/images/bosses/Anubis/Sheets Anubis/idle_up.png" id="7_geebw"]
+[ext_resource type="Texture2D" uid="uid://brp8yqovdgmh1" path="res://assets/images/bosses/Anubis/Sheets Anubis/idle_attack.png" id="8_6swm0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_madl3"]
 atlas = ExtResource("2_v0sh5")
@@ -51,19 +51,19 @@ region = Rect2(128, 0, 64, 64)
 atlas = ExtResource("5_w0jlu")
 region = Rect2(192, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7srw8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0sh5"]
 atlas = ExtResource("6_fsybn")
 region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kxdf4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_usfer"]
 atlas = ExtResource("6_fsybn")
 region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6xr6u"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_7evfn"]
 atlas = ExtResource("6_fsybn")
 region = Rect2(128, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_w4rhs"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0jlu"]
 atlas = ExtResource("6_fsybn")
 region = Rect2(192, 0, 64, 64)
 
@@ -153,19 +153,19 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7srw8")
+"texture": SubResource("AtlasTexture_v0sh5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kxdf4")
+"texture": SubResource("AtlasTexture_usfer")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6xr6u")
+"texture": SubResource("AtlasTexture_7evfn")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_w4rhs")
+"texture": SubResource("AtlasTexture_w0jlu")
 }],
 "loop": true,
-"name": &"idle_rigth",
+"name": &"idle_right",
 "speed": 10.0
 }, {
 "frames": [{
@@ -209,14 +209,14 @@ size = Vector2(75.5, 71.25)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_co1n5"]
 size = Vector2(1408, 1408)
 
-[node name="Golem" type="CharacterBody2D" unique_id=1469553198]
+[node name="Anubis" type="CharacterBody2D" unique_id=1469553198]
 collision_layer = 4
 script = ExtResource("1_wpr87")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=29716560]
 scale = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_24adn")
-animation = &"skill_1"
+animation = &"idle_left"
 autoplay = "idle_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=861251288]
