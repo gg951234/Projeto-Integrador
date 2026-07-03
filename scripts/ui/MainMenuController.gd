@@ -1,8 +1,5 @@
 extends Control
 
-@onready var hud: CanvasLayer = $HUD
-@onready var health_bar: TextureProgressBar = $HUD/HealthBar
-
 @onready var start: Button = $MainMenuCanvas/Buttons/Start
 @onready var options: Button = $MainMenuCanvas/Buttons/Options
 @onready var quit: Button = $MainMenuCanvas/Buttons/Quit
@@ -19,8 +16,6 @@ extends Control
 @onready var menu_sprite: AnimatedSprite2D = $MainMenuCanvas/AnimatedSprite2D
 @onready var instrucoes: Panel = $MainMenuCanvas/Instrucoes
 @onready var fechar: Button = $MainMenuCanvas/Instrucoes/Fechar
-@onready var next: Button = $TelaVitoria/HBoxContainer/ProximaFase
-@onready var menu: Button = $TelaVitoria/HBoxContainer/Menu
 @onready var ranking: Button = $LevelSelectionCanvas/Ranking
 @onready var voltar_loja: Button = $Loja/VoltarLoja
 @onready var back_ranking: Button = $Ranking/BackRanking
@@ -75,29 +70,6 @@ func _ready() -> void:  # Executa quando o nó é criado
 	help.pressed.connect(_on_help_pressed)
 
 # --------------
-# SETAR PLAYER
-# --------------
-func set_player(p) -> void:
-	player = p
-	if player:
-		hud.visible = true
-		max_health = player.health
-		player.health_changed.connect(_update_health)
-		player.died.connect(_hide_HUD)
-		_update_health(player.health)
-
-func _hide_HUD() -> void:
-	hud.visible = false
-
-func _update_health(new_health) -> void:
-	health_bar.value = new_health
-	health_bar.max_value = max_health
-
-func _update_coins(amount) -> void:
-	health_bar.value = amount
-	health_bar.max_value = max_health
-
-# --------------
 # ANIMAÇÃO DE HOVER
 # --------------
 func _on_button_mouse_entered(button: Button) -> void:
@@ -115,7 +87,7 @@ func animate_scale(button: Button, target_scale: Vector2) -> void:
 
 func setup_main_buttons() -> void:
 	# Conecta todos os botões do menu de uma vez
-	for button in [start, options, quit, sound_button, help, back, loja, profile, fechar, next, menu, ranking, voltar_loja, back_ranking, roupa4, roupa2, roupa3, fechar_perfil, cadastrar, voltar_cadastro, fechar_login, tela_cadastro, entrar, alterar_senha, equipado, confirmar, fechar_senha]:
+	for button in [start, options, quit, sound_button, help, back, loja, profile, fechar, ranking, voltar_loja, back_ranking, roupa4, roupa2, roupa3, fechar_perfil, cadastrar, voltar_cadastro, fechar_login, tela_cadastro, entrar, alterar_senha, equipado, confirmar, fechar_senha]:
 		button.pivot_offset = button.size / 2 # Define o pivot para o centro do botão
 		button.mouse_entered.connect(_on_button_mouse_entered.bind(button))
 		button.mouse_exited.connect(_on_button_mouse_exited.bind(button))
@@ -184,7 +156,6 @@ func _on_level_pressed(button: Button) -> void:
 		GameManager.fade_in(1, func():
 			GameManager.load_level(int(button.name)) # Pega o número da fase e tenta carregar
 			level_selection_canvas.visible = false
-			hud.visible = true
 			GameManager.fade_out(0.5)
 		)
 

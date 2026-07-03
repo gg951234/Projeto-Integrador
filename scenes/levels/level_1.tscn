@@ -54,7 +54,7 @@ tile_map_data = PackedByteArray("AAABAAUAAAADAAAAAAAAAAUAAAACAAEAAAAAAAQAAAACAAE
 tile_set = SubResource("TileSet_gmpev")
 
 [node name="Player" parent="." unique_id=1259653975 instance=ExtResource("10_qhwlw")]
-position = Vector2(253, 173)
+position = Vector2(2709, 254)
 
 [node name="Golem" parent="." unique_id=563389507 instance=ExtResource("4_x42e6")]
 position = Vector2(3202, 770)
@@ -97,9 +97,6 @@ position = Vector2(1183, 96)
 
 [node name="Coin5" parent="Collectables" unique_id=1111458468 instance=ExtResource("5_6761a")]
 position = Vector2(2273, 415)
-
-[node name="Coin6" parent="Collectables" unique_id=1665158482 instance=ExtResource("5_6761a")]
-position = Vector2(2145, 608)
 
 [node name="BossEnterArea" type="Node2D" parent="." unique_id=496794438]
 

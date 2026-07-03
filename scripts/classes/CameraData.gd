@@ -18,7 +18,13 @@ var limits = {
 		"left": 0,
 		"top": 0,
 		"right": 2496,
-		"bottom": 1024,
+		"bottom": 1088,
+	},
+	"BossRoom2": {
+		"left": 2432,
+		"top": -172,
+		"right": 3968,
+		"bottom": 1536,
 	},
 	# Adicione mais níveis conforme necessário
 }

@@ -25,13 +25,8 @@
 [ext_resource type="Texture2D" uid="uid://c5lc4q3b47npo" path="res://assets/images/player/Default/RunUp.png" id="13_htxhm"]
 [ext_resource type="Texture2D" uid="uid://dtcyvxfq4ifxo" path="res://assets/images/background/balão configurações.png" id="17_0odxb"]
 [ext_resource type="Texture2D" uid="uid://crvojuge3n4cf" path="res://assets/images/background/close.png" id="18_0odxb"]
+[ext_resource type="Script" uid="uid://cxix0f30fha10" path="res://scripts/ui/HUDController.gd" id="25_0cp0l"]
 [ext_resource type="Texture2D" uid="uid://btfgvgvd1c2qt" path="res://assets/images/background/ranking.png" id="25_0rl1p"]
-[ext_resource type="FontFile" uid="uid://ci54notgfirs3" path="res://assets/fonts/upheavtt.ttf" id="28_kq58d"]
-[ext_resource type="Texture2D" uid="uid://cictbhowhlf1t" path="res://assets/images/background/casa.png" id="29_seu75"]
-[ext_resource type="Texture2D" uid="uid://dx4d7mqqh6anj" path="res://assets/images/background/seta.png" id="31_htxhm"]
-[ext_resource type="Texture2D" uid="uid://buatne8vq2fef" path="res://assets/images/background/coroa.png" id="31_jq2sk"]
-[ext_resource type="Texture2D" uid="uid://ce8im8lvafhso" path="res://assets/images/background/Untitled.png" id="31_ok6jj"]
-[ext_resource type="Texture2D" uid="uid://butf8vrb33kbq" path="res://assets/images/background/estrela.png" id="32_facbu"]
 [ext_resource type="Texture2D" uid="uid://dqmpwmatnsnov" path="res://assets/images/background/Coin.png" id="33_b1qrp"]
 [ext_resource type="Texture2D" uid="uid://uwjdei4mvcwo" path="res://assets/images/background/padrao.png" id="33_facbu"]
 [ext_resource type="Texture2D" uid="uid://nd3gi1ahd6jm" path="res://assets/images/background/gold1.png" id="34_b1qrp"]
@@ -885,61 +880,6 @@ border_width_right = 200
 border_width_bottom = 200
 border_color = Color(0.014659039, 0.019448105, 0.027101196, 1)
 border_blend = true
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qnost"]
-bg_color = Color(0.14509805, 0.30588236, 0.08235294, 1)
-border_width_bottom = 5
-border_color = Color(0.093666516, 0.21266991, 0.047307417, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-corner_detail = 1
-shadow_color = Color(0.20140347, 0.4046115, 0.1186792, 1)
-shadow_size = 1
-shadow_offset = Vector2(0, -2)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wnkbs"]
-bg_color = Color(0.10123908, 0.22636017, 0.052486904, 1)
-border_width_bottom = 5
-border_color = Color(0.062328346, 0.1547584, 0.026781358, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-corner_detail = 1
-shadow_color = Color(0.13397384, 0.2839644, 0.07361763, 1)
-shadow_size = 1
-shadow_offset = Vector2(0, -2)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f6a44"]
-bg_color = Color(0.18531781, 0.37931076, 0.10945145, 1)
-border_width_bottom = 5
-border_color = Color(0.1074295, 0.23432598, 0.05458705, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-corner_detail = 1
-shadow_color = Color(0.2302961, 0.45965207, 0.13743341, 1)
-shadow_size = 1
-shadow_offset = Vector2(0, -2)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0cbny"]
-bg_color = Color(0.07771615, 0.086844094, 0.1005361, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.023529412, 0.03137255, 0.050980393, 1)
-border_blend = true
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-corner_detail = 1
-shadow_color = Color(0.1882353, 0.19215687, 0.21176471, 1)
-shadow_size = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uit24"]
 bg_color = Color(0.14117648, 0.15294118, 0.16862746, 1)
@@ -2298,254 +2238,41 @@ text = "ENTRAR"
 
 [node name="HUD" type="CanvasLayer" parent="UI" unique_id=1201332776]
 visible = false
+script = ExtResource("25_0cp0l")
 
 [node name="HealthBar" type="TextureProgressBar" parent="UI/HUD" unique_id=1552069552]
-offset_left = 20.0
-offset_top = 15.0
-offset_right = 416.0
-offset_bottom = 48.0
+offset_left = 12.0
+offset_top = 650.0
+offset_right = 408.0
+offset_bottom = 683.0
 nine_patch_stretch = true
 texture_under = ExtResource("3_lquwl")
 texture_progress = ExtResource("4_7mycd")
 
-[node name="TelaVitoria" type="CanvasLayer" parent="UI" unique_id=1399314675]
-visible = false
-
-[node name="Panel" type="Panel" parent="UI/TelaVitoria" unique_id=478136331]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_0cp0l")
-
-[node name="TextureRect2" type="TextureRect" parent="UI/TelaVitoria" unique_id=837268537]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -142.5
-offset_top = 31.0
-offset_right = 142.5
-offset_bottom = 206.0
-grow_horizontal = 2
-texture = ExtResource("31_jq2sk")
-expand_mode = 1
-
-[node name="Label" type="Label" parent="UI/TelaVitoria" unique_id=1617037408]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -242.0
-offset_top = 205.0
-offset_right = 242.0
-offset_bottom = 305.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0.37254903, 0.5882353, 0.09803922, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0.0912708, 0.2109302, 0.020942917, 1)
-theme_override_constants/line_spacing = 3
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
-theme_override_constants/outline_size = 2
-theme_override_constants/shadow_outline_size = 23
-theme_override_fonts/font = ExtResource("28_kq58d")
-theme_override_font_sizes/font_size = 110
-text = "VICTORY!"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/TelaVitoria" unique_id=713015840]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -270.0
-offset_top = -130.0
-offset_right = 270.0
-offset_bottom = -55.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/separation = 30
-
-[node name="Menu" type="Button" parent="UI/TelaVitoria/HBoxContainer" unique_id=1127072514]
-auto_translate_mode = 1
-custom_minimum_size = Vector2(210, 75)
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0.19607843, 0.050980393, 0.047058824, 1)
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = SubResource("StyleBoxFlat_4c57u")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_efxa6")
-theme_override_styles/hover = SubResource("StyleBoxFlat_dg77c")
-action_mode = 0
-text = " MENU
-"
-
-[node name="TextureRect" type="TextureRect" parent="UI/TelaVitoria/HBoxContainer/Menu" unique_id=1875513126]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 25.0
-offset_top = -18.0
-offset_right = 55.0
-offset_bottom = 10.0
-grow_vertical = 2
-texture = ExtResource("29_seu75")
-expand_mode = 1
-
-[node name="ProximaFase" type="Button" parent="UI/TelaVitoria/HBoxContainer" unique_id=2094873455]
-auto_translate_mode = 1
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0.19607843, 0.050980393, 0.047058824, 1)
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = SubResource("StyleBoxFlat_qnost")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_wnkbs")
-theme_override_styles/hover = SubResource("StyleBoxFlat_f6a44")
-action_mode = 0
-text = "  PRÓXIMA FASE"
-
-[node name="TextureRect" type="TextureRect" parent="UI/TelaVitoria/HBoxContainer/ProximaFase" unique_id=1012368455]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -126.5
-offset_top = -19.5
-offset_right = -93.5
-offset_bottom = 13.5
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("31_htxhm")
-expand_mode = 1
-
-[node name="Informacoes" type="Panel" parent="UI/TelaVitoria" unique_id=1810026031]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -244.0
-offset_top = -14.0
-offset_right = 244.0
-offset_bottom = 176.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_0cbny")
-
-[node name="Label" type="Label" parent="UI/TelaVitoria/Informacoes" unique_id=675101583]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 63.0
-offset_top = -68.5
-offset_right = 342.0
-offset_bottom = 68.5
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 28
-text = "TEMPO DE DURAÇÃO:
-
-SCORE:
-
-MOEDAS COLETADAS:"
-
-[node name="TextureRect" type="TextureRect" parent="UI/TelaVitoria/Informacoes" unique_id=987899834]
-custom_minimum_size = Vector2(34, 34)
-layout_mode = 0
-offset_left = 14.0
-offset_top = 21.0
-offset_right = 49.0
-offset_bottom = 56.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("31_ok6jj")
-expand_mode = 1
-
-[node name="TextureRect3" type="TextureRect" parent="UI/TelaVitoria/Informacoes" unique_id=1996088445]
-custom_minimum_size = Vector2(37, 37)
-layout_mode = 0
-offset_left = 14.0
-offset_top = 76.0
-offset_right = 51.0
-offset_bottom = 113.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("32_facbu")
-expand_mode = 1
-
-[node name="TextureRect4" type="TextureRect" parent="UI/TelaVitoria/Informacoes" unique_id=1671941190]
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 0
-offset_left = 16.0
-offset_top = 137.0
-offset_right = 46.0
-offset_bottom = 167.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("33_b1qrp")
-expand_mode = 1
-
-[node name="LabelTempo" type="Label" parent="UI/TelaVitoria" unique_id=1393436261]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 588.0
-offset_top = 12.0
-offset_right = 670.0
+[node name="CoinsCount" type="Label" parent="UI/HUD" unique_id=1201761819]
+offset_left = 791.0
+offset_top = 14.0
+offset_right = 885.0
 offset_bottom = 37.0
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.87058824, 0.6509804, 0.07058824, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 28
-text = "00:00"
+text = "Moedas: 0/5"
+vertical_alignment = 1
 
-[node name="LabelScore" type="Label" parent="UI/TelaVitoria" unique_id=1204678350]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 654.0
-offset_top = 69.0
-offset_right = 671.0
-offset_bottom = 94.0
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.87058824, 0.6509804, 0.07058824, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 28
-text = "0"
+[node name="EnemiesDefeatedCount" type="Label" parent="UI/HUD" unique_id=1698965972]
+offset_left = 694.0
+offset_top = 42.0
+offset_right = 885.0
+offset_bottom = 65.0
+text = "Inimigos Derrotados: 0/5"
+vertical_alignment = 1
 
-[node name="LabelMoedas" type="Label" parent="UI/TelaVitoria" unique_id=704505219]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 654.0
-offset_top = 125.0
-offset_right = 671.0
-offset_bottom = 150.0
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.87058824, 0.6509804, 0.07058824, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 28
-text = "0"
+[node name="Timer" type="Label" parent="UI/HUD" unique_id=233444509]
+offset_left = 352.0
+offset_top = 10.0
+offset_right = 543.0
+offset_bottom = 33.0
+text = "10:00"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Loja" type="CanvasLayer" parent="UI" unique_id=975011843]
 visible = false

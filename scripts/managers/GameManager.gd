@@ -6,6 +6,7 @@ var gamescore: int = 0
 var currentlevelroot: Node = null
 var currentlevelpath: String = ""
 var enemies_remaining: int = 0
+var enemies_max: int = 0
 var door_node: Node = null
 
 # Dados para serem salvos
@@ -15,7 +16,7 @@ var currentcoins: int = 0
 var unlockedlevels: Array = [1, 2]
 
 # Sistema de transição global
-var ui_reference: Control
+var hud_reference: CanvasLayer
 var transition_layer: CanvasLayer
 var transition_rect: ColorRect
 
@@ -34,7 +35,7 @@ func _ready() -> void:
 func _find_nodes() -> void:
 	# Procura por um CanvasLayer chamado "FadeTransition" em qualquer lugar da cena root
 	var root = get_tree().root
-	ui_reference = root.find_child("UI", true, false)
+	hud_reference = root.find_child("UI", true, false).find_child("HUD")
 	transition_layer = root.find_child("FadeTransition", true, false)
 	
 	if transition_layer:
@@ -108,7 +109,7 @@ func load_level(levelnumber: int = 0) -> bool:
 		levelnumber = currentlevel
 
 	delete_level()
-
+	
 	if check_level(levelnumber):
 		currentlevelroot = load(currentlevelpath).instantiate()
 		add_child(currentlevelroot)
@@ -116,8 +117,9 @@ func load_level(levelnumber: int = 0) -> bool:
 		print("Fase " + str(levelnumber) + " carregada")
 
 		var player = currentlevelroot.get_node("Player")
-		ui_reference.set_player(player)
-
+		hud_reference.set_player(player)
+		hud_reference.show()
+		
 		# Busca o nó Enemies recursivamente (não precisa ser filho direto)
 		var enemies_node = currentlevelroot.find_child("Enemies", true, false)
 		if enemies_node and enemies_node.has_method("spawn_enemies"):
@@ -150,8 +152,9 @@ func load_level(levelnumber: int = 0) -> bool:
 func level_completed() -> bool:
 	# ENVIAR MOEDAS PARA O BANCO DE DADOS
 	unlocknextlevel()
-	var death_screen = load("res://scenes/UI/death_screen.tscn").instantiate()
-	get_tree().root.add_child(death_screen)
+	hud_reference.hide()
+	var victory_screen = load("res://scenes/UI/victory_screen.tscn").instantiate()
+	get_tree().root.add_child(victory_screen)
 	return 1
 
 # --------------
@@ -203,9 +206,9 @@ func unlocknextlevel() -> void:
 	if not (currentlevel + 1) in unlockedlevels:
 		unlockedlevels.append(currentlevel+1)
 
-func add_coins(amount: int) -> void:
-	currentcoins += amount
-	print(currentcoins)
+func add_coins() -> void:
+	currentcoins += 1
+	hud_reference._update_coins(currentcoins)
 
 # --------------
 # CONTAGEM DE INIMIGOS E PORTA
@@ -215,7 +218,9 @@ func _setup_enemy_counting(enemies_node: Node) -> void:
 	var enemies = enemies_node.get_children().filter(func(child):
 		return child.is_in_group("enemy")
 	)
+	enemies_max = enemies.size()
 	enemies_remaining = enemies.size()
+	hud_reference._update_enemies_defeated(enemies_max-enemies_remaining, enemies_max)
 	
 	# Conecta o sinal "died" de cada inimigo
 	for enemy in enemies:
@@ -229,6 +234,7 @@ func _setup_enemy_counting(enemies_node: Node) -> void:
 
 func _on_enemy_died() -> void:
 	enemies_remaining -= 1
+	hud_reference._update_enemies_defeated(enemies_max-enemies_remaining, enemies_max)
 	if enemies_remaining <= 0:
 		if door_node:
 			door_node.queue_free()

@@ -9,6 +9,6 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		collision_shape_2d.set_deferred("disabled", true)
 		animated_sprite_2d.visible = false
-		GameManager.add_coins(1)
+		GameManager.add_coins()
 		AudioManager.tocar_sfx(position, audio_stream_player_2d)
 		queue_free()
