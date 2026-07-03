@@ -24,13 +24,22 @@ extends Control
 @onready var ranking: Button = $LevelSelectionCanvas/Ranking
 @onready var voltar_loja: Button = $Loja/VoltarLoja
 @onready var back_ranking: Button = $Ranking/BackRanking
+@onready var equipado: Button = $Loja/HBoxContainer/Roupa1/Equipado
 @onready var roupa4: Button = $Loja/HBoxContainer/Roupa4/Coins
 @onready var roupa2: Button = $Loja/HBoxContainer/Roupa2/Coins
 @onready var roupa3: Button = $Loja/HBoxContainer/Roupa3/Coins
 @onready var fechar_perfil: Button = $LevelSelectionCanvas/Perfil/FecharPerfil
 @onready var perfil: Panel = $LevelSelectionCanvas/Perfil
 @onready var login: Panel = $LevelSelectionCanvas/Login
-
+@onready var cadastrar: Button = $Cadastro/Cadastrar
+@onready var voltar_cadastro: Button = $Cadastro/VoltarCadastro
+@onready var entrar: Button = $LevelSelectionCanvas/Login/Entrar
+@onready var tela_cadastro: Button = $LevelSelectionCanvas/Login/BtnTelaCadastro
+@onready var fechar_login: Button = $LevelSelectionCanvas/Login/FecharLogin
+@onready var alterar_senha: Button = $LevelSelectionCanvas/Perfil/Senha
+@onready var fechar_senha: Button = $LevelSelectionCanvas/Perfil/AlterarSenha/FecharSenha
+@onready var confirmar: Button = $LevelSelectionCanvas/Perfil/AlterarSenha/Confirmar
+@onready var tela_alterar_senha: Panel = $LevelSelectionCanvas/Perfil/AlterarSenha
 
 var sound_on_icon = preload("res://assets/images/background/icon_som.png")
 var sound_off_icon = preload("res://assets/images/background/icon_sem_som.png")
@@ -101,7 +110,7 @@ func animate_scale(button: Button, target_scale: Vector2) -> void:
 
 func setup_main_buttons() -> void:
 	# Conecta todos os botões do menu de uma vez
-	for button in [start, options, quit, sound_button, help, back, loja, profile, fechar, next, menu, ranking, voltar_loja, back_ranking, roupa4, roupa2, roupa3, fechar_perfil]:
+	for button in [start, options, quit, sound_button, help, back, loja, profile, fechar, next, menu, ranking, voltar_loja, back_ranking, roupa4, roupa2, roupa3, fechar_perfil, cadastrar, voltar_cadastro, fechar_login, tela_cadastro, entrar, alterar_senha, equipado, confirmar, fechar_senha]:
 		button.pivot_offset = button.size / 2 # Define o pivot para o centro do botão
 		button.mouse_entered.connect(_on_button_mouse_entered.bind(button))
 		button.mouse_exited.connect(_on_button_mouse_exited.bind(button))
@@ -229,6 +238,12 @@ func _on_fechar_perfil_pressed() -> void:
 func _on_btn_tela_cadastro_pressed() -> void:
 	cadastro.visible = true
 	
-
 func _on_entrar_pressed() -> void:
 	pass # Replace with function body.
+
+func _on_fechar_senha_pressed() -> void:
+	tela_alterar_senha.visible = false
+
+
+func _on_senha_pressed() -> void:
+	tela_alterar_senha.visible = true
