@@ -210,7 +210,7 @@ offset_bottom = 63.0
 texture = ExtResource("6_ew52p")
 expand_mode = 1
 
-[node name="HSlider" type="HSlider" parent="CanvasLayer/ConfiguracoesMenu/Panel" unique_id=2086926006]
+[node name="HSliderBrilho" type="HSlider" parent="CanvasLayer/ConfiguracoesMenu/Panel" unique_id=2086926006]
 layout_mode = 0
 offset_left = 80.0
 offset_top = 9.0
@@ -326,7 +326,7 @@ offset_right = 60.0
 offset_bottom = 62.0
 texture = ExtResource("6_05dfj")
 
-[node name="HSlider" type="HSlider" parent="CanvasLayer/ConfiguracoesMenu/Panel4" unique_id=1189168367]
+[node name="HSliderVolume" type="HSlider" parent="CanvasLayer/ConfiguracoesMenu/Panel4" unique_id=1189168367]
 layout_mode = 0
 offset_left = 80.0
 offset_top = 9.0
@@ -341,4 +341,19 @@ theme_override_styles/slider = SubResource("StyleBoxFlat_8hktn")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_r4kmw")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_r4kmw")
 
+[node name="Brightness" type="ColorRect" parent="CanvasLayer" unique_id=1108608735]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -17.0
+offset_top = -8.0
+offset_right = 12.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
 [connection signal="pressed" from="CanvasLayer/Voltar" to="." method="_on_voltar_pressed"]
+[connection signal="changed" from="CanvasLayer/ConfiguracoesMenu/Panel/HSliderBrilho" to="." method="_on_h_slider_brilho_changed"]
+[connection signal="changed" from="CanvasLayer/ConfiguracoesMenu/Panel4/HSliderVolume" to="." method="_on_h_slider_volume_changed"]
