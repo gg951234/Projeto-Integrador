@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://k7xs8ywtanum"]
 
-[ext_resource type="Script" uid="uid://b05t1orawevxu" path="res://scripts/bosses/Golem/GolemController.gd" id="1_wpr87"]
+[ext_resource type="Script" uid="uid://b05t1orawevxu" path="res://scripts/bosses/GolemController.gd" id="1_wpr87"]
 [ext_resource type="Texture2D" uid="uid://bfj5an4fuidk0" path="res://assets/images/bosses/Corona/Sheets Corona/dead.png" id="2_u4npc"]
 [ext_resource type="Texture2D" uid="uid://c7vhl2qxcuc2m" path="res://assets/images/bosses/Corona/Sheets Corona/half_life.png" id="3_7q68a"]
 [ext_resource type="AudioStream" uid="uid://gxnydufebwm8" path="res://assets/sounds/enemies/SlimeDamaged.mp3" id="3_bko2c"]

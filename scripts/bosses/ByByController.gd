@@ -1,6 +1,7 @@
 extends BossManager
 
-@export var boss_type_override: String = "Golem"
+@export var boss_type_override: String = "ByBy"
+@onready var skill1sound: String = "res://assets/sounds/bosses/ByBy/TrainSteam.mp3"
 var levelroot = null
 
 func _ready():
@@ -20,8 +21,8 @@ func _skill_1() -> void:
 		return
 	
 	var params = skills[1]
-	var rock_count = params.get("rock_count", 4)
-	
+	var count = params.get("count", 4)
+
 	# Toca animação correspondente (skill_<id>)
 	var anim_name = "skill_1"
 	if animated_sprite.sprite_frames.has_animation(anim_name):
@@ -32,27 +33,31 @@ func _skill_1() -> void:
 		
 		# Aguarda o tempo exato da animação com Timer
 		await get_tree().create_timer(anim_length).timeout
+		AudioManager.tocar_sfx(position, skill1sound, {Pitch = 0.5})
+		animated_sprite.play("idle_down")
 	else:
 		push_warning("Animação ", anim_name, " não encontrada para o boss ", boss_type)
 		
 	if currentstate == States.SKILL_ACTIVE:
 		# 1. Criar previews das áreas de impacto
-		for i in range(rock_count):
-			rock_spawn(params)
+		for i in range(count):
+			explosion_spawn(params)
+			
+		await get_tree().create_timer(params.get("delay", 1.0)+0.4).timeout
+		AudioManager.tocar_sfx(position, skill1sound)
 
 func _on_damage_area_body_entered(body: Node, damage: int, kb: int, area: Area2D) -> void:
 	if body.is_in_group("player") and body.has_method("take_damage"):
 		body.take_damage(damage, area.position, kb)
 
-func rock_spawn(params) -> void:
-	var fall_delay = params.get("fall_delay", 1.0)
-	var rock_damage = params.get("rock_damage", 20)
-	var rock_knockback = params.get("rock_knockback", 300)
+func explosion_spawn(params) -> void:
+	var delay = params.get("delay", 1.0)
+	var damage = params.get("damage", 20)
+	var knockback = params.get("knockback", 300)
 	var impact_scale = params.get("impact_scale", 32.0)
 	
-	var preview_texture = preload("res://assets/images/bosses/Golem/rock_target.png")
-	var rock_texture = preload("res://assets/images/bosses/Golem/rock.png")
-	var impact_particles_scene = preload("res://scenes/bosses/Golem/rock_particle.tscn")
+	var preview_texture = preload("res://assets/images/bosses/circletarget.png")
+	var impact_particles_scene = preload("res://scenes/bosses/ByBy/explosion_particle.tscn")
 	
 	var square_size = params.get("square_size", 1408.0)
 	var half = square_size / 2.0
@@ -68,24 +73,9 @@ func rock_spawn(params) -> void:
 	preview.modulate = Color(1, 1, 1, 0.7)
 	levelroot.add_child(preview)
 	
-	await get_tree().create_timer(fall_delay).timeout
-	
-	# Queda da pedra
-	var rock = Sprite2D.new()
-	rock.texture = rock_texture
-	rock.scale = Vector2(impact_scale, impact_scale)
-	rock.global_position = target_pos + Vector2(0, -150)
-	rock.z_index = 1
-	levelroot.add_child(rock)
-
-	var tween = create_tween()
-	var rotacao = 3
-	tween.tween_property(rock, "global_position:y", target_pos.y, 0.4).set_ease(Tween.EASE_IN)
-	tween.parallel().tween_property(rock, "rotation", rotacao, 0.4).set_ease(Tween.EASE_IN)
-	
+	await get_tree().create_timer(delay).timeout
 	await get_tree().create_timer(0.4).timeout
-	
-	rock.queue_free()
+
 	preview.queue_free()
 	
 	# Partículas e área de dano
@@ -108,8 +98,8 @@ func rock_spawn(params) -> void:
 	damage_area.global_position = target_pos
 	
 	damage_area.body_entered.connect(_on_damage_area_body_entered.bind(
-		rock_damage,
-		rock_knockback,
+		damage,
+		knockback,
 		damage_area
 	))
 	

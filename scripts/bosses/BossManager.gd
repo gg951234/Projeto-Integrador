@@ -33,7 +33,9 @@ var skill_cancelled: bool = false   # <-- Flag para cancelar skill em andamento
 
 # Visuais
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var sight: Area2D = $Sight
 @onready var health_bar: Node2D = $HealthBar
+@onready var die_sound: AudioStreamPlayer2D = $DieSound
 @export var hit_sound: String = "res://assets/sounds/enemies/SlimeDamaged.mp3"
 
 # Controle de down
@@ -51,6 +53,8 @@ func _ready():
 	find_player()
 	setup_skill_trigger_timer()
 	_update_facing()
+	sight.body_entered.connect(_on_sight_body_entered)
+	sight.body_exited.connect(_on_sight_body_exited)
 
 func load_stats():
 	if boss_type.is_empty():
@@ -61,7 +65,6 @@ func load_stats():
 		push_error("BossManager: dados não encontrados para ", boss_type)
 		return
 	
-	speed = data["speed"]
 	health = data["health"]
 	max_health = health
 	skill_pattern = data["skill_pattern"]
@@ -95,23 +98,25 @@ func _update_facing():
 		find_player()
 	if player == null:
 		return
-	
+
+	# Se a diferença em X for pequena, prioriza a direção vertical
 	var delta = player.global_position - global_position
 	if abs(delta.x) <= horizontal_threshold:
-		#animated_sprite.flip_h = false
+		# Vertical
 		if delta.y > 0:
 			if animated_sprite.animation != "idle_down":
 				animated_sprite.play("idle_down")
 		else:
 			if animated_sprite.animation != "idle_up":
 				animated_sprite.play("idle_up")
+	else:
+		# Horizontal
 		if delta.x > 0:
-			#animated_sprite.flip_h = (delta.x < 0)
-			if animated_sprite.animation != "idle_left":
-				animated_sprite.play("idle_left")
-		else:
 			if animated_sprite.animation != "idle_right":
 				animated_sprite.play("idle_right")
+		else:
+			if animated_sprite.animation != "idle_left":
+				animated_sprite.play("idle_left")
 
 # ===== SKILLS =====
 func _on_sight_body_entered(body: Node2D) -> void:
@@ -165,7 +170,7 @@ func take_damage(damage: int, _attackedpos: Vector2, _kbforce: int) -> void:
 	health = clamp(health, 0, max_health)
 	health_bar.updateHealth(health)
 
-	AudioManager.tocar_sfx(position, hit_sound, {Volume = -20.0})
+	AudioManager.tocar_sfx(position, hit_sound)
 	var tween = create_tween()
 	tween.tween_property(animated_sprite, "self_modulate", Color.RED, 0.05)
 	tween.tween_property(animated_sprite, "self_modulate", Color.WHITE, 0.1)
@@ -204,7 +209,7 @@ func die() -> void:
 	isAlive = false
 	currentstate = States.SKILL_ACTIVE
 	animated_sprite.play("die")
-	AudioManager.tocar_sfx(position, hit_sound, {Volume = -10.0, Pitch = 0.7})
+	AudioManager.tocar_sfx(position, BossesData.get_stats(boss_type)["diesound"])
 	$CollisionShape2D.set_deferred("disabled", true)
 	skill_cooldown_timer.stop()
 	skill_trigger_timer.stop()

@@ -64,9 +64,6 @@ func _set_camera_to_area(left: float, top: float, right: float, bottom: float, d
 	camera.limit_right = int(right)
 	camera.limit_bottom = int(bottom)
 	
-	# Centraliza no centro da área
-	var center = Vector2((left + right) / 2.0, (top + bottom) / 2.0)
-	
 	# Calcula o zoom
 	var viewport_size = get_viewport().get_visible_rect().size
 	var area_width = right - left + padding * 2
@@ -85,10 +82,10 @@ func _set_camera_to_area(left: float, top: float, right: float, bottom: float, d
 	if duration > 0:
 		var tween = create_tween()
 		tween.set_parallel(true)
-		tween.tween_property(camera, "global_position", center, duration)
+		# tween.tween_property(camera, "global_position", center, duration)
 		tween.tween_property(camera, "zoom", Vector2(new_zoom, new_zoom), duration)
 	else:
-		camera.global_position = center
+		# camera.global_position = center
 		camera.zoom = Vector2(new_zoom, new_zoom)
 
 ## Define os limites imediatamente – conversão para int

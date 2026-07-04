@@ -69,6 +69,26 @@ func _ready() -> void:  # Executa quando o nó é criado
 	fechar.pressed.connect(_on_fechar_pressed)
 	help.pressed.connect(_on_help_pressed)
 
+	# --- NOVO: Conecta todos os botões ao som ---
+	_connect_all_buttons_to_sound()
+
+# --------------
+# SOM EM TODOS OS BOTÕES
+# --------------
+func _play_button_sound() -> void:
+	AudioManager.tocar_sfxglobal("res://assets/sounds/UI/ButtonPress.mp3")
+
+func _connect_all_buttons_to_sound() -> void:
+	_add_buttons_from_node(self)
+
+func _add_buttons_from_node(node: Node) -> void:
+	for child in node.get_children():
+		if child is Button:
+			# Conecta o sinal pressed à função de som (não remove outras conexões)
+			child.pressed.connect(_play_button_sound)
+		# Continua recursivamente
+		_add_buttons_from_node(child)
+
 # --------------
 # ANIMAÇÃO DE HOVER
 # --------------
@@ -124,6 +144,9 @@ func setup_levels_selection() -> void:
 		btn.mouse_entered.connect(_on_button_mouse_entered.bind(btn))
 		btn.mouse_exited.connect(_on_button_mouse_exited.bind(btn))
 		btn.pressed.connect(_on_level_pressed.bind(btn))
+
+		# --- NOVO: Conecta o som também nos botões criados dinamicamente ---
+		btn.pressed.connect(_play_button_sound)
 
 # --------------
 # MAIN MENU

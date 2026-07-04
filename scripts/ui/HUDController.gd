@@ -27,5 +27,14 @@ func _update_health(new_health) -> void:
 func _update_coins(currentamount) -> void:
 	coins_count.text = "Moedas: " + str(currentamount) + "/" + "5"
 
+func format_time_simple(seconds: int) -> String:
+	@warning_ignore("integer_division")
+	var minutes = seconds / 60
+	var secs = seconds % 60
+	return "%02d:%02d" % [minutes, secs]
+
+func _update_timer(currentamount) -> void:
+	timer.text = format_time_simple(currentamount)
+
 func _update_enemies_defeated(currentamount, maxamount) -> void:
 	enemies_defeated_count.text = "Inimigos Derrotados: " + str(currentamount) + "/" + str(maxamount)

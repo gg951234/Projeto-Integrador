@@ -45,7 +45,7 @@ func _ready() -> void:
 	hitbox_offset = sword_hitbox.position
 
 	currentweapon = "Sword"
-	currentchar = "Gold"   # <--- Altere aqui para testar diferentes skins: "Gold", "Frost", "Shadow"
+	currentchar = "Default"   # Altere aqui para testar diferentes skins: "Gold", "Frost", "Shadow"
 
 	# Aplica a skin baseada no currentchar ANTES de carregar as stats (opcional, mas visual)
 	apply_skin(currentchar)
@@ -197,12 +197,12 @@ func onDied() -> void:
 	$CollisionShape2D.set_deferred("disabled", true)
 	$SwordHitbox/CollisionShape2D.set_deferred("disabled", true)
 	await animated_sprite_2d.animation_finished
-	var death_screen = load("res://scenes/death_screen.tscn").instantiate()
+	var death_screen = load("res://scenes/UI/death_screen.tscn").instantiate()
 	get_tree().root.add_child(death_screen)
 
 func take_damage(damage: int, attackedpos: Vector2, kbforce: int) -> void:
 	health -= damage
-	print(health)
+
 	if health <= 0:
 		onDied()
 		emit_signal("died")

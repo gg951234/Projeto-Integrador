@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bd38fdb3c53cg"]
 
-[ext_resource type="Script" uid="uid://b05t1orawevxu" path="res://scripts/bosses/Golem/GolemController.gd" id="1_wpr87"]
+[ext_resource type="Script" uid="uid://b05t1orawevxu" path="res://scripts/bosses/GolemController.gd" id="1_wpr87"]
 [ext_resource type="Texture2D" uid="uid://clb571mp5rpkw" path="res://assets/images/bosses/Anubis/Sheets Anubis/dead.png" id="2_v0sh5"]
 [ext_resource type="AudioStream" uid="uid://gxnydufebwm8" path="res://assets/sounds/enemies/SlimeDamaged.mp3" id="3_bko2c"]
 [ext_resource type="Texture2D" uid="uid://0j2pblo4ig64" path="res://assets/images/bosses/Anubis/Sheets Anubis/half_life.png" id="3_usfer"]

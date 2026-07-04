@@ -3,6 +3,9 @@ extends CanvasLayer
 @onready var back: Button = $HBoxContainer/Back
 @onready var next: Button = $HBoxContainer/Next
 @onready var h_box_container: HBoxContainer = $HBoxContainer
+@onready var timer_label: Label = $TimerLabel
+@onready var score_label: Label = $ScoreLabel
+@onready var coins_label: Label = $CoinsLabel
 
 var hover_scale: Vector2 = Vector2(1.1, 1.1)
 var animation_duration: float = 0.2
@@ -25,6 +28,17 @@ func _ready():
 			button.mouse_entered.connect(_on_button_mouse_entered.bind(button))
 			button.mouse_exited.connect(_on_button_mouse_exited.bind(button))
 
+func format_time_simple(seconds: int) -> String:
+	@warning_ignore("integer_division")
+	var minutes = seconds / 60
+	var secs = seconds % 60
+	return "%02d:%02d" % [minutes, secs]
+
+func updatestats(timer: int, score: int, coins: int) -> void:
+	timer_label.text = format_time_simple(timer)
+	score_label.text = str(score)
+	coins_label.text = str(coins)
+
 # --------------
 # ANIMAÇÃO DE HOVER
 # --------------
@@ -42,6 +56,7 @@ func animate_scale(button: Button, target_scale: Vector2) -> void:
 	buttontween.finished.connect(buttontween.kill)
 
 func _on_next_pressed():
+	AudioManager.tocar_sfxglobal("res://assets/sounds/UI/ButtonPress.mp3")
 	if GameManager.check_level(GameManager.currentlevel+1): # Pega o número da fase e verifica se ela existe
 		GameManager.fade_in(1, func():
 			GameManager.load_level(GameManager.currentlevel+1) # Pega o número da fase e tenta carregar
@@ -50,6 +65,7 @@ func _on_next_pressed():
 		)
 
 func _on_back_pressed():
+	AudioManager.tocar_sfxglobal("res://assets/sounds/UI/ButtonPress.mp3")
 	GameManager.fade_in(0.5, func():
 		# Remove a fase atual (LevelRoot)
 		GameManager.delete_level()

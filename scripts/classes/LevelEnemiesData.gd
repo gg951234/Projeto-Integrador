@@ -7,6 +7,9 @@ var enemies = {
 	},
 	"Level2": {
 		"Slime": 2,
+	},
+	"Level3": {
+		"Slime": 3,
 	}
 }
 

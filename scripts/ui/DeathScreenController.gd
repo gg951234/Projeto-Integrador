@@ -5,6 +5,7 @@ func _ready():
 	$Buttons/Back.pressed.connect(_on_back_pressed)
 
 func _on_retry_pressed():
+	AudioManager.tocar_sfxglobal("res://assets/sounds/UI/ButtonPress.mp3")
 	GameManager.fade_in(0.5, func():
 		queue_free() # Remove a tela de morte
 		GameManager.load_level() # Recarrega a fase atual
@@ -12,6 +13,8 @@ func _on_retry_pressed():
 	)
 
 func _on_back_pressed():
+	AudioManager.tocar_sfxglobal("res://assets/sounds/UI/ButtonPress.mp3")
+	AudioManager.tocar_musica("res://assets/sounds/UI/Menu SoundTrack - Moment of Peace.mp3")
 	GameManager.fade_in(0.5, func():
 		# Remove a fase atual (LevelRoot)
 		GameManager.delete_level()

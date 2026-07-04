@@ -1,15 +1,16 @@
-[gd_scene format=3 uid="uid://c43j0r7ygbpsb"]
-
-[ext_resource type="Texture2D" uid="uid://cqpdoakt41dd7" path="res://assets/images/bosses/Golem/smoke_particle.png" id="1_35aaa"]
+[gd_scene format=3 uid="uid://drfcv2vmtidf3"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_p2d0s"]
 particles_animation = true
-particles_anim_h_frames = 8
+particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lyv25"]
+load_path = "res://.godot/imported/attack.png-f4ac9fcefa95a03de134c22215051340.ctex"
+
 [sub_resource type="Curve" id="Curve_872ht"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.30337083), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_p2d0s"]
@@ -29,12 +30,12 @@ angular_velocity_max = 479.99997
 scale_min = 3.0
 scale_max = 7.0
 scale_curve = SubResource("CurveTexture_p2d0s")
-color = Color(0.8535942, 0.77613974, 0.6676808, 1)
 
 [node name="GPUParticles2D" type="GPUParticles2D" unique_id=1709007374]
 material = SubResource("CanvasItemMaterial_p2d0s")
 emitting = false
-texture = ExtResource("1_35aaa")
+amount = 16
+texture = SubResource("CompressedTexture2D_lyv25")
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_vqvgd")

@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://c863a26p162xb"]
 
-[ext_resource type="Script" uid="uid://b05t1orawevxu" path="res://scripts/bosses/Golem/GolemController.gd" id="1_wpr87"]
-[ext_resource type="Texture2D" uid="uid://vqjeawrrdqiu" path="res://assets/images/bosses/Golem/Golem Sprites/die.png" id="2_bko2c"]
-[ext_resource type="AudioStream" uid="uid://gxnydufebwm8" path="res://assets/sounds/enemies/SlimeDamaged.mp3" id="3_bko2c"]
-[ext_resource type="Texture2D" uid="uid://bs5xm33mytb2t" path="res://assets/images/bosses/Golem/Golem Sprites/idle_down.png" id="3_ymcdy"]
+[ext_resource type="Script" uid="uid://b05t1orawevxu" path="res://scripts/bosses/GolemController.gd" id="1_wpr87"]
+[ext_resource type="Texture2D" uid="uid://vqjeawrrdqiu" path="res://assets/images/bosses/Golem/Sheets Golem/die.png" id="2_bko2c"]
+[ext_resource type="Texture2D" uid="uid://bs5xm33mytb2t" path="res://assets/images/bosses/Golem/Sheets Golem/idle_down.png" id="3_ymcdy"]
 [ext_resource type="PackedScene" uid="uid://ccmhhb48eeshy" path="res://scenes/UI/health_bar.tscn" id="4_u0guc"]
-[ext_resource type="Texture2D" uid="uid://c0dt6x0uldyhe" path="res://assets/images/bosses/Golem/Golem Sprites/idle_up.png" id="4_ymcdy"]
-[ext_resource type="Texture2D" uid="uid://chrts0ykd4jwo" path="res://assets/images/bosses/Golem/Golem Sprites/skill_1.png" id="5_co1n5"]
+[ext_resource type="Texture2D" uid="uid://c0dt6x0uldyhe" path="res://assets/images/bosses/Golem/Sheets Golem/idle_up.png" id="4_ymcdy"]
+[ext_resource type="Texture2D" uid="uid://chrts0ykd4jwo" path="res://assets/images/bosses/Golem/Sheets Golem/skill_1.png" id="5_co1n5"]
+[ext_resource type="AudioStream" uid="uid://ds5s4a8tttbvo" path="res://assets/sounds/bosses/Golem/GolemDie.mp3" id="7_ymcdy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rk64f"]
 atlas = ExtResource("2_bko2c")
@@ -175,7 +175,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle_left",
-"speed": 10.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -248,11 +248,12 @@ script = ExtResource("1_wpr87")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=29716560]
 scale = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_24adn")
-animation = &"skill_1"
+animation = &"idle_down"
 autoplay = "idle_down"
+offset = Vector2(0, -16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=861251288]
-position = Vector2(1, 6.5)
+position = Vector2(1, -89)
 scale = Vector2(4, 4)
 shape = SubResource("RectangleShape2D_371uh")
 
@@ -264,14 +265,9 @@ collision_mask = 2
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_co1n5")
 
-[node name="HitSound" type="AudioStreamPlayer2D" parent="." unique_id=1610741949]
-y_sort_enabled = true
-stream = ExtResource("3_bko2c")
-volume_db = -10.0
-
 [node name="HealthBar" parent="." unique_id=332343199 instance=ExtResource("4_u0guc")]
-position = Vector2(-72, 103.00003)
+position = Vector2(-72, 16.000015)
 scale = Vector2(3.5, 3.5)
 
-[connection signal="body_entered" from="Sight" to="." method="_on_sight_body_entered"]
-[connection signal="body_exited" from="Sight" to="." method="_on_sight_body_exited"]
+[node name="DieSound" type="AudioStreamPlayer2D" parent="." unique_id=1814270622]
+stream = ExtResource("7_ymcdy")
