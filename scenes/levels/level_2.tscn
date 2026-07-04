@@ -93,7 +93,7 @@ tile_map_data = PackedByteArray("AAABAAUAAQAAAAEAABAAAAUAAQABAAEAAAAAAAQAAQABAAE
 tile_set = SubResource("TileSet_gmpev")
 
 [node name="Player" parent="." unique_id=1259653975 instance=ExtResource("2_qpwj6")]
-position = Vector2(1091, 1106)
+position = Vector2(186, 159)
 
 [node name="ByBy" parent="." unique_id=1469553198 instance=ExtResource("6_qpwj6")]
 position = Vector2(1088, 1795)

@@ -129,6 +129,7 @@ func delete_level() -> bool:
 	if currentlevelroot:
 		currentlevelroot.queue_free()
 		currentcoins = 0
+		currentscore = 0
 		enemies_remaining = 0
 		return 1
 	return 0
@@ -188,6 +189,12 @@ func load_level(levelnumber: int = 0) -> bool:
 		print("Falha ao carregar a fase " + str(levelnumber))
 		return false
 
+# Identificador da fase usado no Firestore ("fase_01", "fase_02", ...)
+func fase_id(numero: int = 0) -> String:
+	if numero <= 0:
+		numero = currentlevel
+	return "fase_%02d" % numero
+
 func level_completed() -> bool:
 	# Para o timer quando a fase é completada
 	timer.stop()
@@ -196,7 +203,12 @@ func level_completed() -> bool:
 	# Esperar para ver a animação do boss sendo derrotado
 	await get_tree().create_timer(2).timeout
 	
-	# IMPLEMENTAR O ENVIO DE DADOS PARA O BANCO DE DADOS
+	# Enviar para o banco de dados
+	var fid := fase_id(currentlevel)
+	
+	var eh_novo_recorde: bool = PlayerData.registrar_fim_de_fase(fid, currentcoins, currenttimer, currentscore)
+	if eh_novo_recorde:
+		FirebaseManager.enviar_ranking_da_fase(fid, currentscore, currenttimer)
 	
 	unlocknextlevel()
 	hud_reference.hide()
@@ -263,6 +275,10 @@ func add_coins() -> void:
 	currentcoins += 1
 	hud_reference._update_coins(currentcoins)
 
+func add_score(amount: int) -> void:
+	currentscore += amount
+	print("Score: ", currentscore)
+
 # --------------
 # CONTAGEM DE INIMIGOS E PORTA
 # --------------
@@ -290,6 +306,8 @@ func _on_enemy_died() -> void:
 	hud_reference._update_enemies_defeated(enemies_max-enemies_remaining, enemies_max)
 	if enemies_remaining <= 0:
 		if door_node:
+			CameraManager.shake(1.8, 3.0)
+			AudioManager.tocar_sfxglobal("res://assets/sounds/levels/BossRoomDoor.mp3", {Pitch = 0.5})
 			door_node.queue_free()
 			door_node = null
 

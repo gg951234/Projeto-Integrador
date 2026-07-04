@@ -3,7 +3,7 @@ extends Node
 # Tabela de inimigos por nível com quantidades
 var enemies = {
 	"Level1": {
-		"Slime": 5, # 5 slimes
+		"Slime": 1,
 	},
 	"Level2": {
 		"Slime": 2,

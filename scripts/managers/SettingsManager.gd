@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 # --- Configurações ---
-const SETTINGS_PATH := "user://settings.json"
+const SETTINGS_PATH := "res://data/settings_default.json"
 @onready var main_menu_canvas: CanvasLayer = $"../MainMenuCanvas"
 
 var volumesfx: float = 1.0

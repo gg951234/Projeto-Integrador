@@ -81,6 +81,7 @@ func onDied() -> void:
 	animated_sprite_2d.play("die")
 	
 	AudioManager.tocar_sfx(position, hit_sound, {Pitch = 0.7})
+	GameManager.add_score(10)
 	
 	$CollisionShape2D.set_deferred("disabled", true)
 	$Sight/CollisionShape2D.set_deferred("disabled", true)

@@ -788,11 +788,80 @@ shadow_color = Color(0, 0, 0, 1)
 shadow_size = 1
 shadow_offset = Vector2(3, 3)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f1p13"]
+bg_color = Color(0.07771615, 0.086844094, 0.1005361, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.1882353, 0.19215687, 0.21176471, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.023529412, 0.03137255, 0.050980393, 1)
+shadow_size = 27
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4obbf"]
+bg_color = Color(0.07058824, 0.09019608, 0.11764706, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.1882353, 0.19215687, 0.21176471, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.023529412, 0.03137255, 0.050980393, 1)
+shadow_size = 3
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uatky"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rqtf5"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ovcoh"]
+bg_color = Color(0.5137255, 0.13725491, 0.11372549, 1)
+border_width_bottom = 5
+border_color = Color(0.19607843, 0.050980393, 0.047058824, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.61958, 0.22520325, 0.19113013, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ppx11"]
+bg_color = Color(0.34456396, 0.10787804, 0.08792985, 1)
+border_width_bottom = 5
+border_color = Color(0.17708734, 0.042941332, 0.03931019, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.47804278, 0.16199824, 0.13748124, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1yv1y"]
+bg_color = Color(0.55410486, 0.19592047, 0.16530827, 1)
+border_width_bottom = 5
+border_color = Color(0.28742632, 0.08976988, 0.08438449, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.7602159, 0.2957347, 0.25673094, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wu3dr"]
 bg_color = Color(0.14117648, 0.15294118, 0.16862746, 1)
@@ -872,6 +941,45 @@ shadow_color = Color(0.28389335, 0.4756565, 0.13096693, 1)
 shadow_size = 1
 shadow_offset = Vector2(0, -2)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5yh34"]
+bg_color = Color(0.24705882, 0.15686275, 0.37254903, 1)
+border_width_bottom = 5
+border_color = Color(0.12941177, 0.08235294, 0.23921569, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.3882353, 0.20784314, 0.56078434, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yysqy"]
+bg_color = Color(0.20078993, 0.1239695, 0.30744424, 1)
+border_width_bottom = 5
+border_color = Color(0.10300196, 0.06261257, 0.19716507, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.30675822, 0.15671685, 0.44920683, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n5t1e"]
+bg_color = Color(0.3330772, 0.21941173, 0.49233758, 1)
+border_width_bottom = 5
+border_color = Color(0.15709743, 0.103954025, 0.28447655, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.50264585, 0.2906714, 0.7107226, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0cp0l"]
 bg_color = Color(0.039215688, 0.050980393, 0.06666667, 1)
 border_width_left = 200
@@ -880,6 +988,45 @@ border_width_right = 200
 border_width_bottom = 200
 border_color = Color(0.014659039, 0.019448105, 0.027101196, 1)
 border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pjuso"]
+bg_color = Color(0.14117648, 0.15294118, 0.16862746, 1)
+border_width_bottom = 3
+border_color = Color(0.10398757, 0.11155973, 0.12670413, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.2518868, 0.2555316, 0.26646787, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_23xmf"]
+bg_color = Color(0.10041275, 0.109790824, 0.12229461, 1)
+border_width_bottom = 3
+border_color = Color(0.072584815, 0.082180806, 0.09177645, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.18543503, 0.18543416, 0.19119146, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_swlj1"]
+bg_color = Color(0.19506925, 0.21521798, 0.23536971, 1)
+border_width_bottom = 3
+border_color = Color(0.13452473, 0.13923976, 0.16280726, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.34988332, 0.3543434, 0.3632636, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uit24"]
 bg_color = Color(0.14117648, 0.15294118, 0.16862746, 1)
@@ -1082,6 +1229,54 @@ shadow_color = Color(0.28389335, 0.4756565, 0.13096693, 1)
 shadow_size = 1
 shadow_offset = Vector2(0, -2)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wy5fy"]
+bg_color = Color(0.039215688, 0.050980393, 0.06666667, 1)
+border_width_left = 200
+border_width_top = 200
+border_width_right = 200
+border_width_bottom = 200
+border_color = Color(0.014659039, 0.019448105, 0.027101196, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gx4rg"]
+bg_color = Color(0.14117648, 0.15294118, 0.16862746, 1)
+border_width_bottom = 3
+border_color = Color(0.10398757, 0.11155973, 0.12670413, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.2518868, 0.2555316, 0.26646787, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5dllo"]
+bg_color = Color(0.10041275, 0.109790824, 0.12229461, 1)
+border_width_bottom = 3
+border_color = Color(0.072584815, 0.082180806, 0.09177645, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.18543503, 0.18543416, 0.19119146, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_phcyf"]
+bg_color = Color(0.19506925, 0.21521798, 0.23536971, 1)
+border_width_bottom = 3
+border_color = Color(0.13452473, 0.13923976, 0.16280726, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.34988332, 0.3543434, 0.3632636, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_abqjc"]
 bg_color = Color(0.07771615, 0.086844094, 0.1005361, 1)
 border_width_left = 4
@@ -1094,6 +1289,22 @@ corner_radius_top_left = 8
 corner_radius_bottom_left = 8
 corner_detail = 1
 shadow_color = Color(0.1882353, 0.19215687, 0.21176471, 1)
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_birbe"]
+bg_color = Color(0.07058824, 0.09019608, 0.11764706, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.1882353, 0.19215687, 0.21176471, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.023529412, 0.03137255, 0.050980393, 1)
 shadow_size = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6iyjs"]
@@ -1109,6 +1320,126 @@ corner_radius_bottom_right = 8
 corner_detail = 1
 shadow_color = Color(0.1882353, 0.19215687, 0.21176471, 1)
 shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ok6jj"]
+bg_color = Color(0.039215688, 0.050980393, 0.06666667, 1)
+border_width_left = 200
+border_width_top = 200
+border_width_right = 200
+border_width_bottom = 200
+border_color = Color(0.014659039, 0.019448105, 0.027101196, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_facbu"]
+bg_color = Color(0.07771615, 0.086844094, 0.1005361, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.1882353, 0.19215687, 0.21176471, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.023529412, 0.03137255, 0.050980393, 1)
+shadow_size = 27
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b1qrp"]
+bg_color = Color(0.07058824, 0.09019608, 0.11764706, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.1882353, 0.19215687, 0.21176471, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.023529412, 0.03137255, 0.050980393, 1)
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_come4"]
+bg_color = Color(0.14117648, 0.15294118, 0.16862746, 1)
+border_width_bottom = 3
+border_color = Color(0.10398757, 0.11155973, 0.12670413, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.2518868, 0.2555316, 0.26646787, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h8e4i"]
+bg_color = Color(0.10041275, 0.109790824, 0.12229461, 1)
+border_width_bottom = 3
+border_color = Color(0.072584815, 0.082180806, 0.09177645, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.18543503, 0.18543416, 0.19119146, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qnost"]
+bg_color = Color(0.19506925, 0.21521798, 0.23536971, 1)
+border_width_bottom = 3
+border_color = Color(0.13452473, 0.13923976, 0.16280726, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.34988332, 0.3543434, 0.3632636, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wnkbs"]
+bg_color = Color(0.19239807, 0.3346806, 0.08387112, 1)
+border_width_bottom = 3
+border_color = Color(0.10028914, 0.19048461, 0.032176755, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.24964103, 0.42441636, 0.11326853, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f6a44"]
+bg_color = Color(0.14776033, 0.2633192, 0.058027156, 1)
+border_width_bottom = 3
+border_color = Color(0.07841011, 0.15502739, 0.02128171, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.20312697, 0.34815958, 0.08806934, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0cbny"]
+bg_color = Color(0.23357707, 0.39890018, 0.104715414, 1)
+border_width_bottom = 3
+border_color = Color(0.1368593, 0.24723727, 0.049771897, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+shadow_color = Color(0.28389335, 0.4756565, 0.13096693, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, -2)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_thr3o"]
 
@@ -1500,10 +1831,10 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_vivmo")
 icon = ExtResource("18_0odxb")
 icon_alignment = 1
 
-[node name="LevelSelectionCanvas" type="CanvasLayer" parent="UI" unique_id=2055950245]
+[node name="LevelSelectionCanvas" type="CanvasLayer" parent="UI" unique_id=865847581]
 visible = false
 
-[node name="BackgroundTexture" type="TextureRect" parent="UI/LevelSelectionCanvas" unique_id=888582346]
+[node name="BackgroundTexture" type="TextureRect" parent="UI/LevelSelectionCanvas" unique_id=486995628]
 modulate = Color(1, 1, 1, 0.8666667)
 anchors_preset = 15
 anchor_right = 1.0
@@ -1513,7 +1844,7 @@ grow_vertical = 2
 texture = ExtResource("5_5vw27")
 expand_mode = 1
 
-[node name="TextureRect" type="TextureRect" parent="UI/LevelSelectionCanvas" unique_id=1774096239]
+[node name="TextureRect" type="TextureRect" parent="UI/LevelSelectionCanvas" unique_id=241986746]
 modulate = Color(0, 0, 0, 0.5647059)
 anchors_preset = 15
 anchor_right = 1.0
@@ -1523,7 +1854,7 @@ grow_vertical = 2
 texture = SubResource("CanvasTexture_4c57u")
 expand_mode = 1
 
-[node name="TextureRect2" type="TextureRect" parent="UI/LevelSelectionCanvas" unique_id=1878999594]
+[node name="TextureRect2" type="TextureRect" parent="UI/LevelSelectionCanvas" unique_id=1424815039]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -1534,7 +1865,7 @@ grow_horizontal = 2
 texture = ExtResource("8_dg77c")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="UI/LevelSelectionCanvas/TextureRect2" unique_id=1952896159]
+[node name="Label" type="Label" parent="UI/LevelSelectionCanvas/TextureRect2" unique_id=417967347]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -1550,7 +1881,7 @@ theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 40
 text = "FASES"
 
-[node name="Back" type="Button" parent="UI/LevelSelectionCanvas" unique_id=536956405]
+[node name="Back" type="Button" parent="UI/LevelSelectionCanvas" unique_id=1926083524]
 auto_translate_mode = 1
 offset_left = 25.0
 offset_top = 25.0
@@ -1565,7 +1896,7 @@ action_mode = 0
 icon = ExtResource("8_efxa6")
 icon_alignment = 1
 
-[node name="Loja" type="Button" parent="UI/LevelSelectionCanvas" unique_id=1053149348]
+[node name="Loja" type="Button" parent="UI/LevelSelectionCanvas" unique_id=268657256]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -1587,7 +1918,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_qsp4k")
 theme_override_styles/hover = SubResource("StyleBoxFlat_kq58d")
 text = "LOJA"
 
-[node name="Profile" type="Button" parent="UI/LevelSelectionCanvas" unique_id=114968059]
+[node name="Profile" type="Button" parent="UI/LevelSelectionCanvas" unique_id=1375355834]
 auto_translate_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1609,7 +1940,7 @@ action_mode = 0
 icon = ExtResource("10_ycdy4")
 icon_alignment = 1
 
-[node name="Buttons" type="CenterContainer" parent="UI/LevelSelectionCanvas" unique_id=780261192]
+[node name="Buttons" type="CenterContainer" parent="UI/LevelSelectionCanvas" unique_id=1505358752]
 custom_minimum_size = Vector2(120, 120)
 anchors_preset = 8
 anchor_left = 0.5
@@ -1625,13 +1956,13 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="GridContainer" type="GridContainer" parent="UI/LevelSelectionCanvas/Buttons" unique_id=1985207922]
+[node name="GridContainer" type="GridContainer" parent="UI/LevelSelectionCanvas/Buttons" unique_id=344555793]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 columns = 5
 
-[node name="Level" type="Button" parent="UI/LevelSelectionCanvas/Buttons/GridContainer" unique_id=1171180564]
+[node name="Level" type="Button" parent="UI/LevelSelectionCanvas/Buttons/GridContainer" unique_id=775563741]
 auto_translate_mode = 1
 visible = false
 custom_minimum_size = Vector2(115, 120)
@@ -1654,7 +1985,7 @@ text = "1"
 icon_alignment = 1
 vertical_icon_alignment = 2
 
-[node name="Ranking" type="Button" parent="UI/LevelSelectionCanvas" unique_id=1917760781]
+[node name="Ranking" type="Button" parent="UI/LevelSelectionCanvas" unique_id=350910076]
 auto_translate_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1675,7 +2006,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_1u8w0")
 action_mode = 0
 icon_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="UI/LevelSelectionCanvas/Ranking" unique_id=1705189130]
+[node name="TextureRect" type="TextureRect" parent="UI/LevelSelectionCanvas/Ranking" unique_id=2040102016]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1691,7 +2022,7 @@ grow_vertical = 2
 texture = ExtResource("25_0rl1p")
 expand_mode = 1
 
-[node name="Perfil" type="Panel" parent="UI/LevelSelectionCanvas" unique_id=710262694]
+[node name="Perfil" type="Panel" parent="UI/LevelSelectionCanvas" unique_id=1776341505]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -1704,9 +2035,9 @@ offset_right = 295.0
 offset_bottom = 268.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_htxhm")
+theme_override_styles/panel = SubResource("StyleBoxFlat_f1p13")
 
-[node name="Panel" type="Panel" parent="UI/LevelSelectionCanvas/Perfil" unique_id=369874437]
+[node name="Panel" type="Panel" parent="UI/LevelSelectionCanvas/Perfil" unique_id=745271210]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -1716,9 +2047,9 @@ offset_top = 106.0
 offset_right = -97.0
 offset_bottom = 347.0
 grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_4k2k6")
+theme_override_styles/panel = SubResource("StyleBoxFlat_4obbf")
 
-[node name="Padrao" type="TextureRect" parent="UI/LevelSelectionCanvas/Perfil/Panel" unique_id=609312168]
+[node name="Padrao" type="TextureRect" parent="UI/LevelSelectionCanvas/Perfil/Panel" unique_id=665868150]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1730,7 +2061,7 @@ grow_vertical = 2
 texture = ExtResource("33_facbu")
 expand_mode = 1
 
-[node name="Informacoes" type="Panel" parent="UI/LevelSelectionCanvas/Perfil" unique_id=1224587930]
+[node name="Informacoes" type="Panel" parent="UI/LevelSelectionCanvas/Perfil" unique_id=469137857]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -1740,9 +2071,9 @@ offset_top = 106.0
 offset_right = 285.0
 offset_bottom = 531.0
 grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_4k2k6")
+theme_override_styles/panel = SubResource("StyleBoxFlat_4obbf")
 
-[node name="LabelUserName" type="LineEdit" parent="UI/LevelSelectionCanvas/Perfil/Informacoes" unique_id=595892698]
+[node name="LabelUserName" type="LineEdit" parent="UI/LevelSelectionCanvas/Perfil/Informacoes" unique_id=1312929665]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -1760,7 +2091,7 @@ theme_override_font_sizes/font_size = 23
 theme_override_styles/normal = SubResource("StyleBoxFlat_uatky")
 text = "username"
 
-[node name="LabelEmail" type="Label" parent="UI/LevelSelectionCanvas/Perfil/Informacoes" unique_id=166613881]
+[node name="LabelEmail" type="Label" parent="UI/LevelSelectionCanvas/Perfil/Informacoes" unique_id=1976162011]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -1777,7 +2108,7 @@ theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 23
 text = "email"
 
-[node name="LabelDataCriacao" type="Label" parent="UI/LevelSelectionCanvas/Perfil/Informacoes" unique_id=564681446]
+[node name="LabelDataCriacao" type="Label" parent="UI/LevelSelectionCanvas/Perfil/Informacoes" unique_id=933583506]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -1794,33 +2125,15 @@ theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 23
 text = "00/00/0000"
 
-[node name="LabelBio" type="LineEdit" parent="UI/LevelSelectionCanvas/Perfil/Informacoes" unique_id=219165919]
+[node name="LabelPais" type="Label" parent="UI/LevelSelectionCanvas/Perfil/Informacoes" unique_id=809384036]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 21.0
 offset_top = 39.5
-offset_right = 353.0
-offset_bottom = 68.5
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.87058824, 0.6509804, 0.07058824, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 23
-theme_override_styles/normal = SubResource("StyleBoxFlat_rqtf5")
-text = "bio"
-
-[node name="LabelPais" type="Label" parent="UI/LevelSelectionCanvas/Perfil/Informacoes" unique_id=1350455792]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 21.0
-offset_top = 111.5
 offset_right = 129.0
-offset_bottom = 136.5
+offset_bottom = 64.5
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.87058824, 0.6509804, 0.07058824, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -1829,15 +2142,15 @@ theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 23
 text = "país"
 
-[node name="LabelDataNascimento" type="Label" parent="UI/LevelSelectionCanvas/Perfil/Informacoes" unique_id=214038139]
+[node name="LabelDataNascimento" type="Label" parent="UI/LevelSelectionCanvas/Perfil/Informacoes" unique_id=1602630148]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 21.0
-offset_top = 177.5
+offset_top = 105.5
 offset_right = 156.0
-offset_bottom = 202.5
+offset_bottom = 130.5
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.87058824, 0.6509804, 0.07058824, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -1846,7 +2159,7 @@ theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 23
 text = "00/00/0000"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/LevelSelectionCanvas/Perfil" unique_id=1481998503]
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/LevelSelectionCanvas/Perfil" unique_id=1282936722]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1875,9 +2188,6 @@ E-MAIL:
 DATA DE CRIAÇÃO DA CONTA:
 
 
-BIO:
-
-
 PAÍS:
 
 
@@ -1886,7 +2196,7 @@ DATA DE NASCIMENTO:
 "
 fit_content = true
 
-[node name="TextureRect2" type="TextureRect" parent="UI/LevelSelectionCanvas/Perfil" unique_id=1980971998]
+[node name="TextureRect2" type="TextureRect" parent="UI/LevelSelectionCanvas/Perfil" unique_id=300417884]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -1899,7 +2209,7 @@ grow_horizontal = 2
 texture = ExtResource("8_dg77c")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="UI/LevelSelectionCanvas/Perfil" unique_id=1054418012]
+[node name="Label" type="Label" parent="UI/LevelSelectionCanvas/Perfil" unique_id=1870319800]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -1914,7 +2224,7 @@ theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 25
 text = "PERFIL"
 
-[node name="FecharPerfil" type="Button" parent="UI/LevelSelectionCanvas/Perfil" unique_id=891462149]
+[node name="FecharPerfil" type="Button" parent="UI/LevelSelectionCanvas/Perfil" unique_id=347793963]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -1924,13 +2234,13 @@ offset_top = 13.0
 offset_right = -12.0
 offset_bottom = 55.0
 grow_horizontal = 0
-theme_override_styles/normal = SubResource("StyleBoxFlat_hrvbo")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_w48qg")
-theme_override_styles/hover = SubResource("StyleBoxFlat_vivmo")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ovcoh")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ppx11")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1yv1y")
 icon = ExtResource("18_0odxb")
 icon_alignment = 1
 
-[node name="Senha" type="Button" parent="UI/LevelSelectionCanvas/Perfil" unique_id=1073616589]
+[node name="Senha" type="Button" parent="UI/LevelSelectionCanvas/Perfil" unique_id=965717633]
 auto_translate_mode = 1
 layout_mode = 1
 anchors_preset = 8
@@ -1957,7 +2267,34 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_0dhbp")
 action_mode = 0
 text = "ALTERAR SENHA"
 
-[node name="AlterarSenha" type="Panel" parent="UI/LevelSelectionCanvas/Perfil" unique_id=1605584937]
+[node name="Sair" type="Button" parent="UI/LevelSelectionCanvas/Perfil" unique_id=947451120]
+auto_translate_mode = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -284.5
+offset_top = 156.0
+offset_right = -99.0
+offset_bottom = 206.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 7
+size_flags_vertical = 7
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 19
+theme_override_styles/normal = SubResource("StyleBoxFlat_wu3dr")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cyx1q")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0dhbp")
+action_mode = 0
+text = "SAIR"
+
+[node name="AlterarSenha" type="Panel" parent="UI/LevelSelectionCanvas/Perfil" unique_id=1873026439]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -1971,9 +2308,9 @@ offset_right = 255.5
 offset_bottom = 161.25
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_htxhm")
+theme_override_styles/panel = SubResource("StyleBoxFlat_f1p13")
 
-[node name="Informacoes" type="Panel" parent="UI/LevelSelectionCanvas/Perfil/AlterarSenha" unique_id=129894104]
+[node name="Informacoes" type="Panel" parent="UI/LevelSelectionCanvas/Perfil/AlterarSenha" unique_id=1743317723]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -1983,9 +2320,9 @@ offset_top = 67.0
 offset_right = 243.5
 offset_bottom = 217.0
 grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_4k2k6")
+theme_override_styles/panel = SubResource("StyleBoxFlat_4obbf")
 
-[node name="NovaSenha" type="LineEdit" parent="UI/LevelSelectionCanvas/Perfil/AlterarSenha/Informacoes" unique_id=1082419055]
+[node name="NovaSenha" type="LineEdit" parent="UI/LevelSelectionCanvas/Perfil/AlterarSenha/Informacoes" unique_id=174304410]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -2000,8 +2337,9 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 23
+secret = true
 
-[node name="LabelSenha" type="Label" parent="UI/LevelSelectionCanvas/Perfil/AlterarSenha" unique_id=392312794]
+[node name="LabelSenha" type="Label" parent="UI/LevelSelectionCanvas/Perfil/AlterarSenha" unique_id=554384160]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2021,7 +2359,7 @@ text = "DIGITE A NOVA SENHA:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="FecharSenha" type="Button" parent="UI/LevelSelectionCanvas/Perfil/AlterarSenha" unique_id=1545940905]
+[node name="FecharSenha" type="Button" parent="UI/LevelSelectionCanvas/Perfil/AlterarSenha" unique_id=1654238913]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -2031,13 +2369,13 @@ offset_top = 13.0
 offset_right = -12.0
 offset_bottom = 55.0
 grow_horizontal = 0
-theme_override_styles/normal = SubResource("StyleBoxFlat_hrvbo")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_w48qg")
-theme_override_styles/hover = SubResource("StyleBoxFlat_vivmo")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ovcoh")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ppx11")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1yv1y")
 icon = ExtResource("18_0odxb")
 icon_alignment = 1
 
-[node name="Confirmar" type="Button" parent="UI/LevelSelectionCanvas/Perfil/AlterarSenha" unique_id=1803465540]
+[node name="Confirmar" type="Button" parent="UI/LevelSelectionCanvas/Perfil/AlterarSenha" unique_id=1956062674]
 auto_translate_mode = 1
 layout_mode = 1
 anchors_preset = 7
@@ -2063,7 +2401,24 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_kkkcx")
 action_mode = 0
 text = "CONFIRMAR"
 
-[node name="Login" type="Panel" parent="UI/LevelSelectionCanvas" unique_id=301168815]
+[node name="StatusLabel" type="Label" parent="UI/LevelSelectionCanvas/Perfil/AlterarSenha" unique_id=477334226]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -230.0
+offset_top = 219.0
+offset_right = 230.0
+offset_bottom = 240.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.4, 0.4, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 15
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Login" type="Panel" parent="UI/LevelSelectionCanvas" unique_id=725916777]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -2076,9 +2431,9 @@ offset_right = 255.5
 offset_bottom = 242.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_htxhm")
+theme_override_styles/panel = SubResource("StyleBoxFlat_f1p13")
 
-[node name="Informacoes" type="Panel" parent="UI/LevelSelectionCanvas/Login" unique_id=864550814]
+[node name="Informacoes" type="Panel" parent="UI/LevelSelectionCanvas/Login" unique_id=1455233484]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -2088,9 +2443,9 @@ offset_top = 100.0
 offset_right = 243.5
 offset_bottom = 368.5
 grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_4k2k6")
+theme_override_styles/panel = SubResource("StyleBoxFlat_4obbf")
 
-[node name="LabelEmail" type="LineEdit" parent="UI/LevelSelectionCanvas/Login/Informacoes" unique_id=1028922066]
+[node name="LabelEmail" type="LineEdit" parent="UI/LevelSelectionCanvas/Login/Informacoes" unique_id=328915065]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -2106,7 +2461,7 @@ theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 23
 
-[node name="LabelSenha" type="LineEdit" parent="UI/LevelSelectionCanvas/Login/Informacoes" unique_id=172793331]
+[node name="LabelSenha" type="LineEdit" parent="UI/LevelSelectionCanvas/Login/Informacoes" unique_id=1817127718]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -2121,8 +2476,9 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 23
+secret = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/LevelSelectionCanvas/Login" unique_id=876289284]
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/LevelSelectionCanvas/Login" unique_id=1266698459]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2153,7 +2509,7 @@ SENHA:
 "
 fit_content = true
 
-[node name="Label" type="Label" parent="UI/LevelSelectionCanvas/Login" unique_id=1590144953]
+[node name="Label" type="Label" parent="UI/LevelSelectionCanvas/Login" unique_id=1126403315]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -2168,7 +2524,7 @@ theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 33
 text = "LOGIN"
 
-[node name="BtnTelaCadastro" type="Button" parent="UI/LevelSelectionCanvas/Login" unique_id=1431952740]
+[node name="BtnTelaCadastro" type="Button" parent="UI/LevelSelectionCanvas/Login" unique_id=1473261670]
 auto_translate_mode = 1
 layout_mode = 1
 anchors_preset = 7
@@ -2188,13 +2544,13 @@ theme_override_colors/font_outline_color = Color(0.09803922, 0.05490196, 0.20784
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = SubResource("StyleBoxFlat_272bh")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_5vw27")
-theme_override_styles/hover = SubResource("StyleBoxFlat_kek77")
+theme_override_styles/normal = SubResource("StyleBoxFlat_5yh34")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yysqy")
+theme_override_styles/hover = SubResource("StyleBoxFlat_n5t1e")
 action_mode = 0
 text = "CADASTRE-SE"
 
-[node name="FecharLogin" type="Button" parent="UI/LevelSelectionCanvas/Login" unique_id=1601417465]
+[node name="FecharLogin" type="Button" parent="UI/LevelSelectionCanvas/Login" unique_id=162157863]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -2204,13 +2560,13 @@ offset_top = 13.0
 offset_right = -12.0
 offset_bottom = 55.0
 grow_horizontal = 0
-theme_override_styles/normal = SubResource("StyleBoxFlat_hrvbo")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_w48qg")
-theme_override_styles/hover = SubResource("StyleBoxFlat_vivmo")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ovcoh")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ppx11")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1yv1y")
 icon = ExtResource("18_0odxb")
 icon_alignment = 1
 
-[node name="Entrar" type="Button" parent="UI/LevelSelectionCanvas/Login" unique_id=1282124911]
+[node name="Entrar" type="Button" parent="UI/LevelSelectionCanvas/Login" unique_id=1144769805]
 auto_translate_mode = 1
 layout_mode = 1
 anchors_preset = 7
@@ -2235,6 +2591,25 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_jx0wj")
 theme_override_styles/hover = SubResource("StyleBoxFlat_kkkcx")
 action_mode = 0
 text = "ENTRAR"
+
+[node name="StatusLabel" type="Label" parent="UI/LevelSelectionCanvas/Login" unique_id=1477811751]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = -118.0
+offset_right = -15.0
+offset_bottom = -92.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0.4, 0.4, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="HUD" type="CanvasLayer" parent="UI" unique_id=1201332776]
 visible = false
@@ -2293,9 +2668,9 @@ offset_right = 75.0
 offset_bottom = 75.0
 size_flags_horizontal = 7
 size_flags_vertical = 7
-theme_override_styles/normal = SubResource("StyleBoxFlat_ryguw")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_d13ii")
-theme_override_styles/hover = SubResource("StyleBoxFlat_1u8w0")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pjuso")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_23xmf")
+theme_override_styles/hover = SubResource("StyleBoxFlat_swlj1")
 action_mode = 0
 icon = ExtResource("8_efxa6")
 icon_alignment = 1
@@ -2735,18 +3110,18 @@ text = "COMPRE NOVAS ROUPAS E DEIXE SEU PERSONAGEM COM UM VISUAL ÉPICO!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Ranking" type="CanvasLayer" parent="UI" unique_id=608903466]
+[node name="Ranking" type="CanvasLayer" parent="UI" unique_id=576924087]
 visible = false
 
-[node name="Panel" type="Panel" parent="UI/Ranking" unique_id=552399120]
+[node name="Panel" type="Panel" parent="UI/Ranking" unique_id=460514489]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_0cp0l")
+theme_override_styles/panel = SubResource("StyleBoxFlat_wy5fy")
 
-[node name="TextureRect2" type="TextureRect" parent="UI/Ranking" unique_id=407199941]
+[node name="TextureRect2" type="TextureRect" parent="UI/Ranking" unique_id=365296012]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -2758,7 +3133,7 @@ grow_horizontal = 2
 texture = ExtResource("8_dg77c")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="UI/Ranking/TextureRect2" unique_id=1888240115]
+[node name="Label" type="Label" parent="UI/Ranking/TextureRect2" unique_id=1284078288]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -2774,7 +3149,7 @@ theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 40
 text = "RANKING"
 
-[node name="BackRanking" type="Button" parent="UI/Ranking" unique_id=1435055449]
+[node name="BackRanking" type="Button" parent="UI/Ranking" unique_id=280784472]
 auto_translate_mode = 1
 offset_left = 25.0
 offset_top = 25.0
@@ -2782,14 +3157,14 @@ offset_right = 75.0
 offset_bottom = 75.0
 size_flags_horizontal = 7
 size_flags_vertical = 7
-theme_override_styles/normal = SubResource("StyleBoxFlat_ryguw")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_d13ii")
-theme_override_styles/hover = SubResource("StyleBoxFlat_1u8w0")
+theme_override_styles/normal = SubResource("StyleBoxFlat_gx4rg")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5dllo")
+theme_override_styles/hover = SubResource("StyleBoxFlat_phcyf")
 action_mode = 0
 icon = ExtResource("8_efxa6")
 icon_alignment = 1
 
-[node name="Estatisticas" type="Panel" parent="UI/Ranking" unique_id=1189087114]
+[node name="Estatisticas" type="Panel" parent="UI/Ranking" unique_id=534008920]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -2803,7 +3178,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_abqjc")
 
-[node name="Panel" type="Panel" parent="UI/Ranking/Estatisticas" unique_id=477658907]
+[node name="Panel" type="Panel" parent="UI/Ranking/Estatisticas" unique_id=296762616]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -2813,9 +3188,9 @@ offset_top = 106.0
 offset_right = 126.0
 offset_bottom = 182.0
 grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_4k2k6")
+theme_override_styles/panel = SubResource("StyleBoxFlat_birbe")
 
-[node name="Label" type="Label" parent="UI/Ranking/Estatisticas" unique_id=1546210134]
+[node name="Label" type="Label" parent="UI/Ranking/Estatisticas" unique_id=885099510]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2833,7 +3208,7 @@ theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 25
 text = "ESTATÍSTICAS"
 
-[node name="Panel2" type="Panel" parent="UI/Ranking/Estatisticas" unique_id=2020480421]
+[node name="Panel2" type="Panel" parent="UI/Ranking/Estatisticas" unique_id=1295203522]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -2843,9 +3218,9 @@ offset_top = 203.0
 offset_right = 127.0
 offset_bottom = 279.0
 grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_4k2k6")
+theme_override_styles/panel = SubResource("StyleBoxFlat_birbe")
 
-[node name="Panel3" type="Panel" parent="UI/Ranking/Estatisticas" unique_id=1786171583]
+[node name="Panel3" type="Panel" parent="UI/Ranking/Estatisticas" unique_id=2113605821]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -2855,9 +3230,9 @@ offset_top = 300.0
 offset_right = 127.0
 offset_bottom = 376.0
 grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_4k2k6")
+theme_override_styles/panel = SubResource("StyleBoxFlat_birbe")
 
-[node name="Label2" type="Label" parent="UI/Ranking/Estatisticas" unique_id=2096920855]
+[node name="Label2" type="Label" parent="UI/Ranking/Estatisticas" unique_id=637104238]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2875,7 +3250,7 @@ theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 20
 text = "MOEDAS COLETADAS:"
 
-[node name="Label3" type="Label" parent="UI/Ranking/Estatisticas" unique_id=1745074455]
+[node name="Label3" type="Label" parent="UI/Ranking/Estatisticas" unique_id=922343400]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2893,7 +3268,7 @@ theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 20
 text = "POSIÇÃO GERAL:"
 
-[node name="Label4" type="Label" parent="UI/Ranking/Estatisticas" unique_id=588854115]
+[node name="Label4" type="Label" parent="UI/Ranking/Estatisticas" unique_id=111694499]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2909,9 +3284,9 @@ grow_vertical = 2
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 20
-text = "FASES CONCLUÍDAS:"
+text = "FASE:"
 
-[node name="MoedasColetadas" type="Label" parent="UI/Ranking/Estatisticas" unique_id=1510552899]
+[node name="MoedasColetadas" type="Label" parent="UI/Ranking/Estatisticas" unique_id=1301775528]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2930,26 +3305,46 @@ theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 25
 text = "0"
 
-[node name="Fases Concluidas" type="Label" parent="UI/Ranking/Estatisticas" unique_id=1929338534]
+[node name="SeletorFase" type="HBoxContainer" parent="UI/Ranking/Estatisticas" unique_id=1896335619]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -29.5
-offset_top = 16.5
-offset_right = 29.5
-offset_bottom = 39.5
+offset_left = -95.0
+offset_top = 12.0
+offset_right = 95.0
+offset_bottom = 44.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
+
+[node name="FaseAnterior" type="Button" parent="UI/Ranking/Estatisticas/SeletorFase" unique_id=734181289]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 20
+text = "<"
+
+[node name="FaseLabel" type="Label" parent="UI/Ranking/Estatisticas/SeletorFase" unique_id=147169357]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.32156864, 0.5411765, 0.14901961, 1)
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 25
-text = "0/10"
+theme_override_font_sizes/font_size = 22
+text = "FASE 01"
+horizontal_alignment = 1
 
-[node name="PosicaoGeral" type="Label" parent="UI/Ranking/Estatisticas" unique_id=752931520]
+[node name="FaseProxima" type="Button" parent="UI/Ranking/Estatisticas/SeletorFase" unique_id=1376231529]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 20
+text = ">"
+
+[node name="PosicaoGeral" type="Label" parent="UI/Ranking/Estatisticas" unique_id=1057178869]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -2968,7 +3363,7 @@ theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 25
 text = "1"
 
-[node name="Ranking" type="Panel" parent="UI/Ranking" unique_id=726027872]
+[node name="Ranking" type="Panel" parent="UI/Ranking" unique_id=300173650]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -2982,7 +3377,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_6iyjs")
 
-[node name="Panel" type="Panel" parent="UI/Ranking/Ranking" unique_id=513332215]
+[node name="Panel" type="Panel" parent="UI/Ranking/Ranking" unique_id=1933668315]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -2992,9 +3387,9 @@ offset_top = 72.0
 offset_right = 256.0
 offset_bottom = 117.0
 grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_4k2k6")
+theme_override_styles/panel = SubResource("StyleBoxFlat_birbe")
 
-[node name="Label" type="Label" parent="UI/Ranking/Ranking" unique_id=350017098]
+[node name="Label" type="Label" parent="UI/Ranking/Ranking" unique_id=777253470]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3009,7 +3404,7 @@ theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 25
 text = "JOGADOR"
 
-[node name="Panel2" type="Panel" parent="UI/Ranking/Ranking" unique_id=1662418029]
+[node name="Panel2" type="Panel" parent="UI/Ranking/Ranking" unique_id=354197004]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3019,9 +3414,9 @@ offset_top = 337.0
 offset_right = 256.0
 offset_bottom = 382.0
 grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_4k2k6")
+theme_override_styles/panel = SubResource("StyleBoxFlat_birbe")
 
-[node name="Panel3" type="Panel" parent="UI/Ranking/Ranking" unique_id=1124634296]
+[node name="Panel3" type="Panel" parent="UI/Ranking/Ranking" unique_id=2091479917]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3031,9 +3426,9 @@ offset_top = 284.0
 offset_right = 256.0
 offset_bottom = 329.0
 grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_4k2k6")
+theme_override_styles/panel = SubResource("StyleBoxFlat_birbe")
 
-[node name="Panel4" type="Panel" parent="UI/Ranking/Ranking" unique_id=1705977551]
+[node name="Panel4" type="Panel" parent="UI/Ranking/Ranking" unique_id=23681754]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3043,9 +3438,9 @@ offset_top = 231.0
 offset_right = 256.0
 offset_bottom = 276.0
 grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_4k2k6")
+theme_override_styles/panel = SubResource("StyleBoxFlat_birbe")
 
-[node name="Panel5" type="Panel" parent="UI/Ranking/Ranking" unique_id=72490572]
+[node name="Panel5" type="Panel" parent="UI/Ranking/Ranking" unique_id=333837283]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3055,9 +3450,9 @@ offset_top = 178.0
 offset_right = 256.0
 offset_bottom = 223.0
 grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_4k2k6")
+theme_override_styles/panel = SubResource("StyleBoxFlat_birbe")
 
-[node name="Panel6" type="Panel" parent="UI/Ranking/Ranking" unique_id=1877032216]
+[node name="Panel6" type="Panel" parent="UI/Ranking/Ranking" unique_id=111850848]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3067,9 +3462,9 @@ offset_top = 125.0
 offset_right = 256.0
 offset_bottom = 170.0
 grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_4k2k6")
+theme_override_styles/panel = SubResource("StyleBoxFlat_birbe")
 
-[node name="Panel7" type="Panel" parent="UI/Ranking/Ranking" unique_id=103075475]
+[node name="Panel7" type="Panel" parent="UI/Ranking/Ranking" unique_id=1160971846]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3079,9 +3474,9 @@ offset_top = 390.0
 offset_right = 256.0
 offset_bottom = 435.0
 grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_4k2k6")
+theme_override_styles/panel = SubResource("StyleBoxFlat_birbe")
 
-[node name="Label2" type="Label" parent="UI/Ranking/Ranking" unique_id=1185687664]
+[node name="Label2" type="Label" parent="UI/Ranking/Ranking" unique_id=371324521]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3096,7 +3491,7 @@ theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 25
 text = "POS."
 
-[node name="Label3" type="Label" parent="UI/Ranking/Ranking" unique_id=4454240]
+[node name="Label3" type="Label" parent="UI/Ranking/Ranking" unique_id=59027169]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3111,7 +3506,23 @@ theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 25
 text = "SCORE"
 
-[node name="Name1" type="Label" parent="UI/Ranking/Ranking" unique_id=2091431253]
+[node name="LabelTempo" type="Label" parent="UI/Ranking/Ranking" unique_id=1570955263]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 78.0
+offset_top = 25.0
+offset_right = 158.0
+offset_bottom = 48.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 25
+text = "TEMPO"
+horizontal_alignment = 1
+
+[node name="Name1" type="Label" parent="UI/Ranking/Ranking" unique_id=1508464876]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3127,7 +3538,7 @@ theme_override_font_sizes/font_size = 20
 text = "USERNAME"
 horizontal_alignment = 1
 
-[node name="Name2" type="Label" parent="UI/Ranking/Ranking" unique_id=2101291815]
+[node name="Name2" type="Label" parent="UI/Ranking/Ranking" unique_id=1068597537]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3143,7 +3554,7 @@ theme_override_font_sizes/font_size = 20
 text = "USERNAME"
 horizontal_alignment = 1
 
-[node name="Name3" type="Label" parent="UI/Ranking/Ranking" unique_id=1695108677]
+[node name="Name3" type="Label" parent="UI/Ranking/Ranking" unique_id=1346915257]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3159,7 +3570,7 @@ theme_override_font_sizes/font_size = 20
 text = "USERNAME"
 horizontal_alignment = 1
 
-[node name="Name4" type="Label" parent="UI/Ranking/Ranking" unique_id=2137804967]
+[node name="Name4" type="Label" parent="UI/Ranking/Ranking" unique_id=261049120]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3175,7 +3586,7 @@ theme_override_font_sizes/font_size = 20
 text = "USERNAME"
 horizontal_alignment = 1
 
-[node name="Name5" type="Label" parent="UI/Ranking/Ranking" unique_id=1205612251]
+[node name="Name5" type="Label" parent="UI/Ranking/Ranking" unique_id=1999924491]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3191,7 +3602,7 @@ theme_override_font_sizes/font_size = 20
 text = "USERNAME"
 horizontal_alignment = 1
 
-[node name="Name6" type="Label" parent="UI/Ranking/Ranking" unique_id=518020821]
+[node name="Name6" type="Label" parent="UI/Ranking/Ranking" unique_id=974412955]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3207,7 +3618,7 @@ theme_override_font_sizes/font_size = 20
 text = "USERNAME"
 horizontal_alignment = 1
 
-[node name="Name7" type="Label" parent="UI/Ranking/Ranking" unique_id=1455058659]
+[node name="Name7" type="Label" parent="UI/Ranking/Ranking" unique_id=1418739903]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3223,7 +3634,7 @@ theme_override_font_sizes/font_size = 20
 text = "USERNAME"
 horizontal_alignment = 1
 
-[node name="Pos1" type="Label" parent="UI/Ranking/Ranking" unique_id=1115143763]
+[node name="Pos1" type="Label" parent="UI/Ranking/Ranking" unique_id=1295645457]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3239,7 +3650,7 @@ theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 20
 text = "#1"
 
-[node name="Pos2" type="Label" parent="UI/Ranking/Ranking" unique_id=1681084869]
+[node name="Pos2" type="Label" parent="UI/Ranking/Ranking" unique_id=1439667871]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3256,7 +3667,7 @@ theme_override_font_sizes/font_size = 20
 text = "#2
 "
 
-[node name="Pos3" type="Label" parent="UI/Ranking/Ranking" unique_id=932738467]
+[node name="Pos3" type="Label" parent="UI/Ranking/Ranking" unique_id=761174769]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3273,7 +3684,7 @@ theme_override_font_sizes/font_size = 20
 text = "#3
 "
 
-[node name="Pos4" type="Label" parent="UI/Ranking/Ranking" unique_id=696251757]
+[node name="Pos4" type="Label" parent="UI/Ranking/Ranking" unique_id=1663041665]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3290,7 +3701,7 @@ theme_override_font_sizes/font_size = 20
 text = "#4
 "
 
-[node name="Pos5" type="Label" parent="UI/Ranking/Ranking" unique_id=517237944]
+[node name="Pos5" type="Label" parent="UI/Ranking/Ranking" unique_id=1781157469]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3306,7 +3717,7 @@ theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 20
 text = "#5"
 
-[node name="Pos6" type="Label" parent="UI/Ranking/Ranking" unique_id=480982943]
+[node name="Pos6" type="Label" parent="UI/Ranking/Ranking" unique_id=1116282236]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3323,7 +3734,7 @@ theme_override_font_sizes/font_size = 20
 text = "#6
 "
 
-[node name="Pos7" type="Label" parent="UI/Ranking/Ranking" unique_id=1672614746]
+[node name="Pos7" type="Label" parent="UI/Ranking/Ranking" unique_id=1889737095]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3340,7 +3751,7 @@ theme_override_font_sizes/font_size = 20
 text = "#7
 "
 
-[node name="Score1" type="Label" parent="UI/Ranking/Ranking" unique_id=1362980705]
+[node name="Score1" type="Label" parent="UI/Ranking/Ranking" unique_id=2043212496]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3358,7 +3769,7 @@ text = "0
 "
 horizontal_alignment = 1
 
-[node name="Score2" type="Label" parent="UI/Ranking/Ranking" unique_id=290658815]
+[node name="Score2" type="Label" parent="UI/Ranking/Ranking" unique_id=1154952847]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3376,7 +3787,7 @@ text = "0
 "
 horizontal_alignment = 1
 
-[node name="Score3" type="Label" parent="UI/Ranking/Ranking" unique_id=362646496]
+[node name="Score3" type="Label" parent="UI/Ranking/Ranking" unique_id=235610333]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3394,7 +3805,7 @@ text = "0
 "
 horizontal_alignment = 1
 
-[node name="Score4" type="Label" parent="UI/Ranking/Ranking" unique_id=80483245]
+[node name="Score4" type="Label" parent="UI/Ranking/Ranking" unique_id=1663567178]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3412,7 +3823,7 @@ text = "0
 "
 horizontal_alignment = 1
 
-[node name="Score5" type="Label" parent="UI/Ranking/Ranking" unique_id=1285830795]
+[node name="Score5" type="Label" parent="UI/Ranking/Ranking" unique_id=1066603562]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3430,7 +3841,7 @@ text = "0
 "
 horizontal_alignment = 1
 
-[node name="Score6" type="Label" parent="UI/Ranking/Ranking" unique_id=1057278001]
+[node name="Score6" type="Label" parent="UI/Ranking/Ranking" unique_id=1738103802]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3448,7 +3859,7 @@ text = "0
 "
 horizontal_alignment = 1
 
-[node name="Score7" type="Label" parent="UI/Ranking/Ranking" unique_id=1268591019]
+[node name="Score7" type="Label" parent="UI/Ranking/Ranking" unique_id=966619316]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3466,18 +3877,137 @@ text = "0
 "
 horizontal_alignment = 1
 
-[node name="Cadastro" type="CanvasLayer" parent="UI" unique_id=165473980]
+[node name="Tempo1" type="Label" parent="UI/Ranking/Ranking" unique_id=1855701846]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 78.0
+offset_top = 85.0
+offset_right = 158.0
+offset_bottom = 108.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.87652946, 0.90095055, 0.9321099, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 20
+text = "00:00"
+horizontal_alignment = 1
+
+[node name="Tempo2" type="Label" parent="UI/Ranking/Ranking" unique_id=1246601558]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 78.0
+offset_top = 139.0
+offset_right = 158.0
+offset_bottom = 162.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.87652946, 0.90095055, 0.9321099, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 20
+text = "00:00"
+horizontal_alignment = 1
+
+[node name="Tempo3" type="Label" parent="UI/Ranking/Ranking" unique_id=1328096254]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 78.0
+offset_top = 192.0
+offset_right = 158.0
+offset_bottom = 215.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.87652946, 0.90095055, 0.9321099, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 20
+text = "00:00"
+horizontal_alignment = 1
+
+[node name="Tempo4" type="Label" parent="UI/Ranking/Ranking" unique_id=905090836]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 78.0
+offset_top = 244.0
+offset_right = 158.0
+offset_bottom = 267.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.87652946, 0.90095055, 0.9321099, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 20
+text = "00:00"
+horizontal_alignment = 1
+
+[node name="Tempo5" type="Label" parent="UI/Ranking/Ranking" unique_id=1869313689]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 78.0
+offset_top = 297.0
+offset_right = 158.0
+offset_bottom = 320.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.87652946, 0.90095055, 0.9321099, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 20
+text = "00:00"
+horizontal_alignment = 1
+
+[node name="Tempo6" type="Label" parent="UI/Ranking/Ranking" unique_id=519274112]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 78.0
+offset_top = 350.0
+offset_right = 158.0
+offset_bottom = 373.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.87652946, 0.90095055, 0.9321099, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 20
+text = "00:00"
+horizontal_alignment = 1
+
+[node name="Tempo7" type="Label" parent="UI/Ranking/Ranking" unique_id=1524726192]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 78.0
+offset_top = 403.0
+offset_right = 158.0
+offset_bottom = 426.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.87652946, 0.90095055, 0.9321099, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 20
+text = "00:00"
+horizontal_alignment = 1
+
+[node name="Cadastro" type="CanvasLayer" parent="UI" unique_id=1439502473]
 visible = false
 
-[node name="Panel" type="Panel" parent="UI/Cadastro" unique_id=1523416439]
+[node name="Panel" type="Panel" parent="UI/Cadastro" unique_id=1352095169]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_0cp0l")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ok6jj")
 
-[node name="Panel2" type="Panel" parent="UI/Cadastro" unique_id=1515891093]
+[node name="Panel2" type="Panel" parent="UI/Cadastro" unique_id=1739592704]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -3489,9 +4019,9 @@ offset_right = 295.0
 offset_bottom = 236.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_htxhm")
+theme_override_styles/panel = SubResource("StyleBoxFlat_facbu")
 
-[node name="TextureRect2" type="TextureRect" parent="UI/Cadastro/Panel2" unique_id=444761973]
+[node name="TextureRect2" type="TextureRect" parent="UI/Cadastro/Panel2" unique_id=318380069]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3504,7 +4034,7 @@ grow_horizontal = 2
 texture = ExtResource("17_0odxb")
 expand_mode = 1
 
-[node name="Informacoes" type="Panel" parent="UI/Cadastro/Panel2" unique_id=239142440]
+[node name="Informacoes" type="Panel" parent="UI/Cadastro/Panel2" unique_id=509763950]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3514,9 +4044,9 @@ offset_top = 129.0
 offset_right = 285.0
 offset_bottom = 527.0
 grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_4k2k6")
+theme_override_styles/panel = SubResource("StyleBoxFlat_b1qrp")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/Cadastro/Panel2/Informacoes" unique_id=1700913573]
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Cadastro/Panel2/Informacoes" unique_id=1681440180]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -3542,10 +4072,7 @@ text = "USERNAME:
 E-MAIL:
 
 
-SENHA: 
-
-
-BIO:
+SENHA:
 
 
 PAÍS:
@@ -3556,7 +4083,7 @@ DATA DE NASCIMENTO:
 "
 fit_content = true
 
-[node name="LabelUserName" type="LineEdit" parent="UI/Cadastro/Panel2" unique_id=361275975]
+[node name="LabelUserName" type="LineEdit" parent="UI/Cadastro/Panel2" unique_id=1132738081]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -3572,7 +4099,7 @@ theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 23
 
-[node name="LabelEmail" type="LineEdit" parent="UI/Cadastro/Panel2" unique_id=1214228788]
+[node name="LabelEmail" type="LineEdit" parent="UI/Cadastro/Panel2" unique_id=1038127910]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -3588,7 +4115,7 @@ theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 23
 
-[node name="LabelSenha" type="LineEdit" parent="UI/Cadastro/Panel2" unique_id=1329380414]
+[node name="LabelSenha" type="LineEdit" parent="UI/Cadastro/Panel2" unique_id=1806617979]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -3603,15 +4130,16 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 23
+secret = true
 
-[node name="LabelBio" type="LineEdit" parent="UI/Cadastro/Panel2" unique_id=1910471573]
+[node name="LabelPais" type="OptionButton" parent="UI/Cadastro/Panel2" unique_id=1687796279]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 83.0
+offset_left = 96.0
 offset_top = 75.5
-offset_right = 566.0
+offset_right = 567.0
 offset_bottom = 104.5
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -3619,40 +4147,72 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 23
+selected = 0
+item_count = 22
+popup/item_0/text = "Brasil"
+popup/item_0/id = 0
+popup/item_1/text = "Argentina"
+popup/item_1/id = 1
+popup/item_2/text = "Bolívia"
+popup/item_2/id = 2
+popup/item_3/text = "Chile"
+popup/item_3/id = 3
+popup/item_4/text = "Colômbia"
+popup/item_4/id = 4
+popup/item_5/text = "Equador"
+popup/item_5/id = 5
+popup/item_6/text = "Paraguai"
+popup/item_6/id = 6
+popup/item_7/text = "Peru"
+popup/item_7/id = 7
+popup/item_8/text = "Uruguai"
+popup/item_8/id = 8
+popup/item_9/text = "Venezuela"
+popup/item_9/id = 9
+popup/item_10/text = "México"
+popup/item_10/id = 10
+popup/item_11/text = "Estados Unidos"
+popup/item_11/id = 11
+popup/item_12/text = "Canadá"
+popup/item_12/id = 12
+popup/item_13/text = "Portugal"
+popup/item_13/id = 13
+popup/item_14/text = "Espanha"
+popup/item_14/id = 14
+popup/item_15/text = "França"
+popup/item_15/id = 15
+popup/item_16/text = "Alemanha"
+popup/item_16/id = 16
+popup/item_17/text = "Itália"
+popup/item_17/id = 17
+popup/item_18/text = "Reino Unido"
+popup/item_18/id = 18
+popup/item_19/text = "Japão"
+popup/item_19/id = 19
+popup/item_20/text = "China"
+popup/item_20/id = 20
+popup/item_21/text = "Outro"
+popup/item_21/id = 21
 
-[node name="LabelPais" type="LineEdit" parent="UI/Cadastro/Panel2" unique_id=507905002]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 96.0
-offset_top = 145.5
-offset_right = 567.0
-offset_bottom = 174.5
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 23
-
-[node name="LabelDataNascimento" type="LineEdit" parent="UI/Cadastro/Panel2" unique_id=993177265]
+[node name="LabelDataNascimento" type="LineEdit" parent="UI/Cadastro/Panel2" unique_id=2000705667]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 277.0
-offset_top = 214.5
+offset_top = 144.5
 offset_right = 569.0
-offset_bottom = 243.5
+offset_bottom = 173.5
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 23
+placeholder_text = "DD/MM/AAAA"
+max_length = 10
 
-[node name="Label" type="Label" parent="UI/Cadastro/Panel2" unique_id=572332018]
+[node name="Label" type="Label" parent="UI/Cadastro/Panel2" unique_id=793067421]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3667,7 +4227,7 @@ theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 25
 text = "CADASTRO"
 
-[node name="VoltarCadastro" type="Button" parent="UI/Cadastro" unique_id=1757064270]
+[node name="VoltarCadastro" type="Button" parent="UI/Cadastro" unique_id=1933037484]
 auto_translate_mode = 1
 offset_left = 25.0
 offset_top = 25.0
@@ -3675,14 +4235,14 @@ offset_right = 75.0
 offset_bottom = 75.0
 size_flags_horizontal = 7
 size_flags_vertical = 7
-theme_override_styles/normal = SubResource("StyleBoxFlat_ryguw")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_d13ii")
-theme_override_styles/hover = SubResource("StyleBoxFlat_1u8w0")
+theme_override_styles/normal = SubResource("StyleBoxFlat_come4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h8e4i")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qnost")
 action_mode = 0
 icon = ExtResource("8_efxa6")
 icon_alignment = 1
 
-[node name="Cadastrar" type="Button" parent="UI/Cadastro" unique_id=54805313]
+[node name="Cadastrar" type="Button" parent="UI/Cadastro" unique_id=706019380]
 auto_translate_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -3701,11 +4261,29 @@ theme_override_colors/font_outline_color = Color(0.09803922, 0.05490196, 0.20784
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = SubResource("StyleBoxFlat_1vm84")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_jx0wj")
-theme_override_styles/hover = SubResource("StyleBoxFlat_kkkcx")
+theme_override_styles/normal = SubResource("StyleBoxFlat_wnkbs")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_f6a44")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0cbny")
 action_mode = 0
 text = "ENTRAR"
+
+[node name="StatusLabel" type="Label" parent="UI/Cadastro" unique_id=1488971823]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = -118.0
+offset_right = -15.0
+offset_bottom = -92.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0.4, 0.4, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="Settings" type="CanvasLayer" parent="UI" unique_id=809208954]
 visible = false
@@ -3956,21 +4534,4 @@ color = Color(0, 0, 0, 0)
 layer = 2
 visible = false
 
-[connection signal="pressed" from="UI/MainMenuCanvas/Buttons/Start" to="UI" method="_on_start_pressed"]
-[connection signal="pressed" from="UI/MainMenuCanvas/Buttons/Options" to="UI" method="_on_options_pressed"]
-[connection signal="pressed" from="UI/MainMenuCanvas/Buttons/Quit" to="UI" method="_on_quit_pressed"]
 [connection signal="pressed" from="UI/MainMenuCanvas/Som" to="." method="_on_som_pressed"]
-[connection signal="pressed" from="UI/LevelSelectionCanvas/Back" to="UI" method="_on_back_pressed"]
-[connection signal="pressed" from="UI/LevelSelectionCanvas/Loja" to="UI" method="_on_loja_pressed"]
-[connection signal="pressed" from="UI/LevelSelectionCanvas/Profile" to="UI" method="_on_profile_pressed"]
-[connection signal="pressed" from="UI/LevelSelectionCanvas/Ranking" to="UI" method="_on_ranking_pressed"]
-[connection signal="pressed" from="UI/LevelSelectionCanvas/Perfil/FecharPerfil" to="UI" method="_on_fechar_perfil_pressed"]
-[connection signal="pressed" from="UI/LevelSelectionCanvas/Perfil/Senha" to="UI" method="_on_senha_pressed"]
-[connection signal="pressed" from="UI/LevelSelectionCanvas/Perfil/AlterarSenha/FecharSenha" to="UI" method="_on_fechar_senha_pressed"]
-[connection signal="pressed" from="UI/LevelSelectionCanvas/Login/BtnTelaCadastro" to="UI" method="_on_btn_tela_cadastro_pressed"]
-[connection signal="pressed" from="UI/LevelSelectionCanvas/Login/FecharLogin" to="UI" method="_on_fechar_login_pressed"]
-[connection signal="pressed" from="UI/LevelSelectionCanvas/Login/Entrar" to="UI" method="_on_entrar_pressed"]
-[connection signal="pressed" from="UI/Loja/VoltarLoja" to="UI" method="_on_voltar_loja_pressed"]
-[connection signal="pressed" from="UI/Ranking/BackRanking" to="UI" method="_on_back_ranking_pressed"]
-[connection signal="pressed" from="UI/Cadastro/VoltarCadastro" to="UI" method="_on_voltar_cadastro_pressed"]
-[connection signal="pressed" from="UI/Cadastro/Cadastrar" to="UI" method="_on_cadastrar_pressed"]
