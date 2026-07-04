@@ -241,11 +241,15 @@ size = Vector2(75.5, 71.25)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_co1n5"]
 size = Vector2(1408, 1408)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ymcdy"]
+size = Vector2(400, 400)
+
 [node name="Golem" type="CharacterBody2D" unique_id=1469553198]
 collision_layer = 4
 script = ExtResource("1_wpr87")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=29716560]
+position = Vector2(0, -3)
 scale = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_24adn")
 animation = &"idle_down"
@@ -264,6 +268,14 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=708594787]
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_co1n5")
+
+[node name="KeyRange" type="Area2D" parent="." unique_id=1127455850]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KeyRange" unique_id=2133275103]
+position = Vector2(0, -90)
+shape = SubResource("RectangleShape2D_ymcdy")
 
 [node name="HealthBar" parent="." unique_id=332343199 instance=ExtResource("4_u0guc")]
 position = Vector2(-72, 16.000015)

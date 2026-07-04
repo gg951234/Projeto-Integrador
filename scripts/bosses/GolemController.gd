@@ -35,8 +35,10 @@ func _skill_1() -> void:
 		
 		# Aguarda o tempo exato da animação com Timer
 		await get_tree().create_timer(anim_length).timeout
-		AudioManager.tocar_sfx(position, rocksmashsound, {Pitch = 0.5})
-		animated_sprite.play("idle_down")
+		
+		if currentstate == States.SKILL_ACTIVE:
+			AudioManager.tocar_sfx(position, rocksmashsound, {Pitch = 0.5})
+			animated_sprite.play("idle_down")
 	else:
 		push_warning("Animação ", anim_name, " não encontrada para o boss ", boss_type)
 		
