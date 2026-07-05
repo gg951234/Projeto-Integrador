@@ -3,6 +3,7 @@ extends Node
 # Tabela de estatísticas baseadas no nome do inimigo
 var stats = {
 	"Slime": {
+		"scene": "res://scenes/enemies/slime.tscn",
 		"speed": 100,
 		"health": 100,
 		"damage": 20,
@@ -10,6 +11,7 @@ var stats = {
 		"attackcd": 2.0,
 	},
 	"Goblin": {
+		"scene": "res://scenes/enemies/goblin.tscn",
 		"speed": 120,
 		"health": 150,
 		"damage": 25,
@@ -17,6 +19,7 @@ var stats = {
 		"attackcd": 1.5,
 	},
 	"Orc": {
+		"scene": "res://scenes/enemies/orc.tscn",
 		"speed": 80,
 		"health": 200,
 		"damage": 40,

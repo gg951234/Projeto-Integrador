@@ -5,3 +5,4 @@ export_presets.cfg
 *.cfg
 *.db
 assets/images/Cute_Fantasy_Free/
+*.env

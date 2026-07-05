@@ -13,7 +13,7 @@ var stats = {
 		}
 	},
 	"Sword": {
-		"damage": 20,
+		"damage": 2000,
 		"kb": 100,
 		"hitbox": {
 				"Down":  { "pos": Vector2(0,  32), "size": Vector2(128, 64) },

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://ccmhhb48eeshy"]
+
+[ext_resource type="Script" uid="uid://dhou4vm312c6x" path="res://scripts/ui/HealthBarController.gd" id="1_6opq1"]
+[ext_resource type="Texture2D" uid="uid://bvahhiteaicuy" path="res://assets/images/UI/EnemiesLifeBarUnder.png" id="1_y3kqx"]
+[ext_resource type="Texture2D" uid="uid://c6per6gh48any" path="res://assets/images/UI/EnemiesLifeBar.png" id="2_6opq1"]
+
+[node name="HealthBar" type="Node2D" unique_id=332343199]
+script = ExtResource("1_6opq1")
+
+[node name="HealthUnder" type="Sprite2D" parent="." unique_id=934690885]
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("1_y3kqx")
+centered = false
+
+[node name="Health" type="Sprite2D" parent="." unique_id=1400041515]
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_6opq1")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
