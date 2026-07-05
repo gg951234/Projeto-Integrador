@@ -202,9 +202,19 @@ func enviar_ranking_da_fase(fase_id: String, score: int, tempo: int) -> bool:
 		push_error("❌ Falha ao enviar ranking da %s: %s" % [fase_id, JSON.stringify(resposta)])
 		return false
 
-# Busca as melhores colocações de uma fase, ordenadas por score (maior primeiro)
+# Busca as melhores colocações de uma fase, ordenadas por score (maior
+# primeiro) e, em caso de empate, por tempo (menor primeiro).
+#
+# O desempate por tempo é feito aqui no cliente, não no Firestore: pedir pro
+# Firestore ordenar por dois campos (score E tempo) exigiria criar um índice
+# composto manualmente no console pra cada coleção "ranking_fase_XX". Em vez
+# disso, buscamos um buffer maior que o necessário (só ordenado por score,
+# que já tem índice automático) e resolvemos o empate por tempo em GDScript
+# antes de cortar pro tamanho pedido.
 func buscar_ranking_da_fase(fase_id: String, limite: int = 7) -> Array:
 	if auth_token.is_empty(): return []
+	
+	var buffer := maxi(limite * 4, 20)
 
 	var url = "https://firestore.googleapis.com/v1/projects/%s/databases/(default)/documents:runQuery" % PROJECT_ID
 	var headers = [
@@ -215,7 +225,7 @@ func buscar_ranking_da_fase(fase_id: String, limite: int = 7) -> Array:
 		"structuredQuery": {
 			"from": [{"collectionId": "ranking_" + fase_id}],
 			"orderBy": [{"field": {"fieldPath": "score"}, "direction": "DESCENDING"}],
-			"limit": limite
+			"limit": buffer
 		}
 	}
 	var body = JSON.stringify(query)
@@ -245,8 +255,20 @@ func buscar_ranking_da_fase(fase_id: String, limite: int = 7) -> Array:
 		var partes_nome = String(doc.get("name", "")).split("/")
 		dados["user_id"] = partes_nome[partes_nome.size() - 1]
 		ranking.append(dados)
+		
+	ranking.sort_custom(_comparar_posicao_ranking)
+	if ranking.size() > limite:
+		ranking = ranking.slice(0, limite)
 
 	return ranking
+	
+	# Critério de posição: maior score primeiro; em caso de empate, menor tempo primeiro.
+func _comparar_posicao_ranking(a: Dictionary, b: Dictionary) -> bool:
+	var score_a = a.get("score", 0)
+	var score_b = b.get("score", 0)
+	if score_a != score_b:
+		return score_a > score_b
+	return a.get("tempo", 0) < b.get("tempo", 0)
 
 # ==================== 🛠️ FUNÇÕES AUXILIARES / MOTORES INTERNOS ====================
 
