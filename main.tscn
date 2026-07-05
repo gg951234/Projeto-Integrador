@@ -2,35 +2,37 @@
 
 [ext_resource type="Script" uid="uid://drw237hufmuki" path="res://scripts/managers/GameManager.gd" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://drrx1gjlwjdld" path="res://scripts/ui/MainMenuController.gd" id="2_0xm2m"]
-[ext_resource type="Texture2D" uid="uid://bol367qbmx2tq" path="res://assets/images/background/Background.png" id="3_272bh"]
+[ext_resource type="Texture2D" uid="uid://djrmuepei0fe3" path="res://assets/images/background/Background.png" id="3_272bh"]
 [ext_resource type="PackedScene" uid="uid://dvwor3ijsv8cj" path="res://scenes/UI/fade_transition.tscn" id="3_h2yge"]
-[ext_resource type="Texture2D" uid="uid://cectm7oekm2qn" path="res://assets/images/UI/PlayerLifeBarUnder.png" id="3_lquwl"]
-[ext_resource type="FontFile" uid="uid://cbyr1lp1f7yld" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="4_5vw27"]
-[ext_resource type="Texture2D" uid="uid://bjr8pl1h64num" path="res://assets/images/UI/PlayerLifeBar.png" id="4_7mycd"]
-[ext_resource type="Texture2D" uid="uid://d3buqi24rt174" path="res://assets/images/player/Default/AttackDown.png" id="4_d13ii"]
-[ext_resource type="Texture2D" uid="uid://dk1u185jn4id7" path="res://assets/images/background/titulo.png" id="4_kek77"]
-[ext_resource type="Texture2D" uid="uid://bfg8x3ckk5d1t" path="res://assets/images/player/Default/AttackSide.png" id="5_1u8w0"]
-[ext_resource type="Texture2D" uid="uid://bunojt5x313ml" path="res://assets/images/background/Background2.png" id="5_5vw27"]
-[ext_resource type="Texture2D" uid="uid://cdmnugqhh7rfx" path="res://assets/images/player/Default/AttackUp.png" id="6_0odxb"]
-[ext_resource type="Texture2D" uid="uid://dkddor0wed71m" path="res://assets/images/background/icon_som.png" id="7_efxa6"]
-[ext_resource type="Texture2D" uid="uid://b3dwwd00pmglr" path="res://assets/images/player/Default/Die.png" id="7_lswn8"]
-[ext_resource type="Texture2D" uid="uid://dqfgwkbrclc6x" path="res://assets/images/player/Default/IdleDown.png" id="8_a6jrf"]
-[ext_resource type="Texture2D" uid="uid://u0ggty2i7xnv" path="res://assets/images/background/balão fases.png" id="8_dg77c"]
-[ext_resource type="Texture2D" uid="uid://bp4muw0i8mets" path="res://assets/images/background/voltar.png" id="8_efxa6"]
-[ext_resource type="Texture2D" uid="uid://hv8sxr878rg3" path="res://assets/images/player/Default/IdleSide.png" id="9_xuqvo"]
-[ext_resource type="Texture2D" uid="uid://dpi3rr01kf7rd" path="res://assets/images/player/Default/IdleUp.png" id="10_qsp4k"]
-[ext_resource type="Texture2D" uid="uid://duomhrstr10fs" path="res://assets/images/background/profile.png" id="10_ycdy4"]
-[ext_resource type="Texture2D" uid="uid://qr2rmrk43l2a" path="res://assets/images/player/Default/RunDown.png" id="11_kq58d"]
-[ext_resource type="Texture2D" uid="uid://btfntq8f3iarv" path="res://assets/images/player/Default/RunSide.png" id="12_seu75"]
-[ext_resource type="Texture2D" uid="uid://c5lc4q3b47npo" path="res://assets/images/player/Default/RunUp.png" id="13_htxhm"]
-[ext_resource type="Texture2D" uid="uid://dtcyvxfq4ifxo" path="res://assets/images/background/balão configurações.png" id="17_0odxb"]
+[ext_resource type="Texture2D" uid="uid://bw4grtua74luc" path="res://assets/images/UI/PlayerLifeBarUnder.png" id="3_lquwl"]
+[ext_resource type="FontFile" uid="uid://3qlwirrvnr0m" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="4_5vw27"]
+[ext_resource type="Texture2D" uid="uid://u8t085i4fy33" path="res://assets/images/UI/PlayerLifeBar.png" id="4_7mycd"]
+[ext_resource type="Texture2D" uid="uid://b2tvqo4rsiff" path="res://assets/images/player/Default/AttackDown.png" id="4_d13ii"]
+[ext_resource type="Texture2D" uid="uid://5du0vr5icnvl" path="res://assets/images/background/titulo.png" id="4_kek77"]
+[ext_resource type="Texture2D" uid="uid://crkiqy2r34uh1" path="res://assets/images/player/Default/AttackSide.png" id="5_1u8w0"]
+[ext_resource type="Texture2D" uid="uid://bccxfjr04ypeh" path="res://assets/images/background/Background2.png" id="5_5vw27"]
+[ext_resource type="Texture2D" uid="uid://cqcy0niokg0p1" path="res://assets/images/player/Default/AttackUp.png" id="6_0odxb"]
+[ext_resource type="Texture2D" uid="uid://bcmwqklqrufhl" path="res://assets/images/background/icon_som.png" id="7_efxa6"]
+[ext_resource type="Texture2D" uid="uid://c1evwl78jkvbx" path="res://assets/images/player/Default/Die.png" id="7_lswn8"]
+[ext_resource type="Texture2D" uid="uid://c2bkvgp05kxl2" path="res://assets/images/player/Default/IdleDown.png" id="8_a6jrf"]
+[ext_resource type="Texture2D" uid="uid://tkcn5tv6b3ld" path="res://assets/images/background/balão fases.png" id="8_dg77c"]
+[ext_resource type="Texture2D" uid="uid://bd1y5spnsbgb1" path="res://assets/images/background/voltar.png" id="8_efxa6"]
+[ext_resource type="Texture2D" uid="uid://cgwdm2m0i75ti" path="res://assets/images/player/Default/IdleSide.png" id="9_xuqvo"]
+[ext_resource type="Texture2D" uid="uid://b40r8ps6jyemg" path="res://assets/images/player/Default/IdleUp.png" id="10_qsp4k"]
+[ext_resource type="Texture2D" uid="uid://bcvpulvoruhyb" path="res://assets/images/background/profile.png" id="10_ycdy4"]
+[ext_resource type="Texture2D" uid="uid://552fgxbbuv8a" path="res://assets/images/player/Default/RunDown.png" id="11_kq58d"]
+[ext_resource type="Texture2D" uid="uid://byefnt727cecy" path="res://assets/images/player/Default/RunSide.png" id="12_seu75"]
+[ext_resource type="Texture2D" uid="uid://coxt1g2lrg7yy" path="res://assets/images/player/Default/RunUp.png" id="13_htxhm"]
+[ext_resource type="Texture2D" uid="uid://eeqglqx0jmio" path="res://assets/images/background/balão configurações.png" id="17_0odxb"]
 [ext_resource type="Texture2D" uid="uid://crvojuge3n4cf" path="res://assets/images/background/close.png" id="18_0odxb"]
 [ext_resource type="Script" uid="uid://cxix0f30fha10" path="res://scripts/ui/HUDController.gd" id="25_0cp0l"]
 [ext_resource type="Texture2D" uid="uid://btfgvgvd1c2qt" path="res://assets/images/background/ranking.png" id="25_0rl1p"]
+[ext_resource type="Texture2D" uid="uid://de3kf7awjs4xi" path="res://assets/images/background/espada.png" id="29_b1qrp"]
+[ext_resource type="Texture2D" uid="uid://ce8im8lvafhso" path="res://assets/images/background/Untitled.png" id="30_come4"]
 [ext_resource type="Texture2D" uid="uid://dqmpwmatnsnov" path="res://assets/images/background/Coin.png" id="33_b1qrp"]
 [ext_resource type="Texture2D" uid="uid://uwjdei4mvcwo" path="res://assets/images/background/padrao.png" id="33_facbu"]
 [ext_resource type="Texture2D" uid="uid://nd3gi1ahd6jm" path="res://assets/images/background/gold1.png" id="34_b1qrp"]
-[ext_resource type="Texture2D" uid="uid://c4j6qkcpw2g4r" path="res://assets/images/background/frost.png" id="34_come4"]
+[ext_resource type="Texture2D" uid="uid://bi2ic0wj4h1c7" path="res://assets/images/background/frost.png" id="34_come4"]
 [ext_resource type="Texture2D" uid="uid://x775prohyw2r" path="res://assets/images/background/shadow.png" id="36_h8e4i"]
 [ext_resource type="Script" uid="uid://blgng47schcgq" path="res://scripts/managers/SettingsManager.gd" id="37_d2t1y"]
 [ext_resource type="Texture2D" uid="uid://2wp6eoooe1oc" path="res://assets/images/background/brilho.png" id="38_gngh3"]
@@ -2616,38 +2618,74 @@ visible = false
 script = ExtResource("25_0cp0l")
 
 [node name="HealthBar" type="TextureProgressBar" parent="UI/HUD" unique_id=1552069552]
-offset_left = 12.0
-offset_top = 650.0
-offset_right = 408.0
+offset_left = 17.0
+offset_top = 659.0
+offset_right = 339.0
 offset_bottom = 683.0
 nine_patch_stretch = true
 texture_under = ExtResource("3_lquwl")
 texture_progress = ExtResource("4_7mycd")
 
 [node name="CoinsCount" type="Label" parent="UI/HUD" unique_id=1201761819]
-offset_left = 791.0
+offset_left = 785.0
 offset_top = 14.0
-offset_right = 885.0
+offset_right = 889.0
 offset_bottom = 37.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_5vw27")
 text = "Moedas: 0/5"
 vertical_alignment = 1
 
+[node name="TextureRect" type="TextureRect" parent="UI/HUD/CoinsCount" unique_id=1191237831]
+layout_mode = 0
+offset_left = -25.0
+offset_top = 3.0
+offset_right = -6.0
+offset_bottom = 22.0
+texture = ExtResource("33_b1qrp")
+expand_mode = 1
+
 [node name="EnemiesDefeatedCount" type="Label" parent="UI/HUD" unique_id=1698965972]
-offset_left = 694.0
+offset_left = 664.0
 offset_top = 42.0
-offset_right = 885.0
+offset_right = 889.0
 offset_bottom = 65.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_5vw27")
 text = "Inimigos Derrotados: 0/5"
 vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/HUD/EnemiesDefeatedCount" unique_id=193647855]
+layout_mode = 0
+offset_left = -23.0
+offset_top = 4.0
+offset_right = -3.0
+offset_bottom = 24.0
+texture = ExtResource("29_b1qrp")
+expand_mode = 1
 
 [node name="Timer" type="Label" parent="UI/HUD" unique_id=233444509]
 offset_left = 352.0
 offset_top = 10.0
 offset_right = 543.0
 offset_bottom = 33.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_5vw27")
 text = "00:00"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/HUD/Timer" unique_id=1703184265]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 3.0
+offset_right = 66.0
+offset_bottom = 22.0
+texture = ExtResource("30_come4")
+expand_mode = 1
 
 [node name="Loja" type="CanvasLayer" parent="UI" unique_id=975011843]
 visible = false
