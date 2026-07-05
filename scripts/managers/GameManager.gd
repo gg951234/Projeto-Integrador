@@ -112,7 +112,7 @@ func check_level(levelnumber: int = 0) -> bool:
 		print("Sem levelnumber")
 		levelnumber = currentlevel
 	
-	if levelnumber in unlockedlevels:
+	if fase_desbloqueada(levelnumber):
 		# Achar o caminho da fase se o player tiver ela desbloqueada
 		currentlevelpath = "res://scenes/levels/level_%s.tscn" % levelnumber
 		# Retornar true se ela existir
@@ -124,6 +124,12 @@ func check_level(levelnumber: int = 0) -> bool:
 		print("O jogador ainda não desbloqueou a fase " + str(levelnumber))
 	
 	return 0
+
+func fase_desbloqueada(numero: int) -> bool:
+	if numero <= 1:
+		return true
+	var fase_anterior = fase_id(numero - 1)
+	return PlayerData.progresso_fases.get(fase_anterior, {}).get("completada", false)
 
 func delete_level() -> bool:
 	if currentlevelroot:
@@ -141,6 +147,7 @@ func load_level(levelnumber: int = 0) -> bool:
 	delete_level()
 	
 	if check_level(levelnumber):
+		print(currentlevelpath)
 		currentlevelroot = load(currentlevelpath).instantiate()
 		add_child(currentlevelroot)
 		currentlevelroot.name = "LevelRoot"

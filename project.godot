@@ -20,7 +20,6 @@ GameManager="*res://scripts/managers/GameManager.gd"
 SaveManager="*res://scripts/managers/SaveManager.gd"
 AudioManager="*res://scripts/managers/AudioManager.gd"
 EnemiesData="*res://scripts/classes/EnemiesData.gd"
-WeaponsData="*res://scripts/classes/WeaponsData.gd"
 BossesData="*res://scripts/classes/BossesData.gd"
 QuizData="*res://scripts/classes/QuizData.gd"
 CameraData="*res://scripts/classes/CameraData.gd"
@@ -30,6 +29,7 @@ CharactersData="*res://scripts/classes/CharactersData.gd"
 LevelEnemiesData="*uid://b4k1l8aineteh"
 FirebaseManager="*uid://cyybmudafg6rg"
 PlayerData="*uid://benrrbqbd51f6"
+ShopData="*uid://dbkf101hyhqh"
 
 [display]
 

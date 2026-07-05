@@ -143,36 +143,44 @@ func baixar_dados_do_firestore() -> void:
 		await enviar_dados_para_o_firestore(PlayerData.gerar_dicionario_completo())
 		emit_signal("dados_nuvem_carregados", true)
 
-# Envia os dados locais da memória RAM para o Firebase
-func enviar_dados_para_o_firestore(dados_godot: Dictionary) -> void:
-	if user_id.is_empty() or auth_token.is_empty(): 
+# Envia os dados locais da memória RAM para o Firebase.
+# Retorna true só quando a nuvem realmente confirma o recebimento — quem
+# controla a flag "sincronizado" (PlayerData) depende desse retorno ser
+# confiável para não marcar como sincronizado algo que falhou (ex: offline).
+func enviar_dados_para_o_firestore(dados_godot: Dictionary) -> bool:
+	if user_id.is_empty() or auth_token.is_empty():
 		emit_signal("dados_nuvem_salvos", false)
-		return
-	
+		return false
+
 	# Usamos o método PATCH com updateMask para atualizar campos existentes ou criar se não existir
 	var url = "https://firestore.googleapis.com/v1/projects/%s/databases/(default)/documents/usuarios/%s" % [PROJECT_ID, user_id]
 	var headers = [
 		"Authorization: Bearer " + auth_token,
 		"Content-Type: application/json"
 	]
-	
+
 	# Transforma o dicionário limpo da Godot no formato Tipado do Firebase (NoSQL)
 	var dados_formatados = _dicionario_para_firestore(dados_godot)
 	var body = JSON.stringify(dados_formatados)
-	
+
 	var resposta = await _fazer_requisicao_http(url, headers, HTTPClient.METHOD_PATCH, body)
 	if resposta.has("fields"):
 		emit_signal("dados_nuvem_salvos", true)
+		return true
 	else:
 		emit_signal("dados_nuvem_salvos", false)
+		return false
 
 # ==================== 🏆 RANKING POR FASE ====================
 # Cada fase tem sua própria coleção pública ("ranking_fase_01", "ranking_fase_02"...)
 # contendo só username/score/tempo (nunca o documento completo do jogador).
 
 # Grava (sobrescreve) o melhor resultado do jogador logado para uma fase
-func enviar_ranking_da_fase(fase_id: String, score: int, tempo: int) -> void:
-	if user_id.is_empty() or auth_token.is_empty(): return
+
+func enviar_ranking_da_fase(fase_id: String, score: int, tempo: int) -> bool:
+	if user_id.is_empty() or auth_token.is_empty():
+		print("⚠️ Ranking não enviado: jogador não está logado.")
+		return false
 
 	var url = "https://firestore.googleapis.com/v1/projects/%s/databases/(default)/documents/ranking_%s/%s" % [PROJECT_ID, fase_id, user_id]
 	var headers = [
@@ -185,7 +193,14 @@ func enviar_ranking_da_fase(fase_id: String, score: int, tempo: int) -> void:
 		"tempo": tempo
 	}
 	var body = JSON.stringify(_dicionario_para_firestore(dados))
-	await _fazer_requisicao_http(url, headers, HTTPClient.METHOD_PATCH, body)
+	print("📤 Enviando ranking (%s): score=%d tempo=%d..." % [fase_id, score, tempo])
+	var resposta = await _fazer_requisicao_http(url, headers, HTTPClient.METHOD_PATCH, body)
+	if resposta.has("fields"):
+		print("✅ Ranking da %s enviado com sucesso!" % fase_id)
+		return true
+	else:
+		push_error("❌ Falha ao enviar ranking da %s: %s" % [fase_id, JSON.stringify(resposta)])
+		return false
 
 # Busca as melhores colocações de uma fase, ordenadas por score (maior primeiro)
 func buscar_ranking_da_fase(fase_id: String, limite: int = 7) -> Array:
@@ -218,6 +233,7 @@ func buscar_ranking_da_fase(fase_id: String, limite: int = 7) -> Array:
 	var response_body = resultado[3].get_string_from_utf8()
 	var json_parsed = JSON.parse_string(response_body)
 	if typeof(json_parsed) != TYPE_ARRAY:
+		push_error("❌ Falha ao buscar ranking da %s. Resposta do Firestore: %s" % [fase_id, response_body])
 		return []
 
 	var ranking: Array = []

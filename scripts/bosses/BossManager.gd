@@ -272,11 +272,13 @@ func _on_quiz_finished(correct: bool):
 	get_tree().paused = false
 	is_quiz_open = false
 	if correct:
+		GameManager.add_score(60)
 		if current_down_threshold == 1:
 			die()
 		else:
 			exit_down()
 	else:
+		GameManager.add_score(-50)
 		if current_down_threshold == 66:
 			health = max_health
 			health_bar.updateHealth(health)

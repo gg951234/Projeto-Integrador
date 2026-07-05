@@ -7,31 +7,30 @@
 [ext_resource type="Texture2D" uid="uid://cectm7oekm2qn" path="res://assets/images/UI/PlayerLifeBarUnder.png" id="3_lquwl"]
 [ext_resource type="FontFile" uid="uid://cbyr1lp1f7yld" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="4_5vw27"]
 [ext_resource type="Texture2D" uid="uid://bjr8pl1h64num" path="res://assets/images/UI/PlayerLifeBar.png" id="4_7mycd"]
-[ext_resource type="Texture2D" uid="uid://d3buqi24rt174" path="res://assets/images/player/Default/AttackDown.png" id="4_d13ii"]
+[ext_resource type="Texture2D" uid="uid://b2tvqo4rsiff" path="res://assets/images/player/Default/AttackDown.png" id="4_d13ii"]
 [ext_resource type="Texture2D" uid="uid://dk1u185jn4id7" path="res://assets/images/background/titulo.png" id="4_kek77"]
-[ext_resource type="Texture2D" uid="uid://bfg8x3ckk5d1t" path="res://assets/images/player/Default/AttackSide.png" id="5_1u8w0"]
+[ext_resource type="Texture2D" uid="uid://crkiqy2r34uh1" path="res://assets/images/player/Default/AttackSide.png" id="5_1u8w0"]
 [ext_resource type="Texture2D" uid="uid://bunojt5x313ml" path="res://assets/images/background/Background2.png" id="5_5vw27"]
-[ext_resource type="Texture2D" uid="uid://cdmnugqhh7rfx" path="res://assets/images/player/Default/AttackUp.png" id="6_0odxb"]
+[ext_resource type="Texture2D" uid="uid://cqcy0niokg0p1" path="res://assets/images/player/Default/AttackUp.png" id="6_0odxb"]
 [ext_resource type="Texture2D" uid="uid://dkddor0wed71m" path="res://assets/images/background/icon_som.png" id="7_efxa6"]
-[ext_resource type="Texture2D" uid="uid://b3dwwd00pmglr" path="res://assets/images/player/Default/Die.png" id="7_lswn8"]
-[ext_resource type="Texture2D" uid="uid://dqfgwkbrclc6x" path="res://assets/images/player/Default/IdleDown.png" id="8_a6jrf"]
+[ext_resource type="Texture2D" uid="uid://c1evwl78jkvbx" path="res://assets/images/player/Default/Die.png" id="7_lswn8"]
+[ext_resource type="Texture2D" uid="uid://c2bkvgp05kxl2" path="res://assets/images/player/Default/IdleDown.png" id="8_a6jrf"]
 [ext_resource type="Texture2D" uid="uid://u0ggty2i7xnv" path="res://assets/images/background/balão fases.png" id="8_dg77c"]
 [ext_resource type="Texture2D" uid="uid://bp4muw0i8mets" path="res://assets/images/background/voltar.png" id="8_efxa6"]
-[ext_resource type="Texture2D" uid="uid://hv8sxr878rg3" path="res://assets/images/player/Default/IdleSide.png" id="9_xuqvo"]
-[ext_resource type="Texture2D" uid="uid://dpi3rr01kf7rd" path="res://assets/images/player/Default/IdleUp.png" id="10_qsp4k"]
+[ext_resource type="Texture2D" uid="uid://cgwdm2m0i75ti" path="res://assets/images/player/Default/IdleSide.png" id="9_xuqvo"]
+[ext_resource type="Texture2D" uid="uid://b40r8ps6jyemg" path="res://assets/images/player/Default/IdleUp.png" id="10_qsp4k"]
 [ext_resource type="Texture2D" uid="uid://duomhrstr10fs" path="res://assets/images/background/profile.png" id="10_ycdy4"]
-[ext_resource type="Texture2D" uid="uid://qr2rmrk43l2a" path="res://assets/images/player/Default/RunDown.png" id="11_kq58d"]
-[ext_resource type="Texture2D" uid="uid://btfntq8f3iarv" path="res://assets/images/player/Default/RunSide.png" id="12_seu75"]
-[ext_resource type="Texture2D" uid="uid://c5lc4q3b47npo" path="res://assets/images/player/Default/RunUp.png" id="13_htxhm"]
+[ext_resource type="Texture2D" uid="uid://552fgxbbuv8a" path="res://assets/images/player/Default/RunDown.png" id="11_kq58d"]
+[ext_resource type="Texture2D" uid="uid://byefnt727cecy" path="res://assets/images/player/Default/RunSide.png" id="12_seu75"]
+[ext_resource type="Texture2D" uid="uid://coxt1g2lrg7yy" path="res://assets/images/player/Default/RunUp.png" id="13_htxhm"]
 [ext_resource type="Texture2D" uid="uid://dtcyvxfq4ifxo" path="res://assets/images/background/balão configurações.png" id="17_0odxb"]
 [ext_resource type="Texture2D" uid="uid://crvojuge3n4cf" path="res://assets/images/background/close.png" id="18_0odxb"]
-[ext_resource type="Script" uid="uid://cxix0f30fha10" path="res://scripts/ui/HUDController.gd" id="25_0cp0l"]
+[ext_resource type="Script" path="res://scripts/ui/HUDController.gd" id="25_0cp0l"]
 [ext_resource type="Texture2D" uid="uid://btfgvgvd1c2qt" path="res://assets/images/background/ranking.png" id="25_0rl1p"]
+[ext_resource type="StyleBox" uid="uid://c0m80gm5pf46w" path="res://styles/saldo_style.tres" id="28_0rl1p"]
 [ext_resource type="Texture2D" uid="uid://dqmpwmatnsnov" path="res://assets/images/background/Coin.png" id="33_b1qrp"]
 [ext_resource type="Texture2D" uid="uid://uwjdei4mvcwo" path="res://assets/images/background/padrao.png" id="33_facbu"]
-[ext_resource type="Texture2D" uid="uid://nd3gi1ahd6jm" path="res://assets/images/background/gold1.png" id="34_b1qrp"]
 [ext_resource type="Texture2D" uid="uid://c4j6qkcpw2g4r" path="res://assets/images/background/frost.png" id="34_come4"]
-[ext_resource type="Texture2D" uid="uid://x775prohyw2r" path="res://assets/images/background/shadow.png" id="36_h8e4i"]
 [ext_resource type="Script" uid="uid://blgng47schcgq" path="res://scripts/managers/SettingsManager.gd" id="37_d2t1y"]
 [ext_resource type="Texture2D" uid="uid://2wp6eoooe1oc" path="res://assets/images/background/brilho.png" id="38_gngh3"]
 [ext_resource type="Texture2D" uid="uid://d3k4o4wxjokwh" path="res://assets/images/background/slider.png" id="39_0n3wm"]
@@ -1028,19 +1027,6 @@ shadow_color = Color(0.34988332, 0.3543434, 0.3632636, 1)
 shadow_size = 1
 shadow_offset = Vector2(0, -2)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uit24"]
-bg_color = Color(0.14117648, 0.15294118, 0.16862746, 1)
-border_width_bottom = 3
-border_color = Color(0.10398757, 0.11155973, 0.12670413, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-corner_detail = 1
-shadow_color = Color(0.2518868, 0.2555316, 0.26646787, 1)
-shadow_size = 1
-shadow_offset = Vector2(0, -2)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blkrb"]
 bg_color = Color(0.07771615, 0.086844094, 0.1005361, 1)
 border_width_left = 4
@@ -1056,45 +1042,6 @@ corner_radius_bottom_left = 8
 corner_detail = 1
 shadow_color = Color(0.1882353, 0.19215687, 0.21176471, 1)
 shadow_size = 3
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rnkwl"]
-bg_color = Color(0.14117648, 0.15294118, 0.16862746, 1)
-border_width_bottom = 3
-border_color = Color(0.10398757, 0.11155973, 0.12670413, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-corner_detail = 1
-shadow_color = Color(0.2518868, 0.2555316, 0.26646787, 1)
-shadow_size = 1
-shadow_offset = Vector2(0, -2)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vke2r"]
-bg_color = Color(0.11443318, 0.1246377, 0.1382435, 1)
-border_width_bottom = 3
-border_color = Color(0.06673056, 0.06970989, 0.08162988, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-corner_detail = 1
-shadow_color = Color(0.20875928, 0.21218249, 0.22245428, 1)
-shadow_size = 1
-shadow_offset = Vector2(0, -2)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uypp3"]
-bg_color = Color(0.1784553, 0.1923506, 0.21087801, 1)
-border_width_bottom = 3
-border_color = Color(0.13983947, 0.14456621, 0.16346866, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-corner_detail = 1
-shadow_color = Color(0.28770572, 0.29203683, 0.30502844, 1)
-shadow_size = 1
-shadow_offset = Vector2(0, -2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_34ol3"]
 bg_color = Color(0.19239807, 0.3346806, 0.08387112, 1)
@@ -1123,100 +1070,6 @@ shadow_size = 1
 shadow_offset = Vector2(0, -2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pjyto"]
-bg_color = Color(0.23357707, 0.39890018, 0.104715414, 1)
-border_width_bottom = 3
-border_color = Color(0.1368593, 0.24723727, 0.049771897, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-corner_detail = 1
-shadow_color = Color(0.28389335, 0.4756565, 0.13096693, 1)
-shadow_size = 1
-shadow_offset = Vector2(0, -2)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rm4vd"]
-bg_color = Color(0.19239807, 0.3346806, 0.08387112, 1)
-border_width_bottom = 3
-border_color = Color(0.10028914, 0.19048461, 0.032176755, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-corner_detail = 1
-shadow_color = Color(0.24964103, 0.42441636, 0.11326853, 1)
-shadow_size = 1
-shadow_offset = Vector2(0, -2)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ruth0"]
-bg_color = Color(0.14776033, 0.2633192, 0.058027156, 1)
-border_width_bottom = 3
-border_color = Color(0.07841011, 0.15502739, 0.02128171, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-corner_detail = 1
-shadow_color = Color(0.20312697, 0.34815958, 0.08806934, 1)
-shadow_size = 1
-shadow_offset = Vector2(0, -2)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sm6fg"]
-bg_color = Color(0.23357707, 0.39890018, 0.104715414, 1)
-border_width_bottom = 3
-border_color = Color(0.1368593, 0.24723727, 0.049771897, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-corner_detail = 1
-shadow_color = Color(0.28389335, 0.4756565, 0.13096693, 1)
-shadow_size = 1
-shadow_offset = Vector2(0, -2)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4w656"]
-bg_color = Color(0.078431375, 0.08627451, 0.101960786, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.023529412, 0.03137255, 0.050980393, 1)
-border_blend = true
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-corner_detail = 1
-shadow_color = Color(0.1882353, 0.19215687, 0.21176471, 1)
-shadow_size = 3
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e71vb"]
-bg_color = Color(0.19239807, 0.3346806, 0.08387112, 1)
-border_width_bottom = 3
-border_color = Color(0.10028914, 0.19048461, 0.032176755, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-corner_detail = 1
-shadow_color = Color(0.24964103, 0.42441636, 0.11326853, 1)
-shadow_size = 1
-shadow_offset = Vector2(0, -2)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b17eg"]
-bg_color = Color(0.14776033, 0.2633192, 0.058027156, 1)
-border_width_bottom = 3
-border_color = Color(0.07841011, 0.15502739, 0.02128171, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-corner_detail = 1
-shadow_color = Color(0.20312697, 0.34815958, 0.08806934, 1)
-shadow_size = 1
-shadow_offset = Vector2(0, -2)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ntx8l"]
 bg_color = Color(0.23357707, 0.39890018, 0.104715414, 1)
 border_width_bottom = 3
 border_color = Color(0.1368593, 0.24723727, 0.049771897, 1)
@@ -2478,37 +2331,6 @@ theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 23
 secret = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/LevelSelectionCanvas/Login" unique_id=1266698459]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -49.25
-offset_top = -108.5
-offset_right = 49.25
-offset_bottom = 108.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_colors/font_selected_color = Color(0.9098039, 0.73333335, 0.050980393, 1)
-theme_override_constants/line_separation = 3
-theme_override_constants/outline_size = 2
-theme_override_fonts/normal_font = ExtResource("4_5vw27")
-theme_override_font_sizes/normal_font_size = 22
-bbcode_enabled = true
-text = "E-MAIL:
-
-
-
-
-SENHA: 
-
-
-"
-fit_content = true
-
 [node name="Label" type="Label" parent="UI/LevelSelectionCanvas/Login" unique_id=1126403315]
 layout_mode = 1
 anchors_preset = 5
@@ -2523,6 +2345,38 @@ theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 33
 text = "LOGIN"
+
+[node name="EmailLabel" type="Label" parent="UI/LevelSelectionCanvas/Login" unique_id=1264310718]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -54.0
+offset_top = 132.5
+offset_right = 58.0
+offset_bottom = 162.5
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 22
+text = "E-MAIL:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SenhaLabel" type="Label" parent="UI/LevelSelectionCanvas/Login" unique_id=220170064]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -54.0
+offset_top = 244.5
+offset_right = 58.0
+offset_bottom = 274.5
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 22
+text = "SENHA:"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="BtnTelaCadastro" type="Button" parent="UI/LevelSelectionCanvas/Login" unique_id=1473261670]
 auto_translate_mode = 1
@@ -2691,13 +2545,16 @@ grow_vertical = 2
 size_flags_horizontal = 7
 size_flags_vertical = 7
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 21
-theme_override_styles/normal = SubResource("StyleBoxFlat_uit24")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_uit24")
-theme_override_styles/hover = SubResource("StyleBoxFlat_uit24")
+theme_override_styles/normal = ExtResource("28_0rl1p")
+theme_override_styles/pressed = ExtResource("28_0rl1p")
+theme_override_styles/hover = ExtResource("28_0rl1p")
+theme_override_styles/disabled = ExtResource("28_0rl1p")
+disabled = true
 action_mode = 0
 text = " 0"
 
@@ -2761,89 +2618,15 @@ offset_bottom = 152.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 16
+alignment = 1
 
-[node name="Roupa1" type="Panel" parent="UI/Loja/HBoxContainer" unique_id=190786356]
-custom_minimum_size = Vector2(200, 100)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_blkrb")
-
-[node name="Padrao" type="TextureRect" parent="UI/Loja/HBoxContainer/Roupa1" unique_id=717974857]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 34.0
-offset_bottom = -66.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("33_facbu")
-expand_mode = 1
-
-[node name="Label" type="Label" parent="UI/Loja/HBoxContainer/Roupa1" unique_id=1713964269]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -37.0
-offset_top = 17.0
-offset_right = 37.0
-offset_bottom = 40.0
-grow_horizontal = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 21
-text = "PADRÃO"
-
-[node name="Equipado" type="Button" parent="UI/Loja/HBoxContainer/Roupa1" unique_id=1111599662]
-auto_translate_mode = 1
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -63.625
-offset_top = -65.0
-offset_right = 63.625
-offset_bottom = -15.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_horizontal = 7
-size_flags_vertical = 7
-theme_override_colors/font_color = Color(0.34403187, 0.575942, 0.16130099, 1)
-theme_override_colors/font_pressed_color = Color(0.34509805, 0.5764706, 0.16078432, 1)
-theme_override_colors/font_hover_color = Color(0.34509805, 0.5764706, 0.16078432, 1)
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 21
-theme_override_styles/normal = SubResource("StyleBoxFlat_rnkwl")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_vke2r")
-theme_override_styles/hover = SubResource("StyleBoxFlat_uypp3")
-action_mode = 0
-text = "EQUIPADO"
-
-[node name="TextureRect" type="TextureRect" parent="UI/Loja/HBoxContainer/Roupa1/Equipado" unique_id=1120728528]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -42.0
-offset_top = -16.0
-offset_right = -14.0
-offset_bottom = 12.0
-grow_horizontal = 2
-grow_vertical = 2
-expand_mode = 1
-
-[node name="Roupa2" type="Panel" parent="UI/Loja/HBoxContainer" unique_id=183207182]
+[node name="Template" type="Panel" parent="UI/Loja/HBoxContainer" unique_id=183207182]
+visible = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_blkrb")
 
-[node name="Padrao" type="TextureRect" parent="UI/Loja/HBoxContainer/Roupa2" unique_id=1382927306]
+[node name="Padrao" type="TextureRect" parent="UI/Loja/HBoxContainer/Template" unique_id=1382927306]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2855,7 +2638,7 @@ grow_vertical = 2
 texture = ExtResource("34_come4")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="UI/Loja/HBoxContainer/Roupa2" unique_id=1345235807]
+[node name="Label" type="Label" parent="UI/Loja/HBoxContainer/Template" unique_id=1345235807]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2874,7 +2657,7 @@ theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 21
 text = "FROST"
 
-[node name="Coins" type="Button" parent="UI/Loja/HBoxContainer/Roupa2" unique_id=1150973000]
+[node name="Coins" type="Button" parent="UI/Loja/HBoxContainer/Template" unique_id=1150973000]
 auto_translate_mode = 1
 layout_mode = 1
 anchors_preset = 7
@@ -2900,163 +2683,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_pjyto")
 action_mode = 0
 text = "  15"
 
-[node name="TextureRect" type="TextureRect" parent="UI/Loja/HBoxContainer/Roupa2/Coins" unique_id=470339825]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -42.0
-offset_top = -16.0
-offset_right = -14.0
-offset_bottom = 12.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("33_b1qrp")
-expand_mode = 1
-
-[node name="Roupa3" type="Panel" parent="UI/Loja/HBoxContainer" unique_id=676208100]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_blkrb")
-
-[node name="Gold" type="TextureRect" parent="UI/Loja/HBoxContainer/Roupa3" unique_id=2116640239]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 34.0
-offset_bottom = -66.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("34_b1qrp")
-expand_mode = 1
-
-[node name="Label" type="Label" parent="UI/Loja/HBoxContainer/Roupa3" unique_id=358024195]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -24.5
-offset_top = -133.0
-offset_right = 24.5
-offset_bottom = -110.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 21
-text = "GOLD"
-
-[node name="Coins" type="Button" parent="UI/Loja/HBoxContainer/Roupa3" unique_id=1391711249]
-auto_translate_mode = 1
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -54.25
-offset_top = -65.0
-offset_right = 54.25
-offset_bottom = -15.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_horizontal = 7
-size_flags_vertical = 7
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 21
-theme_override_styles/normal = SubResource("StyleBoxFlat_rm4vd")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_ruth0")
-theme_override_styles/hover = SubResource("StyleBoxFlat_sm6fg")
-action_mode = 0
-text = "  20"
-
-[node name="TextureRect" type="TextureRect" parent="UI/Loja/HBoxContainer/Roupa3/Coins" unique_id=1279434768]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -42.0
-offset_top = -16.0
-offset_right = -14.0
-offset_bottom = 12.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("33_b1qrp")
-expand_mode = 1
-
-[node name="Roupa4" type="Panel" parent="UI/Loja/HBoxContainer" unique_id=1187601212]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_4w656")
-
-[node name="Shadow" type="TextureRect" parent="UI/Loja/HBoxContainer/Roupa4" unique_id=609478225]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 34.0
-offset_bottom = -66.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("36_h8e4i")
-expand_mode = 1
-
-[node name="Label" type="Label" parent="UI/Loja/HBoxContainer/Roupa4" unique_id=48215622]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -37.0
-offset_top = -133.0
-offset_right = 37.0
-offset_bottom = -110.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 21
-text = "SHADOW"
-
-[node name="Coins" type="Button" parent="UI/Loja/HBoxContainer/Roupa4" unique_id=1919722582]
-auto_translate_mode = 1
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -54.25
-offset_top = -65.0
-offset_right = 54.25
-offset_bottom = -15.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_horizontal = 7
-size_flags_vertical = 7
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 21
-theme_override_styles/normal = SubResource("StyleBoxFlat_e71vb")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_b17eg")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ntx8l")
-action_mode = 0
-text = "  10"
-
-[node name="TextureRect" type="TextureRect" parent="UI/Loja/HBoxContainer/Roupa4/Coins" unique_id=377073581]
+[node name="TextureRect" type="TextureRect" parent="UI/Loja/HBoxContainer/Template/Coins" unique_id=470339825]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

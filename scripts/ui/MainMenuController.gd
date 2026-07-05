@@ -20,10 +20,9 @@ extends Control
 @onready var ranking: Button = $LevelSelectionCanvas/Ranking
 @onready var voltar_loja: Button = $Loja/VoltarLoja
 @onready var back_ranking: Button = $Ranking/BackRanking
-@onready var equipado: Button = $Loja/HBoxContainer/Roupa1/Equipado
-@onready var roupa4: Button = $Loja/HBoxContainer/Roupa4/Coins
-@onready var roupa2: Button = $Loja/HBoxContainer/Roupa2/Coins
-@onready var roupa3: Button = $Loja/HBoxContainer/Roupa3/Coins
+@onready var roupa_container: HBoxContainer = $Loja/HBoxContainer
+@onready var roupa_template: Panel = $Loja/HBoxContainer/Template
+@onready var loja_saldo: Button = $Loja/Coins
 @onready var fechar_perfil: Button = $LevelSelectionCanvas/Perfil/FecharPerfil
 @onready var perfil: Panel = $LevelSelectionCanvas/Perfil
 @onready var login: Panel = $LevelSelectionCanvas/Login
@@ -67,6 +66,8 @@ extends Control
 const RANKING_FASE_MAX: int = 10
 var ranking_fase_atual: int = 1
 
+var skin_panels := {}
+
 var _formatando_data_nascimento: bool = false
 
 var sound_on_icon = preload("res://assets/images/background/icon_som.png")
@@ -94,6 +95,8 @@ func _ready() -> void:  # Executa quando o nó é criado
 	# Aguarda um frame para o VBoxContainer ajustar os tamanhos
 	await get_tree().process_frame
 	setup_main_buttons()
+	setup_skins_buttons()
+	_atualizar_tela_loja()
 	change_idle()
 	
 	# CONEXÕES DE SINAIS (TODOS OS BOTÕES POR SCRIPT)
@@ -109,10 +112,6 @@ func _ready() -> void:  # Executa quando o nó é criado
 		[profile, _on_profile_pressed],
 		[ranking, _on_ranking_pressed],
 		[voltar_loja, _on_voltar_loja_pressed],
-		# [equipado, _on_equipado_pressed],  # descomente se tiver função
-		# [roupa2, _on_roupa2_pressed],
-		# [roupa3, _on_roupa3_pressed],
-		# [roupa4, _on_roupa4_pressed],
 		[back_ranking, _on_back_ranking_pressed],
 		[ranking_fase_anterior, _on_fase_anterior_pressed],
 		[ranking_fase_proxima, _on_fase_proxima_pressed],
@@ -179,7 +178,7 @@ func animate_scale(button: Button, target_scale: Vector2) -> void:
 
 func setup_main_buttons() -> void:
 	# Conecta todos os botões do menu de uma vez
-	for button in [start, options, quit, sound_button, help, back, loja, profile, fechar, ranking, voltar_loja, back_ranking, roupa4, roupa2, roupa3, fechar_perfil, cadastrar, voltar_cadastro, fechar_login, tela_cadastro, entrar, alterar_senha, equipado, confirmar, fechar_senha, ranking_fase_anterior, ranking_fase_proxima, sair]:
+	for button in [start, options, quit, sound_button, help, back, loja, profile, fechar, ranking, voltar_loja, back_ranking, fechar_perfil, cadastrar, voltar_cadastro, fechar_login, tela_cadastro, entrar, alterar_senha, confirmar, fechar_senha, ranking_fase_anterior, ranking_fase_proxima, sair]:
 		button.pivot_offset = button.size / 2 # Define o pivot para o centro do botão
 		button.mouse_entered.connect(_on_button_mouse_entered.bind(button))
 		button.mouse_exited.connect(_on_button_mouse_exited.bind(button))
@@ -205,7 +204,7 @@ func setup_levels_selection() -> void:
 		btn.text = str(i)
 		
 		# Verifica se o nível está desbloqueado
-		if i in GameManager.unlockedlevels:
+		if GameManager.fase_desbloqueada(i):
 			btn.disabled = false
 		else:
 			btn.disabled = true
@@ -215,10 +214,9 @@ func setup_levels_selection() -> void:
 		btn.pivot_offset = btn.size / 2
 		btn.mouse_entered.connect(_on_button_mouse_entered.bind(btn))
 		btn.mouse_exited.connect(_on_button_mouse_exited.bind(btn))
-		btn.pressed.connect(_on_level_pressed.bind(btn))
-
-		# --- NOVO: Conecta o som também nos botões criados dinamicamente ---
 		btn.pressed.connect(_play_button_sound)
+		btn.pressed.connect(_on_level_pressed.bind(btn))
+		
 
 # --------------
 # MAIN MENU
@@ -292,6 +290,91 @@ func _on_loja_pressed() -> void:
 func _on_voltar_loja_pressed() -> void:
 	$Loja.visible = false
 	$LevelSelectionCanvas.visible = true
+
+# --------------
+# LOJA DE SKINS
+# --------------
+# Cria um botão para cada skin definida em ShopData
+func setup_skins_buttons() -> void:
+	# Limpa os botões antigos (caso seja chamado novamente)
+	for child in roupa_container.get_children():
+		child.queue_free()
+	skin_panels.clear()
+
+	for skin_name in ShopData.skins.keys():
+		var info: Dictionary = ShopData.get_skin_info(skin_name)
+		# Duplica o template
+		var panel: Panel = roupa_template.duplicate()
+		panel.visible = true
+
+		var btn: Button = panel.get_node("Coins")
+		btn.pivot_offset = btn.size / 2
+
+		var icon: TextureRect = panel.get_node("Padrao")  # ajuste o nome do nó
+		if icon:
+			var icon_path: String = info["Icon"]
+			if not icon_path.is_empty():
+				icon.texture = load(icon_path)
+		var title: Label = panel.get_node("Label")
+		if title:
+			title.text = info["Title"]
+		# Conecta os sinais
+		btn.mouse_entered.connect(_on_button_mouse_entered.bind(btn))
+		btn.mouse_exited.connect(_on_button_mouse_exited.bind(btn))
+		# Conecta o pressed para comprar/equipar
+		btn.pressed.connect(_on_skin_button_pressed.bind(skin_name))
+		# Adiciona ao container
+		roupa_container.add_child(panel)
+		skin_panels[skin_name] = panel
+
+	# Oculta o template original (não usado)
+	roupa_template.visible = false
+
+# Callback para o pressed de cada botão de skin
+func _on_skin_button_pressed(skin_name: String) -> void:
+	_comprar_ou_equipar_skin(skin_name)
+
+# Função existente, mas com pequena adaptação para tratar erro se não achar o preço
+func _comprar_ou_equipar_skin(skin_id: String) -> void:
+	var info = ShopData.get_skin_info(skin_id)
+	if info.is_empty():
+		print("Skin não encontrada: ", skin_id)
+		return
+	var preco: int = info["Price"]
+	if PlayerData.comprar_e_equipar_skin(skin_id, preco):
+		_atualizar_tela_loja()
+	else:
+		print("Moedas insuficientes para comprar a skin ", skin_id)
+
+# Atualiza todos os botões dinâmicos
+func _atualizar_tela_loja() -> void:
+	var equipada := PlayerData.obter_skin_equipada()
+	loja_saldo.text = " %d" % PlayerData.moedas_coletadas
+	
+	# Atualiza cada botão de skin
+	for skin_name in skin_panels.keys():
+		var panel: Panel = skin_panels[skin_name]
+		_atualizar_botao_skin(panel, skin_name, equipada)
+
+# Função auxiliar que atualiza um botão específico
+func _atualizar_botao_skin(panel: Panel, skin_id: String, skin_equipada: String) -> void:
+	var info: Dictionary = PlayerData.skins_inventario.get(skin_id, {})
+	var botao: Button = panel.get_node("Coins")
+	var coinicon: TextureRect = botao.get_node("TextureRect")
+	if info.get("comprada", false):
+		coinicon.visible = false
+		if skin_equipada == skin_id:
+			botao.text = "EQUIPADO"
+			botao.disabled = true
+		else:
+			botao.text = "EQUIPAR"
+			botao.disabled = false
+	else:
+		# Mostra o preço (obtido do ShopData)
+		coinicon.visible = true
+		var preco = ShopData.get_skin_info(skin_id).get("Price", 0)
+		botao.text = "  %d" % preco
+		botao.disabled = false
 
 func _on_ranking_pressed() -> void:
 	$LevelSelectionCanvas.visible = false
@@ -391,9 +474,11 @@ func _on_login_concluido(sucesso: bool, mensagem: String) -> void:
 	login_status.text = mensagem
 
 	if sucesso:
-		login_status.text = "Carregando dados..."
-		await FirebaseManager.baixar_dados_do_firestore()
+		login_status.text = "Sincronizando dados..."
+		await PlayerData.sincronizar_apos_login(FirebaseManager.user_id)
 		_atualizar_tela_perfil()
+		_atualizar_tela_loja()
+		setup_levels_selection() # Sem isso, a grade de fases ficava com o estado da conta anterior até voltar ao menu principal
 		login_email.text = ""
 		login_senha.text = ""
 		login_status.text = ""
@@ -452,9 +537,11 @@ func _on_cadastro_concluido(sucesso: bool, mensagem: String) -> void:
 	cadastro_status.text = mensagem
 
 	if sucesso:
-		cadastro_status.text = "Carregando dados..."
-		await FirebaseManager.baixar_dados_do_firestore()
+		cadastro_status.text = "Sincronizando dados..."
+		await PlayerData.sincronizar_apos_login(FirebaseManager.user_id)
 		_atualizar_tela_perfil()
+		_atualizar_tela_loja()
+		setup_levels_selection() # Sem isso, a grade de fases ficava com o estado da conta anterior até voltar ao menu principal
 		cadastro_username.text = ""
 		cadastro_email.text = ""
 		cadastro_senha.text = ""
@@ -504,6 +591,11 @@ func _on_senha_alterada(sucesso: bool, mensagem: String) -> void:
 # LOGOFF
 # --------------
 func _on_sair_pressed() -> void:
+	# IMPORTANTE: sincroniza ANTES de derrubar a sessão - se limpasse o
+	# auth_token primeiro, uma compra/progresso recém-feito (ainda não
+	# sincronizado) não teria mais como ser enviado, e vazaria pro próximo
+	# login neste mesmo dispositivo.
+	await PlayerData.logout_local()
 	FirebaseManager.fazer_logout()
 	perfil.visible = false
 	perfil_username.text = "username"
@@ -511,3 +603,7 @@ func _on_sair_pressed() -> void:
 	perfil_data_criacao.text = "00/00/0000"
 	perfil_pais.text = "país"
 	perfil_data_nascimento.text = "00/00/0000"
+	# Manda pro menu principal - evita telas (fases, loja, ranking) com o
+	# estado da conta que acabou de sair até um novo login as reconstruir.
+	level_selection_canvas.visible = false
+	main_menu_canvas.visible = true

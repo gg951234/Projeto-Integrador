@@ -15,7 +15,6 @@ const SKIN_PATHS := {
 
 var SPEED: float
 var health: int
-var currentweapon: String
 var currentchar: String
 
 var last_direction: Vector2 = Vector2.DOWN
@@ -44,16 +43,17 @@ func _ready() -> void:
 	add_to_group("player")
 	hitbox_offset = sword_hitbox.position
 
-	currentweapon = "Sword"
-	currentchar = "Default"   # Altere aqui para testar diferentes skins: "Gold", "Frost", "Shadow"
+	currentchar = PlayerData.obter_skin_equipada() # Skin comprada/equipada na Loja
 
 	# Aplica a skin baseada no currentchar ANTES de carregar as stats (opcional, mas visual)
 	apply_skin(currentchar)
 
 	var dados = CharactersData.get_stats(currentchar)
 	if dados.is_empty():
-		push_error("Tipo de personagem desconhecido: ", currentchar)
-		return
+		push_error("Tipo de personagem desconhecido: ", currentchar, ". Usando stats de Default.")
+		currentchar = "Default"
+		dados = CharactersData.get_stats(currentchar)
+		
 	SPEED = dados["speed"]
 	health = dados["health"]
 
@@ -149,7 +149,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 # DAR DANO
 # --------------
 func getHbInfo(dir) -> Dictionary:
-	return WeaponsData.get_hitbox(currentweapon).get(dir, { "pos": Vector2(0, 32), "size": Vector2(128, 64) })
+	return CharactersData.get_hitbox(currentchar).get(dir, { "pos": Vector2(0, 32), "size": Vector2(128, 64) })
 
 func update_hitbox_offset() -> void:
 	var direction_key: String = ""
@@ -169,9 +169,9 @@ func update_hitbox_offset() -> void:
 
 func _on_sword_hitbox_body_entered(body: Node2D) -> void:
 	if is_attacking and (body.is_in_group("enemy") or body.is_in_group("boss")):
-		var dados = WeaponsData.get_stats(currentweapon)
+		var dados = CharactersData.get_stats(currentchar)
 		if dados.is_empty():
-			push_error("Tipo de arma desconhecido: ", currentweapon)
+			push_error("Tipo de personagem desconhecido: ", currentchar)
 			return
 		body.take_damage(dados["damage"], position, dados["kb"])
 
