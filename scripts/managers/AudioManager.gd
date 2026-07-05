@@ -9,6 +9,8 @@ func _ready() -> void:
 	_musica_player = AudioStreamPlayer.new()
 	add_child(_musica_player)
 	_musica_player.process_mode = Node.PROCESS_MODE_ALWAYS
+	# Loop infinito de Soundtrack
+	_musica_player.finished.connect(_musica_player.play)
 	_fade_tween = create_tween()
 
 # ------------------------------------------------------------------

@@ -28,6 +28,7 @@
 [ext_resource type="Script" path="res://scripts/ui/HUDController.gd" id="25_0cp0l"]
 [ext_resource type="Texture2D" uid="uid://btfgvgvd1c2qt" path="res://assets/images/background/ranking.png" id="25_0rl1p"]
 [ext_resource type="StyleBox" uid="uid://c0m80gm5pf46w" path="res://styles/saldo_style.tres" id="28_0rl1p"]
+[ext_resource type="Texture2D" uid="uid://de3kf7awjs4xi" path="res://assets/images/background/espada.png" id="29_ok6jj"]
 [ext_resource type="Texture2D" uid="uid://dqmpwmatnsnov" path="res://assets/images/background/Coin.png" id="33_b1qrp"]
 [ext_resource type="Texture2D" uid="uid://uwjdei4mvcwo" path="res://assets/images/background/padrao.png" id="33_facbu"]
 [ext_resource type="Texture2D" uid="uid://c4j6qkcpw2g4r" path="res://assets/images/background/frost.png" id="34_come4"]
@@ -2469,36 +2470,64 @@ autowrap_mode = 2
 visible = false
 script = ExtResource("25_0cp0l")
 
-[node name="HealthBar" type="TextureProgressBar" parent="UI/HUD" unique_id=1552069552]
-offset_left = 12.0
-offset_top = 650.0
-offset_right = 408.0
+[node name="HealthBar" type="TextureProgressBar" parent="UI/HUD" unique_id=868997905]
+offset_left = 17.0
+offset_top = 659.0
+offset_right = 339.0
 offset_bottom = 683.0
 nine_patch_stretch = true
 texture_under = ExtResource("3_lquwl")
 texture_progress = ExtResource("4_7mycd")
 
-[node name="CoinsCount" type="Label" parent="UI/HUD" unique_id=1201761819]
-offset_left = 791.0
+[node name="CoinsCount" type="Label" parent="UI/HUD" unique_id=980765172]
+offset_left = 785.0
 offset_top = 14.0
-offset_right = 885.0
+offset_right = 889.0
 offset_bottom = 37.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_5vw27")
 text = "Moedas: 0/5"
 vertical_alignment = 1
 
-[node name="EnemiesDefeatedCount" type="Label" parent="UI/HUD" unique_id=1698965972]
-offset_left = 694.0
+[node name="TextureRect" type="TextureRect" parent="UI/HUD/CoinsCount" unique_id=199184289]
+layout_mode = 0
+offset_left = -25.0
+offset_top = 3.0
+offset_right = -6.0
+offset_bottom = 22.0
+texture = ExtResource("33_b1qrp")
+expand_mode = 1
+
+[node name="EnemiesDefeatedCount" type="Label" parent="UI/HUD" unique_id=334450668]
+offset_left = 664.0
 offset_top = 42.0
-offset_right = 885.0
+offset_right = 889.0
 offset_bottom = 65.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_5vw27")
 text = "Inimigos Derrotados: 0/5"
 vertical_alignment = 1
 
-[node name="Timer" type="Label" parent="UI/HUD" unique_id=233444509]
+[node name="TextureRect" type="TextureRect" parent="UI/HUD/EnemiesDefeatedCount" unique_id=2121270737]
+layout_mode = 0
+offset_left = -23.0
+offset_top = 4.0
+offset_right = -3.0
+offset_bottom = 24.0
+texture = ExtResource("29_ok6jj")
+expand_mode = 1
+
+[node name="Timer" type="Label" parent="UI/HUD" unique_id=590660682]
 offset_left = 352.0
 offset_top = 10.0
 offset_right = 543.0
 offset_bottom = 33.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 35
 text = "00:00"
 horizontal_alignment = 1
 vertical_alignment = 1
