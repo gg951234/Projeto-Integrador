@@ -2,7 +2,7 @@ extends Node2D
 
 ## Sistema de orientação por setas usando AStar2D (teoria de grafos).
 ##
-## Constrói um grafo de navegação a partir do TileMapLayer do nível (cada
+## Constrói um grafo de navegação a partir do(s) TileMapLayer(s) do nível (cada
 ## célula caminhável = um ponto do AStar2D, conectada às vizinhas ortogonais
 ## que também são caminháveis). Quando o último inimigo da fase morre, o
 ## GameManager chama revelar_caminhos(): calculamos o menor caminho do jogador
@@ -10,39 +10,56 @@ extends Node2D
 ## FIXAS ao longo de cada rota, calculadas uma única vez a partir da posição do
 ## jogador naquele instante — as setas não se movem mais depois disso.
 ##
-## A rota mais curta é desenhada numa cor chamativa; as alternativas, numa cor
-## neutra mais apagada (mas ainda visível). Enquanto a guia está ativa, medimos,
-## quadro a quadro, quanto tempo o jogador passa perto o suficiente da rota mais
-## curta — se for a maioria do trajeto (>= proporcao_minima_rota_rapida),
+## A rota mais curta (rotas[0]) é desenhada em OURO (caminho certo); as
+## alternativas, em AZUL (caminhos errados/mais longos). Enquanto a guia está
+## ativa, medimos, quadro a quadro, se o jogador está seguindo a linha dourada —
+## se for a maioria do trajeto (>= proporcao_minima_rota_rapida),
 ## seguiu_majoritariamente_a_rota_mais_rapida() devolve true e o GameManager
 ## libera a recompensa (moedas) na sala do boss.
 ##
 ## Este nó é DIRIGIDO pelo GameManager (que já cuida do ciclo de vida dos
 ## inimigos e da entrada do boss); ele não conta inimigos por conta própria.
+##
+## CONFIGURAÇÃO POR FASE (no Inspector do nó, quando os nomes diferem do padrão):
+## - tilemap_path: TileMapLayer do chão/paredes (ex: "../TileMap_Terrain" nas 4-8).
+## - camadas_extras_de_parede: outras TileMapLayers que também têm parede.
 
 const TEXTURA_SETA := preload("res://assets/images/background/seta.png")
 # Limite POR ROTA (não global): com limite global as rotas alternativas, que
 # são desenhadas por último, estouravam o orçamento e sumiam no meio do
-# caminho. Como as setas são fixas (criadas uma única vez), o custo é baixo.
-const MAX_SETAS_POR_ROTA := 90
+# caminho. Alto o bastante para não truncar caminhos longos (fases grandes, onde
+# o caminho até o boss passa facilmente de 90 setas). Como as setas são fixas
+# (criadas uma única vez), o custo é baixo.
+const MAX_SETAS_POR_ROTA := 400
 const DIRECOES_ORTOGONAIS := [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]
 
-# Gradiente de cor por velocidade da rota: a mais rápida (menor comprimento)
-# fica na cor mais chamativa; as mais longas ficam progressivamente mais
-# claras/apagadas, mas ainda bem visíveis — ver _atualizar_setas().
-const COR_ROTA_RAPIDA := Color(1.0, 0.82, 0.15)          # amarelo-ouro chamativo
-const COR_ROTA_LENTA := Color(0.55, 0.7, 0.9, 0.7)       # azul-acinzentado neutro, mas visível
+const COR_ROTA_RAPIDA := Color(1.0, 0.82, 0.15)          # ouro chamativo (caminho certo)
+const COR_ROTA_LENTA := Color(0.55, 0.7, 0.9, 0.7)       # azul neutro (caminhos errados)
+
+# Peso aplicado às células de uma rota já encontrada, para empurrar a busca da
+# próxima alternativa por outro corredor SEM desconectar o grafo. Finito: os
+# gargalos continuam passáveis, então a alternativa sempre existe em mapas
+# conectados (mesmo labirintos tipo "árvore"). Ver _calcular_rotas().
+const PESO_ROTA_USADA := 8.0
 
 @export var tilemap_path: NodePath = ^"../TileMapLayer_Terrain"
 @export var goal_path: NodePath = ^"../BossEnterArea/Enter"
+
+# Camadas de tiles sobrepostas que TAMBÉM contêm paredes (ex: mapa de Física
+# numa segunda TileMapLayer). Uma célula deixa de ser caminhável se qualquer uma
+# dessas camadas tiver parede ali — sem isso, as setas passam por dentro de
+# paredes que existem só na camada de cima. Vazio = só o tilemap principal.
+@export var camadas_extras_de_parede: Array[NodePath] = []
 
 @export var distancia_entre_setas: float = 48.0
 @export var rotacao_offset_graus: float = 0.0 # ajuste fino se a arte da seta não apontar pra "direita" por padrão
 @export var quantidade_rotas_alternativas: int = 2
 
-# Usados pra saber, no fim, se o jogador seguiu majoritariamente a rota mais
-# rápida (libera a recompensa) — ver seguiu_majoritariamente_a_rota_mais_rapida().
-@export var tolerancia_seguir_rota: float = 90.0
+# tolerancia_celulas: distância máxima (em passos de corredor, PELO GRAFO) da
+# célula do jogador até a LINHA dourada para ainda contar como "no menor caminho".
+# Mede pela linha específica e distingue das rotas azuis (ver _construir_faixa_da_rota).
+# Maior = mais folga (bom pra corredores largos); menor = mais rígido.
+@export var tolerancia_celulas: int = 3
 @export var proporcao_minima_rota_rapida: float = 0.5
 
 var astar := AStar2D.new()
@@ -50,18 +67,20 @@ var _cell_para_id: Dictionary = {}   # Vector2i -> int
 var _id_para_cell: Dictionary = {}   # int -> Vector2i
 
 var tilemap: TileMapLayer
+var _camadas_parede: Array[TileMapLayer] = []
 var goal: Node2D
 var _player: Node2D
 
 var _ativo: bool = false
 var _setas: Array[Node2D] = []
 
-# Rota mais curta atual (cacheada) usada pelo feedback ao vivo em _process().
-var _rota_rapida_pontos: PackedVector2Array = PackedVector2Array()
+# Faixa de células consideradas "seguindo o menor caminho": mais próximas da
+# linha DOURADA do que de qualquer rota AZUL, dentro de tolerancia_celulas.
+# Usada pelo feedback ao vivo em _process. Recalculada a cada revelação.
+var _celulas_perto_do_caminho: Dictionary = {}
 var _frames_seguindo_rota_rapida: int = 0
 var _frames_total: int = 0
 var _ultimo_perto: bool = false
-
 
 func _ready() -> void:
 	# Espera todo mundo da cena terminar o próprio _ready() (player incluso)
@@ -78,8 +97,15 @@ func _ready() -> void:
 		push_error("PathGuideManager: nó objetivo não encontrado em '%s'." % goal_path)
 		return
 
-	_construir_grade()
+	_camadas_parede.clear()
+	for caminho in camadas_extras_de_parede:
+		var camada := get_node_or_null(caminho)
+		if camada is TileMapLayer:
+			_camadas_parede.append(camada)
+		else:
+			push_warning("PathGuideManager: camada extra de parede '%s' não é uma TileMapLayer." % caminho)
 
+	_construir_grade()
 
 # O player nunca é assumido como capturado para sempre: qualquer skin/reload
 # recria o nó, então sempre revalida e rebusca no grupo antes de usar.
@@ -88,22 +114,23 @@ func _obter_player() -> Node2D:
 		_player = get_tree().get_first_node_in_group("player")
 	return _player
 
-
 func _exit_tree() -> void:
 	_esconder_setas()
 
-
 func _process(_delta: float) -> void:
-	# Feedback ao vivo: mede, quadro a quadro, se o jogador está perto o
-	# suficiente da rota mais curta e atualiza o indicador do HUD. A estatística
-	# acumulada aqui é o que seguiu_majoritariamente_a_rota_mais_rapida() usa.
-	if not _ativo or _rota_rapida_pontos.size() < 2:
+	# Feedback ao vivo: mede, quadro a quadro, se o jogador está seguindo a linha
+	# DOURADA (e não uma rota azul) e atualiza o indicador do HUD. A faixa (ver
+	# _construir_faixa_da_rota) só contém células mais próximas do ouro que de
+	# qualquer rota azul e dentro da tolerância — então em cima de uma seta azul,
+	# ou longe de tudo, dá "fora".
+	if not _ativo or _celulas_perto_do_caminho.is_empty():
 		return
 	var jogador := _obter_player()
 	if not jogador:
 		return
 
-	var perto := _distancia_ate_polilinha(jogador.global_position, _rota_rapida_pontos) <= tolerancia_seguir_rota
+	var cel_jogador := tilemap.local_to_map(tilemap.to_local(jogador.global_position))
+	var perto := _celulas_perto_do_caminho.has(cel_jogador)
 	_frames_total += 1
 	if perto:
 		_frames_seguindo_rota_rapida += 1
@@ -112,9 +139,7 @@ func _process(_delta: float) -> void:
 		_ultimo_perto = perto
 		_atualizar_indicador_hud(perto)
 
-
 # ==================== 🎮 API PÚBLICA (chamada pelo GameManager) ====================
-
 ## Libera a guia de caminhos. Chamado quando o último inimigo da fase morre.
 func revelar_caminhos() -> void:
 	if _ativo:
@@ -129,11 +154,9 @@ func revelar_caminhos() -> void:
 	_mostrar_indicador_hud()
 	_calcular_e_desenhar_caminhos()
 
-
 ## Interrompe a guia e some com as setas na hora (ex: jogador entrou na sala do boss).
 func parar() -> void:
 	_parar_guia()
-
 
 ## Permite trocar o destino da guia em tempo real (ex: próximo checkpoint).
 func definir_objetivo(novo_objetivo: Node2D) -> void:
@@ -142,19 +165,14 @@ func definir_objetivo(novo_objetivo: Node2D) -> void:
 		_esconder_setas()
 		_calcular_e_desenhar_caminhos()
 
-
-## Diz se o jogador passou a maior parte do trajeto perto o suficiente da rota
-## mais curta. Não rastreia a rota que ele realmente andou — só o quão perto ele
-## estava da rota rápida, quadro a quadro. Chamar ANTES de parar(): é a base
-## para o GameManager liberar (ou não) a recompensa de moedas na sala do boss.
+## Diz se o jogador passou a maior parte do trajeto seguindo a linha dourada.
+## Chamar ANTES de parar(): base para o GameManager liberar (ou não) a recompensa.
 func seguiu_majoritariamente_a_rota_mais_rapida() -> bool:
 	if _frames_total == 0:
 		return false
 	return float(_frames_seguindo_rota_rapida) / float(_frames_total) >= proporcao_minima_rota_rapida
 
-
 # ==================== 🧭 CONSTRUÇÃO DO GRAFO (AStar2D) ====================
-
 func _construir_grade() -> void:
 	var caminhaveis: Dictionary = {} # Vector2i -> true
 	var proximo_id := 0
@@ -177,14 +195,20 @@ func _construir_grade() -> void:
 				if not astar.are_points_connected(id_atual, id_vizinha):
 					astar.connect_points(id_atual, id_vizinha)
 
-
 func _celula_e_caminhavel(celula: Vector2i) -> bool:
 	var dados := tilemap.get_cell_tile_data(celula)
 	if dados == null:
 		return false
 	# Tiles de parede têm polígono de colisão na physics layer 0; chão não tem.
-	return dados.get_collision_polygons_count(0) == 0
-
+	if dados.get_collision_polygons_count(0) > 0:
+		return false
+	# Paredes que vivem em camadas sobrepostas também bloqueiam. Todas as camadas
+	# compartilham origem e tamanho de célula, então a mesma Vector2i vale pra todas.
+	for camada in _camadas_parede:
+		var dados_extra := camada.get_cell_tile_data(celula)
+		if dados_extra != null and dados_extra.get_collision_polygons_count(0) > 0:
+			return false
+	return true
 
 # Acha o id do AStar2D mais próximo de uma posição global (procura em raios
 # crescentes caso a posição exata caia numa célula não registrada).
@@ -205,13 +229,8 @@ func _id_mais_proximo(pos_global: Vector2) -> int:
 
 	return -1
 
-
 # ==================== 🔁 CÁLCULO E ATUALIZAÇÃO DO CAMINHO ====================
-
-# Calcula as rotas UMA vez, a partir da posição do jogador no instante em que o
-# último inimigo morre, e desenha as setas fixas. Daí em diante as setas não se
-# movem — só o indicador do HUD acompanha, ao vivo, se o jogador está ou não
-# sobre a rota mais curta (ver _process).
+# Calcula as rotas UMA vez (setas fixas) e monta a faixa "no menor caminho".
 func _calcular_e_desenhar_caminhos() -> void:
 	var jogador := _obter_player()
 	if not jogador or not is_instance_valid(goal):
@@ -227,59 +246,73 @@ func _calcular_e_desenhar_caminhos() -> void:
 	if rotas.is_empty():
 		return
 
-	# rotas vem ordenado por comprimento crescente; a [0] é a mais curta. Ela é
-	# cacheada para o feedback ao vivo (indicador do HUD) em _process().
-	_rota_rapida_pontos = rotas[0]["pontos"]
+	# Faixa de células "mais perto do OURO que de qualquer rota azul", usada pelo
+	# feedback ao vivo em _process() para saber se o jogador segue o menor caminho.
+	_construir_faixa_da_rota(rotas)
 	_atualizar_setas(rotas)
-
 
 func _parar_guia() -> void:
 	_ativo = false
 	_esconder_setas()
-	_rota_rapida_pontos = PackedVector2Array()
+	_celulas_perto_do_caminho.clear()
 	_esconder_indicador_hud()
 
-
 # ==================== 🗺️ ROTAS (PRINCIPAL + ALTERNATIVAS) ====================
-
-# Calcula o caminho mais curto e, opcionalmente, algumas rotas alternativas,
-# devolvendo tudo ordenado por comprimento (a mais rápida primeiro). Cada
-# alternativa é achada bloqueando temporariamente os pontos já usados pelas
-# rotas anteriores (menos início/fim) e recalculando — isso força a busca a
-# desviar por outro corredor do labirinto em vez de repetir a mesma rota. Os
-# pontos são sempre restaurados no final.
+# Calcula o caminho mais curto e algumas rotas alternativas, ordenado por
+# comprimento. Em vez de DESABILITAR o caminho principal (o que desconecta o
+# grafo em gargalos, deixando sem alternativa), PENALIZA o peso das células já
+# usadas. Assim o A* desvia por corredores paralelos onde é possível, mas ainda
+# atravessa os gargalos quando não há outro jeito — gerando rotas alternativas
+# COMPLETAS em mapas conectados. Os pesos são sempre restaurados no final.
 func _calcular_rotas(id_inicio: int, id_fim: int) -> Array:
 	var rotas: Array = []
+	var caminhos_ids: Array = []   # id-paths já aceitos, para evitar duplicatas
 
 	var ids_principal := astar.get_id_path(id_inicio, id_fim)
 	if ids_principal.size() < 2:
 		return rotas
 
-	var pontos_principal := _ids_para_pontos(ids_principal)
-	rotas.append({"pontos": pontos_principal, "comprimento": _comprimento_do_caminho(pontos_principal)})
+	rotas.append(_rota_de_ids(ids_principal))
+	caminhos_ids.append(ids_principal)
 
-	var pontos_bloqueados: Array = []
+	var penalizados: Dictionary = {}   # ids cujo peso foi alterado (a restaurar)
 	var ultima_rota := ids_principal
 
 	for i in range(quantidade_rotas_alternativas):
 		for id in ultima_rota:
-			if id != id_inicio and id != id_fim and not pontos_bloqueados.has(id):
-				pontos_bloqueados.append(id)
-				astar.set_point_disabled(id, true)
+			if id != id_inicio and id != id_fim and not penalizados.has(id):
+				penalizados[id] = true
+				astar.set_point_weight_scale(id, PESO_ROTA_USADA)
 
-		var ids_alternativa := astar.get_id_path(id_inicio, id_fim)
-		if ids_alternativa.size() < 2:
-			break # não existe mais nenhum desvio possível
-		var pontos_alt := _ids_para_pontos(ids_alternativa)
-		rotas.append({"pontos": pontos_alt, "comprimento": _comprimento_do_caminho(pontos_alt)})
-		ultima_rota = ids_alternativa
+		var ids_alt := astar.get_id_path(id_inicio, id_fim)
+		if ids_alt.size() < 2 or _rota_ja_existe(ids_alt, caminhos_ids):
+			break # não há mais desvio distinto possível
+		rotas.append(_rota_de_ids(ids_alt))
+		caminhos_ids.append(ids_alt)
+		ultima_rota = ids_alt
 
-	for id in pontos_bloqueados:
-		astar.set_point_disabled(id, false)
+	for id in penalizados.keys():
+		astar.set_point_weight_scale(id, 1.0)
 
 	rotas.sort_custom(func(a, b): return a["comprimento"] < b["comprimento"])
 	return rotas
 
+func _rota_de_ids(ids) -> Dictionary:
+	var pontos := _ids_para_pontos(ids)
+	return {"pontos": pontos, "comprimento": _comprimento_do_caminho(pontos)}
+
+func _rota_ja_existe(ids, lista: Array) -> bool:
+	for outro in lista:
+		if ids.size() != outro.size():
+			continue
+		var igual := true
+		for i in range(ids.size()):
+			if ids[i] != outro[i]:
+				igual = false
+				break
+		if igual:
+			return true
+	return false
 
 func _ids_para_pontos(ids) -> PackedVector2Array:
 	var pontos: PackedVector2Array = []
@@ -288,23 +321,57 @@ func _ids_para_pontos(ids) -> PackedVector2Array:
 		pontos.append(tilemap.to_global(tilemap.map_to_local(celula)))
 	return pontos
 
-
 func _comprimento_do_caminho(pontos: PackedVector2Array) -> float:
 	var total := 0.0
 	for i in range(pontos.size() - 1):
 		total += pontos[i].distance_to(pontos[i + 1])
 	return total
 
+# ==================== 🎯 FAIXA "NO MENOR CAMINHO" (OURO vs AZUL) ====================
+# Faixa de células mais próximas da linha DOURADA (rotas[0]) do que de qualquer
+# rota AZUL, dentro de tolerancia_celulas. BFS multi-origem rotulada (Voronoi)
+# pelo grafo (respeita paredes): o ouro é semeado primeiro (empates e gargalos
+# compartilhados ficam com o ouro), cada célula herda o rótulo da rota mais
+# próxima, e só as células OURO entram na faixa. Em cima de uma seta azul, ou
+# longe de tudo, a célula fica de fora.
+func _construir_faixa_da_rota(rotas: Array) -> void:
+	_celulas_perto_do_caminho.clear()
+	if rotas.is_empty():
+		return
 
-func _distancia_ate_polilinha(ponto: Vector2, pontos: PackedVector2Array) -> float:
-	if pontos.size() < 2:
-		return INF
-	var menor := INF
-	for i in range(pontos.size() - 1):
-		var mais_proximo: Vector2 = Geometry2D.get_closest_point_to_segment(ponto, pontos[i], pontos[i + 1])
-		menor = minf(menor, ponto.distance_to(mais_proximo))
-	return menor
+	var eh_ouro: Dictionary = {}   # Vector2i -> bool (rótulo da rota mais próxima)
+	var prof: Dictionary = {}      # Vector2i -> int (passos até a rota mais próxima)
+	var fila: Array = []
 
+	_semear_rota(rotas[0]["pontos"], true, eh_ouro, prof, fila)
+	for i in range(1, rotas.size()):
+		_semear_rota(rotas[i]["pontos"], false, eh_ouro, prof, fila)
+
+	var idx := 0
+	while idx < fila.size():
+		var atual: Vector2i = fila[idx]
+		idx += 1
+		var p: int = prof[atual]
+		if eh_ouro[atual] and p <= tolerancia_celulas:
+			_celulas_perto_do_caminho[atual] = true
+		if p >= tolerancia_celulas:
+			continue
+		for dir in DIRECOES_ORTOGONAIS:
+			var viz: Vector2i = atual + dir
+			if _cell_para_id.has(viz) and not eh_ouro.has(viz):
+				eh_ouro[viz] = eh_ouro[atual]
+				prof[viz] = p + 1
+				fila.append(viz)
+
+# Semeia as células de uma rota (distância 0) com o rótulo dado, sem sobrescrever
+# células já semeadas (o ouro é semeado antes, então mantém a prioridade).
+func _semear_rota(pontos: PackedVector2Array, ouro: bool, eh_ouro: Dictionary, prof: Dictionary, fila: Array) -> void:
+	for ponto in pontos:
+		var cel := tilemap.local_to_map(tilemap.to_local(ponto))
+		if not eh_ouro.has(cel):
+			eh_ouro[cel] = ouro
+			prof[cel] = 0
+			fila.append(cel)
 
 # ==================== 🏹 SETAS VISUAIS ====================
 
@@ -314,21 +381,16 @@ func _atualizar_setas(rotas: Array) -> void:
 	if rotas.is_empty():
 		return
 
-	# rotas já vem ordenado por comprimento crescente (ver _calcular_rotas).
-	# A mais curta sai maior e na cor chamativa; as alternativas, menores e na
-	# cor neutra — todas desenhadas por inteiro (limite de setas é por rota).
-	var comprimento_min: float = rotas[0]["comprimento"]
-	var comprimento_max: float = rotas[-1]["comprimento"]
-	var intervalo: float = comprimento_max - comprimento_min
-
-	for rota in rotas:
-		var t := 0.0
-		if intervalo > 0.001:
-			t = (rota["comprimento"] - comprimento_min) / intervalo
-		var cor: Color = COR_ROTA_RAPIDA.lerp(COR_ROTA_LENTA, t)
-		var escala: float = lerpf(1.0, 0.7, t)
-		_desenhar_rota(rota["pontos"], cor, escala)
-
+	# rotas já vem ordenado por comprimento crescente (ver _calcular_rotas), então
+	# rotas[0] é a MAIS CURTA = caminho certo (ouro, maior). Todas as outras são
+	# alternativas mais longas = erradas (azul, menores). Cor por POSIÇÃO (índice),
+	# não por comprimento: senão uma alternativa de comprimento parecido com a mais
+	# curta também sairia dourada (dois "caminhos certos").
+	for i in range(rotas.size()):
+		var eh_mais_curta := i == 0
+		var cor: Color = COR_ROTA_RAPIDA if eh_mais_curta else COR_ROTA_LENTA
+		var escala: float = 1.0 if eh_mais_curta else 0.7
+		_desenhar_rota(rotas[i]["pontos"], cor, escala)
 
 func _desenhar_rota(pontos: PackedVector2Array, cor: Color, escala: float) -> void:
 	if pontos.size() < 2:
@@ -351,7 +413,6 @@ func _desenhar_rota(pontos: PackedVector2Array, cor: Color, escala: float) -> vo
 		setas_nesta_rota += 1
 		distancia += distancia_entre_setas
 
-
 func _amostrar_caminho(segmentos: Array, distancia: float) -> Array:
 	for segmento in segmentos:
 		if distancia <= segmento["acumulado"] + segmento["comprimento"]:
@@ -362,10 +423,13 @@ func _amostrar_caminho(segmentos: Array, distancia: float) -> Array:
 	var ultimo: Dictionary = segmentos[-1]
 	return [ultimo["b"], (ultimo["b"] - ultimo["a"]).normalized()]
 
-
 func _criar_seta(posicao: Vector2, direcao: Vector2, cor: Color, escala: float) -> Sprite2D:
 	var seta := Sprite2D.new()
 	seta.texture = TEXTURA_SETA
+	# z_index 0 (e não 100): mantém as setas no mesmo nível do player, que é
+	# y-sorted e sempre está em Y > 0, enquanto este PathGuideManager fica em
+	# Y = 0. Assim o player (e demais personagens) desenha POR CIMA das setas, e
+	# elas ainda ficam acima do chão por ordem na árvore de nós.
 	seta.z_index = 0
 	seta.modulate = cor
 	seta.scale = Vector2(escala, escala)
@@ -373,7 +437,6 @@ func _criar_seta(posicao: Vector2, direcao: Vector2, cor: Color, escala: float) 
 	seta.global_position = posicao
 	seta.rotation = direcao.angle() + deg_to_rad(rotacao_offset_graus)
 	return seta
-
 
 func _esconder_setas() -> void:
 	for seta in _setas:
@@ -390,19 +453,16 @@ func _obter_hud() -> Node:
 		return gm.hud_reference
 	return null
 
-
 func _mostrar_indicador_hud() -> void:
 	var hud := _obter_hud()
 	if hud and hud.has_method("mostrar_indicador_caminho"):
 		hud.mostrar_indicador_caminho(true)
 		hud.atualizar_indicador_caminho(false)
 
-
 func _esconder_indicador_hud() -> void:
 	var hud := _obter_hud()
 	if hud and hud.has_method("mostrar_indicador_caminho"):
 		hud.mostrar_indicador_caminho(false)
-
 
 func _atualizar_indicador_hud(no_caminho: bool) -> void:
 	var hud := _obter_hud()

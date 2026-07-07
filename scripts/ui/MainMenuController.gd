@@ -208,7 +208,7 @@ func setup_levels_selection() -> void:
 	await get_tree().process_frame
 	
 	# Cria 10 botões clonando o template
-	for i in range(1, 11):
+	for i in range(1, 9):
 		var btn = template.duplicate()
 		var btntext = btn.get_node("LevelNumber")
 		btn.visible = true

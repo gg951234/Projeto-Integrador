@@ -10,8 +10,8 @@ var enemies = {
 		"Novice Book": 2,
 	},
 	"Level3": {
-		"Novice Book": 1,
-		#"Adept Book": 2,
+		"Novice Book": 4,
+		"Adept Book": 2,
 	},
 	"Level4": {
 		"Novice Book": 2,
