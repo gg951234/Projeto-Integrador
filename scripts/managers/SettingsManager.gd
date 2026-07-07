@@ -1,15 +1,13 @@
 extends CanvasLayer
 
-# --- Configurações ---
-const SETTINGS_PATH := "res://data/settings_default.json"
+const SETTINGS_PATH = "user://settings_default.json"
 @onready var main_menu_canvas: CanvasLayer = $"../MainMenuCanvas"
+@onready var voltar = $Voltar
+@onready var music_slider: HSlider = $ConfiguracoesMenu/VBoxContainer/MusicPanel/HSliderMusic
+@onready var sfx_slider: HSlider = $ConfiguracoesMenu/VBoxContainer/SFXPanel/HSliderSFX
 
 var volumesfx: float = 1.0
 var volumemusic: float = 1.0
-var brightness: float = 1.0
-
-# --- UI ---
-@onready var voltar = $Voltar
 
 var hover_scale: Vector2 = Vector2(1.1, 1.1)
 var original_scale: Vector2 = Vector2(1, 1)
@@ -21,11 +19,25 @@ func _ready() -> void:
 	# Carrega as configurações salvas
 	carregar()
 
-	# Configura o botão (pivot e sinais de mouse)
+	# Configura os sliders (max = 1.0, step = 0.1)
+	music_slider.max_value = 1.0
+	music_slider.step = 0.1
+	sfx_slider.max_value = 1.0
+	sfx_slider.step = 0.1
+
+	# Sincroniza os sliders com os valores carregados
+	music_slider.value = volumemusic
+	sfx_slider.value = volumesfx
+
+	# --- Conexão dos sinais via script ---
+	music_slider.drag_ended.connect(_on_music_slider_ended)
+	sfx_slider.drag_ended.connect(_on_sfx_slider_ended)
+	music_slider.value_changed.connect(_on_music_slider_value_changed)
+
+	# Configura o botão Voltar (pivot e sinais de mouse)
 	voltar.pivot_offset = voltar.size / 2
 	voltar.mouse_entered.connect(_on_button_mouse_entered.bind(voltar))
 	voltar.mouse_exited.connect(_on_button_mouse_exited.bind(voltar))
-	# O sinal "pressed" do botão deve estar conectado no editor ou pode ser conectado aqui:
 	voltar.pressed.connect(_on_voltar_pressed)
 
 # --- Persistência ---
@@ -33,7 +45,6 @@ func salvar() -> void:
 	var dados := {
 		"volumesfx": volumesfx,
 		"volumemusic": volumemusic,
-		"brightness": brightness,
 	}
 	var arquivo := FileAccess.open(SETTINGS_PATH, FileAccess.WRITE)
 	if arquivo:
@@ -51,13 +62,11 @@ func carregar() -> void:
 		if dados:
 			volumesfx = dados.get("volumesfx", 1.0)
 			volumemusic = dados.get("volumemusic", 1.0)
-			brightness = dados.get("brightness", 1.0)
 
 func get_configs() -> Dictionary:
 	return {
 		"volumesfx": volumesfx,
 		"volumemusic": volumemusic,
-		"brightness": brightness,
 	}
 
 # --- Animações do botão ---
@@ -73,7 +82,21 @@ func animate_scale(button: Button, target_scale: Vector2) -> void:
 	buttontween.set_trans(tween_trans)
 	buttontween.tween_property(button, "scale", target_scale, animation_duration)
 
-# --- Ação do botão Voltar ---
 func _on_voltar_pressed() -> void:
 	visible = false
 	main_menu_canvas.visible = true
+
+# Music slider: salva apenas se o valor realmente mudou (value_changed == true)
+func _on_music_slider_ended(value_changed: bool) -> void:
+	if value_changed:
+		volumemusic = music_slider.value
+		salvar()
+
+# SFX slider: salva apenas se o valor realmente mudou
+func _on_sfx_slider_ended(value_changed: bool) -> void:
+	if value_changed:
+		volumesfx = sfx_slider.value
+		salvar()
+
+func _on_music_slider_value_changed(value: float) -> void:
+		AudioManager.update_music_volume(value)

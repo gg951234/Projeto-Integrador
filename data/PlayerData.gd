@@ -68,11 +68,8 @@ func atualizar_dados_da_nuvem(dados_nuvem: Dictionary) -> void:
 
 # Modifica o progresso de uma fase (Pode ser chamado de dentro de qualquer fase)
 # Retorna true se o score desta tentativa é um novo recorde da fase (deve ir pro ranking)
-func registrar_fim_de_fase(fase_id: String, moedas_ganhas: int, tempo: float, score: int) -> bool:
-	# 1. Atualiza as moedas globais
-	moedas_coletadas += moedas_ganhas
-
-	# 2. Verifica se já existe registro dessa fase para manter os melhores recordes
+func registrar_fim_de_fase(fase_id: String, moedas_coletadasnafase: int, tempo: float, score: int) -> bool:
+	# 1. Verifica se já existe registro dessa fase para manter os melhores recordes
 	var melhor_tempo = tempo
 	var melhor_score = score
 	var eh_novo_recorde = true
@@ -84,19 +81,25 @@ func registrar_fim_de_fase(fase_id: String, moedas_ganhas: int, tempo: float, sc
 		if antigo.has("melhor_score") and antigo["melhor_score"] > score:
 			melhor_score = antigo["melhor_score"] # Mantém o maior score
 			eh_novo_recorde = false
+		# 2. Atualiza as moedas globais com (Moedas coletadas na fase - Moedas já pegas antes)
+		var moedas_ganhas = (moedas_coletadasnafase - antigo.get("moedas_fase", 0))
+		if moedas_ganhas < 0:
+			moedas_ganhas = 0
+		moedas_coletadas += moedas_ganhas
+		print("💰 Coletou %d moedas e foram descontadas %d por já ter pego antes" % [moedas_coletadasnafase, antigo.get("moedas_fase", 0)])
 
 	progresso_fases[fase_id] = {
 		"completada": true,
 		"melhor_tempo": melhor_tempo,
 		"melhor_score": melhor_score,
-		"moedas_fase": moedas_ganhas
+		"moedas_fase": moedas_coletadasnafase
 	}
 
 	# 3. Altera o status para pendente de sincronização externa
 	sincronizado = false
 	_gravar_arquivo_no_disco()
 
-	print("🏁 Fim de fase %s: +%d moedas (total %d), score=%d, novo_recorde=%s" % [fase_id, moedas_ganhas, moedas_coletadas, score, eh_novo_recorde])
+	print("🏁 Fim de fase %s: totaldemoedas=%d, score=%d, novo_recorde=%s" % [fase_id, moedas_coletadas, score, eh_novo_recorde])
 
 	# 4. Tenta despachar em segundo plano para o Firebase (falha em silêncio se
 	# estiver offline — o timer de fundo e o próximo login tentam de novo)

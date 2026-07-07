@@ -10,6 +10,7 @@ var health: int
 var target = null
 var target_in_range: bool = false
 var isAlive: bool = true
+var isAttacking: bool = false
 var knockback_tween: Tween = null   # Referência para o tween ativo
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
@@ -39,11 +40,26 @@ func _physics_process(_delta: float) -> void:
 
 func _moveToTarget() -> void:
 	var distance = position.distance_to(target.position)
-	if distance < 1: # Se estiver muito perto, não se move
+	if distance < 0.1: # Se estiver muito perto, não se move
 		velocity = Vector2.ZERO
 		return
 	var direction = (target.position - position).normalized()
 	velocity = direction * SPEED
+
+func _playattackanim() -> void:
+	isAttacking = true
+	animated_sprite_2d.stop()
+	animated_sprite_2d.play("attack")
+	
+	var frame_count = animated_sprite_2d.sprite_frames.get_frame_count("attack")
+	var fps = animated_sprite_2d.sprite_frames.get_animation_speed("attack")
+	var anim_length = frame_count / fps if fps > 0 else 1.0
+	
+	await get_tree().create_timer(anim_length).timeout
+	
+	isAttacking = false
+	if target and isAlive:
+		animated_sprite_2d.play("idle")
 
 func take_damage(damage: int, attackedpos: Vector2, kbforce: int) -> void:
 	health -= damage
@@ -99,16 +115,17 @@ func _on_sight_body_exited(body: Node2D) -> void:
 		animated_sprite_2d.play("idle")
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player") and attack_timer.time_left <= 0:
+	if body.is_in_group("player"):
 		target_in_range = true
-		attack_timer.start()
-		
-		# Busca os dados do inimigo atual na tabela global
-		var dados = EnemiesData.get_stats(enemy_type)
-		if dados.is_empty():
-			push_error("Dano não registrado: ", enemy_type)
-			return
-		body.take_damage(dados["damage"], position, dados["kb"])
+		if attack_timer.time_left <= 0:
+			attack_timer.start()
+			# Busca os dados do inimigo atual na tabela global
+			var dados = EnemiesData.get_stats(enemy_type)
+			if dados.is_empty():
+				push_error("Dano não registrado: ", enemy_type)
+				return
+			body.take_damage(dados["damage"], position, dados["kb"])
+			_playattackanim()
 
 func _on_hitbox_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
@@ -116,10 +133,13 @@ func _on_hitbox_body_exited(body: Node2D) -> void:
 
 func _on_attack_timer_timeout() -> void:
 	attack_timer.stop()
+	
 	if target and target_in_range:
+		attack_timer.start()
 		# Busca os dados do inimigo atual na tabela global
 		var dados = EnemiesData.get_stats(enemy_type)
 		if dados.is_empty():
 			push_error("Dano não registrado: ", enemy_type)
 			return
 		target.take_damage(dados["damage"], position, dados["kb"])
+		_playattackanim()

@@ -1,36 +1,57 @@
 extends Control
-
-@onready var start: Button = $MainMenuCanvas/Buttons/Start
-@onready var options: Button = $MainMenuCanvas/Buttons/Options
-@onready var quit: Button = $MainMenuCanvas/Buttons/Quit
+# -- CANVAS --
 @onready var main_menu_canvas: CanvasLayer = $MainMenuCanvas
 @onready var level_selection_canvas: CanvasLayer = $LevelSelectionCanvas
 @onready var cadastro: CanvasLayer = $Cadastro
 @onready var settings: CanvasLayer = $Settings
-@onready var level_selection_buttons: GridContainer = $LevelSelectionCanvas/Buttons/GridContainer
 
+# -- MAIN MENU --
+@onready var start: Button = $MainMenuCanvas/Buttons/Start
+@onready var options: Button = $MainMenuCanvas/Buttons/Options
+@onready var quit: Button = $MainMenuCanvas/Buttons/Quit
 @onready var sound_button: Button = $MainMenuCanvas/Som
 @onready var help: Button = $MainMenuCanvas/Help
+@onready var menu_sprite: AnimatedSprite2D = $MainMenuCanvas/AnimatedSprite2D
+
+# -- FASES --
+@onready var level_selection_buttons: GridContainer = $LevelSelectionCanvas/Buttons/GridContainer
 @onready var back: Button = $LevelSelectionCanvas/Back
 @onready var loja: Button = $LevelSelectionCanvas/Loja
 @onready var profile: Button = $LevelSelectionCanvas/Profile
-@onready var menu_sprite: AnimatedSprite2D = $MainMenuCanvas/AnimatedSprite2D
+@onready var ranking: Button = $LevelSelectionCanvas/Ranking
+
+# -- INSTRUÇÕES --
 @onready var instrucoes: Panel = $MainMenuCanvas/Instrucoes
 @onready var fechar: Button = $MainMenuCanvas/Instrucoes/Fechar
-@onready var ranking: Button = $LevelSelectionCanvas/Ranking
+
+# -- LOJA --
 @onready var voltar_loja: Button = $Loja/VoltarLoja
-@onready var back_ranking: Button = $Ranking/BackRanking
 @onready var roupa_container: HBoxContainer = $Loja/HBoxContainer
 @onready var roupa_template: Panel = $Loja/HBoxContainer/Template
 @onready var loja_saldo: Button = $Loja/Coins
-@onready var fechar_perfil: Button = $LevelSelectionCanvas/Perfil/FecharPerfil
-@onready var perfil: Panel = $LevelSelectionCanvas/Perfil
+
+# -- LOGIN --
 @onready var login: Panel = $LevelSelectionCanvas/Login
-@onready var cadastrar: Button = $Cadastro/Cadastrar
-@onready var voltar_cadastro: Button = $Cadastro/VoltarCadastro
 @onready var entrar: Button = $LevelSelectionCanvas/Login/Entrar
+@onready var login_email: LineEdit = $LevelSelectionCanvas/Login/Informacoes/LabelEmail
+@onready var login_senha: LineEdit = $LevelSelectionCanvas/Login/Informacoes/LabelSenha
+@onready var login_status: Label = $LevelSelectionCanvas/Login/StatusLabel
 @onready var tela_cadastro: Button = $LevelSelectionCanvas/Login/BtnTelaCadastro
 @onready var fechar_login: Button = $LevelSelectionCanvas/Login/FecharLogin
+
+# -- CADASTRO --
+@onready var cadastro_username: LineEdit = $Cadastro/Panel2/LabelUserName
+@onready var cadastro_email: LineEdit = $Cadastro/Panel2/LabelEmail
+@onready var cadastro_senha: LineEdit = $Cadastro/Panel2/LabelSenha
+@onready var cadastro_pais: OptionButton = $Cadastro/Panel2/LabelPais
+@onready var cadastro_data_nascimento: LineEdit = $Cadastro/Panel2/LabelDataNascimento
+@onready var cadastro_status: Label = $Cadastro/StatusLabel
+@onready var cadastrar: Button = $Cadastro/Cadastrar
+@onready var voltar_cadastro: Button = $Cadastro/VoltarCadastro
+
+# -- PERFIL --
+@onready var fechar_perfil: Button = $LevelSelectionCanvas/Perfil/FecharPerfil
+@onready var perfil: Panel = $LevelSelectionCanvas/Perfil
 @onready var alterar_senha: Button = $LevelSelectionCanvas/Perfil/Senha
 @onready var fechar_senha: Button = $LevelSelectionCanvas/Perfil/AlterarSenha/FecharSenha
 @onready var confirmar: Button = $LevelSelectionCanvas/Perfil/AlterarSenha/Confirmar
@@ -38,30 +59,20 @@ extends Control
 @onready var nova_senha: LineEdit = $LevelSelectionCanvas/Perfil/AlterarSenha/Informacoes/NovaSenha
 @onready var senha_status: Label = $LevelSelectionCanvas/Perfil/AlterarSenha/StatusLabel
 @onready var sair: Button = $LevelSelectionCanvas/Perfil/Sair
-
-@onready var login_email: LineEdit = $LevelSelectionCanvas/Login/Informacoes/LabelEmail
-@onready var login_senha: LineEdit = $LevelSelectionCanvas/Login/Informacoes/LabelSenha
-@onready var login_status: Label = $LevelSelectionCanvas/Login/StatusLabel
-
-@onready var cadastro_username: LineEdit = $Cadastro/Panel2/LabelUserName
-@onready var cadastro_email: LineEdit = $Cadastro/Panel2/LabelEmail
-@onready var cadastro_senha: LineEdit = $Cadastro/Panel2/LabelSenha
-@onready var cadastro_pais: OptionButton = $Cadastro/Panel2/LabelPais
-@onready var cadastro_data_nascimento: LineEdit = $Cadastro/Panel2/LabelDataNascimento
-@onready var cadastro_status: Label = $Cadastro/StatusLabel
-
 @onready var perfil_username: LineEdit = $LevelSelectionCanvas/Perfil/Informacoes/LabelUserName
 @onready var perfil_email: Label = $LevelSelectionCanvas/Perfil/Informacoes/LabelEmail
 @onready var perfil_data_criacao: Label = $LevelSelectionCanvas/Perfil/Informacoes/LabelDataCriacao
 @onready var perfil_pais: Label = $LevelSelectionCanvas/Perfil/Informacoes/LabelPais
 @onready var perfil_data_nascimento: Label = $LevelSelectionCanvas/Perfil/Informacoes/LabelDataNascimento
 
+# -- RANKING --
 @onready var ranking_fase_anterior: Button = $Ranking/Estatisticas/SeletorFase/FaseAnterior
 @onready var ranking_fase_proxima: Button = $Ranking/Estatisticas/SeletorFase/FaseProxima
 @onready var ranking_fase_label: Label = $Ranking/Estatisticas/SeletorFase/FaseLabel
 @onready var ranking_moedas: Label = $Ranking/Estatisticas/MoedasColetadas
 @onready var ranking_posicao: Label = $Ranking/Estatisticas/PosicaoGeral
 @onready var ranking_linhas: Node = $Ranking/Ranking
+@onready var back_ranking: Button = $Ranking/BackRanking
 
 const RANKING_FASE_MAX: int = 10
 var ranking_fase_atual: int = 1
@@ -199,21 +210,23 @@ func setup_levels_selection() -> void:
 	# Cria 10 botões clonando o template
 	for i in range(1, 11):
 		var btn = template.duplicate()
+		var btntext = btn.get_node("LevelNumber")
 		btn.visible = true
 		btn.name = "Level" + str(i)
-		btn.text = str(i)
-		
+		btntext.text = str(i)
 		# Verifica se o nível está desbloqueado
 		if GameManager.fase_desbloqueada(i):
 			btn.disabled = false
+			btntext.add_theme_color_override("font_color", Color("#ffffff"))
 		else:
 			btn.disabled = true
+			btntext.add_theme_color_override("font_color", Color("#7d7d7d"))
 		
 		level_selection_buttons.add_child(btn)
 		
 		btn.pivot_offset = btn.size / 2
-		btn.mouse_entered.connect(_on_button_mouse_entered.bind(btn))
-		btn.mouse_exited.connect(_on_button_mouse_exited.bind(btn))
+		btn.mouse_entered.connect(_on_level_entered.bind(btn, i))
+		btn.mouse_exited.connect(_on_level_exited.bind(btn, i))
 		btn.pressed.connect(_play_button_sound)
 		btn.pressed.connect(_on_level_pressed.bind(btn))
 		
@@ -251,6 +264,28 @@ func _on_level_pressed(button: Button) -> void:
 			level_selection_canvas.visible = false
 			GameManager.fade_out(0.5)
 		)
+
+func _on_level_entered(button: Button, number: int) -> void:
+	animate_scale(button, hover_scale)
+	if button.disabled:
+		return
+	var btntext: Label = button.get_node("LevelNumber")
+	var btncoin: AnimatedSprite2D = button.get_node("CoinSprite")
+	if GameManager.check_level(int(button.name)) and btncoin and btntext: # Pega o número da fase e verifica se ela existe
+		btncoin.visible = true
+		btncoin.play("default")
+		btntext.text = str(GameManager.fase_moedascoletadas(number)) + "/10"
+
+func _on_level_exited(button: Button, number: int) -> void:
+	animate_scale(button, original_scale)
+	if button.disabled:
+		return
+	var btntext = button.get_node("LevelNumber")
+	var btncoin: AnimatedSprite2D = button.get_node("CoinSprite")
+	if GameManager.check_level(int(button.name)) and btncoin and btntext: # Pega o número da fase e verifica se ela existe
+		btncoin.stop()
+		btncoin.visible = false
+		btntext.text = str(number)
 
 func _on_som_pressed() -> void:
 	sound_muted = !sound_muted

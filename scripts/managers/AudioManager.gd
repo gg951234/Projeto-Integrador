@@ -9,7 +9,6 @@ func _ready() -> void:
 	_musica_player = AudioStreamPlayer.new()
 	add_child(_musica_player)
 	_musica_player.process_mode = Node.PROCESS_MODE_ALWAYS
-	# Loop infinito de Soundtrack
 	_musica_player.finished.connect(_musica_player.play)
 	_fade_tween = create_tween()
 
@@ -52,6 +51,15 @@ func _iniciar_nova_musica(audio_path: String) -> void:
 	_fade_tween.tween_property(_musica_player, "volume_db", alvo_db, _fade_duration)
 
 	_musica_atual_path = audio_path
+
+# ------------------------------------------------------------------
+#  NOVO: Atualiza o volume da música em tempo real (sem quebrar o fade)
+# ------------------------------------------------------------------
+func update_music_volume(linear_volume: float) -> void:
+	# Só aplica se não houver um fade em andamento
+	if _fade_tween == null or not _fade_tween.is_valid() or not _fade_tween.is_running():
+		_musica_player.volume_db = get_volume_db(linear_volume)
+	# Se houver fade, a atualização é ignorada – o fade termina com o volume corrente
 
 func parar_musica() -> void:
 	if _fade_tween and _fade_tween.is_valid(): 

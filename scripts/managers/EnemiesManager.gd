@@ -45,7 +45,7 @@ func spawn_enemies(level_name: String) -> void:
 			spawn_index += 1
 
 			var enemy_instance = scene.instantiate()
-			enemy_instance.name = "Slime" + str(spawn_index)
+			enemy_instance.name = str(enemy_type) + str(spawn_index)
 			enemy_instance.enemy_type = enemy_type   # Define o tipo antes de adicionar
 			enemy_instance.global_position = spawn.global_position
 			# Adiciona como filho deste nó "Enemies" (ou pode ser adicionado ao LevelRoot)

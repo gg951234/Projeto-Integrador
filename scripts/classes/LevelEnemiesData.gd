@@ -3,14 +3,35 @@ extends Node
 # Tabela de inimigos por nível com quantidades
 var enemies = {
 	"Level1": {
-		"Slime": 1,
+		"Weak Book": 6,
 	},
 	"Level2": {
-		"Slime": 2,
+		"Weak Book": 4,
+		"Novice Book": 2,
 	},
 	"Level3": {
-		"Slime": 3,
-	}
+		"Novice Book": 4,
+		"Adept Book": 2,
+	},
+	"Level4": {
+		"Novice Book": 2,
+		"Adept Book": 4,
+	},
+	"Level5": {
+		"Adept Book": 4,
+		"Expert Book": 2,
+	},
+	"Level6": {
+		"Expert Book": 2,
+		"Master Book": 4,
+	},
+	"Level7": {
+		"Expert Book": 4,
+		"Master Book": 2,
+	},
+	"Level8": {
+		"Legend Book": 6,
+	},
 }
 
 # Retorna um dicionário com nome -> quantidade para um nível

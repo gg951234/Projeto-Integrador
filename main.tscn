@@ -25,15 +25,17 @@
 [ext_resource type="Texture2D" uid="uid://coxt1g2lrg7yy" path="res://assets/images/player/Default/RunUp.png" id="13_htxhm"]
 [ext_resource type="Texture2D" uid="uid://dtcyvxfq4ifxo" path="res://assets/images/background/balão configurações.png" id="17_0odxb"]
 [ext_resource type="Texture2D" uid="uid://crvojuge3n4cf" path="res://assets/images/background/close.png" id="18_0odxb"]
-[ext_resource type="Script" path="res://scripts/ui/HUDController.gd" id="25_0cp0l"]
+[ext_resource type="Texture2D" uid="uid://jer2lc8g4lir" path="res://assets/images/collectables/Coin (16 x 16).png" id="23_facbu"]
+[ext_resource type="FontFile" uid="uid://ci54notgfirs3" path="res://assets/fonts/upheavtt.ttf" id="24_b1qrp"]
+[ext_resource type="Script" uid="uid://cxix0f30fha10" path="res://scripts/ui/HUDController.gd" id="25_0cp0l"]
 [ext_resource type="Texture2D" uid="uid://btfgvgvd1c2qt" path="res://assets/images/background/ranking.png" id="25_0rl1p"]
 [ext_resource type="StyleBox" uid="uid://c0m80gm5pf46w" path="res://styles/saldo_style.tres" id="28_0rl1p"]
 [ext_resource type="Texture2D" uid="uid://de3kf7awjs4xi" path="res://assets/images/background/espada.png" id="29_ok6jj"]
 [ext_resource type="Texture2D" uid="uid://dqmpwmatnsnov" path="res://assets/images/background/Coin.png" id="33_b1qrp"]
 [ext_resource type="Texture2D" uid="uid://uwjdei4mvcwo" path="res://assets/images/background/padrao.png" id="33_facbu"]
+[ext_resource type="Texture2D" uid="uid://ci5wvwx13hwh6" path="res://assets/images/background/icon_music.png" id="33_ok6jj"]
 [ext_resource type="Texture2D" uid="uid://c4j6qkcpw2g4r" path="res://assets/images/background/frost.png" id="34_come4"]
 [ext_resource type="Script" uid="uid://blgng47schcgq" path="res://scripts/managers/SettingsManager.gd" id="37_d2t1y"]
-[ext_resource type="Texture2D" uid="uid://2wp6eoooe1oc" path="res://assets/images/background/brilho.png" id="38_gngh3"]
 [ext_resource type="Texture2D" uid="uid://d3k4o4wxjokwh" path="res://assets/images/background/slider.png" id="39_0n3wm"]
 [ext_resource type="Texture2D" uid="uid://cl7mte3m4kyld" path="res://assets/images/background/icon_som_verde.png" id="40_qnost"]
 
@@ -788,6 +790,42 @@ shadow_color = Color(0, 0, 0, 1)
 shadow_size = 1
 shadow_offset = Vector2(3, 3)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1qrp"]
+atlas = ExtResource("23_facbu")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_come4"]
+atlas = ExtResource("23_facbu")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8e4i"]
+atlas = ExtResource("23_facbu")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4lmeg"]
+atlas = ExtResource("23_facbu")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0cp0l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1qrp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_come4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8e4i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4lmeg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f1p13"]
 bg_color = Color(0.07771615, 0.086844094, 0.1005361, 1)
 border_width_left = 4
@@ -1385,15 +1423,6 @@ corner_detail = 1
 shadow_color = Color(0, 0, 0, 1)
 shadow_size = 2
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rwvnh"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_houyn"]
-bg_color = Color(0.07058824, 0.09019608, 0.11764706, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7lk5g"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-
 [node name="Main" type="Node2D" unique_id=91432734]
 y_sort_enabled = true
 script = ExtResource("1_ig7tw")
@@ -1816,7 +1845,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 columns = 5
 
-[node name="Level" type="Button" parent="UI/LevelSelectionCanvas/Buttons/GridContainer" unique_id=775563741]
+[node name="Level" type="Button" parent="UI/LevelSelectionCanvas/Buttons/GridContainer" unique_id=647504321]
 auto_translate_mode = 1
 visible = false
 custom_minimum_size = Vector2(115, 120)
@@ -1835,9 +1864,27 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_a6jrf")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_4lmeg")
 disabled = true
 action_mode = 0
-text = "1"
 icon_alignment = 1
 vertical_icon_alignment = 2
+
+[node name="CoinSprite" type="AnimatedSprite2D" parent="UI/LevelSelectionCanvas/Buttons/GridContainer/Level" unique_id=1870505649]
+visible = false
+position = Vector2(57.999996, 61)
+scale = Vector2(3.624999, 3.624999)
+sprite_frames = SubResource("SpriteFrames_0cp0l")
+
+[node name="LevelNumber" type="Label" parent="UI/LevelSelectionCanvas/Buttons/GridContainer/Level" unique_id=625582368]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 43.0
+offset_right = 110.0
+offset_bottom = 76.0
+theme_override_colors/font_color = Color(0.48962224, 0.48962224, 0.48962218, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("24_b1qrp")
+theme_override_font_sizes/font_size = 34
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Ranking" type="Button" parent="UI/LevelSelectionCanvas" unique_id=350910076]
 auto_translate_mode = 1
@@ -2743,7 +2790,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_blkrb")
 
-[node name="Label" type="RichTextLabel" parent="UI/Loja/Panel2" unique_id=2117244742]
+[node name="WarningsLabel" type="RichTextLabel" parent="UI/Loja/Panel2" unique_id=2117244742]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 1
 anchors_preset = 8
@@ -4021,28 +4068,63 @@ offset_bottom = 241.0
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ay6x5")
 
-[node name="Panel" type="Panel" parent="UI/Settings/ConfiguracoesMenu" unique_id=626851867]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Settings/ConfiguracoesMenu" unique_id=133561036]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -201.0
-offset_top = 101.0
-offset_right = 201.0
-offset_bottom = 181.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_right = -18.0
 grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="MusicPanel" type="Panel" parent="UI/Settings/ConfiguracoesMenu/VBoxContainer" unique_id=1588674045]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_t4qar")
 
-[node name="TextureRect" type="TextureRect" parent="UI/Settings/ConfiguracoesMenu/Panel" unique_id=1094472250]
+[node name="TextureRect" type="TextureRect" parent="UI/Settings/ConfiguracoesMenu/VBoxContainer/MusicPanel" unique_id=1108699202]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 12.0
+offset_right = 63.0
+offset_bottom = 67.0
+texture = ExtResource("33_ok6jj")
+
+[node name="HSliderMusic" type="HSlider" parent="UI/Settings/ConfiguracoesMenu/VBoxContainer/MusicPanel" unique_id=1189168367]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 9.0
+offset_right = 378.0
+offset_bottom = 72.0
+theme_override_constants/center_grabber = 0
+theme_override_constants/grabber_offset = 0
+theme_override_constants/tick_offset = 0
+theme_override_icons/grabber = ExtResource("39_0n3wm")
+theme_override_icons/grabber_highlight = ExtResource("39_0n3wm")
+theme_override_styles/slider = SubResource("StyleBoxFlat_8hktn")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_r4kmw")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_r4kmw")
+max_value = 1.0
+step = 0.1
+
+[node name="SFXPanel" type="Panel" parent="UI/Settings/ConfiguracoesMenu/VBoxContainer" unique_id=626851867]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t4qar")
+
+[node name="TextureRect" type="TextureRect" parent="UI/Settings/ConfiguracoesMenu/VBoxContainer/SFXPanel" unique_id=1094472250]
 layout_mode = 0
 offset_left = 13.0
 offset_top = 18.0
 offset_right = 58.0
 offset_bottom = 63.0
-texture = ExtResource("38_gngh3")
+texture = ExtResource("40_qnost")
 expand_mode = 1
 
-[node name="HSliderBrilho" type="HSlider" parent="UI/Settings/ConfiguracoesMenu/Panel" unique_id=2086926006]
+[node name="HSliderSFX" type="HSlider" parent="UI/Settings/ConfiguracoesMenu/VBoxContainer/SFXPanel" unique_id=2086926006]
 layout_mode = 0
 offset_left = 80.0
 offset_top = 9.0
@@ -4056,138 +4138,9 @@ theme_override_icons/grabber_highlight = ExtResource("39_0n3wm")
 theme_override_styles/slider = SubResource("StyleBoxFlat_8hktn")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_r4kmw")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_r4kmw")
-
-[node name="Panel2" type="Panel" parent="UI/Settings/ConfiguracoesMenu" unique_id=1899765440]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -201.0
-offset_top = 194.0
-offset_right = 201.0
-offset_bottom = 274.0
-grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_t4qar")
-
-[node name="OptionButton" type="OptionButton" parent="UI/Settings/ConfiguracoesMenu/Panel2" unique_id=1584299503]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 20.0
-offset_right = -19.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxFlat_rwvnh")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_rwvnh")
-theme_override_styles/hover = SubResource("StyleBoxFlat_rwvnh")
-alignment = 1
-item_count = 2
-popup/item_0/text = "Português"
-popup/item_0/id = 0
-popup/item_1/text = "English"
-popup/item_1/id = 1
-
-[node name="Label" type="Label" parent="UI/Settings/ConfiguracoesMenu" unique_id=349296547]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 82.0
-offset_top = 202.0
-offset_right = -88.0
-offset_bottom = -109.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 2
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 26
-theme_override_styles/normal = SubResource("StyleBoxFlat_houyn")
-text = "IDIOMA"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Panel3" type="Panel" parent="UI/Settings/ConfiguracoesMenu" unique_id=1681367525]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -201.0
-offset_top = 288.0
-offset_right = 201.0
-offset_bottom = 368.0
-grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_t4qar")
-
-[node name="Button" type="Button" parent="UI/Settings/ConfiguracoesMenu/Panel3" unique_id=793236963]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/outline_size = 3
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 26
-theme_override_styles/normal = SubResource("StyleBoxFlat_7lk5g")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_7lk5g")
-theme_override_styles/hover = SubResource("StyleBoxFlat_7lk5g")
-text = "ACESSIBILIDADE"
-
-[node name="Panel4" type="Panel" parent="UI/Settings/ConfiguracoesMenu" unique_id=1588674045]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -201.0
-offset_top = 9.0
-offset_right = 201.0
-offset_bottom = 89.0
-grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_t4qar")
-
-[node name="TextureRect" type="TextureRect" parent="UI/Settings/ConfiguracoesMenu/Panel4" unique_id=1108699202]
-layout_mode = 0
-offset_left = 15.0
-offset_top = 17.0
-offset_right = 60.0
-offset_bottom = 62.0
-texture = ExtResource("40_qnost")
-
-[node name="HSliderVolume" type="HSlider" parent="UI/Settings/ConfiguracoesMenu/Panel4" unique_id=1189168367]
-layout_mode = 0
-offset_left = 80.0
-offset_top = 9.0
-offset_right = 378.0
-offset_bottom = 72.0
-theme_override_constants/center_grabber = 0
-theme_override_constants/grabber_offset = 0
-theme_override_constants/tick_offset = 0
-theme_override_icons/grabber = ExtResource("39_0n3wm")
-theme_override_icons/grabber_highlight = ExtResource("39_0n3wm")
-theme_override_styles/slider = SubResource("StyleBoxFlat_8hktn")
-theme_override_styles/grabber_area = SubResource("StyleBoxFlat_r4kmw")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_r4kmw")
-
-[node name="Brightness" type="ColorRect" parent="UI/Settings" unique_id=1108608735]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -17.0
-offset_top = -8.0
-offset_right = 12.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 0)
+max_value = 1.0
+step = 0.1
 
 [node name="FadeTransition" parent="." unique_id=1020010962 instance=ExtResource("3_h2yge")]
 layer = 2
 visible = false
-
-[connection signal="pressed" from="UI/MainMenuCanvas/Som" to="." method="_on_som_pressed"]

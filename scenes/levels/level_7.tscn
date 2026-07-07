@@ -1,10 +1,11 @@
 [gd_scene format=4 uid="uid://cynom33nrequ"]
 
-[ext_resource type="PackedScene" uid="uid://dqmugt1xu11kk" path="res://scenes/player.tscn" id="1_772ry"]
-[ext_resource type="Texture2D" uid="uid://drby68xhg5ha6" path="res://assets/images/tiles/Tile Map 7 - ED Fisica/Basquete.png" id="1_d06uk"]
+[ext_resource type="PackedScene" uid="uid://dqmugt1xu11kk" path="res://scenes/player/player.tscn" id="1_772ry"]
+[ext_resource type="Texture2D" uid="uid://bfyavhqklcr6d" path="res://assets/images/tiles/Tile Map 7 - ED Fisica/Basquete.png" id="1_d06uk"]
 [ext_resource type="PackedScene" uid="uid://c863a26p162xb" path="res://scenes/bosses/Golem/golem.tscn" id="2_d06uk"]
-[ext_resource type="PackedScene" uid="uid://co6ewiawdd4i7" path="res://scenes/slime.tscn" id="3_hq5i0"]
-[ext_resource type="PackedScene" uid="uid://dy0qxbrtqd5ir" path="res://scenes/coin.tscn" id="4_u1w5x"]
+[ext_resource type="PackedScene" uid="uid://co6ewiawdd4i7" path="res://scenes/enemies/weakbook.tscn" id="3_hq5i0"]
+[ext_resource type="PackedScene" uid="uid://dy0qxbrtqd5ir" path="res://scenes/collectables/coin.tscn" id="4_u1w5x"]
+
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hq5i0"]
 texture = ExtResource("1_d06uk")

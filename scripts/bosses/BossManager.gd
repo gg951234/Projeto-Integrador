@@ -272,7 +272,7 @@ func _on_quiz_finished(correct: bool):
 	get_tree().paused = false
 	is_quiz_open = false
 	if correct:
-		GameManager.add_score(60)
+		GameManager.add_score(50)
 		if current_down_threshold == 1:
 			die()
 		else:

@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://vej28ctixkyh" path="res://scripts/managers/EnemiesManager.gd" id="4_6761a"]
 [ext_resource type="PackedScene" uid="uid://c863a26p162xb" path="res://scenes/bosses/Golem/golem.tscn" id="4_x42e6"]
-
 [ext_resource type="PackedScene" uid="uid://dy0qxbrtqd5ir" path="res://scenes/collectables/coin.tscn" id="5_6761a"]
 [ext_resource type="Texture2D" uid="uid://h4c1l4ge1tx0" path="res://assets/images/tiles/Tile Map 1 - Geografia/TileMap1GEO.png" id="9_np2pn"]
 [ext_resource type="PackedScene" uid="uid://dqmugt1xu11kk" path="res://scenes/player/player.tscn" id="10_qhwlw"]

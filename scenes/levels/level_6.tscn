@@ -1,12 +1,13 @@
 [gd_scene format=4 uid="uid://bgdqpgnyagwhb"]
 
-[ext_resource type="Texture2D" uid="uid://3888sudxn7gk" path="res://assets/images/tiles/Tile Map 5 - Biologia/Biologia.png" id="1_i0fhw"]
-[ext_resource type="PackedScene" uid="uid://dqmugt1xu11kk" path="res://scenes/player.tscn" id="2_5wshb"]
-[ext_resource type="Texture2D" uid="uid://c8jvujsub0e7u" path="res://assets/images/tiles/Tile Map 6 - Filosofia/Grécia.png" id="2_7x7cx"]
+[ext_resource type="Texture2D" uid="uid://cdjm8o1ia6abp" path="res://assets/images/tiles/Tile Map 5 - Biologia/Biologia.png" id="1_i0fhw"]
+[ext_resource type="PackedScene" uid="uid://dqmugt1xu11kk" path="res://scenes/player/player.tscn" id="2_5wshb"]
+[ext_resource type="Texture2D" uid="uid://dw6xh7xrqaqqr" path="res://assets/images/tiles/Tile Map 6 - Filosofia/Grécia.png" id="2_7x7cx"]
 [ext_resource type="PackedScene" uid="uid://c863a26p162xb" path="res://scenes/bosses/Golem/golem.tscn" id="3_7x7cx"]
-[ext_resource type="Texture2D" uid="uid://bca7eufr4itbu" path="res://assets/images/tiles/Tile Map 3 - Matemática/matematica.png" id="3_b6i88"]
-[ext_resource type="PackedScene" uid="uid://co6ewiawdd4i7" path="res://scenes/slime.tscn" id="4_b6i88"]
-[ext_resource type="PackedScene" uid="uid://dy0qxbrtqd5ir" path="res://scenes/coin.tscn" id="5_e18e5"]
+[ext_resource type="Texture2D" uid="uid://fi5yaapiicyb" path="res://assets/images/tiles/Tile Map 3 - Matemática/matematica.png" id="3_b6i88"]
+[ext_resource type="PackedScene" uid="uid://co6ewiawdd4i7" path="res://scenes/enemies/weakbook.tscn" id="4_b6i88"]
+[ext_resource type="PackedScene" uid="uid://dy0qxbrtqd5ir" path="res://scenes/collectables/coin.tscn" id="5_e18e5"]
+
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hldbq"]
 texture = ExtResource("1_i0fhw")

@@ -131,6 +131,10 @@ func fase_desbloqueada(numero: int) -> bool:
 	var fase_anterior = fase_id(numero - 1)
 	return PlayerData.progresso_fases.get(fase_anterior, {}).get("completada", false)
 
+func fase_moedascoletadas(numero: int) -> int:
+	var fase = fase_id(numero)
+	return PlayerData.progresso_fases.get(fase, {}).get("moedas_fase", 0)
+
 func delete_level() -> bool:
 	if currentlevelroot:
 		currentlevelroot.queue_free()
@@ -147,14 +151,13 @@ func load_level(levelnumber: int = 0) -> bool:
 	delete_level()
 	
 	if check_level(levelnumber):
-		print(currentlevelpath)
 		currentlevelroot = load(currentlevelpath).instantiate()
 		add_child(currentlevelroot)
 		currentlevelroot.name = "LevelRoot"
-		print("Fase " + str(levelnumber) + " carregada")
 
 		var player = currentlevelroot.get_node("Player")
 		hud_reference.set_player(player)
+		hud_reference._update_coins(currentcoins)
 		hud_reference.show()
 		
 		# Inicia o timer e zera o contador
@@ -284,7 +287,6 @@ func add_coins() -> void:
 
 func add_score(amount: int) -> void:
 	currentscore += amount
-	print("Score: ", currentscore)
 
 # --------------
 # CONTAGEM DE INIMIGOS E PORTA

@@ -17,7 +17,6 @@ config/features=PackedStringArray("4.6")
 [autoload]
 
 GameManager="*res://scripts/managers/GameManager.gd"
-SaveManager="*res://scripts/managers/SaveManager.gd"
 AudioManager="*res://scripts/managers/AudioManager.gd"
 EnemiesData="*res://scripts/classes/EnemiesData.gd"
 BossesData="*res://scripts/classes/BossesData.gd"

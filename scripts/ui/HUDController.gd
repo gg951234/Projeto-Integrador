@@ -25,7 +25,7 @@ func _update_health(new_health) -> void:
 	health_bar.max_value = max_health
 
 func _update_coins(currentamount) -> void:
-	coins_count.text = "Moedas: " + str(currentamount) + "/" + "5"
+	coins_count.text = "Moedas: " + str(currentamount) + "/" + "10"
 
 func format_time_simple(seconds: int) -> String:
 	@warning_ignore("integer_division")

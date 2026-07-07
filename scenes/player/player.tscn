@@ -1,16 +1,16 @@
 [gd_scene format=3 uid="uid://dqmugt1xu11kk"]
 
 [ext_resource type="Script" uid="uid://2tievjsrtmbf" path="res://scripts/player/PlayerController.gd" id="1_g2els"]
-[ext_resource type="Texture2D" uid="uid://d3buqi24rt174" path="res://assets/images/player/Default/AttackDown.png" id="2_3v2ag"]
-[ext_resource type="Texture2D" uid="uid://bfg8x3ckk5d1t" path="res://assets/images/player/Default/AttackSide.png" id="3_jej6c"]
-[ext_resource type="Texture2D" uid="uid://cdmnugqhh7rfx" path="res://assets/images/player/Default/AttackUp.png" id="4_f1ej7"]
-[ext_resource type="Texture2D" uid="uid://b3dwwd00pmglr" path="res://assets/images/player/Default/Die.png" id="5_oprun"]
-[ext_resource type="Texture2D" uid="uid://dqfgwkbrclc6x" path="res://assets/images/player/Default/IdleDown.png" id="6_a8ls1"]
-[ext_resource type="Texture2D" uid="uid://hv8sxr878rg3" path="res://assets/images/player/Default/IdleSide.png" id="7_qfm1y"]
-[ext_resource type="Texture2D" uid="uid://dpi3rr01kf7rd" path="res://assets/images/player/Default/IdleUp.png" id="8_fulsm"]
-[ext_resource type="Texture2D" uid="uid://qr2rmrk43l2a" path="res://assets/images/player/Default/RunDown.png" id="9_4r5pv"]
-[ext_resource type="Texture2D" uid="uid://btfntq8f3iarv" path="res://assets/images/player/Default/RunSide.png" id="10_60mlk"]
-[ext_resource type="Texture2D" uid="uid://c5lc4q3b47npo" path="res://assets/images/player/Default/RunUp.png" id="11_i4ail"]
+[ext_resource type="Texture2D" uid="uid://b2tvqo4rsiff" path="res://assets/images/player/Default/AttackDown.png" id="2_3v2ag"]
+[ext_resource type="Texture2D" uid="uid://crkiqy2r34uh1" path="res://assets/images/player/Default/AttackSide.png" id="3_jej6c"]
+[ext_resource type="Texture2D" uid="uid://cqcy0niokg0p1" path="res://assets/images/player/Default/AttackUp.png" id="4_f1ej7"]
+[ext_resource type="Texture2D" uid="uid://c1evwl78jkvbx" path="res://assets/images/player/Default/Die.png" id="5_oprun"]
+[ext_resource type="Texture2D" uid="uid://c2bkvgp05kxl2" path="res://assets/images/player/Default/IdleDown.png" id="6_a8ls1"]
+[ext_resource type="Texture2D" uid="uid://cgwdm2m0i75ti" path="res://assets/images/player/Default/IdleSide.png" id="7_qfm1y"]
+[ext_resource type="Texture2D" uid="uid://b40r8ps6jyemg" path="res://assets/images/player/Default/IdleUp.png" id="8_fulsm"]
+[ext_resource type="Texture2D" uid="uid://552fgxbbuv8a" path="res://assets/images/player/Default/RunDown.png" id="9_4r5pv"]
+[ext_resource type="Texture2D" uid="uid://byefnt727cecy" path="res://assets/images/player/Default/RunSide.png" id="10_60mlk"]
+[ext_resource type="Texture2D" uid="uid://coxt1g2lrg7yy" path="res://assets/images/player/Default/RunUp.png" id="11_i4ail"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a38lo"]
 atlas = ExtResource("2_3v2ag")
@@ -357,17 +357,17 @@ collision_layer = 2
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=437506249]
+position = Vector2(0, -40)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_60mlk")
 animation = &"attack_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1254865130]
-position = Vector2(0, 42)
 scale = Vector2(4, 4)
 shape = SubResource("RectangleShape2D_i4ail")
 
 [node name="SwordHitbox" type="Area2D" parent="." unique_id=1563834819]
-position = Vector2(0, 32)
+position = Vector2(0, -8)
 collision_mask = 4
 metadata/_edit_group_ = true
 
