@@ -12,7 +12,8 @@ var API_KEY: String = ""
 var PROJECT_ID: String = ""
 
 # Variáveis de sessão do jogador logado
-var auth_token: String = ""
+var auth_token: String = ""       # idToken — expira em ~1h
+var refresh_token: String = ""    # token longevo, usado pra restaurar a sessão (login persistente)
 var user_id: String = ""
 var email_usuario: String = ""
 
@@ -69,6 +70,7 @@ func cadastrar_com_email(email: String, senha: String) -> void:
 	if resposta.has("localId"): # Se retornou um ID local, deu certo!
 		user_id = resposta["localId"]
 		auth_token = resposta["idToken"]
+		refresh_token = resposta.get("refreshToken", "")
 		email_usuario = resposta["email"]
 		emit_signal("cadastro_concluido", true, "Conta criada com sucesso!")
 	else:
@@ -88,6 +90,7 @@ func fazer_login_com_email(email: String, senha: String) -> void:
 	if resposta.has("localId"):
 		user_id = resposta["localId"]
 		auth_token = resposta["idToken"]
+		refresh_token = resposta.get("refreshToken", "")
 		email_usuario = resposta["email"]
 		emit_signal("login_concluido", true, "Login efetuado com sucesso!")
 	else:
@@ -110,14 +113,37 @@ func alterar_senha(nova_senha: String) -> void:
 	var resposta = await _fazer_requisicao_http(url, [], HTTPClient.METHOD_POST, body)
 	if resposta.has("idToken"):
 		auth_token = resposta["idToken"] # O Firebase invalida o token antigo ao trocar a senha
+		if resposta.has("refreshToken"):
+			refresh_token = resposta["refreshToken"]
 		emit_signal("senha_alterada", true, "Senha alterada com sucesso!")
 	else:
 		var erro_msg = _traduzir_erro_firebase(resposta)
 		emit_signal("senha_alterada", false, erro_msg)
 
+# Restaura a sessão a partir do refresh token salvo no dispositivo (login
+# persistente). Troca o refresh token por um idToken novo no endpoint de token
+# seguro do Firebase. Retorna true se conseguiu. OBS: essa resposta NÃO traz o
+# email — quem chama (PlayerData) restaura o email salvo localmente.
+func restaurar_sessao(token: String) -> bool:
+	if token.is_empty() or API_KEY.is_empty():
+		return false
+
+	var url = "https://securetoken.googleapis.com/v1/token?key=" + API_KEY
+	var headers = ["Content-Type: application/x-www-form-urlencoded"]
+	var body = "grant_type=refresh_token&refresh_token=" + token.uri_encode()
+
+	var resposta = await _fazer_requisicao_http(url, headers, HTTPClient.METHOD_POST, body)
+	if resposta.has("id_token") and resposta.has("user_id"):
+		auth_token = resposta["id_token"]
+		user_id = resposta["user_id"]
+		refresh_token = resposta.get("refresh_token", token)
+		return true
+	return false
+
 # Encerra a sessão do jogador logado (dados locais/offline permanecem no dispositivo)
 func fazer_logout() -> void:
 	auth_token = ""
+	refresh_token = ""
 	user_id = ""
 	email_usuario = ""
 
@@ -137,11 +163,27 @@ func baixar_dados_do_firestore() -> void:
 		var dados_limpos = _firestore_para_dicionario(resposta)
 		PlayerData.atualizar_dados_da_nuvem(dados_limpos)
 		emit_signal("dados_nuvem_carregados", true)
-	else:
-		# Se a conta é nova e o documento ainda não existe na nuvem, cria o primeiro save
+	elif _documento_nao_existe(resposta):
+		# Conta nova: o documento ainda não existe → cria o primeiro save com o local.
 		print("Documento não encontrado. Criando primeiro registro do jogador na nuvem...")
 		await enviar_dados_para_o_firestore(PlayerData.gerar_dicionario_completo())
 		emit_signal("dados_nuvem_carregados", true)
+	else:
+		# Erro de rede/permissão (NÃO é "documento inexistente"): NÃO enviamos o
+		# local por cima, pra não arriscar sobrescrever um Firebase mais avançado.
+		push_warning("FirebaseManager: falha ao baixar da nuvem — envio cancelado pra não sobrescrever o Firebase.")
+		emit_signal("dados_nuvem_carregados", false)
+
+# Distingue "documento ainda não existe" (seguro criar o primeiro save) de um
+# erro de rede/permissão (onde NÃO se deve enviar o local por cima da nuvem).
+# O Firestore devolve 404/NOT_FOUND quando o documento não existe.
+func _documento_nao_existe(resposta: Dictionary) -> bool:
+	if not resposta.has("error"):
+		return false # sem "fields" e sem "error" = resposta inesperada → não arrisca
+	var err = resposta["error"]
+	if err is Dictionary:
+		return err.get("status", "") == "NOT_FOUND" or int(err.get("code", 0)) == 404
+	return false
 
 # Envia os dados locais da memória RAM para o Firebase.
 # Retorna true só quando a nuvem realmente confirma o recebimento — quem

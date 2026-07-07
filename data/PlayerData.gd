@@ -1,5 +1,8 @@
 extends Node
 
+# Emitido após a tentativa de login automático no boot (login persistente).
+signal sessao_restaurada(sucesso: bool)
+
 # Dados salvos na RAM (Fonte da Verdade do jogo)
 var username: String = "Jogador"
 var pais: String = ""
@@ -20,6 +23,13 @@ var _sincronizando: bool = false
 # contas diferentes no mesmo aparelho).
 var ultimo_user_id: String = ""
 
+# Login persistente: refresh token do Firebase + email, salvos no dispositivo.
+# Enquanto houver token_login, o jogo restaura a sessão sozinho ao abrir e
+# sincroniza com o Firebase. Só enviamos progresso pra nuvem quando há sessão
+# (token) — assim um dispositivo sem login nunca sobrescreve a conta na nuvem.
+var token_login: String = ""
+var email_login: String = ""
+
 const CAMINHO_SAVE_LOCAL = "user://salvamento_local.json"
 const INTERVALO_TENTATIVA_SINCRONIZACAO := 30.0 # segundos entre tentativas automáticas
 
@@ -36,6 +46,11 @@ func _ready() -> void:
 	timer_sincronizacao.timeout.connect(_on_timer_sincronizacao_timeout)
 	add_child(timer_sincronizacao)
 
+	# Login persistente: se há um token salvo, restaura a sessão e sincroniza
+	# (merge) automaticamente, sem precisar digitar e-mail/senha de novo.
+	if not token_login.is_empty():
+		_tentar_login_automatico()
+
 func _on_timer_sincronizacao_timeout() -> void:
 	tentar_sincronizar_com_nuvem()
 
@@ -51,20 +66,25 @@ func gerar_dicionario_completo() -> Dictionary:
 		"skins_inventario": skins_inventario
 	}
 
-# Recebe os dados brutos vindos da nuvem (Firebase) e atualiza o jogo local
+# Recebe os dados da nuvem e JUNTA com o local mantendo o MELHOR DE CADA (nunca
+# sobrescreve cego) — assim nem o progresso avançado do Firebase nem um avanço
+# local offline são perdidos. Não mexe na flag 'sincronizado': quem chama
+# (sincronizar_apos_login) decide empurrar o resultado pra nuvem depois.
 func atualizar_dados_da_nuvem(dados_nuvem: Dictionary) -> void:
-	if dados_nuvem.has("username"): username = dados_nuvem["username"]
-	if dados_nuvem.has("pais"): pais = dados_nuvem["pais"]
-	if dados_nuvem.has("data_nascimento"): data_nascimento = dados_nuvem["data_nascimento"]
-	if dados_nuvem.has("data_criacao"): data_criacao = dados_nuvem["data_criacao"]
-	if dados_nuvem.has("moedas_coletadas"): moedas_coletadas = dados_nuvem["moedas_coletadas"]
-	if dados_nuvem.has("progresso_fases"): progresso_fases = dados_nuvem["progresso_fases"]
-	if dados_nuvem.has("skins_inventario"): skins_inventario = dados_nuvem["skins_inventario"]
+	username = _preferir_nao_vazio(username, str(dados_nuvem.get("username", "")))
+	pais = _preferir_nao_vazio(pais, str(dados_nuvem.get("pais", "")))
+	data_nascimento = _preferir_nao_vazio(data_nascimento, str(dados_nuvem.get("data_nascimento", "")))
+	data_criacao = _preferir_nao_vazio(data_criacao, str(dados_nuvem.get("data_criacao", "")))
+	# moedas: fica com o maior saldo
+	moedas_coletadas = maxi(moedas_coletadas, int(dados_nuvem.get("moedas_coletadas", 0)))
+	# fases: união, o melhor de cada fase
+	progresso_fases = _merge_progresso(progresso_fases, dados_nuvem.get("progresso_fases", {}))
+	# skins: união (comprada = OR)
+	skins_inventario = _merge_skins(skins_inventario, dados_nuvem.get("skins_inventario", {}))
 
 	_migrar_skins_inventario()
-	sincronizado = true
 	_gravar_arquivo_no_disco()
-	print("✅ RAM e Arquivo Local atualizados com os dados da nuvem!")
+	print("🔀 Progresso local e da nuvem juntados (o melhor de cada).")
 
 # Modifica o progresso de uma fase (Pode ser chamado de dentro de qualquer fase)
 # Retorna true se o score desta tentativa é um novo recorde da fase (deve ir pro ranking)
@@ -173,6 +193,8 @@ func _resetar_para_padrao() -> void:
 	}
 	sincronizado = true
 	ultimo_user_id = ""
+	token_login = ""
+	email_login = ""
 	_gravar_arquivo_no_disco()
 
 # Tenta enviar o progresso pendente para o Firestore. Só marca como
@@ -214,6 +236,8 @@ func _gravar_arquivo_no_disco() -> void:
 		var pacote = {
 			"sincronizado": sincronizado,
 			"ultimo_user_id": ultimo_user_id,
+			"token_login": token_login,
+			"email_login": email_login,
 			"dados": gerar_dicionario_completo()
 		}
 		arquivo.store_string(JSON.stringify(pacote))
@@ -233,6 +257,8 @@ func carregar_progresso_local() -> void:
 		if pacote != null and pacote.has("dados"):
 			sincronizado = pacote.get("sincronizado", true)
 			ultimo_user_id = pacote.get("ultimo_user_id", "")
+			token_login = pacote.get("token_login", "")
+			email_login = pacote.get("email_login", "")
 			var d = pacote["dados"]
 			
 			if d.has("username"): username = d["username"]
@@ -271,11 +297,80 @@ func sincronizar_apos_login(novo_user_id: String) -> void:
 		_resetar_para_padrao()
 
 	ultimo_user_id = novo_user_id
+	# Guarda o token de login (persistência) + email vindos do FirebaseManager.
+	token_login = FirebaseManager.refresh_token
+	email_login = FirebaseManager.email_usuario
 
-	if not sincronizado:
-		print("📤 Progresso offline pendente encontrado — enviando para a nuvem antes de baixar...")
-		await tentar_sincronizar_com_nuvem()
-	else:
-		await FirebaseManager.baixar_dados_do_firestore()
+	# SEMPRE baixa a nuvem e JUNTA com o local (merge — ver atualizar_dados_da_nuvem):
+	# nunca sobrescreve cego, então o progresso avançado do Firebase nunca é
+	# perdido, e avanços feitos offline também são mantidos.
+	await FirebaseManager.baixar_dados_do_firestore()
+
+	# Depois do merge, envia o resultado (o melhor de cada) de volta pra nuvem,
+	# pra ela também ficar com os avanços locais.
+	sincronizado = false
+	await tentar_sincronizar_com_nuvem()
 
 	_gravar_arquivo_no_disco()
+
+
+# ==================== 🔓 LOGIN AUTOMÁTICO (PERSISTENTE) ====================
+
+# Chamado no boot quando há token_login salvo: restaura a sessão no Firebase e
+# sincroniza (merge). NÃO apaga o token se falhar (pode ser só falta de internet
+# ou token temporariamente inválido) — tenta de novo no próximo boot.
+func _tentar_login_automatico() -> void:
+	print("🔑 Token de login encontrado — restaurando sessão...")
+	var ok := await FirebaseManager.restaurar_sessao(token_login)
+	if ok:
+		FirebaseManager.email_usuario = email_login
+		token_login = FirebaseManager.refresh_token  # o refresh token pode rotacionar
+		await sincronizar_apos_login(FirebaseManager.user_id)
+		print("✅ Sessão restaurada automaticamente (%s)." % email_login)
+		sessao_restaurada.emit(true)
+	else:
+		print("⚠️ Não deu pra restaurar a sessão (token expirado ou sem internet). Mantendo o token pra tentar depois.")
+		sessao_restaurada.emit(false)
+
+
+# ==================== 🔀 MERGE (JUNTAR O MELHOR DE CADA) ====================
+
+func _preferir_nao_vazio(local: String, nuvem: String) -> String:
+	return local if not local.is_empty() else nuvem
+
+# Une o progresso de fases dos dois lados, mantendo o melhor de cada fase.
+func _merge_progresso(local: Dictionary, nuvem: Dictionary) -> Dictionary:
+	var res: Dictionary = local.duplicate(true)
+	for fase in nuvem.keys():
+		var c = nuvem[fase]
+		if not (c is Dictionary):
+			continue
+		if not res.has(fase):
+			res[fase] = c.duplicate(true)
+			continue
+		var l: Dictionary = res[fase]
+		l["completada"] = bool(l.get("completada", false)) or bool(c.get("completada", false))
+		l["melhor_score"] = maxi(int(l.get("melhor_score", 0)), int(c.get("melhor_score", 0)))
+		l["melhor_tempo"] = _menor_tempo(int(l.get("melhor_tempo", 0)), int(c.get("melhor_tempo", 0)))
+		l["moedas_fase"] = maxi(int(l.get("moedas_fase", 0)), int(c.get("moedas_fase", 0)))
+		res[fase] = l
+	return res
+
+# Menor tempo é o melhor recorde; 0 significa "sem recorde ainda".
+func _menor_tempo(a: int, b: int) -> int:
+	if a <= 0: return b
+	if b <= 0: return a
+	return mini(a, b)
+
+# Une os inventários de skins: uma skin fica "comprada" se comprada em qualquer lado.
+func _merge_skins(local: Dictionary, nuvem: Dictionary) -> Dictionary:
+	var res: Dictionary = local.duplicate(true)
+	for skin in nuvem.keys():
+		var c = nuvem[skin]
+		if not (c is Dictionary):
+			continue
+		if not res.has(skin):
+			res[skin] = c.duplicate(true)
+		else:
+			res[skin]["comprada"] = bool(res[skin].get("comprada", false)) or bool(c.get("comprada", false))
+	return res

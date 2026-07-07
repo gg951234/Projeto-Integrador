@@ -150,7 +150,13 @@ func _ready() -> void:  # Executa quando o nó é criado
 	FirebaseManager.login_concluido.connect(_on_login_concluido)
 	FirebaseManager.cadastro_concluido.connect(_on_cadastro_concluido)
 	FirebaseManager.senha_alterada.connect(_on_senha_alterada)
+	PlayerData.sessao_restaurada.connect(_on_sessao_restaurada)
 	cadastro_data_nascimento.text_changed.connect(_on_data_nascimento_text_changed)
+	
+	# Se o login automático (persistente) já concluiu antes desta tela existir,
+	# reflete o estado logado agora.
+	if not FirebaseManager.user_id.is_empty():
+		_on_sessao_restaurada(true)
 
 	# Conecta todos os botões ao som
 	_connect_all_buttons_to_sound()
@@ -506,6 +512,13 @@ func _on_entrar_pressed() -> void:
 	entrar.disabled = true
 	login_status.text = "Entrando..."
 	FirebaseManager.fazer_login_com_email(email, senha)
+
+# Se restaurou a sessão atualiza as telas pra refletir a conta logada
+func _on_sessao_restaurada(sucesso: bool) -> void:
+	if sucesso:
+		_atualizar_tela_perfil()
+		_atualizar_tela_loja()
+		setup_levels_selection()
 
 func _on_login_concluido(sucesso: bool, mensagem: String) -> void:
 	entrar.disabled = false
