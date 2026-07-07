@@ -7,6 +7,7 @@ var stats = {
 		"speed": 300,
 		"damage": 10,
 		"kb": 100,
+		"sprite": "res://scenes/player/defaultskin.tres",
 		"hitbox": {
 				"Down":  { "pos": Vector2(0,  -8), "size": Vector2(128, 64) },
 				"Up":    { "pos": Vector2(0, -12), "size": Vector2(128, 64) },
@@ -19,6 +20,7 @@ var stats = {
 		"speed": 350,
 		"damage": 20,
 		"kb": 100,
+		"sprite": "res://scenes/player/frostskin.tres",
 		"hitbox": {
 				"Down":  { "pos": Vector2(0,  32), "size": Vector2(128, 64) },
 				"Up":    { "pos": Vector2(0, -12), "size": Vector2(128, 64) },
@@ -31,6 +33,7 @@ var stats = {
 		"speed": 400,
 		"damage": 30,
 		"kb": 100,
+		"sprite": "res://scenes/player/shadowskin.tres",
 		"hitbox": {
 				"Down":  { "pos": Vector2(0,  32), "size": Vector2(128, 64) },
 				"Up":    { "pos": Vector2(0, -12), "size": Vector2(128, 64) },
@@ -43,6 +46,20 @@ var stats = {
 		"speed": 450,
 		"damage": 50,
 		"kb": 100,
+		"sprite": "res://scenes/player/goldskin.tres",
+		"hitbox": {
+				"Down":  { "pos": Vector2(0,  32), "size": Vector2(128, 64) },
+				"Up":    { "pos": Vector2(0, -12), "size": Vector2(128, 64) },
+				"Right": { "pos": Vector2(4, 20), "size": Vector2(120, 72) },
+				"Left":  { "pos": Vector2(-4, 20), "size": Vector2(120, 72) },
+		}
+	},
+	"Pirate": {
+		"health": 500,
+		"speed": 450,
+		"damage": 50,
+		"kb": 100,
+		"sprite": "res://scenes/player/goldskin.tres",
 		"hitbox": {
 				"Down":  { "pos": Vector2(0,  32), "size": Vector2(128, 64) },
 				"Up":    { "pos": Vector2(0, -12), "size": Vector2(128, 64) },

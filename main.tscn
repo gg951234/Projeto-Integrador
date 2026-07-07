@@ -1456,7 +1456,7 @@ expand_mode = 1
 position = Vector2(222.00002, 490.00003)
 scale = Vector2(7, 7)
 sprite_frames = SubResource("SpriteFrames_jq2sk")
-animation = &"attack_down"
+animation = &"idle_down"
 
 [node name="TextureRect" type="TextureRect" parent="UI/MainMenuCanvas" unique_id=1051341823]
 modulate = Color(0, 0, 0, 0.27450982)
@@ -1938,7 +1938,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_f1p13")
 
-[node name="Panel" type="Panel" parent="UI/LevelSelectionCanvas/Perfil" unique_id=745271210]
+[node name="IconPanel" type="Panel" parent="UI/LevelSelectionCanvas/Perfil" unique_id=745271210]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -1950,7 +1950,7 @@ offset_bottom = 347.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_4obbf")
 
-[node name="Padrao" type="TextureRect" parent="UI/LevelSelectionCanvas/Perfil/Panel" unique_id=665868150]
+[node name="ProfileSkin" type="TextureRect" parent="UI/LevelSelectionCanvas/Perfil/IconPanel" unique_id=665868150]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2694,100 +2694,6 @@ theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 40
 text = "LOJA"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/Loja" unique_id=76110575]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -424.0
-offset_top = -148.0
-offset_right = 424.0
-offset_bottom = 152.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 16
-alignment = 1
-
-[node name="Template" type="Panel" parent="UI/Loja/HBoxContainer" unique_id=183207182]
-visible = false
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_blkrb")
-
-[node name="Padrao" type="TextureRect" parent="UI/Loja/HBoxContainer/Template" unique_id=1382927306]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 34.0
-offset_bottom = -66.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("34_come4")
-expand_mode = 1
-
-[node name="Label" type="Label" parent="UI/Loja/HBoxContainer/Template" unique_id=1345235807]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -31.0
-offset_top = -133.0
-offset_right = 31.0
-offset_bottom = -110.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 21
-text = "FROST"
-
-[node name="Coins" type="Button" parent="UI/Loja/HBoxContainer/Template" unique_id=1150973000]
-auto_translate_mode = 1
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -54.25
-offset_top = -65.0
-offset_right = 54.25
-offset_bottom = -15.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_horizontal = 7
-size_flags_vertical = 7
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("4_5vw27")
-theme_override_font_sizes/font_size = 21
-theme_override_styles/normal = SubResource("StyleBoxFlat_34ol3")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_c2n8d")
-theme_override_styles/hover = SubResource("StyleBoxFlat_pjyto")
-action_mode = 0
-text = "  15"
-
-[node name="TextureRect" type="TextureRect" parent="UI/Loja/HBoxContainer/Template/Coins" unique_id=470339825]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -42.0
-offset_top = -16.0
-offset_right = -14.0
-offset_bottom = 12.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("33_b1qrp")
-expand_mode = 1
-
 [node name="Panel2" type="Panel" parent="UI/Loja" unique_id=1562097576]
 custom_minimum_size = Vector2(200, 90)
 anchors_preset = 7
@@ -2825,6 +2731,111 @@ theme_override_font_sizes/normal_font_size = 21
 text = "COMPRE NOVAS ROUPAS E DEIXE SEU PERSONAGEM COM UM VISUAL ÉPICO!"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/Loja" unique_id=944505760]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -424.0
+offset_top = -150.0
+offset_right = 424.0
+offset_bottom = 158.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/scrollbar_v_separation = 5
+vertical_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Loja/ScrollContainer" unique_id=248558922]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Loja/ScrollContainer/MarginContainer" unique_id=76110575]
+custom_minimum_size = Vector2(0, 290)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 27
+
+[node name="Template" type="Panel" parent="UI/Loja/ScrollContainer/MarginContainer/HBoxContainer" unique_id=183207182]
+visible = false
+custom_minimum_size = Vector2(190, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_blkrb")
+
+[node name="Padrao" type="TextureRect" parent="UI/Loja/ScrollContainer/MarginContainer/HBoxContainer/Template" unique_id=1382927306]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 34.0
+offset_bottom = -66.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("34_come4")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="UI/Loja/ScrollContainer/MarginContainer/HBoxContainer/Template" unique_id=1345235807]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -133.0
+offset_right = 31.0
+offset_bottom = -110.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 21
+text = "FROST"
+
+[node name="Coins" type="Button" parent="UI/Loja/ScrollContainer/MarginContainer/HBoxContainer/Template" unique_id=1150973000]
+auto_translate_mode = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -54.25
+offset_top = -65.0
+offset_right = 54.25
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 7
+size_flags_vertical = 7
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxFlat_34ol3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_c2n8d")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pjyto")
+action_mode = 0
+text = "  15"
+
+[node name="TextureRect" type="TextureRect" parent="UI/Loja/ScrollContainer/MarginContainer/HBoxContainer/Template/Coins" unique_id=470339825]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.0
+offset_top = -16.0
+offset_right = -14.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("33_b1qrp")
+expand_mode = 1
 
 [node name="Ranking" type="CanvasLayer" parent="UI" unique_id=576924087]
 visible = false

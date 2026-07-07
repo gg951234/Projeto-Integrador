@@ -26,8 +26,8 @@ extends Control
 
 # -- LOJA --
 @onready var voltar_loja: Button = $Loja/VoltarLoja
-@onready var roupa_container: HBoxContainer = $Loja/HBoxContainer
-@onready var roupa_template: Panel = $Loja/HBoxContainer/Template
+@onready var roupa_container: HBoxContainer = $Loja/ScrollContainer/MarginContainer/HBoxContainer
+@onready var roupa_template: Panel = $Loja/ScrollContainer/MarginContainer/HBoxContainer/Template
 @onready var loja_saldo: Button = $Loja/Coins
 
 # -- LOGIN --
@@ -64,6 +64,7 @@ extends Control
 @onready var perfil_data_criacao: Label = $LevelSelectionCanvas/Perfil/Informacoes/LabelDataCriacao
 @onready var perfil_pais: Label = $LevelSelectionCanvas/Perfil/Informacoes/LabelPais
 @onready var perfil_data_nascimento: Label = $LevelSelectionCanvas/Perfil/Informacoes/LabelDataNascimento
+@onready var perfil_icon: TextureRect = $LevelSelectionCanvas/Perfil/IconPanel/ProfileSkin
 
 # -- RANKING --
 @onready var ranking_fase_anterior: Button = $Ranking/Estatisticas/SeletorFase/FaseAnterior
@@ -473,6 +474,7 @@ func _on_profile_pressed() -> void:
 		login_status.text = ""
 		login.visible = true
 	else:
+		_atualizar_icone_perfil()
 		perfil.visible = true
 
 func _on_fechar_perfil_pressed() -> void:
@@ -594,6 +596,15 @@ func _atualizar_tela_perfil() -> void:
 	perfil_data_criacao.text = PlayerData.data_criacao if not PlayerData.data_criacao.is_empty() else "00/00/0000"
 	perfil_pais.text = PlayerData.pais if not PlayerData.pais.is_empty() else "-"
 	perfil_data_nascimento.text = PlayerData.data_nascimento if not PlayerData.data_nascimento.is_empty() else "00/00/0000"
+	_atualizar_icone_perfil()
+
+func _atualizar_icone_perfil() -> void:
+	var skinequipada = PlayerData.obter_skin_equipada()
+	var skinicon = ShopData.get_skin_info(skinequipada).get("Icon", "res://assets/images/background/padrao.png")
+	if skinicon:
+		perfil_icon.texture = load(skinicon)
+	else:
+		perfil_icon.texture = load("res://assets/images/background/padrao.png")
 
 func _on_fechar_senha_pressed() -> void:
 	tela_alterar_senha.visible = false

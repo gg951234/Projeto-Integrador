@@ -3,16 +3,6 @@ extends CharacterBody2D
 signal health_changed(new_health: int)
 signal died
 
-# --- SKIN SYSTEM ---
-# Mapeia o nome do personagem (currentchar) para o caminho do arquivo .tres
-const SKIN_PATHS := {
-	"Default": "res://scenes/player/defaultskin.tres",
-	"Gold": "res://scenes/player/goldskin.tres",
-	"Frost": "res://scenes/player/frostskin.tres",
-	"Shadow": "res://scenes/player/shadowskin.tres",
-}
-# ------------------
-
 var SPEED: float
 var health: int
 var currentchar: String
@@ -80,12 +70,12 @@ func _physics_process(_delta: float) -> void:
 func apply_skin(skin_name: String) -> void:
 	# Converte para minúsculo para evitar erros de digitação
 	var key = skin_name
-	var path = SKIN_PATHS.get(key)
+	var path = CharactersData.get_stats(key).get("sprite")
 	
 	# Se não encontrar, usa a skin "Default" como fallback
 	if path == null:
 		push_warning("Skin não encontrada: ", skin_name, ". Usando Default.")
-		path = SKIN_PATHS["Default"]
+		path = CharactersData.get_stats("Default").get("sprite")
 	
 	var new_frames: SpriteFrames = load(path)
 	if new_frames:
