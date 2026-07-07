@@ -1,15 +1,14 @@
 [gd_scene format=3 uid="uid://bo52qi38p2hjg"]
 
-[ext_resource type="Script" uid="uid://b05t1orawevxu" path="res://scripts/bosses/GolemController.gd" id="1_wpr87"]
+[ext_resource type="Script" uid="uid://p8p75edlejxk" path="res://scripts/bosses/KobeController.gd" id="1_vtwwl"]
 [ext_resource type="Texture2D" uid="uid://cgqpfhv756mfp" path="res://assets/images/bosses/Kobe/Sheets Kobe/dead-Sheet.png" id="2_vtwwl"]
-[ext_resource type="AudioStream" uid="uid://gxnydufebwm8" path="res://assets/sounds/enemies/SlimeDamaged.mp3" id="3_bko2c"]
 [ext_resource type="Texture2D" uid="uid://h803gnboco7l" path="res://assets/images/bosses/Kobe/Sheets Kobe/half_life.png" id="3_kgrgg"]
 [ext_resource type="Texture2D" uid="uid://cfgcit7e71rs8" path="res://assets/images/bosses/Kobe/Sheets Kobe/idle_left.png" id="4_kojjx"]
 [ext_resource type="PackedScene" uid="uid://ccmhhb48eeshy" path="res://scenes/UI/health_bar.tscn" id="4_u0guc"]
-[ext_resource type="Texture2D" path="res://assets/images/bosses/Kobe/Sheets Kobe/idle_rigth.png" id="5_v8je0"]
+[ext_resource type="Texture2D" uid="uid://demnn6w0mcoqf" path="res://assets/images/bosses/Kobe/Sheets Kobe/idle_down.png" id="4_vtwwl"]
+[ext_resource type="Texture2D" uid="uid://5grs8omklmja" path="res://assets/images/bosses/Kobe/Sheets Kobe/idle_right.png" id="6_kgrgg"]
 [ext_resource type="Texture2D" uid="uid://dnoicnabfxvp2" path="res://assets/images/bosses/Kobe/Sheets Kobe/idle_up.png" id="6_x234b"]
 [ext_resource type="Texture2D" uid="uid://d2nvmdhpsjgyj" path="res://assets/images/bosses/Kobe/Sheets Kobe/throw.png" id="7_ln7n7"]
-
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x8t5j"]
 atlas = ExtResource("2_vtwwl")
@@ -43,6 +42,22 @@ region = Rect2(128, 0, 64, 64)
 atlas = ExtResource("3_kgrgg")
 region = Rect2(192, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_kojjx"]
+atlas = ExtResource("4_vtwwl")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8je0"]
+atlas = ExtResource("4_vtwwl")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x234b"]
+atlas = ExtResource("4_vtwwl")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ln7n7"]
+atlas = ExtResource("4_vtwwl")
+region = Rect2(192, 0, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_kichp"]
 atlas = ExtResource("4_kojjx")
 region = Rect2(0, 0, 64, 64)
@@ -60,19 +75,19 @@ atlas = ExtResource("4_kojjx")
 region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ipg4t"]
-atlas = ExtResource("5_v8je0")
+atlas = ExtResource("6_kgrgg")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g7jxe"]
-atlas = ExtResource("5_v8je0")
+atlas = ExtResource("6_kgrgg")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2oafa"]
-atlas = ExtResource("5_v8je0")
+atlas = ExtResource("6_kgrgg")
 region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_41xh1"]
-atlas = ExtResource("5_v8je0")
+atlas = ExtResource("6_kgrgg")
 region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u4aqj"]
@@ -143,7 +158,19 @@ animations = [{
 "name": &"downed",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kojjx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8je0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x234b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ln7n7")
+}],
 "loop": true,
 "name": &"idle_down",
 "speed": 5.0
@@ -179,7 +206,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_41xh1")
 }],
 "loop": true,
-"name": &"idle_rigth",
+"name": &"idle_right",
 "speed": 5.0
 }, {
 "frames": [{
@@ -217,43 +244,47 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_371uh"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u4aqj"]
 size = Vector2(75.5, 71.25)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_co1n5"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0m4u0"]
 size = Vector2(1408, 1408)
 
-[node name="Golem" type="CharacterBody2D" unique_id=1469553198]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0aj44"]
+size = Vector2(400, 400)
+
+[node name="Kobe" type="CharacterBody2D" unique_id=1469553198]
 collision_layer = 4
-script = ExtResource("1_wpr87")
+script = ExtResource("1_vtwwl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=29716560]
+position = Vector2(0, -108)
 scale = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_24adn")
-animation = &"die"
+animation = &"downed"
 autoplay = "idle_down"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=861251288]
-position = Vector2(1, 6.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=959102631]
+position = Vector2(1, -89)
 scale = Vector2(4, 4)
-shape = SubResource("RectangleShape2D_371uh")
+shape = SubResource("RectangleShape2D_u4aqj")
 
-[node name="Sight" type="Area2D" parent="." unique_id=444106651]
+[node name="Sight" type="Area2D" parent="." unique_id=1915159835]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=708594787]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=213087567]
 position = Vector2(0, -1)
-shape = SubResource("RectangleShape2D_co1n5")
+shape = SubResource("RectangleShape2D_0m4u0")
 
-[node name="HitSound" type="AudioStreamPlayer2D" parent="." unique_id=1610741949]
-y_sort_enabled = true
-stream = ExtResource("3_bko2c")
-volume_db = -10.0
+[node name="KeyRange" type="Area2D" parent="." unique_id=708537215]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KeyRange" unique_id=1054203515]
+position = Vector2(0, -90)
+shape = SubResource("RectangleShape2D_0aj44")
 
 [node name="HealthBar" parent="." unique_id=332343199 instance=ExtResource("4_u0guc")]
-position = Vector2(-72, 103.00003)
+position = Vector2(-72, 16.000015)
 scale = Vector2(3.5, 3.5)
-
-[connection signal="body_entered" from="Sight" to="." method="_on_sight_body_entered"]
-[connection signal="body_exited" from="Sight" to="." method="_on_sight_body_exited"]

@@ -9,7 +9,7 @@ var stats = {
 		"kb": 100,
 		"hitbox": {
 				"Down":  { "pos": Vector2(0,  -8), "size": Vector2(128, 64) },
-				"Up":    { "pos": Vector2(0, -52), "size": Vector2(128, 64) },
+				"Up":    { "pos": Vector2(0, -12), "size": Vector2(128, 64) },
 				"Right": { "pos": Vector2(4, -20), "size": Vector2(120, 72) },
 				"Left":  { "pos": Vector2(-4, -20), "size": Vector2(120, 72) },
 		}

@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://bno1n44iy78yc"]
 
-[ext_resource type="Script" uid="uid://b05t1orawevxu" path="res://scripts/bosses/GolemController.gd" id="1_wpr87"]
+[ext_resource type="Script" uid="uid://dh5ewhfiay1fj" path="res://scripts/bosses/AresController.gd" id="1_r412l"]
 [ext_resource type="Texture2D" uid="uid://boxe0tika5day" path="res://assets/images/bosses/Ares/Sheets Ares/dead.png" id="2_5k5d1"]
-[ext_resource type="AudioStream" uid="uid://gxnydufebwm8" path="res://assets/sounds/enemies/SlimeDamaged.mp3" id="3_bko2c"]
 [ext_resource type="Texture2D" uid="uid://calax0c1hqo2t" path="res://assets/images/bosses/Ares/Sheets Ares/half_life.png" id="3_th258"]
 [ext_resource type="Texture2D" uid="uid://dc2p0lmh6m50c" path="res://assets/images/bosses/Ares/Sheets Ares/IdleFoward-Sheet.png" id="4_a2vll"]
 [ext_resource type="PackedScene" uid="uid://ccmhhb48eeshy" path="res://scenes/UI/health_bar.tscn" id="4_u0guc"]
@@ -10,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://bllu2bt5j6733" path="res://assets/images/bosses/Ares/Sheets Ares/IdleRight-Sheet.png" id="6_j8ied"]
 [ext_resource type="Texture2D" uid="uid://gurate2yc0gb" path="res://assets/images/bosses/Ares/Sheets Ares/IdleBack-Sheet.png" id="7_8evjb"]
 [ext_resource type="Texture2D" uid="uid://n6n8em5t7o52" path="res://assets/images/bosses/Ares/Sheets Ares/attack.png" id="8_i304j"]
-
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wu7g6"]
 atlas = ExtResource("2_5k5d1")
@@ -166,7 +164,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_ojqgt")
 }],
 "loop": true,
-"name": &"idle_rigth",
+"name": &"idle_right",
 "speed": 10.0
 }, {
 "frames": [{
@@ -204,43 +202,47 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_371uh"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bqhkq"]
 size = Vector2(75.5, 71.25)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_co1n5"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r412l"]
 size = Vector2(1408, 1408)
 
-[node name="Golem" type="CharacterBody2D" unique_id=1469553198]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5k5d1"]
+size = Vector2(400, 400)
+
+[node name="Ares" type="CharacterBody2D" unique_id=1469553198]
 collision_layer = 4
-script = ExtResource("1_wpr87")
+script = ExtResource("1_r412l")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=29716560]
+position = Vector2(0, -112)
 scale = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_24adn")
-animation = &"skill_1"
+animation = &"idle_down"
 autoplay = "idle_down"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=861251288]
-position = Vector2(1, 6.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1247650029]
+position = Vector2(1, -89)
 scale = Vector2(4, 4)
-shape = SubResource("RectangleShape2D_371uh")
+shape = SubResource("RectangleShape2D_bqhkq")
 
-[node name="Sight" type="Area2D" parent="." unique_id=444106651]
+[node name="Sight" type="Area2D" parent="." unique_id=693950170]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=708594787]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=440094313]
 position = Vector2(0, -1)
-shape = SubResource("RectangleShape2D_co1n5")
+shape = SubResource("RectangleShape2D_r412l")
 
-[node name="HitSound" type="AudioStreamPlayer2D" parent="." unique_id=1610741949]
-y_sort_enabled = true
-stream = ExtResource("3_bko2c")
-volume_db = -10.0
+[node name="KeyRange" type="Area2D" parent="." unique_id=558408744]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KeyRange" unique_id=1811777167]
+position = Vector2(0, -90)
+shape = SubResource("RectangleShape2D_5k5d1")
 
 [node name="HealthBar" parent="." unique_id=332343199 instance=ExtResource("4_u0guc")]
-position = Vector2(-72, 103.00003)
+position = Vector2(-72, 16.000015)
 scale = Vector2(3.5, 3.5)
-
-[connection signal="body_entered" from="Sight" to="." method="_on_sight_body_entered"]
-[connection signal="body_exited" from="Sight" to="." method="_on_sight_body_exited"]

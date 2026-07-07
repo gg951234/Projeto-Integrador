@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://bd38fdb3c53cg"]
 
-[ext_resource type="Script" uid="uid://b05t1orawevxu" path="res://scripts/bosses/GolemController.gd" id="1_wpr87"]
+[ext_resource type="Script" uid="uid://7bv1t73k6lri" path="res://scripts/bosses/AnubisController.gd" id="1_d42wf"]
 [ext_resource type="Texture2D" uid="uid://clb571mp5rpkw" path="res://assets/images/bosses/Anubis/Sheets Anubis/dead.png" id="2_v0sh5"]
-[ext_resource type="AudioStream" uid="uid://gxnydufebwm8" path="res://assets/sounds/enemies/SlimeDamaged.mp3" id="3_bko2c"]
 [ext_resource type="Texture2D" uid="uid://0j2pblo4ig64" path="res://assets/images/bosses/Anubis/Sheets Anubis/half_life.png" id="3_usfer"]
 [ext_resource type="Texture2D" uid="uid://b52oank1n2aoq" path="res://assets/images/bosses/Anubis/Sheets Anubis/idle_down.png" id="4_7evfn"]
 [ext_resource type="PackedScene" uid="uid://ccmhhb48eeshy" path="res://scenes/UI/health_bar.tscn" id="4_u0guc"]
@@ -203,43 +202,47 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_371uh"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d42wf"]
 size = Vector2(75.5, 71.25)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_co1n5"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v0sh5"]
 size = Vector2(1408, 1408)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_usfer"]
+size = Vector2(400, 400)
 
 [node name="Anubis" type="CharacterBody2D" unique_id=1469553198]
 collision_layer = 4
-script = ExtResource("1_wpr87")
+script = ExtResource("1_d42wf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=29716560]
+position = Vector2(0, -135)
 scale = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_24adn")
-animation = &"idle_left"
+animation = &"idle_down"
 autoplay = "idle_down"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=861251288]
-position = Vector2(1, 6.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=404954317]
+position = Vector2(1, -118)
 scale = Vector2(4, 4)
-shape = SubResource("RectangleShape2D_371uh")
+shape = SubResource("RectangleShape2D_d42wf")
 
-[node name="Sight" type="Area2D" parent="." unique_id=444106651]
+[node name="Sight" type="Area2D" parent="." unique_id=650944442]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=708594787]
-position = Vector2(0, -1)
-shape = SubResource("RectangleShape2D_co1n5")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=1215197322]
+position = Vector2(0, -129)
+shape = SubResource("RectangleShape2D_v0sh5")
 
-[node name="HitSound" type="AudioStreamPlayer2D" parent="." unique_id=1610741949]
-y_sort_enabled = true
-stream = ExtResource("3_bko2c")
-volume_db = -10.0
+[node name="KeyRange" type="Area2D" parent="." unique_id=1291408262]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KeyRange" unique_id=846145150]
+position = Vector2(0, -142)
+shape = SubResource("RectangleShape2D_usfer")
 
 [node name="HealthBar" parent="." unique_id=332343199 instance=ExtResource("4_u0guc")]
-position = Vector2(-72, 103.00003)
+position = Vector2(-72, -6.9999995)
 scale = Vector2(3.5, 3.5)
-
-[connection signal="body_entered" from="Sight" to="." method="_on_sight_body_entered"]
-[connection signal="body_exited" from="Sight" to="." method="_on_sight_body_exited"]

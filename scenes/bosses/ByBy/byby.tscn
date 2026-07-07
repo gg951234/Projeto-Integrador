@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://dns1qam5e5e88"]
 
 [ext_resource type="Script" uid="uid://curvs5ag0a1y5" path="res://scripts/bosses/ByByController.gd" id="1_caqud"]
-[ext_resource type="Texture2D" uid="uid://cnfkibrxskg2f" path="res://assets/images/bosses/ByBy/Sheets ByBy/die.png" id="2_caqud"]
-[ext_resource type="Texture2D" uid="uid://dqc5e5bjp53jj" path="res://assets/images/bosses/ByBy/Sheets ByBy/downed.png" id="3_mvmau"]
+[ext_resource type="Texture2D" uid="uid://cu5og4y7wgohc" path="res://assets/images/bosses/ByBy/Sheets ByBy/die.png" id="2_caqud"]
+[ext_resource type="Texture2D" uid="uid://bs3dnc3jln4r8" path="res://assets/images/bosses/ByBy/Sheets ByBy/downed.png" id="3_mvmau"]
 [ext_resource type="Texture2D" uid="uid://bi1mk4t0chbu1" path="res://assets/images/bosses/ByBy/Sheets ByBy/idle_down.png" id="4_nb3ei"]
 [ext_resource type="PackedScene" uid="uid://ccmhhb48eeshy" path="res://scenes/UI/health_bar.tscn" id="4_u0guc"]
 [ext_resource type="Texture2D" uid="uid://dyghlrgw6qk6p" path="res://assets/images/bosses/ByBy/Sheets ByBy/idle_left.png" id="5_faqb3"]
-[ext_resource type="Texture2D" uid="uid://ciuxg0ot2lj7y" path="res://assets/images/bosses/ByBy/Sheets ByBy/idle_right.png" id="6_kphxy"]
+[ext_resource type="Texture2D" uid="uid://t06u8poo2tcy" path="res://assets/images/bosses/ByBy/Sheets ByBy/idle_right.png" id="6_kphxy"]
 [ext_resource type="Texture2D" uid="uid://canrnx3kb6fda" path="res://assets/images/bosses/ByBy/Sheets ByBy/idle_up.png" id="7_12df8"]
-[ext_resource type="Texture2D" uid="uid://dtekx82egkhew" path="res://assets/images/bosses/ByBy/Sheets ByBy/skill_1.png" id="8_ek5o7"]
+[ext_resource type="Texture2D" uid="uid://7uhv32xkyjtl" path="res://assets/images/bosses/ByBy/Sheets ByBy/skill_1.png" id="8_ek5o7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l4w8u"]
 atlas = ExtResource("2_caqud")
@@ -268,5 +268,3 @@ shape = SubResource("RectangleShape2D_a8uno")
 [node name="HealthBar" parent="." unique_id=332343199 instance=ExtResource("4_u0guc")]
 position = Vector2(-72, 7.9999995)
 scale = Vector2(3.5, 3.5)
-
-[node name="DieSound" type="AudioStreamPlayer2D" parent="." unique_id=240882520]

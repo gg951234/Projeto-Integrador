@@ -29,7 +29,6 @@ var skill_cancelled: bool = false
 @onready var sight: Area2D = $Sight
 @onready var keyrange: Area2D = $KeyRange
 @onready var health_bar: Node2D = $HealthBar
-@onready var die_sound: AudioStreamPlayer2D = $DieSound
 @export var hit_sound: String = "res://assets/sounds/enemies/SlimeDamaged.mp3"
 
 var outline_shader: Shader = preload("res://shaders/outlineshader.gdshader")
@@ -272,13 +271,13 @@ func _on_quiz_finished(correct: bool):
 	get_tree().paused = false
 	is_quiz_open = false
 	if correct:
-		GameManager.add_score(50)
+		GameManager.add_score(1000)
 		if current_down_threshold == 1:
 			die()
 		else:
 			exit_down()
 	else:
-		GameManager.add_score(-50)
+		GameManager.add_score(-1000)
 		if current_down_threshold == 66:
 			health = max_health
 			health_bar.updateHealth(health)

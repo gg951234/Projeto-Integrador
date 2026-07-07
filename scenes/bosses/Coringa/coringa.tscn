@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://j7nhvw4qoh2c"]
 
-[ext_resource type="Script" uid="uid://b05t1orawevxu" path="res://scripts/bosses/GolemController.gd" id="1_wpr87"]
+[ext_resource type="Script" uid="uid://bjtf228msy1ql" path="res://scripts/bosses/CoringaController.gd" id="1_74ty4"]
 [ext_resource type="Texture2D" uid="uid://d355jxrirn1ya" path="res://assets/images/bosses/Coringa/Sheets Coringa/dead.png" id="2_f1i8c"]
-[ext_resource type="AudioStream" uid="uid://gxnydufebwm8" path="res://assets/sounds/enemies/SlimeDamaged.mp3" id="3_bko2c"]
 [ext_resource type="Texture2D" uid="uid://dkayouqvl3x6u" path="res://assets/images/bosses/Coringa/Sheets Coringa/half_life.png" id="3_yd2ib"]
 [ext_resource type="Texture2D" uid="uid://btqr84fbhoshl" path="res://assets/images/bosses/Coringa/Sheets Coringa/idle_down.png" id="4_1wjaa"]
 [ext_resource type="PackedScene" uid="uid://ccmhhb48eeshy" path="res://scenes/UI/health_bar.tscn" id="4_u0guc"]
@@ -10,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://u7pv0w00euua" path="res://assets/images/bosses/Coringa/Sheets Coringa/idle_rigth.png" id="6_l2304"]
 [ext_resource type="Texture2D" uid="uid://chrjsfcybwlcp" path="res://assets/images/bosses/Coringa/Sheets Coringa/idle_up.png" id="7_1hry3"]
 [ext_resource type="Texture2D" uid="uid://p5p1i55wl86p" path="res://assets/images/bosses/Coringa/Sheets Coringa/attack.png" id="8_s31qu"]
-
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dtt46"]
 atlas = ExtResource("2_f1i8c")
@@ -166,7 +164,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_rhp4t")
 }],
 "loop": true,
-"name": &"idle_rigth",
+"name": &"idle_right",
 "speed": 5.0
 }, {
 "frames": [{
@@ -204,43 +202,47 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_371uh"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4jyjn"]
 size = Vector2(75.5, 71.25)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_co1n5"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_74ty4"]
 size = Vector2(1408, 1408)
 
-[node name="Golem" type="CharacterBody2D" unique_id=1469553198]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f1i8c"]
+size = Vector2(400, 400)
+
+[node name="Coringa" type="CharacterBody2D" unique_id=1469553198]
 collision_layer = 4
-script = ExtResource("1_wpr87")
+script = ExtResource("1_74ty4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=29716560]
+position = Vector2(0, -125)
 scale = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_24adn")
-animation = &"downed"
+animation = &"idle_right"
 autoplay = "idle_down"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=861251288]
-position = Vector2(1, 6.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=891652630]
+position = Vector2(1, -89)
 scale = Vector2(4, 4)
-shape = SubResource("RectangleShape2D_371uh")
+shape = SubResource("RectangleShape2D_4jyjn")
 
-[node name="Sight" type="Area2D" parent="." unique_id=444106651]
+[node name="Sight" type="Area2D" parent="." unique_id=1126888170]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=708594787]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=456993090]
 position = Vector2(0, -1)
-shape = SubResource("RectangleShape2D_co1n5")
+shape = SubResource("RectangleShape2D_74ty4")
 
-[node name="HitSound" type="AudioStreamPlayer2D" parent="." unique_id=1610741949]
-y_sort_enabled = true
-stream = ExtResource("3_bko2c")
-volume_db = -10.0
+[node name="KeyRange" type="Area2D" parent="." unique_id=2019560299]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KeyRange" unique_id=258869340]
+position = Vector2(0, -90)
+shape = SubResource("RectangleShape2D_f1i8c")
 
 [node name="HealthBar" parent="." unique_id=332343199 instance=ExtResource("4_u0guc")]
-position = Vector2(-72, 103.00003)
+position = Vector2(-72, 16.000015)
 scale = Vector2(3.5, 3.5)
-
-[connection signal="body_entered" from="Sight" to="." method="_on_sight_body_entered"]
-[connection signal="body_exited" from="Sight" to="." method="_on_sight_body_exited"]

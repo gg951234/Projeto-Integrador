@@ -366,7 +366,7 @@ func _amostrar_caminho(segmentos: Array, distancia: float) -> Array:
 func _criar_seta(posicao: Vector2, direcao: Vector2, cor: Color, escala: float) -> Sprite2D:
 	var seta := Sprite2D.new()
 	seta.texture = TEXTURA_SETA
-	seta.z_index = 100
+	seta.z_index = 0
 	seta.modulate = cor
 	seta.scale = Vector2(escala, escala)
 	add_child(seta)
