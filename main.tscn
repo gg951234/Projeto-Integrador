@@ -31,9 +31,12 @@
 [ext_resource type="Texture2D" uid="uid://btfgvgvd1c2qt" path="res://assets/images/background/ranking.png" id="25_0rl1p"]
 [ext_resource type="StyleBox" uid="uid://c0m80gm5pf46w" path="res://styles/saldo_style.tres" id="28_0rl1p"]
 [ext_resource type="Texture2D" uid="uid://de3kf7awjs4xi" path="res://assets/images/background/espada.png" id="29_ok6jj"]
+[ext_resource type="Script" uid="uid://b1g6f84c0m41f" path="res://scripts/ui/HUDMobileController.gd" id="32_4lmeg"]
+[ext_resource type="Texture2D" uid="uid://du6mvtj0lcg3n" path="res://assets/images/background/mobile_attack.png" id="33_4lmeg"]
 [ext_resource type="Texture2D" uid="uid://dqmpwmatnsnov" path="res://assets/images/background/Coin.png" id="33_b1qrp"]
 [ext_resource type="Texture2D" uid="uid://uwjdei4mvcwo" path="res://assets/images/background/padrao.png" id="33_facbu"]
 [ext_resource type="Texture2D" uid="uid://ci5wvwx13hwh6" path="res://assets/images/background/icon_music.png" id="33_ok6jj"]
+[ext_resource type="Texture2D" uid="uid://catgydr3pk8sx" path="res://assets/images/background/mobile_interact.png" id="34_0cp0l"]
 [ext_resource type="Texture2D" uid="uid://c4j6qkcpw2g4r" path="res://assets/images/background/frost.png" id="34_come4"]
 [ext_resource type="Script" uid="uid://blgng47schcgq" path="res://scripts/managers/SettingsManager.gd" id="37_d2t1y"]
 [ext_resource type="Texture2D" uid="uid://d3k4o4wxjokwh" path="res://assets/images/background/slider.png" id="39_0n3wm"]
@@ -1018,6 +1021,41 @@ shadow_color = Color(0.50264585, 0.2906714, 0.7107226, 1)
 shadow_size = 1
 shadow_offset = Vector2(0, -2)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uypp3"]
+bg_color = Color(0, 0, 0, 0.39215687)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4w656"]
+bg_color = Color(0.21568628, 0.21568628, 0.21568628, 0.4509804)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e71vb"]
+bg_color = Color(0, 0, 0, 0.39215687)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vke2r"]
+bg_color = Color(0, 0, 0, 0.78431374)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rnkwl"]
+bg_color = Color(0, 0, 0, 0.39215687)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0cp0l"]
 bg_color = Color(0.039215688, 0.050980393, 0.06666667, 1)
 border_width_left = 200
@@ -1923,6 +1961,33 @@ grow_vertical = 2
 texture = ExtResource("25_0rl1p")
 expand_mode = 1
 
+[node name="ShowCoins" type="Button" parent="UI/LevelSelectionCanvas" unique_id=983300793]
+auto_translate_mode = 1
+visible = false
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -130.0
+offset_top = -40.0
+offset_right = -50.0
+offset_bottom = 40.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 10
+size_flags_vertical = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_ryguw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_d13ii")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1u8w0")
+action_mode = 0
+icon_alignment = 1
+
+[node name="CoinSprite" type="AnimatedSprite2D" parent="UI/LevelSelectionCanvas/ShowCoins" unique_id=1117720657]
+position = Vector2(40, 38)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_0cp0l")
+
 [node name="Perfil" type="Panel" parent="UI/LevelSelectionCanvas" unique_id=1776341505]
 visible = false
 anchors_preset = 8
@@ -2591,6 +2656,77 @@ theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 30
 text = "Menor caminho: fora"
 vertical_alignment = 1
+
+[node name="HUDMobile" type="CanvasLayer" parent="UI" unique_id=1237374007]
+visible = false
+script = ExtResource("32_4lmeg")
+knob_max_distance = 75.0
+action_button_path = NodePath("ActionButton")
+icon_path = NodePath("ActionButton/Icon")
+attack_icon = ExtResource("33_4lmeg")
+interact_icon = ExtResource("34_0cp0l")
+
+[node name="Joystick" type="Control" parent="UI/HUDMobile" unique_id=303178916]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 50.0
+offset_top = 450.0
+offset_right = 250.0
+offset_bottom = 650.0
+
+[node name="Background" type="Panel" parent="UI/HUDMobile/Joystick" unique_id=900809271]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -75.0
+offset_right = 75.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uypp3")
+
+[node name="Knob" type="Panel" parent="UI/HUDMobile/Joystick/Background" unique_id=1438134765]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -30.0
+offset_right = 30.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4w656")
+
+[node name="ActionButton" type="Button" parent="UI/HUDMobile" unique_id=1492864319]
+offset_left = 675.0
+offset_top = 475.0
+offset_right = 825.0
+offset_bottom = 625.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_e71vb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_vke2r")
+theme_override_styles/hover = SubResource("StyleBoxFlat_rnkwl")
+
+[node name="Icon" type="TextureRect" parent="UI/HUDMobile/ActionButton" unique_id=468214191]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -48.0
+offset_right = 48.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="Loja" type="CanvasLayer" parent="UI" unique_id=975011843]
 visible = false

@@ -134,15 +134,18 @@ func _on_keyrange_body_exited(body: Node2D):
 
 func _add_key_and_outline():
 	if tecla_instance == null and isAlive:
-		tecla_instance = downedkey_scene.instantiate()
-		add_child(tecla_instance)
-		tecla_instance.position = Vector2(0, -50)
-	animated_sprite.material = outline_material
+		if OS.get_name() == "Android" or OS.get_name() == "iOS":
+			tecla_instance = downedkey_scene.instantiate()
+			add_child(tecla_instance)
+			tecla_instance.position = Vector2(0, -50)
+		GameManager._change_mobilebutton("Interact")
+		animated_sprite.material = outline_material
 
 func _remove_key_and_outline():
 	if tecla_instance != null:
 		tecla_instance.queue_free()
 		tecla_instance = null
+	GameManager._change_mobilebutton("Attack")
 	animated_sprite.material = normal_material
 
 func _on_skill_trigger_timeout():

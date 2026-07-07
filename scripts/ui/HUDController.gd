@@ -26,7 +26,6 @@ func _update_health(new_health) -> void:
 	health_bar.min_value = 0
 	health_bar.value = new_health
 
-
 func _update_coins(currentamount) -> void:
 	coins_count.text = "Moedas: " + str(currentamount) + "/" + "10"
 

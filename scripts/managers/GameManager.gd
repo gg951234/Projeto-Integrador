@@ -21,6 +21,7 @@ var unlockedlevels: Array = [1, 2]
 # Sistema de transição global
 var ui_reference: Control
 var hud_reference: CanvasLayer
+var hudmobile_reference: CanvasLayer
 var transition_layer: CanvasLayer
 var transition_rect: ColorRect
 
@@ -63,6 +64,7 @@ func _find_nodes() -> void:
 	ui_reference = root.find_child("UI", true, false)
 	if ui_reference:
 		hud_reference = ui_reference.find_child("HUD")
+		hudmobile_reference = ui_reference.find_child("HUDMobile")
 		if not hud_reference:
 			push_error("HUD não existe")
 	else:
@@ -164,6 +166,9 @@ func load_level(levelnumber: int = 0) -> bool:
 		hud_reference._update_coins(currentcoins)
 		hud_reference.show()
 		
+		if OS.get_name() == "Android" or OS.get_name() == "iOS":
+			hudmobile_reference.show()
+		
 		# Inicia o timer e zera o contador
 		currenttimer = 0
 		timer.start()
@@ -231,6 +236,7 @@ func level_completed() -> bool:
 	
 	unlocknextlevel()
 	hud_reference.hide()
+	hudmobile_reference.hide()
 	
 	GameManager.fade_in(0.5, func():
 		var victory_screen = load("res://scenes/UI/victory_screen.tscn").instantiate()
@@ -241,8 +247,14 @@ func level_completed() -> bool:
 	return 1
 
 # --------------
-# ÁREA DE ENTRADA DO BOSS
+# BOSS
 # --------------
+func _change_mobilebutton(action: String) -> void:
+	if action == "Interact":
+		hudmobile_reference.set_interact_mode(true)
+	else:
+		hudmobile_reference.set_interact_mode(false)
+
 func setup_boss_enter_area() -> void:
 	if not currentlevelroot:
 		return

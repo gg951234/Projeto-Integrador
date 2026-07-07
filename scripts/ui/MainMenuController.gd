@@ -19,6 +19,7 @@ extends Control
 @onready var loja: Button = $LevelSelectionCanvas/Loja
 @onready var profile: Button = $LevelSelectionCanvas/Profile
 @onready var ranking: Button = $LevelSelectionCanvas/Ranking
+@onready var show_coins: Button = $LevelSelectionCanvas/ShowCoins
 
 # -- INSTRUÇÕES --
 @onready var instrucoes: Panel = $MainMenuCanvas/Instrucoes
@@ -138,7 +139,7 @@ func _ready() -> void:  # Executa quando o nó é criado
 		[voltar_cadastro, _on_voltar_cadastro_pressed],
 		[cadastrar, _on_cadastrar_pressed],
 	]
-
+	
 	for par in botoes_e_metodos:
 		var botao = par[0]
 		var metodo = par[1]
@@ -146,6 +147,11 @@ func _ready() -> void:  # Executa quando o nó é criado
 			if botao.pressed.is_connected(metodo):
 				botao.pressed.disconnect(metodo)
 			botao.pressed.connect(metodo)
+	
+	# Lógica específica para mobile
+	if OS.get_name() == "Android" or OS.get_name() == "iOS":
+		show_coins.visible = true
+		show_coins.pressed.connect(_on_showcoins_pressed)
 	
 	FirebaseManager.login_concluido.connect(_on_login_concluido)
 	FirebaseManager.cadastro_concluido.connect(_on_cadastro_concluido)
@@ -172,6 +178,8 @@ func _connect_all_buttons_to_sound() -> void:
 
 func _add_buttons_from_node(node: Node) -> void:
 	for child in node.get_children():
+		if child == $HUDMobile/ActionButton:
+				return
 		if child is Button:
 			# Conecta o sinal pressed à função de som (não remove outras conexões)
 			child.pressed.connect(_play_button_sound)
@@ -196,7 +204,7 @@ func animate_scale(button: Button, target_scale: Vector2) -> void:
 
 func setup_main_buttons() -> void:
 	# Conecta todos os botões do menu de uma vez
-	for button in [start, options, quit, sound_button, help, back, loja, profile, fechar, ranking, voltar_loja, back_ranking, fechar_perfil, cadastrar, voltar_cadastro, fechar_login, tela_cadastro, entrar, alterar_senha, confirmar, fechar_senha, ranking_fase_anterior, ranking_fase_proxima, sair]:
+	for button in [start, options, quit, sound_button, help, back, loja, profile, fechar, ranking, voltar_loja, back_ranking, fechar_perfil, cadastrar, voltar_cadastro, fechar_login, tela_cadastro, entrar, alterar_senha, confirmar, fechar_senha, ranking_fase_anterior, ranking_fase_proxima, sair, show_coins]:
 		button.pivot_offset = button.size / 2 # Define o pivot para o centro do botão
 		button.mouse_entered.connect(_on_button_mouse_entered.bind(button))
 		button.mouse_exited.connect(_on_button_mouse_exited.bind(button))
@@ -372,6 +380,33 @@ func setup_skins_buttons() -> void:
 
 	# Oculta o template original (não usado)
 	roupa_template.visible = false
+
+func _on_showcoins_pressed() -> void:
+	# Itera sobre todos os filhos do container
+	for btn in level_selection_buttons.get_children():
+		# Verifica se é um botão e se está habilitado
+		if btn is Button and not btn.disabled:
+			var btntext: Label = btn.get_node("LevelNumber")
+			var btncoin: AnimatedSprite2D = btn.get_node("CoinSprite")
+			# Extrai o número do nível a partir do nome do botão
+			var level_number = int(btn.name.replace("Level", ""))
+			
+			# Verifica se o nível existe (opcional, mas seguro)
+			if not GameManager.check_level(level_number):
+				continue
+			
+			# Alterna a visibilidade da moeda e atualiza o texto
+			if btncoin.visible:
+				# Moeda visível → oculta e mostra o número
+				btncoin.stop()
+				btncoin.visible = false
+				btntext.text = str(level_number)
+			else:
+				# Moeda oculta → mostra e exibe a quantidade de moedas
+				btncoin.visible = true
+				btncoin.play("default")
+				var moedas = GameManager.fase_moedascoletadas(level_number)
+				btntext.text = str(moedas) + "/10"
 
 # Callback para o pressed de cada botão de skin
 func _on_skin_button_pressed(skin_name: String) -> void:
