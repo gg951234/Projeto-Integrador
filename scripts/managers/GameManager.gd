@@ -8,6 +8,8 @@ var currentlevelpath: String = ""
 var enemies_remaining: int = 0
 var enemies_max: int = 0
 var door_node: Node = null
+var path_guide: Node = null
+var _popup_grafos_mostrada: bool = false
 
 # Dados para serem salvos
 var playername: String = ""
@@ -141,6 +143,8 @@ func delete_level() -> bool:
 		currentcoins = 0
 		currentscore = 0
 		enemies_remaining = 0
+		door_node = null
+		path_guide = null
 		return 1
 	return 0
 
@@ -193,6 +197,11 @@ func load_level(levelnumber: int = 0) -> bool:
 		AudioManager.tocar_musica(CameraData.get_soundtrack(level_name))
 		
 		setup_boss_enter_area()
+		
+		# Guia de caminhos por grafos (AStar2D), se a fase tiver um PathGuideManager
+		path_guide = currentlevelroot.find_child("PathGuideManager", true, false)
+		_popup_grafos_mostrada = false
+		
 		currentlevel = levelnumber
 		return true
 	else:
@@ -269,6 +278,9 @@ func _on_boss_enter_area_body_entered(body: Node, barrier: Node) -> void:
 		
 		AudioManager.tocar_musica(CameraData.get_soundtrack(bossroom_name))
 		
+		# Avalia se seguiu o menor caminho e recompensa
+		_conceder_recompensa_menor_caminho()
+		
 		# Desconecta o sinal para não disparar novamente
 		var enter_area = barrier.get_parent().get_node("Enter")
 		if enter_area and enter_area.body_entered.is_connected(_on_boss_enter_area_body_entered):
@@ -305,10 +317,12 @@ func _setup_enemy_counting(enemies_node: Node) -> void:
 		if enemy.has_signal("died") and not enemy.died.is_connected(_on_enemy_died):
 			enemy.died.connect(_on_enemy_died)
 	
-	# Se não houver inimigos, já libera a porta
-	if enemies_remaining == 0 and door_node:
-		door_node.queue_free()
-		door_node = null
+	# Se não houver inimigos, já libera a porta e revela os caminhos
+	if enemies_remaining == 0:
+		if door_node:
+			door_node.queue_free()
+			door_node = null
+		_revelar_caminhos()
 
 func _on_enemy_died() -> void:
 	enemies_remaining -= 1
@@ -319,6 +333,80 @@ func _on_enemy_died() -> void:
 			AudioManager.tocar_sfxglobal("res://assets/sounds/levels/BossRoomDoor.mp3", {Pitch = 0.5})
 			door_node.queue_free()
 			door_node = null
+		# Último inimigo morto: libera a guia de caminhos (menor caminho + rotas)
+		# e mostra a popup explicando o que são grafos.
+		_revelar_caminhos()
+		_mostrar_popup_grafos()
+
+# --------------
+# GUIA DE CAMINHOS (TEORIA DE GRAFOS / AStar2D)
+# --------------
+func _revelar_caminhos() -> void:
+	# Chamado quando o último inimigo da fase morre: libera as setas que mostram
+	# o menor caminho (cor chamativa) e as rotas alternativas (cor neutra).
+	if path_guide and path_guide.has_method("revelar_caminhos"):
+		path_guide.revelar_caminhos()
+
+func _mostrar_popup_grafos() -> void:
+	# Popup educativa sobre grafos (linguagem de 7º ano). Só aparece nas fases
+	# que têm guia de caminhos, uma vez por fase, com o jogo pausado — as setas
+	# já ficam visíveis atrás dela, servindo de exemplo do que ela explica.
+	if not path_guide or _popup_grafos_mostrada:
+		return
+	_popup_grafos_mostrada = true
+	var popup_scene: PackedScene = load("res://scenes/UI/graph_info_popup.tscn")
+	if not popup_scene:
+		push_warning("Não foi possível carregar graph_info_popup.tscn")
+		return
+	var popup = popup_scene.instantiate()
+	get_tree().root.add_child(popup)
+	get_tree().paused = true
+	popup.fechado.connect(func(): get_tree().paused = false)
+
+func _conceder_recompensa_menor_caminho() -> void:
+	# Chamado quando o jogador chega na área do boss. Se ele seguiu o menor
+	# caminho na maior parte do trajeto (>= 50%), ganha 5 moedas de recompensa.
+	if not path_guide:
+		return
+	var seguiu: bool = false
+	if path_guide.has_method("seguiu_majoritariamente_a_rota_mais_rapida"):
+		seguiu = path_guide.seguiu_majoritariamente_a_rota_mais_rapida()
+	if path_guide.has_method("parar"):
+		path_guide.parar()
+	if seguiu:
+		_spawn_moedas_recompensa(5)
+
+func _spawn_moedas_recompensa(quantidade: int) -> void:
+	if not currentlevelroot:
+		return
+
+	var coin_scene: PackedScene = load("res://scenes/collectables/coin.tscn")
+	if not coin_scene:
+		push_warning("Não foi possível carregar coin.tscn para a recompensa.")
+		return
+
+	# Organiza as moedas sob o nó Collectables (ou no próprio LevelRoot)
+	var parent: Node = currentlevelroot.get_node_or_null("Collectables")
+	if not parent:
+		parent = currentlevelroot
+
+	# Origem: posição do jogador ao entrar na sala do boss
+	var player: Node2D = currentlevelroot.get_node_or_null("Player")
+	var origem: Vector2 = player.global_position if player else Vector2.ZERO
+
+	# Direção: rumo ao boss
+	var golem: Node2D = currentlevelroot.get_node_or_null("Golem")
+	var direcao: Vector2 = Vector2.DOWN
+	if golem and player:
+		direcao = (golem.global_position - origem).normalized()
+
+	var espacamento: float = 70.0
+	for i in range(quantidade):
+		var coin: Node2D = coin_scene.instantiate()
+		coin.global_position = origem + direcao * (espacamento * (i + 1))
+
+		# Adiar a adição para evitar conflito com a física
+		parent.call_deferred("add_child", coin)
 
 # --------------
 # EVENTO DE MORTE DO PLAYER

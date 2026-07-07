@@ -1,34 +1,11 @@
 [gd_scene format=4 uid="uid://bk0ytt2n4nfkt"]
 
-[ext_resource type="Texture2D" uid="uid://h4c1l4ge1tx0" path="res://assets/images/tiles/Tile Map 1 - Geografia/TileMap1GEO.png" id="1_l37oo"]
 [ext_resource type="Texture2D" uid="uid://4pdca8blduo4" path="res://assets/images/tiles/Tile Map 2 - Física/untitled.png" id="2_ibugp"]
 [ext_resource type="PackedScene" uid="uid://dqmugt1xu11kk" path="res://scenes/player/player.tscn" id="2_qpwj6"]
 [ext_resource type="Script" uid="uid://vej28ctixkyh" path="res://scripts/managers/EnemiesManager.gd" id="4_qpwj6"]
 [ext_resource type="PackedScene" uid="uid://dy0qxbrtqd5ir" path="res://scenes/collectables/coin.tscn" id="5_3p04p"]
 [ext_resource type="PackedScene" uid="uid://dns1qam5e5e88" path="res://scenes/bosses/ByBy/byby.tscn" id="6_qpwj6"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v6ha0"]
-texture = ExtResource("1_l37oo")
-0:0/0 = 0
-2:0/0 = 0
-2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-3:0/0 = 0
-3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-1:1/0 = 0
-2:1/0 = 0
-2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-3:1/0 = 0
-3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-1:2/0 = 0
-2:2/0 = 0
-2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-3:2/0 = 0
-3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-1:3/0 = 0
-2:3/0 = 0
-2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-3:3/0 = 0
-3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+[ext_resource type="Script" uid="uid://cyatk8gr1wofw" path="res://scripts/levels/PathGuideManager.gd" id="7_ibugp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8qukl"]
 texture = ExtResource("2_ibugp")
@@ -63,7 +40,6 @@ texture = ExtResource("2_ibugp")
 
 [sub_resource type="TileSet" id="TileSet_gmpev"]
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_v6ha0")
 sources/1 = SubResource("TileSetAtlasSource_8qukl")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qpwj6"]
@@ -189,3 +165,6 @@ limit_left = 320
 limit_top = 1064
 limit_right = 1856
 limit_bottom = 2560
+
+[node name="PathGuideManager" type="Node2D" parent="." unique_id=693614687]
+script = ExtResource("7_ibugp")

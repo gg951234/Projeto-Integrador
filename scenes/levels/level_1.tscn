@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dy0qxbrtqd5ir" path="res://scenes/collectables/coin.tscn" id="5_6761a"]
 [ext_resource type="Texture2D" uid="uid://h4c1l4ge1tx0" path="res://assets/images/tiles/Tile Map 1 - Geografia/TileMap1GEO.png" id="9_np2pn"]
 [ext_resource type="PackedScene" uid="uid://dqmugt1xu11kk" path="res://scenes/player/player.tscn" id="10_qhwlw"]
+[ext_resource type="Script" uid="uid://cyatk8gr1wofw" path="res://scripts/levels/PathGuideManager.gd" id="11_pathguide"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v6ha0"]
 texture = ExtResource("9_np2pn")
@@ -138,3 +139,6 @@ region_rect = Rect2(48, 31, 16, 33)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossEnterArea/Door" unique_id=707082841]
 position = Vector2(34, -1)
 shape = SubResource("RectangleShape2D_s8va5")
+
+[node name="PathGuideManager" type="Node2D" parent="." unique_id=287970120]
+script = ExtResource("11_pathguide")

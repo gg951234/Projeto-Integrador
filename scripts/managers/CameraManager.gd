@@ -11,6 +11,8 @@ func _ready():
 func set_camera(new_camera: Camera2D) -> void:
 	camera = new_camera
 	if camera:
+		if camera.is_inside_tree():
+			camera.make_current()
 		print("CameraManager: câmera atualizada para: ", camera.name)
 	else:
 		push_warning("CameraManager: tentativa de definir câmera nula.")

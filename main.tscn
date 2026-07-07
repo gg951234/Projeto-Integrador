@@ -2527,14 +2527,14 @@ texture_under = ExtResource("3_lquwl")
 texture_progress = ExtResource("4_7mycd")
 
 [node name="CoinsCount" type="Label" parent="UI/HUD" unique_id=980765172]
-offset_left = 785.0
+offset_left = 768.0
 offset_top = 14.0
-offset_right = 889.0
+offset_right = 890.0
 offset_bottom = 37.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("4_5vw27")
-text = "Moedas: 0/5"
+text = "Moedas: 0/0"
 vertical_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="UI/HUD/CoinsCount" unique_id=199184289]
@@ -2547,14 +2547,14 @@ texture = ExtResource("33_b1qrp")
 expand_mode = 1
 
 [node name="EnemiesDefeatedCount" type="Label" parent="UI/HUD" unique_id=334450668]
-offset_left = 664.0
+offset_left = 647.0
 offset_top = 42.0
-offset_right = 889.0
+offset_right = 891.0
 offset_bottom = 65.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("4_5vw27")
-text = "Inimigos Derrotados: 0/5"
+text = "Inimigos Derrotados: 0/0"
 vertical_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="UI/HUD/EnemiesDefeatedCount" unique_id=2121270737]
@@ -2577,6 +2577,19 @@ theme_override_fonts/font = ExtResource("4_5vw27")
 theme_override_font_sizes/font_size = 35
 text = "00:00"
 horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PathIndicator" type="Label" parent="UI/HUD" unique_id=1179094715]
+visible = false
+offset_left = 17.0
+offset_top = 10.0
+offset_right = 480.0
+offset_bottom = 52.0
+theme_override_colors/font_color = Color(0.85, 0.87, 0.92, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("4_5vw27")
+theme_override_font_sizes/font_size = 30
+text = "Menor caminho: fora"
 vertical_alignment = 1
 
 [node name="Loja" type="CanvasLayer" parent="UI" unique_id=975011843]

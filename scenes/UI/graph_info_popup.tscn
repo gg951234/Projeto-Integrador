@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://dg5aph2x1nfo3"]
+
+[ext_resource type="Script" path="res://scripts/ui/GraphInfoPopupController.gd" id="1_grafos"]
+[ext_resource type="Texture2D" uid="uid://bunojt5x313ml" path="res://assets/images/background/Background2.png" id="2_rb20j"]
+[ext_resource type="FontFile" uid="uid://cbyr1lp1f7yld" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="3_p4wo3"]
+[ext_resource type="StyleBox" uid="uid://cstg6mvucrkki" path="res://styles/options_normal_style.tres" id="4_06poq"]
+[ext_resource type="StyleBox" uid="uid://kku8gh25fk06" path="res://styles/options_hovered_normal_style.tres" id="5_mmd5s"]
+
+[node name="GraphInfoPopup" type="CanvasLayer" unique_id=200001777]
+process_mode = 3
+script = ExtResource("1_grafos")
+
+[node name="Background" type="TextureRect" parent="." unique_id=200001778]
+offset_left = 100.0
+offset_top = 110.0
+offset_right = 800.0
+offset_bottom = 590.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_rb20j")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="TitleLabel" type="Label" parent="Background" unique_id=200001779]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 22.0
+offset_right = 670.0
+offset_bottom = 70.0
+theme_override_colors/font_color = Color(1, 0.82, 0.15, 1)
+theme_override_colors/font_outline_color = Color(0.025004718, 0.09836692, 0.1826249, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("3_p4wo3")
+theme_override_font_sizes/font_size = 30
+text = "O QUE É UM GRAFO?"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="ContentLabel" type="Label" parent="Background" unique_id=200001780]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 85.0
+offset_right = 645.0
+offset_bottom = 390.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.025004718, 0.09836692, 0.1826249, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_p4wo3")
+theme_override_font_sizes/font_size = 21
+text = "..."
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="PageLabel" type="Label" parent="Background" unique_id=200001781]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 412.0
+offset_right = 400.0
+offset_bottom = 445.0
+theme_override_colors/font_color = Color(0.8, 0.8, 0.85, 1)
+theme_override_colors/font_outline_color = Color(0.025004718, 0.09836692, 0.1826249, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("3_p4wo3")
+theme_override_font_sizes/font_size = 18
+text = "1/4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackButton" type="Button" parent="Background" unique_id=200001783]
+visible = false
+layout_mode = 0
+offset_left = 60.0
+offset_top = 400.0
+offset_right = 270.0
+offset_bottom = 448.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.025004718, 0.09836692, 0.1826249, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("3_p4wo3")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = ExtResource("4_06poq")
+theme_override_styles/pressed = ExtResource("5_mmd5s")
+theme_override_styles/hover = ExtResource("5_mmd5s")
+action_mode = 0
+text = "< VOLTAR"
+
+[node name="ContinueButton" type="Button" parent="Background" unique_id=200001782]
+layout_mode = 0
+offset_left = 430.0
+offset_top = 400.0
+offset_right = 640.0
+offset_bottom = 448.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.025004718, 0.09836692, 0.1826249, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("3_p4wo3")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = ExtResource("4_06poq")
+theme_override_styles/pressed = ExtResource("5_mmd5s")
+theme_override_styles/hover = ExtResource("5_mmd5s")
+action_mode = 0
+text = "PRÓXIMO >"

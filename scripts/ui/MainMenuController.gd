@@ -319,6 +319,7 @@ func _on_fechar_pressed() -> void:
 	instrucoes.visible = false
 
 func _on_loja_pressed() -> void:
+	_atualizar_tela_loja()
 	$LevelSelectionCanvas.visible = false
 	$Loja.visible = true
 
@@ -596,7 +597,6 @@ func _atualizar_tela_perfil() -> void:
 
 func _on_fechar_senha_pressed() -> void:
 	tela_alterar_senha.visible = false
-
 
 func _on_senha_pressed() -> void:
 	nova_senha.text = ""

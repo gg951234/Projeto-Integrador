@@ -6,7 +6,7 @@ var limits = {
 		"left": 0,
 		"top": 0,
 		"right": 2496,
-		"bottom": 1024,
+		"bottom": 1088,
 		"soundtrack": "res://assets/sounds/levels/Level 1 Soundtrack.mp3",
 	},
 	"BossRoom1": {

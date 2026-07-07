@@ -87,6 +87,9 @@ func registrar_fim_de_fase(fase_id: String, moedas_coletadasnafase: int, tempo: 
 			moedas_ganhas = 0
 		moedas_coletadas += moedas_ganhas
 		print("💰 Coletou %d moedas e foram descontadas %d por já ter pego antes" % [moedas_coletadasnafase, antigo.get("moedas_fase", 0)])
+	else:
+		moedas_coletadas += moedas_coletadasnafase
+		print("💰 Coletou %d moedas e nenhuma moeda foi descontada" % [moedas_coletadasnafase])
 
 	progresso_fases[fase_id] = {
 		"completada": true,
