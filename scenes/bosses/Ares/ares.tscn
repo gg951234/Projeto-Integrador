@@ -212,6 +212,7 @@ size = Vector2(1408, 1408)
 size = Vector2(400, 400)
 
 [node name="Ares" type="CharacterBody2D" unique_id=1469553198]
+z_index = 1
 collision_layer = 4
 script = ExtResource("1_r412l")
 
@@ -219,8 +220,10 @@ script = ExtResource("1_r412l")
 position = Vector2(0, -112)
 scale = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_24adn")
-animation = &"idle_down"
+animation = &"skill_1"
 autoplay = "idle_down"
+frame = 3
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1247650029]
 position = Vector2(1, -89)

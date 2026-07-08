@@ -60,7 +60,7 @@ var stats = {
 	},
 	"Anubis": {
 		"health": 500, # Vida (ex: 800)
-		"skill_pattern": [1,2,1], # Ordem das skills (ex: [1,2,1,2,3])
+		"skill_pattern": [1,2], # Ordem das skills (ex: [1,2,1,2,3])
 		"diesound": "res://assets/sounds/bosses/Anubis/AnubisDie.mp3",
 		"skills": { # Skills e seus parâmetros { id: { parâmetros necessários } }
 			1: {
@@ -68,7 +68,7 @@ var stats = {
 				"thickness": 32.0, # Largura da textura
 				"damage": 20,
 				"knockback": 300,
-				"spin_speed": 30.0,
+				"spin_speed": 40.0,
 				"duration": 4.0,
 				"hit_interval": 0.2,
 				"cooldown": 0.0,
@@ -120,20 +120,31 @@ var stats = {
 				"cooldown": 5.0,
 				"damage": 20, # Dano
 				"knockback": 150, # Knockback
-				"count": 16, # Quantidade
+				"count": 20, # Quantidade
 				"square_size": 1300, # Distância máxima
 				"delay": 1.0, # Delay pra spawnar após o preview
 				"impact_scale": 3.0, # Tamanho
-			}
+				"skill_duration": 10 # Tempo de duração
+			},
 		}
 	},
 	"Kobe": {
 		"health": 500, # Vida (ex: 800)
-		"skill_pattern": [1], # Ordem das skills (ex: [1,2,1,2,3])
+		"skill_pattern": [1,2], # Ordem das skills (ex: [1,2,1,2,3])
 		"diesound": "res://assets/sounds/bosses/Kobe/KobeDie.mp3",
 		"skills": { # Skills e seus parâmetros { id: { parâmetros necessários } }
 			1: {
-				"cooldown": 5.0,
+				"length": 2000.0,
+				"thickness": 32.0, # Largura da textura
+				"damage": 20,
+				"knockback": 300,
+				"spin_speed": 65.0,
+				"duration": 4.0,
+				"hit_interval": 0.2,
+				"cooldown": 0.0,
+			},
+			2: {
+				"cooldown": 0.0,
 				"damage": 20, # Dano
 				"knockback": 150, # Knockback
 				"count": 16, # Quantidade
@@ -143,10 +154,10 @@ var stats = {
 			}
 		}
 	},
-	"Coringa": {
+	"Risadinha": {
 		"health": 500, # Vida (ex: 800)
 		"skill_pattern": [1], # Ordem das skills (ex: [1,2,1,2,3])
-		"diesound": "res://assets/sounds/bosses/Coringa/CoringaDie.mp3",
+		"diesound": "res://assets/sounds/bosses/Risadinha/RisadinhaDie.mp3",
 		"skills": { # Skills e seus parâmetros { id: { parâmetros necessários } }
 			1: {
 				"cooldown": 5.0,

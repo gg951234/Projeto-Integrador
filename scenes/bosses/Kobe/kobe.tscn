@@ -137,7 +137,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_m3fr1")
 }],
-"loop": false,
+"loop": true,
 "name": &"die",
 "speed": 7.0
 }, {
@@ -254,6 +254,7 @@ size = Vector2(1408, 1408)
 size = Vector2(400, 400)
 
 [node name="Kobe" type="CharacterBody2D" unique_id=1469553198]
+z_index = 1
 collision_layer = 4
 script = ExtResource("1_vtwwl")
 
@@ -261,7 +262,7 @@ script = ExtResource("1_vtwwl")
 position = Vector2(0, -108)
 scale = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_24adn")
-animation = &"downed"
+animation = &"die"
 autoplay = "idle_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=959102631]

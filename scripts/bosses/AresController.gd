@@ -1,7 +1,12 @@
 extends BossManager
 
-@export var boss_type_override: String = "ByBy"
-@onready var skill1sound: String = "res://assets/sounds/bosses/ByBy/TrainSteam.mp3"
+@export var boss_type_override: String = "Ares"
+@onready var skill1sound: String = "res://assets/sounds/bosses/Ares/AresImpact.mp3"
+@onready var rocksmashsound: String = "res://assets/sounds/bosses/Golem/RockSmash.mp3"
+@onready var rock_texture = preload("res://assets/images/bosses/Golem/rock.png")
+@onready var circlepreview_texture = preload("res://assets/images/bosses/circletarget.png")
+@onready var rock_particles_scene = preload("res://scenes/bosses/Golem/rock_particle.tscn")
+
 var levelroot = null
 
 func _ready():
@@ -14,6 +19,10 @@ func _ready():
 		levelroot = get_tree().root
 	else:
 		levelroot = GameManager.currentlevelroot
+
+func _on_damage_area_body_entered(body: Node, damage: int, kb: int, area: Area2D) -> void:
+	if body.is_in_group("player") and body.has_method("take_damage"):
+		body.take_damage(damage, area.position, kb)
 
 func _skill_1() -> void:
 	if not levelroot:
@@ -43,23 +52,17 @@ func _skill_1() -> void:
 	if currentstate == States.SKILL_ACTIVE:
 		# 1. Criar previews das áreas de impacto
 		for i in range(count):
-			explosion_spawn(params)
+			permarocks_spawn(params)
 			
 		await get_tree().create_timer(params.get("delay", 1.0)+0.4).timeout
-		AudioManager.tocar_sfx(position, skill1sound)
+		AudioManager.tocar_sfx(position, rocksmashsound)
 
-func _on_damage_area_body_entered(body: Node, damage: int, kb: int, area: Area2D) -> void:
-	if body.is_in_group("player") and body.has_method("take_damage"):
-		body.take_damage(damage, area.position, kb)
-
-func explosion_spawn(params) -> void:
+func permarocks_spawn(params) -> void:
 	var delay = params.get("delay", 1.0)
 	var damage = params.get("damage", 20)
 	var knockback = params.get("knockback", 300)
 	var impact_scale = params.get("impact_scale", 32.0)
-	
-	var preview_texture = preload("res://assets/images/bosses/circletarget.png")
-	var impact_particles_scene = preload("res://scenes/bosses/ByBy/explosion_particle.tscn")
+	var skill_duration = params.get("skill_duration", 32.0)
 	
 	var square_size = params.get("square_size", 1408.0)
 	var half = square_size / 2.0
@@ -69,7 +72,7 @@ func explosion_spawn(params) -> void:
 	
 	# Preview
 	var preview = Sprite2D.new()
-	preview.texture = preview_texture
+	preview.texture = circlepreview_texture
 	preview.scale = Vector2(impact_scale, impact_scale)
 	preview.global_position = target_pos
 	preview.modulate = Color(1, 1, 1, 0.7)
@@ -81,11 +84,22 @@ func explosion_spawn(params) -> void:
 	preview.queue_free()
 	
 	# Partículas e área de dano
-	var particles = impact_particles_scene.instantiate()
+	var rock = Sprite2D.new()
+	rock.texture = rock_texture
+	rock.scale = Vector2(impact_scale, impact_scale)
+	rock.global_position = target_pos
+	rock.z_index = 1
+	levelroot.add_child(rock)
+	
+	var particles = rock_particles_scene.instantiate()
 	particles.global_position = target_pos
 	levelroot.add_child(particles)
+	particles.z_index = 0
 	particles.emitting = true
-	particles.z_index = 2
+	
+	for subparticles in particles.get_children():
+		particles.z_index = 0
+		subparticles.emitting = true
 	
 	var damage_area = Area2D.new()
 	damage_area.collision_layer = 2
@@ -106,7 +120,8 @@ func explosion_spawn(params) -> void:
 	))
 	
 	levelroot.add_child(damage_area)
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(skill_duration).timeout
+	rock.queue_free()
 	damage_area.queue_free()
 	await get_tree().create_timer(particles.lifetime).timeout
 	particles.queue_free()

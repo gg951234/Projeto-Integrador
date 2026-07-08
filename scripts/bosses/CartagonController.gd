@@ -1,9 +1,10 @@
 extends BossManager
 
 @export var boss_type_override: String = "Cartagon"
-@onready var skill1sound: String = "res://assets/sounds/bosses/Golem/RockSmash.mp3"
-@onready var skill2sound: String = "res://assets/sounds/bosses/ByBy/TrainSteam.mp3"
-@onready var skill2secondsound: String = "res://assets/sounds/bosses/Golem/RockSmash.mp3"
+@onready var skill1sound: String = "res://assets/sounds/bosses/Cartagon/CartagonLines.mp3"
+@onready var skill2sound: String = "res://assets/sounds/bosses/Cartagon/CartagonSkill.mp3"
+@onready var skill2secondsound: String = "res://assets/sounds/bosses/Cartagon/CartagonExplosion.mp3"
+
 @onready var circlepreview_texture = preload("res://assets/images/bosses/circletarget.png")
 @onready var fulltargetpreview_texture = preload("res://assets/images/bosses/fulltarget.png")
 @onready var linehitbox_texture = preload("res://assets/images/bosses/Cartagon/LineHitboxTexture.png")
@@ -43,7 +44,7 @@ func _skill_1() -> void:
 		await get_tree().create_timer(anim_length).timeout
 		
 		if currentstate == States.SKILL_ACTIVE:
-			AudioManager.tocar_sfx(position, skill1sound, {Pitch = 0.5})
+			AudioManager.tocar_sfx(position, skill2sound, {Pitch = 0.5})
 			animated_sprite.play("idle_down")
 	else:
 		push_warning("Animação ", anim_name, " não encontrada para o boss ", boss_type)
@@ -88,11 +89,11 @@ func explosion_spawn(params) -> void:
 	var particles = sixseven_particles_scene.instantiate()
 	particles.global_position = target_pos
 	levelroot.add_child(particles)
-	particles.z_index = 2
+	particles.z_index = 0
 	particles.emitting = true
 	
 	for subparticles in particles.get_children():
-		particles.z_index = 2
+		particles.z_index = 0
 		subparticles.emitting = true
 	
 	var damage_area = Area2D.new()

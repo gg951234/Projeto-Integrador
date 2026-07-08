@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://j7nhvw4qoh2c"]
 
-[ext_resource type="Script" uid="uid://bjtf228msy1ql" path="res://scripts/bosses/CoringaController.gd" id="1_74ty4"]
-[ext_resource type="Texture2D" uid="uid://d355jxrirn1ya" path="res://assets/images/bosses/Coringa/Sheets Coringa/dead.png" id="2_f1i8c"]
-[ext_resource type="Texture2D" uid="uid://dkayouqvl3x6u" path="res://assets/images/bosses/Coringa/Sheets Coringa/half_life.png" id="3_yd2ib"]
-[ext_resource type="Texture2D" uid="uid://btqr84fbhoshl" path="res://assets/images/bosses/Coringa/Sheets Coringa/idle_down.png" id="4_1wjaa"]
+[ext_resource type="Script" uid="uid://bjtf228msy1ql" path="res://scripts/bosses/RisadinhaController.gd" id="1_74ty4"]
+[ext_resource type="Texture2D" uid="uid://d355jxrirn1ya" path="res://assets/images/bosses/Risadinha/Sheets Risadinha/dead.png" id="2_f1i8c"]
+[ext_resource type="Texture2D" uid="uid://dkayouqvl3x6u" path="res://assets/images/bosses/Risadinha/Sheets Risadinha/half_life.png" id="3_yd2ib"]
+[ext_resource type="Texture2D" uid="uid://btqr84fbhoshl" path="res://assets/images/bosses/Risadinha/Sheets Risadinha/idle_down.png" id="4_1wjaa"]
 [ext_resource type="PackedScene" uid="uid://ccmhhb48eeshy" path="res://scenes/UI/health_bar.tscn" id="4_u0guc"]
-[ext_resource type="Texture2D" uid="uid://cfiv75vgm8ilv" path="res://assets/images/bosses/Coringa/Sheets Coringa/idle_left.png" id="5_57ydo"]
-[ext_resource type="Texture2D" uid="uid://u7pv0w00euua" path="res://assets/images/bosses/Coringa/Sheets Coringa/idle_rigth.png" id="6_l2304"]
-[ext_resource type="Texture2D" uid="uid://chrjsfcybwlcp" path="res://assets/images/bosses/Coringa/Sheets Coringa/idle_up.png" id="7_1hry3"]
-[ext_resource type="Texture2D" uid="uid://p5p1i55wl86p" path="res://assets/images/bosses/Coringa/Sheets Coringa/attack.png" id="8_s31qu"]
+[ext_resource type="Texture2D" uid="uid://cfiv75vgm8ilv" path="res://assets/images/bosses/Risadinha/Sheets Risadinha/idle_left.png" id="5_57ydo"]
+[ext_resource type="Texture2D" uid="uid://u7pv0w00euua" path="res://assets/images/bosses/Risadinha/Sheets Risadinha/idle_rigth.png" id="6_l2304"]
+[ext_resource type="Texture2D" uid="uid://chrjsfcybwlcp" path="res://assets/images/bosses/Risadinha/Sheets Risadinha/idle_up.png" id="7_1hry3"]
+[ext_resource type="Texture2D" uid="uid://7qqb2p7ftu3n" path="res://assets/images/bosses/Risadinha/Sheets Risadinha/skill_2.png" id="8_g00t7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dtt46"]
 atlas = ExtResource("2_f1i8c")
@@ -82,21 +82,41 @@ region = Rect2(128, 0, 64, 64)
 atlas = ExtResource("7_1hry3")
 region = Rect2(192, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_a5agi"]
-atlas = ExtResource("8_s31qu")
+[sub_resource type="AtlasTexture" id="AtlasTexture_jb5b2"]
+atlas = ExtResource("8_g00t7")
 region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ysglw"]
-atlas = ExtResource("8_s31qu")
+[sub_resource type="AtlasTexture" id="AtlasTexture_xxcgk"]
+atlas = ExtResource("8_g00t7")
 region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5iljj"]
-atlas = ExtResource("8_s31qu")
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2mcn"]
+atlas = ExtResource("8_g00t7")
 region = Rect2(128, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_123qd"]
-atlas = ExtResource("8_s31qu")
+[sub_resource type="AtlasTexture" id="AtlasTexture_in7hc"]
+atlas = ExtResource("8_g00t7")
 region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4axjp"]
+atlas = ExtResource("8_g00t7")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rubm8"]
+atlas = ExtResource("8_g00t7")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ro2lo"]
+atlas = ExtResource("8_g00t7")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ufj6n"]
+atlas = ExtResource("8_g00t7")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwylq"]
+atlas = ExtResource("8_g00t7")
+region = Rect2(512, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_24adn"]
 animations = [{
@@ -186,19 +206,34 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_a5agi")
+"texture": SubResource("AtlasTexture_jb5b2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ysglw")
+"texture": SubResource("AtlasTexture_xxcgk")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5iljj")
+"texture": SubResource("AtlasTexture_r2mcn")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_123qd")
+"texture": SubResource("AtlasTexture_in7hc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4axjp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rubm8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ro2lo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ufj6n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwylq")
 }],
 "loop": false,
-"name": &"skill_1",
+"name": &"skill_2",
 "speed": 10.0
 }]
 
@@ -211,7 +246,8 @@ size = Vector2(1408, 1408)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f1i8c"]
 size = Vector2(400, 400)
 
-[node name="Coringa" type="CharacterBody2D" unique_id=1469553198]
+[node name="Risadinha" type="CharacterBody2D" unique_id=1469553198]
+z_index = 1
 collision_layer = 4
 script = ExtResource("1_74ty4")
 
@@ -219,7 +255,7 @@ script = ExtResource("1_74ty4")
 position = Vector2(0, -125)
 scale = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_24adn")
-animation = &"idle_right"
+animation = &"idle_down"
 autoplay = "idle_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=891652630]

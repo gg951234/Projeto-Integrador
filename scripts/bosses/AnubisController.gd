@@ -1,9 +1,9 @@
 extends BossManager
 
 @export var boss_type_override: String = "Anubis"
-@onready var skill1sound: String = "res://assets/sounds/bosses/ByBy/TrainSteam.mp3"
+@onready var skill1sound: String = "res://assets/sounds/bosses/Anubis/AnubisSkill.mp3"
 @onready var rocksmashsound: String = "res://assets/sounds/bosses/Golem/RockSmash.mp3"
-@onready var rock_texture = preload("res://assets/images/bosses/Golem/rock.png")
+@onready var rock_texture = preload("res://assets/images/bosses/Anubis/AnubisRock.png")
 @onready var circlepreview_texture = preload("res://assets/images/bosses/circletarget.png")
 @onready var rock_particles_scene = preload("res://scenes/bosses/Golem/rock_particle.tscn")
 @onready var spinline_texture = preload("res://assets/images/bosses/Anubis/SpinLineTexture.png")
@@ -173,11 +173,11 @@ func permarocks_spawn(params) -> void:
 	var particles = rock_particles_scene.instantiate()
 	particles.global_position = target_pos
 	levelroot.add_child(particles)
-	particles.z_index = 2
+	particles.z_index = 0
 	particles.emitting = true
 	
 	for subparticles in particles.get_children():
-		particles.z_index = 2
+		particles.z_index = 0
 		subparticles.emitting = true
 	
 	var damage_area = Area2D.new()

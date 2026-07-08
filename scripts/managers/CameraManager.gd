@@ -28,10 +28,8 @@ func set_limits_from_level(level_name: String, transition_duration: float = 0.0)
 	}
 	
 	if transition_duration > 0:
-		print(final_limits)
 		transition_to_limits(final_limits, transition_duration)
 	else:
-		print(final_limits)
 		set_limits(final_limits)
 
 ## Ajusta a câmera para mostrar exatamente a área de uma sala definida no CameraData

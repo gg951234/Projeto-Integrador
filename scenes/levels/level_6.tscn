@@ -82,7 +82,7 @@ tile_map_data = PackedByteArray("AAAdAAgAAQACAAIAAAAeAAgAAQACAAIAAAAfAAgAAQACAAI
 tile_set = SubResource("TileSet_fsnos")
 
 [node name="Player" parent="." unique_id=1259653975 instance=ExtResource("2_5wshb")]
-position = Vector2(308, 1171)
+position = Vector2(316, 1240)
 
 [node name="Ares" parent="." unique_id=1469553198 instance=ExtResource("4_7x7cx")]
 position = Vector2(2752, 3073)

@@ -43,20 +43,7 @@ var stats = {
 	},
 	"Gold": {
 		"health": 500,
-		"speed": 450,
-		"damage": 50,
-		"kb": 100,
-		"sprite": "res://scenes/player/goldskin.tres",
-		"hitbox": {
-				"Down":  { "pos": Vector2(0,  32), "size": Vector2(128, 64) },
-				"Up":    { "pos": Vector2(0, -12), "size": Vector2(128, 64) },
-				"Right": { "pos": Vector2(4, 20), "size": Vector2(120, 72) },
-				"Left":  { "pos": Vector2(-4, 20), "size": Vector2(120, 72) },
-		}
-	},
-	"Pirate": {
-		"health": 500,
-		"speed": 450,
+		"speed": 500,
 		"damage": 50,
 		"kb": 100,
 		"sprite": "res://scenes/player/goldskin.tres",

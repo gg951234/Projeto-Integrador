@@ -146,6 +146,7 @@ radius = 250.0
 size = Vector2(48, 35)
 
 [node name="Adept Book" type="CharacterBody2D" unique_id=1469553198]
+z_index = 1
 collision_layer = 4
 script = ExtResource("1_4n3rc")
 

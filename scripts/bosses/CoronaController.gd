@@ -2,7 +2,8 @@ extends BossManager
 
 @export var boss_type_override: String = "Corona"
 @onready var skill1sound: String = "res://assets/sounds/bosses/ByBy/TrainSteam.mp3"
-@onready var rocksmashsound: String = "res://assets/sounds/bosses/Golem/RockSmash.mp3"
+@onready var shotsound: String = "res://assets/sounds/bosses/Corona/CoronaExplosion.mp3"
+
 @onready var rock_texture = preload("res://assets/images/bosses/Golem/rock.png")
 @onready var greenrock_texture = preload("res://assets/images/bosses/Corona/GreenRock.png")
 @onready var circlepreview_texture = preload("res://assets/images/bosses/circletarget.png")
@@ -47,7 +48,7 @@ func _skill_1() -> void:
 		await get_tree().create_timer(anim_length).timeout
 		
 		if currentstate == States.SKILL_ACTIVE:
-			AudioManager.tocar_sfx(position, skill1sound, {Pitch = 0.5})
+			AudioManager.tocar_sfx(position, skill1sound, {Pitch = 1.5})
 			animated_sprite.play("idle_down")
 	else:
 		push_warning("Animação ", anim_name, " não encontrada para o boss ", boss_type)
@@ -58,7 +59,7 @@ func _skill_1() -> void:
 			explosion_spawn(params)
 			
 		await get_tree().create_timer(params.get("delay", 1.0)+0.4).timeout
-		AudioManager.tocar_sfx(position, rocksmashsound)
+		AudioManager.tocar_sfx(position, shotsound, {Pitch = 0.3})
 
 func explosion_spawn(params) -> void:
 	var delay = params.get("delay", 1.0)
@@ -89,7 +90,7 @@ func explosion_spawn(params) -> void:
 	particles.global_position = target_pos
 	levelroot.add_child(particles)
 	particles.emitting = true
-	particles.z_index = 2
+	particles.z_index = 0
 	
 	var damage_area = Area2D.new()
 	damage_area.collision_layer = 2
@@ -146,7 +147,7 @@ func _skill_2() -> void:
 			permarocks_spawn(params)
 			
 		await get_tree().create_timer(params.get("delay", 1.0)+0.4).timeout
-		AudioManager.tocar_sfx(position, rocksmashsound)
+		AudioManager.tocar_sfx(position, shotsound, {Pitch = 1.5})
 
 func permarocks_spawn(params) -> void:
 	var delay = params.get("delay", 1.0)

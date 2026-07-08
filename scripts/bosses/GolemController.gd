@@ -101,7 +101,7 @@ func rock_spawn(params) -> void:
 	particles.global_position = target_pos
 	levelroot.add_child(particles)
 	particles.emitting = true
-	particles.z_index = 2
+	particles.z_index = 0
 	
 	var damage_area = Area2D.new()
 	damage_area.collision_layer = 2

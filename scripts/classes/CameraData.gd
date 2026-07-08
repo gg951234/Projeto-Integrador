@@ -103,16 +103,16 @@ var limits = {
 		"Level8": {
 		"left": 0,
 		"top": 0,
-		"right": 6912,
-		"bottom": 2752,
+		"right": 7744,
+		"bottom": 2880,
 		"soundtrack": "res://assets/sounds/levels/Level 8 Soundtrack.mp3",
 	},
 	"BossRoom8": {
-		"left": 7488,
-		"top": 640,
-		"right": 9024,
-		"bottom": 2176,
-		"soundtrack": "res://assets/sounds/bosses/Coringa/CoringaSoundtrack.mp3",
+		"left": 7616,
+		"top": 768,
+		"right": 9152,
+		"bottom": 2304,
+		"soundtrack": "res://assets/sounds/bosses/Risadinha/RisadinhaSoundtrack.mp3",
 	},
 }
 

@@ -212,6 +212,7 @@ size = Vector2(1408, 1408)
 size = Vector2(400, 400)
 
 [node name="Cartagon" type="CharacterBody2D" unique_id=1469553198]
+z_index = 1
 collision_layer = 4
 script = ExtResource("1_kjwf8")
 

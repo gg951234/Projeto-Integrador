@@ -22,11 +22,6 @@ var skins = {
 		"Price": 30,
 		"Icon": "res://assets/images/background/gold1.png",
 	},
-	"Pirate": {
-		"Title": "Pirate",
-		"Price": 50,
-		"Icon": "res://assets/images/background/gold1.png",
-	}
 }
 
 # Retorna um dicionário com nome
