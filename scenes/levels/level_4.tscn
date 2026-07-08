@@ -11,6 +11,7 @@
 texture = ExtResource("1_anwe6")
 0:0/0 = 0
 1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:0/0 = 0
 3:0/0 = 0
 0:1/0 = 0
@@ -26,6 +27,7 @@ texture = ExtResource("1_anwe6")
 3:3/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_5vn0v"]
+physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_rej77")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ts8eg"]
@@ -78,7 +80,7 @@ tile_map_data = PackedByteArray("AAAGAAUAAAADAAAAAAAGAAYAAAADAAAAAAAGAAcAAAADAAA
 tile_set = SubResource("TileSet_um320")
 
 [node name="Player" parent="." unique_id=1259653975 instance=ExtResource("3_ts8eg")]
-position = Vector2(205, 1003)
+position = Vector2(212, 1036)
 
 [node name="Anubis" parent="." unique_id=1469553198 instance=ExtResource("3_rej77")]
 position = Vector2(4030, 1346)

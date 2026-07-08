@@ -68,7 +68,7 @@ var limits = {
 	"BossRoom5": {
 		"left": -1472,
 		"top": 896,
-		"right": 0,
+		"right": 64,
 		"bottom": 2432,
 		"soundtrack": "res://assets/sounds/bosses/Corona/CoronaSoundtrack.mp3",
 	},
@@ -89,15 +89,15 @@ var limits = {
 		"Level7": {
 		"left": 0,
 		"top": 0,
-		"right": 3392,
-		"bottom": 1728,
+		"right": 3456,
+		"bottom": 1792,
 		"soundtrack": "res://assets/sounds/levels/Level 7 Soundtrack.mp3",
 	},
 	"BossRoom7": {
-		"left": 2304,
-		"top": 1664,
-		"right": 768,
-		"bottom": 3200,
+		"left": 2368,
+		"top": 1728,
+		"right": 832,
+		"bottom": 3264,
 		"soundtrack": "res://assets/sounds/bosses/Kobe/KobeSoundtrack.mp3",
 	},
 		"Level8": {

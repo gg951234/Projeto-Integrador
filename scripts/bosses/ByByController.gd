@@ -1,7 +1,10 @@
 extends BossManager
 
 @export var boss_type_override: String = "ByBy"
-@onready var skill1sound: String = "res://assets/sounds/bosses/ByBy/TrainSteam.mp3"
+@onready var skill1sound: String = "res://assets/sounds/bosses/Golem/RockSmash.mp3"
+@onready var circlepreview_texture = preload("res://assets/images/bosses/circletarget.png")
+@onready var explosion_particles_scene = preload("res://scenes/bosses/ByBy/explosion_particle.tscn")
+
 var levelroot = null
 
 func _ready():
@@ -57,10 +60,6 @@ func explosion_spawn(params) -> void:
 	var damage = params.get("damage", 20)
 	var knockback = params.get("knockback", 300)
 	var impact_scale = params.get("impact_scale", 32.0)
-	
-	var preview_texture = preload("res://assets/images/bosses/circletarget.png")
-	var impact_particles_scene = preload("res://scenes/bosses/ByBy/explosion_particle.tscn")
-	
 	var square_size = params.get("square_size", 1408.0)
 	var half = square_size / 2.0
 	var offset_x = randf_range(-half, half)
@@ -69,7 +68,7 @@ func explosion_spawn(params) -> void:
 	
 	# Preview
 	var preview = Sprite2D.new()
-	preview.texture = preview_texture
+	preview.texture = circlepreview_texture
 	preview.scale = Vector2(impact_scale, impact_scale)
 	preview.global_position = target_pos
 	preview.modulate = Color(1, 1, 1, 0.7)
@@ -81,7 +80,7 @@ func explosion_spawn(params) -> void:
 	preview.queue_free()
 	
 	# Partículas e área de dano
-	var particles = impact_particles_scene.instantiate()
+	var particles = explosion_particles_scene.instantiate()
 	particles.global_position = target_pos
 	levelroot.add_child(particles)
 	particles.emitting = true

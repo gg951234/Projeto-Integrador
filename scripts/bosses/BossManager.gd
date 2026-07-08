@@ -134,7 +134,7 @@ func _on_keyrange_body_exited(body: Node2D):
 
 func _add_key_and_outline():
 	if tecla_instance == null and isAlive:
-		if OS.get_name() == "Android" or OS.get_name() == "iOS":
+		if OS.get_name() != "Android" and OS.get_name() != "iOS":
 			tecla_instance = downedkey_scene.instantiate()
 			add_child(tecla_instance)
 			tecla_instance.position = Vector2(0, -50)

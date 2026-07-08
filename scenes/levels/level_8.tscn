@@ -18,7 +18,6 @@
 texture = ExtResource("1_u61dc")
 0:0/0 = 0
 2:0/0 = 0
-2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:1/0 = 0
 3:1/0 = 0
 1:0/0 = 0
@@ -226,7 +225,7 @@ position = Vector2(1752, 1076)
 [node name="BossEnterArea" type="Node2D" parent="." unique_id=676400628]
 
 [node name="Enter" type="Area2D" parent="BossEnterArea" unique_id=531359222]
-position = Vector2(6934, 1515)
+position = Vector2(7580, 1431)
 rotation = 4.712389
 collision_layer = 2
 collision_mask = 2
@@ -246,7 +245,7 @@ position = Vector2(97, -11)
 shape = SubResource("RectangleShape2D_kk2ik")
 
 [node name="Barrier" type="StaticBody2D" parent="BossEnterArea" unique_id=1892124082]
-position = Vector2(6841, 1491)
+position = Vector2(7487, 1407)
 rotation = 1.5707964
 metadata/_edit_group_ = true
 
@@ -256,7 +255,7 @@ shape = SubResource("RectangleShape2D_6to6e")
 disabled = true
 
 [node name="Door" type="StaticBody2D" parent="BossEnterArea" unique_id=705928997]
-position = Vector2(6842, 1486)
+position = Vector2(6848, 1402)
 
 [node name="Sprite2D" type="Sprite2D" parent="BossEnterArea/Door" unique_id=1450918694]
 texture_repeat = 2
@@ -272,11 +271,3 @@ shape = SubResource("RectangleShape2D_40qa3")
 
 [node name="PathGuideManager" type="Node2D" parent="." unique_id=1938694865]
 script = ExtResource("12_v7ucw")
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1509305726]
-position = Vector2(-6, 84)
-scale = Vector2(4, 4)
-limit_left = 7488
-limit_top = 640
-limit_right = 9024
-limit_bottom = 2176

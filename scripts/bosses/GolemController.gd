@@ -2,6 +2,9 @@ extends BossManager
 
 @export var boss_type_override: String = "Golem"
 @onready var rocksmashsound: String = "res://assets/sounds/bosses/Golem/RockSmash.mp3"
+@onready var preview_texture = preload("res://assets/images/bosses/circletarget.png")
+@onready var rock_texture = preload("res://assets/images/bosses/Golem/rock.png")
+@onready var impact_particles_scene = preload("res://scenes/bosses/Golem/rock_particle.tscn")
 
 var levelroot = null
 
@@ -15,6 +18,10 @@ func _ready():
 		levelroot = get_tree().root
 	else:
 		levelroot = GameManager.currentlevelroot
+
+func _on_damage_area_body_entered(body: Node, damage: int, kb: int, area: Area2D) -> void:
+	if body.is_in_group("player") and body.has_method("take_damage"):
+		body.take_damage(damage, area.position, kb)
 
 func _skill_1() -> void:
 	if not levelroot:
@@ -50,20 +57,11 @@ func _skill_1() -> void:
 		await get_tree().create_timer(params.get("delay", 1.0)+0.4).timeout
 		AudioManager.tocar_sfx(position, rocksmashsound)
 
-func _on_damage_area_body_entered(body: Node, damage: int, kb: int, area: Area2D) -> void:
-	if body.is_in_group("player") and body.has_method("take_damage"):
-		body.take_damage(damage, area.position, kb)
-
 func rock_spawn(params) -> void:
 	var delay = params.get("delay", 1.0)
 	var damage = params.get("damage", 20)
 	var knockback = params.get("knockback", 300)
 	var impact_scale = params.get("impact_scale", 32.0)
-	
-	var preview_texture = preload("res://assets/images/bosses/circletarget.png")
-	var rock_texture = preload("res://assets/images/bosses/Golem/rock.png")
-	var impact_particles_scene = preload("res://scenes/bosses/Golem/rock_particle.tscn")
-	
 	var square_size = params.get("square_size", 1408.0)
 	var half = square_size / 2.0
 	var offset_x = randf_range(-half, half)

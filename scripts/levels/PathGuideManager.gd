@@ -98,6 +98,7 @@ func _ready() -> void:
 		return
 
 	_camadas_parede.clear()
+
 	for caminho in camadas_extras_de_parede:
 		var camada := get_node_or_null(caminho)
 		if camada is TileMapLayer:

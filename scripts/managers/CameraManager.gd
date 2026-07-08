@@ -3,17 +3,12 @@ extends Node
 ## Referência à câmera – deve ser definida via set_camera()
 @export var camera: Camera2D
 
-func _ready():
-	# Não busca automaticamente, aguarda definição via set_camera()
-	print("CameraManager: aguardando definição da câmera via set_camera().")
-
 ## Define a câmera manualmente
 func set_camera(new_camera: Camera2D) -> void:
 	camera = new_camera
 	if camera:
 		if camera.is_inside_tree():
 			camera.make_current()
-		print("CameraManager: câmera atualizada para: ", camera.name)
 	else:
 		push_warning("CameraManager: tentativa de definir câmera nula.")
 

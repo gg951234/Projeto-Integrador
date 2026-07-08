@@ -28,7 +28,6 @@ func determinar_vida_maxima_pelo_nome():
 		var stats = EnemiesData.get_stats(clean_name)
 		if not stats.is_empty() and stats.has("health"):
 			max_health = stats["health"]
-			print("HealthBar: vida máxima encontrada em EnemiesData para '", clean_name, "': ", max_health)
 			updateHealth(int(max_health))
 			return
 	
@@ -37,7 +36,6 @@ func determinar_vida_maxima_pelo_nome():
 		var stats = BossesData.get_stats(clean_name)
 		if not stats.is_empty() and stats.has("health"):
 			max_health = stats["health"]
-			print("HealthBar: vida máxima encontrada em BossesData para '", clean_name, "': ", max_health)
 			updateHealth(int(max_health))
 			return
 	

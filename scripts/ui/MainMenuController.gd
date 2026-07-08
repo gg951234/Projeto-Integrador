@@ -553,7 +553,6 @@ func _on_sessao_restaurada(sucesso: bool) -> void:
 	if sucesso:
 		_atualizar_tela_perfil()
 		_atualizar_tela_loja()
-		setup_levels_selection()
 
 func _on_login_concluido(sucesso: bool, mensagem: String) -> void:
 	entrar.disabled = false

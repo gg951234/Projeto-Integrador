@@ -56,9 +56,10 @@ tile_map_data = PackedByteArray("AAAFAAwAAAABAAMAAAAFAAsAAAABAAMAAAAFAAoAAAABAAM
 tile_set = SubResource("TileSet_fsnos")
 
 [node name="Player" parent="." unique_id=1259653975 instance=ExtResource("2_hldbq")]
-position = Vector2(3684, 336)
+position = Vector2(-42, 1688)
 
 [node name="Corona" parent="." unique_id=1469553198 instance=ExtResource("3_fsnos")]
+z_index = 2
 position = Vector2(-704, 1666)
 
 [node name="Enemies" type="Node2D" parent="." unique_id=718151408]
