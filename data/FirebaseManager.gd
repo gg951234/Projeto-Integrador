@@ -379,7 +379,9 @@ func _dicionario_para_firestore(dict_godot: Dictionary) -> Dictionary:
 
 func _envelopar_valor_firestore(val):
 	if typeof(val) == TYPE_STRING: return {"stringValue": val}
-	elif typeof(val) == TYPE_INT: return {"integerValue": val}
+	# integerValue precisa ir como STRING no REST do Firestore (int64 em texto);
+	# mandar número cru pode ser recusado. Na leitura, int("123") resolve de volta.
+	elif typeof(val) == TYPE_INT: return {"integerValue": str(val)}
 	elif typeof(val) == TYPE_FLOAT: return {"doubleValue": val}
 	elif typeof(val) == TYPE_BOOL: return {"booleanValue": val}
 	elif typeof(val) == TYPE_DICTIONARY:

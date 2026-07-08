@@ -4,7 +4,8 @@ extends Node
 signal sessao_restaurada(sucesso: bool)
 
 # Dados salvos na RAM (Fonte da Verdade do jogo)
-var username: String = "Jogador"
+const NOME_PADRAO := "Jogador"   # placeholder até o jogador escolher um nome no cadastro
+var username: String = NOME_PADRAO
 var pais: String = ""
 var data_nascimento: String = ""
 var data_criacao: String = ""
@@ -71,7 +72,7 @@ func gerar_dicionario_completo() -> Dictionary:
 # local offline são perdidos. Não mexe na flag 'sincronizado': quem chama
 # (sincronizar_apos_login) decide empurrar o resultado pra nuvem depois.
 func atualizar_dados_da_nuvem(dados_nuvem: Dictionary) -> void:
-	username = _preferir_nao_vazio(username, str(dados_nuvem.get("username", "")))
+	username = _preferir_nome(username, str(dados_nuvem.get("username", "")))
 	pais = _preferir_nao_vazio(pais, str(dados_nuvem.get("pais", "")))
 	data_nascimento = _preferir_nao_vazio(data_nascimento, str(dados_nuvem.get("data_nascimento", "")))
 	data_criacao = _preferir_nao_vazio(data_criacao, str(dados_nuvem.get("data_criacao", "")))
@@ -182,7 +183,7 @@ func logout_local() -> void:
 		print("⚠️ Logout com progresso pendente (sem internet) — mantendo dados locais até sincronizar.")
 
 func _resetar_para_padrao() -> void:
-	username = "Jogador"
+	username = NOME_PADRAO
 	pais = ""
 	data_nascimento = ""
 	data_criacao = ""
@@ -227,6 +228,31 @@ func tentar_sincronizar_com_nuvem() -> void:
 	else:
 		print("⚠️ Sem conexão com a nuvem agora. Vamos tentar de novo em breve.")
 	_sincronizando = false
+
+# ==================== 🏆 RANKING ====================
+
+# Envia o RECORDE local de uma fase (melhor score + melhor tempo) para o ranking.
+# Idempotente: sobrescreve a entrada do jogador, então reenviar o mesmo recorde
+# não faz mal. Ignora em silêncio se estiver offline/sem login — nesse caso o
+# login reenvia depois (ver enviar_todos_recordes_para_ranking).
+func enviar_recorde_para_ranking(fase_id: String) -> void:
+	if FirebaseManager.auth_token.is_empty() or FirebaseManager.user_id.is_empty():
+		return
+	if not progresso_fases.has(fase_id):
+		return
+	var f = progresso_fases[fase_id]
+	var score := int(f.get("melhor_score", 0))
+	var tempo := int(f.get("melhor_tempo", 0))
+	await FirebaseManager.enviar_ranking_da_fase(fase_id, score, tempo)
+
+# Empurra os recordes de TODAS as fases concluídas para o ranking. Chamado ao
+# logar (com internet): assim os tempos feitos offline sobem para o ranking.
+func enviar_todos_recordes_para_ranking() -> void:
+	if FirebaseManager.auth_token.is_empty() or FirebaseManager.user_id.is_empty():
+		return
+	for fase_id in progresso_fases.keys():
+		if bool(progresso_fases[fase_id].get("completada", false)):
+			await enviar_recorde_para_ranking(fase_id)
 
 # ==================== 💾 OPERAÇÕES EM ARQUIVO LOCAL (OFFLINE) ====================
 
@@ -313,6 +339,11 @@ func sincronizar_apos_login(novo_user_id: String) -> void:
 
 	_gravar_arquivo_no_disco()
 
+	# Com o progresso já sincronizado, sobe os RECORDES (tempo + score) de cada
+	# fase concluída para o ranking — cobre os tempos feitos offline, agora que há
+	# login/internet. Roda em segundo plano, sem travar o fim do login.
+	enviar_todos_recordes_para_ranking()
+
 
 # ==================== 🔓 LOGIN AUTOMÁTICO (PERSISTENTE) ====================
 
@@ -337,6 +368,15 @@ func _tentar_login_automatico() -> void:
 
 func _preferir_nao_vazio(local: String, nuvem: String) -> String:
 	return local if not local.is_empty() else nuvem
+
+# Igual ao anterior, mas tratando o nome-padrão "Jogador" como "ainda não
+# escolhido": se o local só tem o placeholder, usamos o nome da nuvem (definido
+# no cadastro). Assim, entrar na conta num aparelho que começou offline não
+# troca mais o nome real por "Jogador".
+func _preferir_nome(local: String, nuvem: String) -> String:
+	if not local.is_empty() and local != NOME_PADRAO:
+		return local
+	return nuvem if not nuvem.is_empty() else local
 
 # Une o progresso de fases dos dois lados, mantendo o melhor de cada fase.
 func _merge_progresso(local: Dictionary, nuvem: Dictionary) -> Dictionary:
