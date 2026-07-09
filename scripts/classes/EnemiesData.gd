@@ -27,7 +27,7 @@ var stats = {
 		"attackcd": 1.6,
 	},
 	"Expert Book": {
-		"scene": "res://scenes/enemies/Expertbook.tscn",
+		"scene": "res://scenes/enemies/expertbook.tscn",
 		"speed": 115,
 		"health": 125,
 		"damage": 20,

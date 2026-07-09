@@ -349,7 +349,7 @@ animations = [{
 size = Vector2(14, 2.75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
-size = Vector2(128, 64)
+size = Vector2(128, 100)
 
 [node name="Player" type="CharacterBody2D" unique_id=1259653975]
 z_index = 1
@@ -361,7 +361,7 @@ script = ExtResource("1_g2els")
 position = Vector2(0, -40)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_60mlk")
-animation = &"attack_down"
+animation = &"idle_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1254865130]
 scale = Vector2(4, 4)
