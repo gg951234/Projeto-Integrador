@@ -26,9 +26,9 @@ CameraManager="*res://scripts/managers/CameraManager.gd"
 QuizManager="*res://scripts/managers/QuizManager.gd"
 CharactersData="*res://scripts/classes/CharactersData.gd"
 LevelEnemiesData="*uid://b4k1l8aineteh"
-FirebaseManager="*uid://cyybmudafg6rg"
-PlayerData="*uid://benrrbqbd51f6"
 ShopData="*uid://dbkf101hyhqh"
+FirebaseManager="*uid://cnmo4rb8bbstg"
+PlayerData="*uid://d1c7nnos7nkno"
 
 [display]
 

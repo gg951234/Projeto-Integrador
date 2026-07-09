@@ -35,7 +35,6 @@ func _ready() -> void:
 	if OS.get_name() == "Android" or OS.get_name() == "iOS" or OS.has_feature("web_android") or OS.has_feature("web_ios"):
 		_reset_joystick()
 		_update_button_icon()
-
 		action_button.button_down.connect(_on_action_button_down)
 		action_button.button_up.connect(_on_action_button_up)
 
@@ -62,19 +61,19 @@ func _input(event: InputEvent) -> void:
 			_update_joystick(event.position)
 
 	# --- MOUSE (PC, para testar) ---
-	elif event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			if event.pressed:
-				if _is_point_inside(event.position):
-					joystick_pressed = true
-					_update_joystick(event.position)
-			elif joystick_pressed:
-				joystick_pressed = false
-				_reset_joystick()
-
-	elif event is InputEventMouseMotion:
-		if joystick_pressed:
-			_update_joystick(event.position)
+	#elif event is InputEventMouseButton:
+		#if event.button_index == MOUSE_BUTTON_LEFT:
+			#if event.pressed:
+				#if _is_point_inside(event.position):
+					#joystick_pressed = true
+					#_update_joystick(event.position)
+			#elif joystick_pressed:
+				#joystick_pressed = false
+				#_reset_joystick()
+#
+	#elif event is InputEventMouseMotion:
+		#if joystick_pressed:
+			#_update_joystick(event.position)
 
 
 func _is_point_inside(point: Vector2) -> bool:
