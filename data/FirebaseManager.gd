@@ -23,15 +23,20 @@ func _ready() -> void:
 # Lê o .env na raiz do projeto e preenche API_KEY/PROJECT_ID.
 # O .env nunca é commitado (está no .gitignore) — veja .env.example para o formato esperado.
 func _carregar_variaveis_de_ambiente() -> void:
-	const CAMINHO_ENV = "res://.env"
+	# Tenta o .env padrão; se não existir (no build web pro itch.io o arquivo
+	# precisou ser renomeado para index.env, pois dotfiles não entram no export),
+	# cai para o index.env.
+	var caminho_env := "res://.env"
+	if not FileAccess.file_exists(caminho_env):
+		caminho_env = "res://index.env"
 
-	if not FileAccess.file_exists(CAMINHO_ENV):
-		push_error(".env não encontrado na raiz do projeto! Copie .env.example para .env e preencha com suas chaves do Firebase.")
+	if not FileAccess.file_exists(caminho_env):
+		push_error("Nenhum arquivo de ambiente (.env / index.env) encontrado! Copie .env.example e preencha com suas chaves do Firebase.")
 		return
 
-	var arquivo = FileAccess.open(CAMINHO_ENV, FileAccess.READ)
+	var arquivo = FileAccess.open(caminho_env, FileAccess.READ)
 	if not arquivo:
-		push_error("Não foi possível abrir o .env.")
+		push_error("Não foi possível abrir o arquivo de ambiente.")
 		return
 
 	while not arquivo.eof_reached():
