@@ -149,7 +149,7 @@ func _ready() -> void:  # Executa quando o nó é criado
 			botao.pressed.connect(metodo)
 	
 	# Lógica específica para mobile
-	if OS.get_name() == "Android" or OS.get_name() == "iOS":
+	if OS.get_name() == "Android" or OS.get_name() == "iOS" or OS.has_feature("web_android") or OS.has_feature("web_ios"):
 		show_coins.visible = true
 		show_coins.pressed.connect(_on_showcoins_pressed)
 	

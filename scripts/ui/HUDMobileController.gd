@@ -32,11 +32,12 @@ var is_interact_mode: bool = false
 # READY
 # ============================================================
 func _ready() -> void:
-	_reset_joystick()
-	_update_button_icon()
+	if OS.get_name() == "Android" or OS.get_name() == "iOS" or OS.has_feature("web_android") or OS.has_feature("web_ios"):
+		_reset_joystick()
+		_update_button_icon()
 
-	action_button.button_down.connect(_on_action_button_down)
-	action_button.button_up.connect(_on_action_button_up)
+		action_button.button_down.connect(_on_action_button_down)
+		action_button.button_up.connect(_on_action_button_up)
 
 
 # ============================================================

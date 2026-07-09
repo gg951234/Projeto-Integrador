@@ -166,7 +166,7 @@ func load_level(levelnumber: int = 0) -> bool:
 		hud_reference._update_coins(currentcoins)
 		hud_reference.show()
 		
-		if OS.get_name() == "Android" or OS.get_name() == "iOS":
+		if OS.get_name() == "Android" or OS.get_name() == "iOS" or OS.has_feature("web_android") or OS.has_feature("web_ios"):
 			hudmobile_reference.show()
 		
 		# Inicia o timer e zera o contador
