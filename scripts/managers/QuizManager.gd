@@ -12,7 +12,6 @@ func _ready():
 
 func reset():
 	used_questions.clear()
-	print("QuizManager: histórico de perguntas resetado.")
 
 # Retorna uma pergunta aleatória de um nível, garantindo não repetição
 func get_random_question(level: String) -> Dictionary:

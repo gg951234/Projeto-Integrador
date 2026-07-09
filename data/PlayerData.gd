@@ -123,7 +123,7 @@ func registrar_fim_de_fase(fase_id: String, moedas_coletadasnafase: int, tempo: 
 	sincronizado = false
 	_gravar_arquivo_no_disco()
 
-	print("🏁 Fim de fase %s: totaldemoedas=%d, score=%d, novo_recorde=%s" % [fase_id, moedas_coletadas, score, eh_novo_recorde])
+	# print("🏁 Fim de fase %s: totaldemoedas=%d, score=%d, novo_recorde=%s" % [fase_id, moedas_coletadas, score, eh_novo_recorde])
 
 	# 4. Tenta despachar em segundo plano para o Firebase (falha em silêncio se
 	# estiver offline — o timer de fundo e o próximo login tentam de novo)

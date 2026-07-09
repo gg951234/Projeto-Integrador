@@ -18,7 +18,7 @@ func _ready():
 func setup(question: String, options: Array, correct: int):
 	question_label.text = question
 	correct_index = correct
-	print("Resposta Correta: " + str(correct+1) + "ª" + " - " + str(options[correct]))
+	#print("Resposta Correta: " + str(correct+1) + "ª" + " - " + str(options[correct]))
 	
 	for child in options_container.get_children():
 		child.queue_free()
