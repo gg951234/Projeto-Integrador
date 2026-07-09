@@ -48,7 +48,7 @@ func _ready() -> void:
 	health = dados["health"]
 
 func _physics_process(_delta: float) -> void:
-	sword_hitbox.monitoring = false
+	#sword_hitbox.monitoring = false
 
 	if Input.is_action_just_pressed("attack") and isAlive and not is_attacking:
 		attack()
@@ -122,6 +122,16 @@ func play_anims(prefix: String, dir: Vector2) -> void:
 		animated_sprite_2d.play(prefix + "_down")
 	update_hitbox_offset()
 
+func get_animname(prefix: String, dir: Vector2) -> String:
+	if dir.x != 0:
+		return (prefix + "_side")
+	elif dir.y < 0:
+		return (prefix + "_up")
+	elif dir.y > 0:
+		return (prefix + "_down")
+	else:
+		return "attack_down"
+
 # --------------
 # ATACAR/INTERAGIR
 # --------------
@@ -130,10 +140,19 @@ func attack() -> void:
 	sword_hitbox.monitoring = true
 	AudioManager.tocar_sfx(position, swing_sword)
 	play_anims("attack", last_direction)
+	# ADD pra remover _on_animated_sprite_2d_animation_finished()
+	var frame_count = animated_sprite_2d.sprite_frames.get_frame_count(get_animname("attack", last_direction))
+	var fps = animated_sprite_2d.sprite_frames.get_animation_speed(get_animname("attack", last_direction))
+	var anim_length = frame_count / fps
+	# Aguarda o tempo exato da animação com Timer
+	await get_tree().create_timer(anim_length).timeout
+	is_attacking = false
+	sword_hitbox.monitoring = false
 
-func _on_animated_sprite_2d_animation_finished() -> void:
-	if is_attacking:
-		is_attacking = false
+#func _on_animated_sprite_2d_animation_finished() -> void:
+	#if is_attacking:
+		#is_attacking = false
+		#sword_hitbox.monitoring = false
 
 # --------------
 # DAR DANO
