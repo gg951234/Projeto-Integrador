@@ -178,7 +178,10 @@ tile_map_data = PackedByteArray("AADy/ywABQAAAAAAAADy/y0ABQAAAAAAAADy/y4ABQAAAAA
 tile_set = SubResource("TileSet_u1w5x")
 
 [node name="Player" parent="." unique_id=1259653975 instance=ExtResource("2_7snfr")]
-position = Vector2(370, 296)
+position = Vector2(353, 326)
+
+[node name="Risadinha" parent="." unique_id=1469553198 instance=ExtResource("13_v7ucw")]
+position = Vector2(8384, 1537)
 
 [node name="Enemies" type="Node2D" parent="." unique_id=1146915051]
 y_sort_enabled = true
@@ -268,6 +271,3 @@ shape = SubResource("RectangleShape2D_40qa3")
 
 [node name="PathGuideManager" type="Node2D" parent="." unique_id=1938694865]
 script = ExtResource("12_v7ucw")
-
-[node name="Risadinha" parent="." unique_id=1469553198 instance=ExtResource("13_v7ucw")]
-position = Vector2(8384, 1537)

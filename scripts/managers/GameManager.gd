@@ -230,9 +230,11 @@ func level_completed() -> bool:
 	# Enviar para o banco de dados
 	var fid := fase_id(currentlevel)
 	
-	var eh_novo_recorde: bool = PlayerData.registrar_fim_de_fase(fid, currentcoins, currenttimer, currentscore)
-	if eh_novo_recorde:
-		FirebaseManager.enviar_ranking_da_fase(fid, currentscore, currenttimer)
+	PlayerData.registrar_fim_de_fase(fid, currentcoins, currenttimer, currentscore)
+	# Sobe o RECORDE (melhor score + melhor tempo) da fase para o ranking. Sempre —
+	# não só quando o score melhora — para uma melhora só de TEMPO também atualizar
+	# o ranking. Offline é ignorado; o próximo login reenvia (enviar_todos_recordes_para_ranking).
+	PlayerData.enviar_recorde_para_ranking(fid)
 	
 	unlocknextlevel()
 	hud_reference.hide()
@@ -324,10 +326,11 @@ func _setup_enemy_counting(enemies_node: Node) -> void:
 	enemies_remaining = enemies.size()
 	hud_reference._update_enemies_defeated(enemies_max-enemies_remaining, enemies_max)
 	
-	# Conecta o sinal "died" de cada inimigo
+	# Conecta o sinal "died" de cada inimigo, vinculando o próprio inimigo para
+	# sabermos a posição do ÚLTIMO que morrer (origem da guia de caminhos).
 	for enemy in enemies:
-		if enemy.has_signal("died") and not enemy.died.is_connected(_on_enemy_died):
-			enemy.died.connect(_on_enemy_died)
+		if enemy.has_signal("died") and not enemy.died.is_connected(_on_enemy_died.bind(enemy)):
+			enemy.died.connect(_on_enemy_died.bind(enemy))
 	
 	# Se não houver inimigos, já libera a porta e revela os caminhos
 	if enemies_remaining == 0:
@@ -336,7 +339,7 @@ func _setup_enemy_counting(enemies_node: Node) -> void:
 			door_node = null
 		_revelar_caminhos()
 
-func _on_enemy_died() -> void:
+func _on_enemy_died(enemy = null) -> void:
 	enemies_remaining -= 1
 	hud_reference._update_enemies_defeated(enemies_max-enemies_remaining, enemies_max)
 	if enemies_remaining <= 0:
@@ -345,19 +348,23 @@ func _on_enemy_died() -> void:
 			AudioManager.tocar_sfxglobal("res://assets/sounds/levels/BossRoomDoor.mp3", {Pitch = 0.5})
 			door_node.queue_free()
 			door_node = null
-		# Último inimigo morto: libera a guia de caminhos (menor caminho + rotas)
-		# e mostra a popup explicando o que são grafos.
-		_revelar_caminhos()
+		# Último inimigo morto: libera a guia de caminhos a partir da posição DELE
+		# (menor caminho + rotas) e mostra a popup explicando o que são grafos.
+		_revelar_caminhos(enemy)
 		_mostrar_popup_grafos()
 
 # --------------
 # GUIA DE CAMINHOS (TEORIA DE GRAFOS / AStar2D)
 # --------------
-func _revelar_caminhos() -> void:
+func _revelar_caminhos(origem_enemy = null) -> void:
 	# Chamado quando o último inimigo da fase morre: libera as setas que mostram
-	# o menor caminho (cor chamativa) e as rotas alternativas (cor neutra).
+	# o menor caminho (cor chamativa) e as rotas alternativas (cor neutra). A linha
+	# parte da posição do último inimigo morto (origem_enemy), quando disponível.
 	if path_guide and path_guide.has_method("revelar_caminhos"):
-		path_guide.revelar_caminhos()
+		var origem = null
+		if is_instance_valid(origem_enemy) and origem_enemy is Node2D:
+			origem = origem_enemy.global_position
+		path_guide.revelar_caminhos(origem)
 
 func _mostrar_popup_grafos() -> void:
 	# Popup educativa sobre grafos (linguagem de 7º ano). Só aparece nas fases
@@ -402,20 +409,24 @@ func _spawn_moedas_recompensa(quantidade: int) -> void:
 	if not parent:
 		parent = currentlevelroot
 
-	# Origem: posição do jogador ao entrar na sala do boss
-	var player: Node2D = currentlevelroot.get_node_or_null("Player")
-	var origem: Vector2 = player.global_position if player else Vector2.ZERO
+	# Centro = posição do BOSS (fica no meio da sala do boss). Cada fase tem um
+	# boss de nome diferente (Golem, ByBy, Corona, ...), mas todos ficam no grupo
+	# "boss". Antes o código procurava só o nó "Golem"; da fase 2 em diante ele não
+	# era achado, a direção virava Vector2.DOWN e as moedas caíam fora do mapa.
+	var boss: Node2D = get_tree().get_first_node_in_group("boss")
+	var centro: Vector2
+	if boss:
+		centro = boss.global_position
+	else:
+		var player: Node2D = currentlevelroot.get_node_or_null("Player")
+		centro = player.global_position if player else Vector2.ZERO
 
-	# Direção: rumo ao boss
-	var golem: Node2D = currentlevelroot.get_node_or_null("Golem")
-	var direcao: Vector2 = Vector2.DOWN
-	if golem and player:
-		direcao = (golem.global_position - origem).normalized()
-
+	# Fileira horizontal de moedas centrada no meio da sala.
 	var espacamento: float = 70.0
+	var inicio: float = -espacamento * (quantidade - 1) * 0.5
 	for i in range(quantidade):
 		var coin: Node2D = coin_scene.instantiate()
-		coin.global_position = origem + direcao * (espacamento * (i + 1))
+		coin.global_position = centro + Vector2(inicio + espacamento * i, 0.0)
 
 		# Adiar a adição para evitar conflito com a física
 		parent.call_deferred("add_child", coin)

@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://vej28ctixkyh" path="res://scripts/managers/EnemiesManager.gd" id="4_qpwj6"]
 [ext_resource type="PackedScene" uid="uid://dy0qxbrtqd5ir" path="res://scenes/collectables/coin.tscn" id="5_3p04p"]
 [ext_resource type="PackedScene" uid="uid://dns1qam5e5e88" path="res://scenes/bosses/ByBy/byby.tscn" id="6_qpwj6"]
-[ext_resource type="Script" uid="uid://cyatk8gr1wofw" path="res://scripts/levels/PathGuideManager.gd" id="7_ibugp"]
+[ext_resource type="Script" uid="uid://bvc61ss50vn68" path="res://scripts/levels/PathGuideManager.gd" id="7_ibugp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8qukl"]
 texture = ExtResource("2_ibugp")
@@ -85,10 +85,10 @@ position = Vector2(289, 728)
 position = Vector2(1501, 614)
 
 [node name="Spawn3" type="Marker2D" parent="Enemies" unique_id=1142664081]
-position = Vector2(2240, 162)
+position = Vector2(1490, 1005)
 
 [node name="Spawn4" type="Marker2D" parent="Enemies" unique_id=1775156594]
-position = Vector2(932, 987)
+position = Vector2(801, 950)
 
 [node name="Spawn5" type="Marker2D" parent="Enemies" unique_id=1756983427]
 position = Vector2(2334, 959)

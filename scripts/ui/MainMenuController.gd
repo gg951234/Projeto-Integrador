@@ -76,7 +76,7 @@ extends Control
 @onready var ranking_linhas: Node = $Ranking/Ranking
 @onready var back_ranking: Button = $Ranking/BackRanking
 
-const RANKING_FASE_MAX: int = 10
+const RANKING_FASE_MAX: int = 8
 var ranking_fase_atual: int = 1
 
 var skin_panels := {}
@@ -457,6 +457,9 @@ func _atualizar_botao_skin(panel: Panel, skin_id: String, skin_equipada: String)
 func _on_ranking_pressed() -> void:
 	$LevelSelectionCanvas.visible = false
 	$Ranking.visible = true
+	# Abre no ranking da ÚLTIMA fase jogada (não sempre na fase 1) — assim, logo
+	# depois de concluir uma fase, o jogador vê o ranking DELA (e a própria entrada).
+	ranking_fase_atual = clampi(GameManager.currentlevel, 1, RANKING_FASE_MAX)
 	_carregar_ranking_da_fase(ranking_fase_atual)
 
 func _on_back_ranking_pressed() -> void:

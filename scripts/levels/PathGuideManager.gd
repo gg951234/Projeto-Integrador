@@ -34,7 +34,7 @@ const MAX_SETAS_POR_ROTA := 400
 const DIRECOES_ORTOGONAIS := [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]
 
 const COR_ROTA_RAPIDA := Color(1.0, 0.82, 0.15)          # ouro chamativo (caminho certo)
-const COR_ROTA_LENTA := Color(0.55, 0.7, 0.9, 0.7)       # azul neutro (caminhos errados)
+const COR_ROTA_LENTA := Color(0.4, 0.68, 1.0, 0.85)      # azul claro visível (caminhos errados)
 
 # Peso aplicado às células de uma rota já encontrada, para empurrar a busca da
 # próxima alternativa por outro corredor SEM desconectar o grafo. Finito: os
@@ -45,11 +45,14 @@ const PESO_ROTA_USADA := 8.0
 @export var tilemap_path: NodePath = ^"../TileMapLayer_Terrain"
 @export var goal_path: NodePath = ^"../BossEnterArea/Enter"
 
-# Camadas de tiles sobrepostas que TAMBÉM contêm paredes (ex: mapa de Física
-# numa segunda TileMapLayer). Uma célula deixa de ser caminhável se qualquer uma
-# dessas camadas tiver parede ali — sem isso, as setas passam por dentro de
-# paredes que existem só na camada de cima. Vazio = só o tilemap principal.
+# (Obsoleto) Antes marcava camadas extras de parede tile a tile. Agora a
+# caminhabilidade é medida pela FÍSICA real (a colisão do jogador), que já
+# enxerga TODAS as camadas de tile e StaticBodies de parede. Mantido só para não
+# quebrar cenas que ainda setam este campo.
 @export var camadas_extras_de_parede: Array[NodePath] = []
+
+# Layer de colisão das paredes. O TileSet usa a physics layer 0 (= máscara 1).
+@export var mascara_paredes: int = 1
 
 @export var distancia_entre_setas: float = 48.0
 @export var rotacao_offset_graus: float = 0.0 # ajuste fino se a arte da seta não apontar pra "direita" por padrão
@@ -65,14 +68,18 @@ const PESO_ROTA_USADA := 8.0
 var astar := AStar2D.new()
 var _cell_para_id: Dictionary = {}   # Vector2i -> int
 var _id_para_cell: Dictionary = {}   # int -> Vector2i
+var _pos_mundo_da_celula: Dictionary = {} # Vector2i -> Vector2 (ponto LIVRE, onde o player cabe; é ali que a seta é desenhada)
 
 var tilemap: TileMapLayer
-var _camadas_parede: Array[TileMapLayer] = []
 var goal: Node2D
 var _player: Node2D
 
 var _ativo: bool = false
 var _setas: Array[Node2D] = []
+
+# Ponto de partida da guia (setas FIXAS): a posição do ÚLTIMO inimigo morto,
+# passada pelo GameManager em revelar_caminhos(). Não muda depois de revelada.
+var _origem_guia: Vector2 = Vector2.ZERO
 
 # Faixa de células consideradas "seguindo o menor caminho": mais próximas da
 # linha DOURADA do que de qualquer rota AZUL, dentro de tolerancia_celulas.
@@ -97,14 +104,9 @@ func _ready() -> void:
 		push_error("PathGuideManager: nó objetivo não encontrado em '%s'." % goal_path)
 		return
 
-	_camadas_parede.clear()
-
-	for caminho in camadas_extras_de_parede:
-		var camada := get_node_or_null(caminho)
-		if camada is TileMapLayer:
-			_camadas_parede.append(camada)
-		else:
-			push_warning("PathGuideManager: camada extra de parede '%s' não é uma TileMapLayer." % caminho)
+	# Espera um quadro de física para os corpos de colisão do(s) tilemap(s) e das
+	# paredes já existirem antes de sondar a caminhabilidade pela física.
+	await get_tree().physics_frame
 
 	_construir_grade()
 
@@ -142,13 +144,19 @@ func _process(_delta: float) -> void:
 
 # ==================== 🎮 API PÚBLICA (chamada pelo GameManager) ====================
 ## Libera a guia de caminhos. Chamado quando o último inimigo da fase morre.
-func revelar_caminhos() -> void:
+## origem_global: de onde a linha parte — a posição do último inimigo morto,
+## passada pelo GameManager. Se não vier, usa a posição atual do jogador.
+func revelar_caminhos(origem_global = null) -> void:
 	if _ativo:
 		return
 	if not tilemap or not goal or not _obter_player():
 		push_warning("PathGuideManager: não foi possível liberar a guia (tilemap/objetivo/jogador ausente).")
 		return
 	_ativo = true
+	if origem_global is Vector2:
+		_origem_guia = origem_global
+	else:
+		_origem_guia = _obter_player().global_position
 	_frames_seguindo_rota_rapida = 0
 	_frames_total = 0
 	_ultimo_perto = false
@@ -174,42 +182,118 @@ func seguiu_majoritariamente_a_rota_mais_rapida() -> bool:
 	return float(_frames_seguindo_rota_rapida) / float(_frames_total) >= proporcao_minima_rota_rapida
 
 # ==================== 🧭 CONSTRUÇÃO DO GRAFO (AStar2D) ====================
+# A caminhabilidade é medida pela FÍSICA real: uma célula é nó do grafo se o
+# corpo do jogador couber em ALGUMA posição dentro dela. Isso resolve dois
+# problemas do teste tile-a-tile antigo:
+#   1) Paredes com colisão PARCIAL (meias-paredes/beiradas) não fragmentam mais o
+#      grafo — as passagens estreitas por onde o jogador realmente passa ficam
+#      conectadas, então sempre existe rota do inimigo até o boss.
+#   2) As paredes de QUALQUER camada de tile (Terrain, Terrain2, ...) e quaisquer
+#      StaticBodies bloqueiam de verdade — as setas não as atravessam.
 func _construir_grade() -> void:
+	var space := tilemap.get_world_2d().direct_space_state
+	if space == null:
+		return
+
+	var forma := _forma_do_agente()
+	var consulta := PhysicsShapeQueryParameters2D.new()
+	consulta.shape = forma
+	consulta.collision_mask = mascara_paredes
+	consulta.collide_with_areas = false
+	consulta.collide_with_bodies = true
+	consulta.exclude = _corpos_a_ignorar()
+	var amostras := _amostras_na_celula(forma.size)
+
 	var caminhaveis: Dictionary = {} # Vector2i -> true
 	var proximo_id := 0
 
+	# 1) Nós: cada célula onde o player cabe. Guarda a posição LIVRE (mais perto do
+	#    centro) — é ali que a seta será desenhada, então ela nunca fica em cima da
+	#    parede, mesmo quando o player só passa pela beirada da célula.
 	for celula in tilemap.get_used_cells():
-		if _celula_e_caminhavel(celula):
+		var pos_livre = _posicao_livre_na_celula(celula, space, consulta, amostras)
+		if pos_livre != null:
 			caminhaveis[celula] = true
+			_pos_mundo_da_celula[celula] = pos_livre
 			var id := proximo_id
 			proximo_id += 1
 			_cell_para_id[celula] = id
 			_id_para_cell[id] = celula
-			astar.add_point(id, tilemap.map_to_local(celula))
+			astar.add_point(id, tilemap.to_local(pos_livre))
 
+	# 2) Arestas: só liga vizinhas se o player consegue de fato PASSAR entre elas
+	#    (o corpo cabe no meio do caminho). Sem isso, a linha ligava células
+	#    separadas por uma parede fina e as setas a atravessavam.
 	for celula in caminhaveis.keys():
 		var id_atual: int = _cell_para_id[celula]
+		var pos_atual: Vector2 = _pos_mundo_da_celula[celula]
 		for direcao in DIRECOES_ORTOGONAIS:
 			var vizinha: Vector2i = celula + direcao
 			if caminhaveis.has(vizinha):
 				var id_vizinha: int = _cell_para_id[vizinha]
 				if not astar.are_points_connected(id_atual, id_vizinha):
-					astar.connect_points(id_atual, id_vizinha)
+					if _passagem_livre(pos_atual, _pos_mundo_da_celula[vizinha], space, consulta):
+						astar.connect_points(id_atual, id_vizinha)
 
-func _celula_e_caminhavel(celula: Vector2i) -> bool:
-	var dados := tilemap.get_cell_tile_data(celula)
-	if dados == null:
-		return false
-	# Tiles de parede têm polígono de colisão na physics layer 0; chão não tem.
-	if dados.get_collision_polygons_count(0) > 0:
-		return false
-	# Paredes que vivem em camadas sobrepostas também bloqueiam. Todas as camadas
-	# compartilham origem e tamanho de célula, então a mesma Vector2i vale pra todas.
-	for camada in _camadas_parede:
-		var dados_extra := camada.get_cell_tile_data(celula)
-		if dados_extra != null and dados_extra.get_collision_polygons_count(0) > 0:
-			return false
-	return true
+# Devolve a posição LIVRE dentro da célula (a mais próxima do centro onde o corpo
+# do player não bate em parede), ou null se a célula for parede de verdade.
+func _posicao_livre_na_celula(celula: Vector2i, space: PhysicsDirectSpaceState2D, consulta: PhysicsShapeQueryParameters2D, amostras: Array):
+	var centro := tilemap.to_global(tilemap.map_to_local(celula))
+	for deslocamento in amostras:
+		consulta.transform = Transform2D(0.0, centro + deslocamento)
+		if space.intersect_shape(consulta, 1).is_empty():
+			return centro + deslocamento
+	return null
+
+# Player consegue passar de a para b? Testa o corpo no meio do trajeto.
+func _passagem_livre(a: Vector2, b: Vector2, space: PhysicsDirectSpaceState2D, consulta: PhysicsShapeQueryParameters2D) -> bool:
+	consulta.transform = Transform2D(0.0, (a + b) * 0.5)
+	return space.intersect_shape(consulta, 1).is_empty()
+
+# Forma que aproxima o corpo do jogador (retângulo da CollisionShape2D dele, já
+# em escala de mundo), levemente encolhida pra não "raspar" nas bordas.
+func _forma_do_agente() -> RectangleShape2D:
+	var forma := RectangleShape2D.new()
+	forma.size = Vector2(56, 11) # padrão ~ colisão do player (14 x 2.75 * escala 4)
+	var jogador := _obter_player()
+	if jogador:
+		var cs = jogador.find_child("CollisionShape2D", true, false)
+		if cs is CollisionShape2D and (cs as CollisionShape2D).shape is RectangleShape2D:
+			var r := (cs as CollisionShape2D).shape as RectangleShape2D
+			forma.size = r.size * (cs as CollisionShape2D).global_scale.abs()
+	forma.size = Vector2(maxf(forma.size.x - 2.0, 2.0), maxf(forma.size.y - 2.0, 2.0))
+	return forma
+
+# Corpos ignorados na sondagem: a Porta e a Barreira do boss (fecham a entrada,
+# mas ABREM quando a guia aparece — senão o objetivo fica isolado do grafo) e o
+# próprio jogador.
+func _corpos_a_ignorar() -> Array[RID]:
+	var ignora: Array[RID] = []
+	var jogador := _obter_player()
+	if jogador is CollisionObject2D:
+		ignora.append((jogador as CollisionObject2D).get_rid())
+	var area_boss := goal.get_parent()
+	if area_boss:
+		for corpo in area_boss.find_children("*", "CollisionObject2D", true, false):
+			ignora.append((corpo as CollisionObject2D).get_rid())
+	return ignora
+
+# Posições (relativas ao centro da célula) onde testar o corpo do agente: ele
+# pode se encaixar fora do centro, sobretudo na vertical (é baixo). Grid 3x5
+# limitado pela folga (célula - agente)/2.
+func _amostras_na_celula(agente: Vector2) -> Array:
+	var celula := Vector2(tilemap.tile_set.tile_size) * tilemap.global_scale.abs()
+	var folga_x := maxf((celula.x - agente.x) * 0.5, 0.0)
+	var folga_y := maxf((celula.y - agente.y) * 0.5, 0.0)
+	var xs := [-folga_x, 0.0, folga_x] if folga_x > 1.0 else [0.0]
+	var ys := [-folga_y, -folga_y * 0.5, 0.0, folga_y * 0.5, folga_y] if folga_y > 1.0 else [0.0]
+	var amostras: Array = []
+	for x in xs:
+		for y in ys:
+			amostras.append(Vector2(x, y))
+	# centro primeiro: assim a posição LIVRE escolhida é a mais próxima do centro.
+	amostras.sort_custom(func(p, q): return p.length_squared() < q.length_squared())
+	return amostras
 
 # Acha o id do AStar2D mais próximo de uma posição global (procura em raios
 # crescentes caso a posição exata caia numa célula não registrada).
@@ -233,11 +317,10 @@ func _id_mais_proximo(pos_global: Vector2) -> int:
 # ==================== 🔁 CÁLCULO E ATUALIZAÇÃO DO CAMINHO ====================
 # Calcula as rotas UMA vez (setas fixas) e monta a faixa "no menor caminho".
 func _calcular_e_desenhar_caminhos() -> void:
-	var jogador := _obter_player()
-	if not jogador or not is_instance_valid(goal):
+	if not _obter_player() or not is_instance_valid(goal):
 		return
 
-	var id_inicio := _id_mais_proximo(jogador.global_position)
+	var id_inicio := _id_mais_proximo(_origem_guia)
 	var id_fim := _id_mais_proximo(goal.global_position)
 
 	if id_inicio == -1 or id_fim == -1:
@@ -319,7 +402,9 @@ func _ids_para_pontos(ids) -> PackedVector2Array:
 	var pontos: PackedVector2Array = []
 	for id in ids:
 		var celula: Vector2i = _id_para_cell[id]
-		pontos.append(tilemap.to_global(tilemap.map_to_local(celula)))
+		# posição LIVRE da célula (onde o player cabe), não o centro cru — assim a
+		# seta é desenhada no espaço navegável, não em cima da parede.
+		pontos.append(_pos_mundo_da_celula.get(celula, tilemap.to_global(tilemap.map_to_local(celula))))
 	return pontos
 
 func _comprimento_do_caminho(pontos: PackedVector2Array) -> float:
@@ -390,7 +475,7 @@ func _atualizar_setas(rotas: Array) -> void:
 	for i in range(rotas.size()):
 		var eh_mais_curta := i == 0
 		var cor: Color = COR_ROTA_RAPIDA if eh_mais_curta else COR_ROTA_LENTA
-		var escala: float = 1.0 if eh_mais_curta else 0.7
+		var escala: float = 1.0 if eh_mais_curta else 0.6
 		_desenhar_rota(rotas[i]["pontos"], cor, escala)
 
 func _desenhar_rota(pontos: PackedVector2Array, cor: Color, escala: float) -> void:
